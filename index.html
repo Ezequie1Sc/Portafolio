@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portafolio profesional de Ezequiel, desarrollador de software" />
+  <meta name="keywords" content="portafolio, desarrollador, FLUTTER, DART, JAVA, PYTHON, C#" />
+  <meta name="author" content="Ezequiel Salazar" />
+  
+  <link rel="icon" type="image/svg+xml" href="public/favicon.svg" />
+  <link rel="alternate icon" href="public/favicon.ico" />
+  <link rel="apple-touch-icon" href="public/apple-touch-icon.png" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <title>Ezequiel Salazar | Portafolio</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Animaciones personalizadas */
+    @keyframes orbit {
+      0% {
+        transform: rotate(0deg) translateX(180px) rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg) translateX(180px) rotate(-360deg);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
+      50% { box-shadow: 0 0 25px rgba(59, 130, 246, 0.8); }
+    }
+
+    @keyframes cursor-blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @keyframes rotate-icon {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes slide-in {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* Clases de animación */
+    .animate-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .animate-fade-in {
+      animation: fade-in 1s ease-out forwards;
+    }
+
+    /* Estilos para las órbitas */
+    .orbit-icon {
+      position: absolute;
+      width: 56px;
+      height: 56px;
+      animation: orbit linear infinite;
+      transform-origin: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 20;
+    }
+
+    .orbit-icon img {
+      width: 100%;
+      height: 100%;
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.7));
+      animation: rotate-icon 10s linear infinite reverse;
+    }
+
+    .orbit-icon:hover img {
+      transform: scale(1.3);
+      filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.9));
+      animation-play-state: paused;
+    }
+
+    .orbit-slow { animation-duration: 22s; }
+    .orbit-medium { animation-duration: 16s; }
+    .orbit-fast { animation-duration: 12s; }
+
+    .orbit-icon:nth-child(1) { animation-delay: 0s; }
+    .orbit-icon:nth-child(2) { animation-delay: -3s; }
+    .orbit-icon:nth-child(3) { animation-delay: -6s; }
+    .orbit-icon:nth-child(4) { animation-delay: -9s; }
+    .orbit-icon:nth-child(5) { animation-delay: -12s; }
+    .orbit-icon:nth-child(6) { animation-delay: -15s; }
+
+    .typewriter-cursor {
+      animation: cursor-blink 1s step-end infinite;
+    }
+
+    /* Estilos para títulos de secciones */
+    .section-title {
+      background: linear-gradient(90deg, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.8));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 0.2rem 0.5rem;
+      display: inline-block;
+      border-radius: 8px;
+      backdrop-filter: blur(4px);
+    }
+
+    .profile-img {
+      box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+      transition: all 0.3s ease;
+      border: 4px solid rgba(59, 130, 246, 0.3);
+      z-index: 30;
+    }
+
+    .profile-img:hover {
+      box-shadow: 0 0 50px rgba(99, 102, 241, 0.8);
+      animation: pulse-glow 2s ease-in-out infinite;
+      border-color: rgba(59, 130, 246, 0.6);
+    }
+
+    /* Estilos para la navegación */
+    .nav-link {
+      position: relative;
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      color: #e5e7eb;
+      transition: all 0.3s ease;
+      border-radius: 8px;
+    }
+
+    .nav-link:hover {
+      color: #3b82f6;
+      background: rgba(59, 130, 246, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-link:hover::after {
+      width: 60%;
+    }
+
+    /* Mobile menu styles */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .mobile-menu.open {
+      transform: translateX(0);
+      animation: slide-in 0.3s ease-out;
+    }
+
+    /* Efecto hero section */
+    .hero-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+      z-index: 0;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero-section {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+      }
+      
+      .profile-img {
+        width: 12rem;
+        height: 12rem;
+        margin-bottom: 2rem;
+      }
+      
+      @keyframes orbit {
+        0% {
+          transform: rotate(0deg) translateX(120px) rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg) translateX(120px) rotate(-360deg);
+        }
+      }
+      
+      .orbit-icon {
+        width: 42px;
+        height: 42px;
+      }
+      
+      .orbit-icon img {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+      
+      .typewriter-text {
+        font-size: 1.5rem;
+      }
+
+      .nav-link {
+        padding: 1rem;
+        font-size: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <header class="fixed w-full bg-gradient-to-r from-gray-800 to-gray-900 bg-opacity-95 backdrop-blur-md z-50 shadow-lg">
+    <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">Ezequiel Salazar</h1>
+      <nav class="hidden md:flex space-x-4">
+        <a href="#inicio" class="nav-link">Inicio</a>
+        <a href="#proyectos" class="nav-link">Proyectos</a>
+        <a href="#habilidades" class="nav-link">Habilidades</a>
+        <a href="#contacto" class="nav-link">Contacto</a>
+      </nav>
+      <button id="theme-toggle" class="text-2xl focus:outline-none transition transform hover:scale-125">
+        🌙
+      </button>
+      <button id="mobile-menu-toggle" class="md:hidden text-2xl focus:outline-none">
+        ☰
+      </button>
+    </div>
+    <nav id="mobile-menu" class="mobile-menu md:hidden fixed top-0 right-0 h-full w-3/4 bg-gray-800 bg-opacity-95 backdrop-blur-md flex flex-col items-center justify-center space-y-6 z-40">
+      <a href="#inicio" class="nav-link">Inicio</a>
+      <a href="#proyectos" class="nav-link">Proyectos</a>
+      <a href="#habilidades" class="nav-link">Habilidades</a>
+      <a href="#contacto" class="nav-link">Contacto</a>
+    </nav>
+  </header>
+
+  <main class="pt-24">
+    <!-- Sección Hero -->
+    <section id="inicio" class="hero-section min-h-screen container mx-auto px-6 flex flex-col md:flex-row items-center justify-between py-16 md:py-0">
+      <div class="md:w-1/2 z-20 text-center md:text-left mb-16 md:mb-0 animate-fade-in">
+        <h2 class="text-2xl md:text-3xl mb-4 text-blue-400 font-medium">¡Hola Mundo! 👋</h2>
+        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+          Soy <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-600">Ezequiel Salazar</span>
+        </h1>
+        <div class="typewriter-container mb-8">
+          <h2 class="text-3xl md:text-4xl font-semibold text-blue-300 inline-block">
+            <span class="typewriter-text">Desarrollador Full Stack</span>
+            <span class="typewriter-cursor">|</span>
+          </h2>
+        </div>
+        <p class="text-xl text-gray-300 mb-10 max-w-lg mx-auto md:mx-0 leading-relaxed">
+          Especializado en crear soluciones innovadoras con Flutter, Dart, Java y más. Transformo ideas en experiencias digitales excepcionales.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-6 justify-center md:justify-start">
+          <a href="#cv" class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg hover:shadow-blue-500/30 flex items-center justify-center text-lg font-medium">
+            <span>Descargar CV</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+          </a>
+          <a href="#contacto" class="bg-transparent border-2 border-blue-500 hover:bg-blue-600 text-white py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg hover:shadow-blue-500/20 flex items-center justify-center text-lg font-medium">
+            <span>Contáctame</span>
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+            </svg>
+          </a>
+        </div>
+        <div class="flex justify-center md:justify-start mt-12 space-x-8">
+          <a href="#" class="social-icon hover:text-blue-400 transition transform hover:scale-125">
+            <img src="public/icons/linkedin.svg" alt="LinkedIn" class="w-12 h-12">
+          </a>
+          <a href="#" class="social-icon hover:text-purple-400 transition transform hover:scale-125">
+            <img src="public/icons/github.svg" alt="GitHub" class="w-12 h-12">
+          </a>
+        </div>
+      </div>
+      <div class="md:w-1/2 relative flex justify-center items-center h-96 md:h-auto">
+        <div class="relative z-30">
+          <img src="public/face.jpg" alt="Ezequiel Salazar" 
+               class="w-72 h-72 md:w-80 md:h-80 rounded-full object-cover border-4 border-blue-500/30 shadow-2xl profile-img animate-float">
+        </div>
+        <div class="absolute w-full h-full flex items-center justify-center z-20">
+          <div class="orbit-icon orbit-slow">
+            <img src="public/icons/flutter.svg" alt="Flutter" class="w-14 h-14">
+          </div>
+          <div class="orbit-icon orbit-medium">
+            <img src="public/icons/reacta.svg" alt="React" class="w-14 h-14">
+          </div>
+          <div class="orbit-icon orbit-fast">
+            <img src="public/icons/java.svg" alt="Java" class="w-14 h-14">
+          </div>
+          <div class="orbit-icon orbit-slow">
+            <img src="public/icons/html.svg" alt="HTML" class="w-14 h-14">
+          </div>
+          <div class="orbit-icon orbit-medium">
+            <img src="public/icons/github.svg" alt="GitHub" class="w-14 h-14">
+          </div>
+          <div class="orbit-icon orbit-fast">
+            <img src="public/icons/python.svg" alt="Vite" class="w-14 h-14">
+          </div>
+            <div class="orbit-icon orbit-fast">
+            <img src="public/icons/dart.svg" alt="Vite" class="w-14 h-14">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Proyectos -->
+    <section id="proyectos" class="py-20 bg-gray-800/50 backdrop-blur-sm">
+      <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title">
+          Mis Proyectos
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="project-card bg-gradient-to-br from-gray-700/80 to-gray-800/80 p-6 rounded-xl shadow-xl smooth-card hover:border-blue-500 border border-gray-700">
+            <div class="flex items-center mb-4">
+              <div class="w-16 h-16 bg-gray-600/50 rounded-full flex items-center justify-center mr-4">
+                <img src="public/icons/flutter.svg" alt="Flutter" class="w-10 h-10">
+              </div>
+              <h3 class="text-xl font-semibold text-white">Aplicación Flutter</h3>
+            </div>
+            <p class="text-gray-300 mb-4">Aplicación móvil desarrollada con Flutter y Dart para gestión de tareas con Firebase.</p>
+            <div class="mb-4">
+              <h4 class="text-sm font-medium text-gray-400 mb-2">Tecnologías utilizadas:</h4>
+              <div class="flex flex-wrap gap-3">
+                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+                  <img src="public/icons/flutter.svg" alt="Flutter" class="w-5 h-5 mr-2">
+                  <span class="text-sm text-white">Flutter</span>
+                </div>
+                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+                  <img src="public/icons/dart.svg" alt="Dart" class="w-5 h-5 mr-2">
+                  <span class="text-sm text-white">Dart</span>
+                </div>
+                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+                  <img src="public/icons/firebase.svg" alt="Firebase" class="w-5 h-5 mr-2">
+                  <span class="text-sm text-white">Firebase</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex space-x-4">
+              <a href="#" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-300 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                </svg>
+                Ver Demo
+              </a>
+              <a href="#" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors duration-300 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                Código
+              </a>
+            </div>
+          </div>
+          <div class="project-card bg-gradient-to-br from-gray-700/80 to-gray-800/80 p-6 rounded-xl shadow-xl smooth-card hover:border-purple-500 border border-gray-700">
+            <div class="flex items-center mb-4">
+              <div class="w-16 h-16 bg-gray-600/50 rounded-full flex items-center justify-center mr-4">
+                <img src="public/icons/django.svg" alt="Django" class="w-10 h-10">
+              </div>
+              <h3 class="text-xl font-semibold text-white">Sistema Web</h3>
+            </div>
+            <p class="text-gray-300 mb-4">Plataforma de e-commerce con Python (Django) y base de datos PostgreSQL.</p>
+            <div class="mb-4">
+              <h4 class="text-sm font-medium text-gray-400 mb-2">Tecnologías utilizadas:</h4>
+              <div class="flex flex-wrap gap-3">
+                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+                  <img src="public/icons/python.svg" alt="Python" class="w-5 h-5 mr-2">
+                  <span class="text-sm text-white">Python</span>
+                </div>
+                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+                  <img src="public/icons/django.svg" alt="Django" class="w-5 h-5 mr-2">
+                  <span class="text-sm text-white">Django</span>
+                </div>
+                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+                  <img src="public/icons/postgresql.svg" alt="PostgreSQL" class="w-5 h-5 mr-2">
+                  <span class="text-sm text-white">PostgreSQL</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex space-x-4">
+              <a href="#" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors duration-300 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                </svg>
+                Ver Demo
+              </a>
+              <a href="#" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors duration-300 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                Código
+              </a>
+            </div>
+          </div>
+          <div class="project-card bg-gradient-to-br from-gray-700/80 to-gray-800/80 p-6 rounded-xl shadow-xl smooth-card hover:border-green-500 border border-gray-700">
+            <div class="flex items-center mb-4">
+              <div class="w-16 h-16 bg-gray-600/50 rounded-full flex items-center justify-center mr-4">
+                <img src="public/icons/csharp.svg" alt="C#" class="w-10 h-10">
+              </div>
+              <h3 class="text-xl font-semibold text-white">Herramienta C#</h3>
+            </div>
+            <p class="text-gray-300 mb-4">Software de escritorio para análisis de datos desarrollado con C# y .NET.</p>
+            <div class="mb-4">
+              <h4 class="text-sm font-medium text-gray-400 mb-2">Tecnologías utilizadas:</h4>
+              <div class="flex flex-wrap gap-3">
+                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+                  <img src="public/icons/csharp.svg" alt="C#" class="w-5 h-5 mr-2">
+                  <span class="text-sm text-white">C#</span>
+                </div>
+                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+                  <img src="public/icons/dotnet.svg" alt=".NET" class="w-5 h-5 mr-2">
+                  <span class="text-sm text-white">.NET</span>
+                </div>
+                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+                  <img src="public/icons/sqlserver.svg" alt="SQL Server" class="w-5 h-5 mr-2">
+                  <span class="text-sm text-white">SQL Server</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex space-x-4">
+              <a href="#" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors duration-300 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+                </svg>
+                Ver Demo
+              </a>
+              <a href="#" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors duration-300 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                </svg>
+                Código
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Habilidades -->
+    <section id="habilidades" class="py-20 bg-gray-900/50 backdrop-blur-sm">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl md:text-5xl font-bold section-title animate-fade-in">
+            Dominio Tecnológico
+          </h2>
+          <h3 class="text-xl text-gray-400 mt-4 font-light">
+            Lenguajes, frameworks y herramientas que domino
+          </h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div class="skill-category group relative overflow-hidden rounded-xl p-6 shadow-2xl transition-all duration-500 hover:shadow-blue-500/20">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <h3 class="text-2xl font-semibold text-center mb-6 text-blue-400 relative z-10">
+              <span class="inline-block transform transition-transform duration-300 group-hover:scale-110">
+                <span class="text-white">01.</span> Desarrollo Móvil
+              </span>
+            </h3>
+            <div class="flex flex-wrap justify-center gap-6 relative z-10">
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-blue-500/20 transition-colors duration-300">
+                  <img src="public/icons/flutter.svg" alt="Flutter" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">Flutter</span>
+              </div>
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-blue-500/20 transition-colors duration-300">
+                  <img src="public/icons/dart.svg" alt="Dart" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">Dart</span>
+              </div>
+            </div>
+          </div>
+          <div class="skill-category group relative overflow-hidden rounded-xl p-6 shadow-2xl transition-all duration-500 hover:shadow-purple-500/20">
+            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <h3 class="text-2xl font-semibold text-center mb-6 text-purple-400 relative z-10">
+              <span class="inline-block transform transition-transform duration-300 group-hover:scale-110">
+                <span class="text-white">02.</span> Backend
+              </span>
+            </h3>
+            <div class="flex flex-wrap justify-center gap-6 relative z-10">
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-purple-500/20 transition-colors duration-300">
+                  <img src="public/icons/java.svg" alt="Java" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">Java</span>
+              </div>
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-purple-500/20 transition-colors duration-300">
+                  <img src="public/icons/python.svg" alt="Python" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">Python</span>
+              </div>
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-purple-500/20 transition-colors duration-300">
+                  <img src="public/icons/csharp.svg" alt="C#" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">C#</span>
+              </div>
+            </div>
+          </div>
+          <div class="skill-category group relative overflow-hidden rounded-xl p-6 shadow-2xl transition-all duration-500 hover:shadow-green-500/20">
+            <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <h3 class="text-2xl font-semibold text-center mb-6 text-green-400 relative z-10">
+              <span class="inline-block transform transition-transform duration-300 group-hover:scale-110">
+                <span class="text-white">03.</span> Frontend
+              </span>
+            </h3>
+            <div class="flex flex-wrap justify-center gap-6 relative z-10">
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-green-500/20 transition-colors duration-300">
+                  <img src="public/icons/html.svg" alt="HTML" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">HTML</span>
+              </div>
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-green-500/20 transition-colors duration-300">
+                  <img src="public/icons/css.svg" alt="CSS" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">CSS</span>
+              </div>
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-green-500/20 transition-colors duration-300">
+                  <img src="public/icons/tp.svg" alt="TypeScript" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">JavaScript</span>
+              </div>
+            </div>
+          </div>
+          <div class="skill-category group relative overflow-hidden rounded-xl p-6 shadow-2xl transition-all duration-500 hover:shadow-yellow-500/20">
+            <div class="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <h3 class="text-2xl font-semibold text-center mb-6 text-yellow-400 relative z-10">
+              <span class="inline-block transform transition-transform duration-300 group-hover:scale-110">
+                <span class="text-white">04.</span> Bases de Datos
+              </span>
+            </h3>
+            <div class="flex flex-wrap justify-center gap-6 relative z-10">
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-yellow-500/20 transition-colors duration-300">
+                  <img src="public/icons/postgresql.svg" alt="PostgreSQL" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">PostgreSQL</span>
+              </div>
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-yellow-500/20 transition-colors duration-300">
+                  <img src="public/icons/sql.svg" alt="SQL Server" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">SQL Server</span>
+              </div>
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-yellow-500/20 transition-colors duration-300">
+                  <img src="public/icons/mysql.svg" alt="MySQL" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">MySQL</span>
+              </div>
+            </div>
+          </div>
+          <div class="skill-category group relative overflow-hidden rounded-xl p-6 shadow-2xl transition-all duration-500 hover:shadow-red-500/20 sm:col-span-2 lg:col-span-1">
+            <div class="absolute inset-0 bg-gradient-to-br from-red-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <h3 class="text-2xl font-semibold text-center mb-6 text-red-400 relative z-10">
+              <span class="inline-block transform transition-transform duration-300 group-hover:scale-110">
+                <span class="text-white">05.</span> Herramientas
+              </span>
+            </h3>
+            <div class="flex flex-wrap justify-center gap-6 relative z-10">
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-red-500/20 transition-colors duration-300">
+                  <img src="public/icons/git.svg" alt="Git" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">Git</span>
+              </div>
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-red-500/20 transition-colors duration-300">
+                  <img src="public/icons/github.svg" alt="GitHub" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">GitHub</span>
+              </div>
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-red-500/20 transition-colors duration-300">
+                  <img src="public/icons/vscode.svg" alt="Visual Studio Code" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">VS Code</span>
+              </div>
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-red-500/20 transition-colors duration-300">
+                  <img src="public/icons/visual.svg" alt="Visual Studio" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">Visual Studio</span>
+              </div>
+              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
+                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-red-500/20 transition-colors duration-300">
+                  <img src="public/icons/slack.svg" alt="Slack" class="w-12 h-12">
+                </div>
+                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">Slack</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto" class="py-20 bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl md:text-4xl font-bold section-title">
+            Conectemos Nuestras Ideas
+          </h2>
+          <p class="text-lg text-gray-300 max-w-2xl mx-auto mt-4">
+            ¿Listo para comenzar tu próximo proyecto? Envíame un mensaje y hablemos sobre cómo puedo ayudarte a hacerlo realidad.
+          </p>
+        </div>
+        <div class="max-w-lg mx-auto bg-gray-700/50 p-8 rounded-xl shadow-2xl border border-gray-600/30 smooth-card">
+          <div id="form-message" class="hidden text-center mb-4 text-green-400"></div>
+          <form id="contact-form" class="space-y-6">
+            <div>
+              <label class="block text-gray-300 mb-2 text-sm font-medium">Nombre</label>
+              <div class="relative">
+                <input type="text" placeholder="Tu nombre" 
+                       class="w-full p-3 bg-gray-600/50 border border-gray-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-400">
+                <span class="absolute right-3 top-3 text-gray-400">👤</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-gray-300 mb-2 text-sm font-medium">Email</label>
+              <div class="relative">
+                <input type="email" placeholder="tu@email.com" 
+                       class="w-full p-3 bg-gray-600/50 border border-gray-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-400">
+                <span class="absolute right-3 top-3 text-gray-400">✉️</span>
+              </div>
+            </div>
+            <div>
+              <label class="block text-gray-300 mb-2 text-sm font-medium">Mensaje</label>
+              <textarea placeholder="Cuéntame sobre tu proyecto..." 
+                        class="w-full p-3 bg-gray-600/50 border border-gray-500/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition placeholder-gray-400 h-32"></textarea>
+            </div>
+            <button type="submit" 
+                    class="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white py-3 px-6 rounded-lg shadow-lg hover:shadow-blue-500/20 transition-all transform hover:scale-[1.01] font-medium flex items-center justify-center">
+              <span>Enviar Mensaje</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+              </svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-gradient-to-br from-gray-900 to-gray-800 py-8 border-t border-gray-700/50">
+    <div class="container mx-auto px-4 text-center">
+      <div class="flex justify-center space-x-8 mb-6">
+        <a href="#" class="social-icon hover:text-blue-400 transition transform hover:scale-125">
+          <img src="public/icons/linkedin.svg" alt="LinkedIn" class="w-12 h-12">
+        </a>
+        <a href="#" class="social-icon hover:text-purple-400 transition transform hover:scale-125">
+          <img src="public/icons/github.svg" alt="GitHub" class="w-12 h-12">
+        </a>
+      </div>
+      <p class="text-gray-400 text-sm mb-2">
+        © <span id="current-year">2025</span> Ezequiel Salazar. Todos los derechos reservados.
+      </p>
+      <p class="text-gray-500 text-xs">
+        <span id="current-date">29 de Junio de 2025</span>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Toggle tema claro/oscuro
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      document.documentElement.classList.toggle('light');
+      themeToggle.textContent = document.documentElement.classList.contains('light') ? '☀️' : '🌙';
+      localStorage.setItem('theme', document.documentElement.classList.contains('light') ? 'light' : 'dark');
+    });
+
+    // Cargar tema guardado
+    if (localStorage.getItem('theme') === 'light') {
+      document.documentElement.classList.add('light');
+      themeToggle.textContent = '☀️';
+    }
+
+    // Mobile menu toggle
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuToggle.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      mobileMenuToggle.textContent = mobileMenu.classList.contains('open') ? '✕' : '☰';
+    });
+
+    // Cerrar menú móvil al hacer clic en un enlace
+    mobileMenu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        mobileMenuToggle.textContent = '☰';
+      });
+    });
+
+    // Efecto máquina de escribir
+    const typewriterText = document.querySelector('.typewriter-text');
+    const phrases = [
+      "Desarrollador Full Stack",
+      "Especialista en Flutter",
+      "Programador Mobile",
+      "Apasionado por la tecnología"
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let isEnd = false;
+
+    function typeWriter() {
+      const currentPhrase = phrases[phraseIndex];
+      
+      if (isDeleting) {
+        typewriterText.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typewriterText.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      if (!isDeleting && charIndex === currentPhrase.length) {
+        isEnd = true;
+        setTimeout(() => {
+          isDeleting = true;
+        }, 1500);
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        isEnd = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+      }
+
+      const speed = isDeleting ? 50 : isEnd ? 1000 : 100;
+      setTimeout(typeWriter, speed);
+    }
+
+    // Iniciar el efecto
+    setTimeout(typeWriter, 1000);
+  </script>
+</body>
+</html>

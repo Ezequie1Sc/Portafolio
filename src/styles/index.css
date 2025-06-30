@@ -1,0 +1,247 @@
+/* Animaciones personalizadas */
+@keyframes orbit {
+  0% {
+    transform: rotate(0deg) translateX(150px) rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg) translateX(150px) rotate(-360deg);
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(59, 130, 246, 0.5); }
+  50% { box-shadow: 0 0 25px rgba(59, 130, 246, 0.8); }
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Clases de animación */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+/* Estilos para las órbitas */
+.orbit-icon {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  animation: orbit linear infinite;
+  transform-origin: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.orbit-icon img {
+  width: 100%;
+  height: 100%;
+  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.7));
+}
+
+.orbit-icon:hover img {
+  transform: scale(1.3);
+  filter: drop-shadow(0 0 15px rgba(59, 130, 246, 0.9));
+}
+
+.orbit-slow { animation-duration: 18s; }
+.orbit-medium { animation-duration: 14s; }
+.orbit-fast { animation-duration: 10s; }
+
+/* Establecer posiciones iniciales para cada ícono */
+.orbit-icon:nth-child(1) { animation-delay: 0s; }
+.orbit-icon:nth-child(2) { animation-delay: -3s; }
+.orbit-icon:nth-child(3) { animation-delay: -6s; }
+.orbit-icon:nth-child(4) { animation-delay: -9s; }
+.orbit-icon:nth-child(5) { animation-delay: -12s; }
+.orbit-icon:nth-child(6) { animation-delay: -15s; }
+
+.typewriter-cursor {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+/* Efectos especiales */
+.neon-text {
+  text-shadow: 0 0 8px rgba(59, 130, 246, 0.8),
+               0 0 15px rgba(59, 130, 246, 0.6),
+               0 0 22px rgba(59, 130, 246, 0.4);
+}
+
+.profile-img {
+  box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
+  transition: all 0.3s ease;
+  border: 4px solid rgba(59, 130, 246, 0.3);
+  z-index: 30;
+}
+
+.profile-img:hover {
+  box-shadow: 0 0 50px rgba(99, 102, 241, 0.8);
+  animation: pulse-glow 2s ease-in-out infinite;
+  border-color: rgba(59, 130, 246, 0.6);
+}
+
+/* Estilos para las habilidades */
+.skill-category {
+  background: rgba(31, 41, 55, 0.5);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.skill-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.skill-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.skill-icon:hover {
+  transform: scale(1.1);
+}
+
+.skill-icon img {
+  filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
+}
+
+/* Resto de tus estilos... */
+.smooth-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  backdrop-filter: blur(5px);
+}
+
+.smooth-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto hero section */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(59, 130, 246, 0.1) 0%, transparent 70%);
+  z-index: 0;
+}
+
+/* Modo claro */
+.light {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+  color: rgb(31 41 55 / var(--tw-text-opacity));
+}
+
+.light .hero-section {
+  background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+}
+
+.light .profile-img {
+  border-color: rgba(59, 130, 246, 0.2);
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+}
+
+.light .orbit-icon img {
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+}
+
+.light .skill-category {
+  background: rgba(229, 231, 235, 0.7);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-section {
+    flex-direction: column;
+    text-align: center;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+  
+  .profile-img {
+    width: 12rem;
+    height: 12rem;
+    margin-bottom: 2rem;
+  }
+  
+  @keyframes orbit {
+    0% {
+      transform: rotate(0deg) translateX(100px) rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg) translateX(100px) rotate(-360deg);
+    }
+  }
+  
+  .orbit-icon {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .orbit-icon img {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+  
+  .typewriter-text {
+    font-size: 1.5rem;
+  }
+  
+  .skill-category {
+    padding: 1rem;
+  }
+}
+
+/* Estilos adicionales para enlaces de proyectos */
+.demo-link, .code-link {
+  color: #3b82f6;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.demo-link:hover, .code-link:hover {
+  color: #60a5fa;
+  text-decoration: underline;
+}
+
+/* Iconos de redes sociales */
+.social-icon {
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  filter: brightness(1.2);
+}
