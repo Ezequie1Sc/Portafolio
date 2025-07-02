@@ -101,6 +101,37 @@
       to { opacity: 1; }
     }
 
+    /* Flip Card Styles */
+    .skill-category {
+      perspective: 1000px;
+      min-height: 320px;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+    }
+
+    .skill-category:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+
     /* Clases de animación */
     .animate-float { animation: float 6s ease-in-out infinite; }
     .animate-fade-in { animation: fade-in 1s ease-out forwards; }
@@ -779,39 +810,75 @@
             </div>
           </div>
 
-          <!-- 03. Backend -->
-          <div class="skill-category group">
-            <div class="skill-header">
-              <h3 class="text-2xl font-semibold text-center mb-6 text-green-400">
-                <span class="text-white">03.</span> Backend
-              </h3>
-              <div class="skill-icons">
-                <div class="skill-icon">
-                  <div class="icon-container">
-                    <img src="public/icons/csharp.svg" alt="C#" class="hover:animate-float">
+          <!-- 03. Backend - Versión mejorada con Flip Card -->
+          <div class="skill-category group relative">
+            <!-- Contenedor de la flip card -->
+            <div class="flip-card-inner w-full h-full">
+              <!-- Frente de la tarjeta -->
+              <div class="flip-card-front bg-gradient-to-br from-gray-800/80 to-gray-900/80 rounded-xl p-6 shadow-xl border border-gray-700 hover:border-green-500 transition-all duration-300 flex flex-col items-center justify-center h-full">
+                <h3 class="text-2xl font-semibold text-center mb-6 text-green-400">
+                  <span class="text-white">03.</span> Backend
+                </h3>
+                <div class="skill-icons flex justify-center gap-4">
+                  <div class="skill-icon flex flex-col items-center">
+                    <div class="icon-container w-16 h-16 bg-gray-700/50 rounded-full flex items-center justify-center mb-2 transition-all hover:bg-green-600/20">
+                      <img src="public/icons/csharp.svg" alt="C#" class="w-10 h-10 hover:scale-110 transition-transform">
+                    </div>
+                    <span class="text-sm text-gray-300">C#</span>
                   </div>
-                  <span>C#</span>
+                  <div class="skill-icon flex flex-col items-center">
+                    <div class="icon-container w-16 h-16 bg-gray-700/50 rounded-full flex items-center justify-center mb-2 transition-all hover:bg-green-600/20">
+                      <img src="public/icons/python.svg" alt="Python" class="w-10 h-10 hover:scale-110 transition-transform">
+                    </div>
+                    <span class="text-sm text-gray-300">Python</span>
+                  </div>
+                  <div class="skill-icon flex flex-col items-center">
+                    <div class="icon-container w-16 h-16 bg-gray-700/50 rounded-full flex items-center justify-center mb-2 transition-all hover:bg-green-600/20">
+                      <img src="public/icons/java.svg" alt="Java" class="w-10 h-10 hover:scale-110 transition-transform">
+                    </div>
+                    <span class="text-sm text-gray-300">Java</span>
+                  </div>
                 </div>
-                <div class="skill-icon">
-                  <div class="icon-container">
-                    <img src="public/icons/python.svg" alt="Python" class="hover:animate-spin-slow">
-                  </div>
-                  <span>Python</span>
-                </div>
-                <div class="skill-icon">
-                  <div class="icon-container">
-                    <img src="public/icons/java.svg" alt="Java" class="hover:animate-pulse">
-                  </div>
-                  <span>Java</span>
+                <div class="mt-6 text-center">
+                  <p class="text-gray-400 text-sm">(Pasa el cursor para más detalles)</p>
                 </div>
               </div>
-            </div>
-            <div class="skill-description">
-              <p>Desarrollo de APIs robustas y sistemas backend escalables. Experiencia en arquitecturas de microservicios y RESTful APIs.</p>
-              <div class="skill-tags">
-                <span class="tag">APIs</span>
-                <span class="tag">Microservicios</span>
-                <span class="tag">Seguridad</span>
+              
+              <!-- Reverso de la tarjeta -->
+              <div class="flip-card-back bg-gradient-to-br from-green-900/70 to-gray-900/80 rounded-xl p-6 shadow-xl border border-green-500/50 flex flex-col items-center justify-center h-full">
+                <h4 class="text-xl font-semibold text-green-300 mb-4">Experiencia Backend</h4>
+                <ul class="space-y-3 text-gray-300 mb-6">
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    APIs RESTful y GraphQL
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Arquitectura de microservicios
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Autenticación JWT & OAuth2
+                  </li>
+                  <li class="flex items-center">
+                    <svg class="w-5 h-5 text-green-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                    Optimización de consultas SQL
+                  </li>
+                </ul>
+                <div class="skill-tags flex flex-wrap gap-2 justify-center">
+                  <span class="tag bg-green-800/50 text-green-300 px-3 py-1 rounded-full text-xs">APIs</span>
+                  <span class="tag bg-green-800/50 text-green-300 px-3 py-1 rounded-full text-xs">Microservicios</span>
+                  <span class="tag bg-green-800/50 text-green-300 px-3 py-1 rounded-full text-xs">Seguridad</span>
+                  <span class="tag bg-green-800/50 text-green-300 px-3 py-1 rounded-full text-xs">Bases de datos</span>
+                </div>
               </div>
             </div>
           </div>
@@ -921,7 +988,8 @@
                   </div>
                   <span>Slack</span>
                 </div>
-               
+              </div>
+            </div>
             <div class="skill-description">
               <p>Dominio completo de herramientas de desarrollo, colaboración y diseño. Experiencia en:</p>
               <div class="skill-tags">
@@ -1077,6 +1145,11 @@
 
     // Iniciar el efecto
     setTimeout(typeWriter, 1000);
+
+    // Actualizar año y fecha actual
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    document.getElementById('current-date').textContent = new Date().toLocaleDateString('es-ES', options);
   </script>
 </body>
 </html>
