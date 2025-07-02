@@ -44,6 +44,13 @@
       50% { box-shadow: 0 0 25px rgba(59, 130, 246, 0.8); }
     }
 
+    @keyframes rgb-glow {
+      0% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); }
+      33% { box-shadow: 0 0 15px rgba(0, 255, 0, 0.7); }
+      66% { box-shadow: 0 0 15px rgba(0, 0, 255, 0.7); }
+      100% { box-shadow: 0 0 15px rgba(255, 0, 0, 0.7); }
+    }
+
     @keyframes cursor-blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0; }
@@ -59,14 +66,48 @@
       to { transform: translateX(0); opacity: 1; }
     }
 
-    /* Clases de animación */
-    .animate-float {
-      animation: float 6s ease-in-out infinite;
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
     }
 
-    .animate-fade-in {
-      animation: fade-in 1s ease-out forwards;
+    @keyframes blink-caret {
+      from, to { border-color: transparent; }
+      50% { border-color: #3b82f6; }
     }
+
+    @keyframes spin-slow {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes wiggle {
+      0%, 100% { transform: rotate(-3deg); }
+      50% { transform: rotate(3deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Clases de animación */
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    .animate-fade-in { animation: fade-in 1s ease-out forwards; }
+    .animate-spin-slow { animation: spin-slow 4s linear infinite; }
+    .animate-pulse { animation: pulse 2s ease-in-out infinite; }
+    .animate-bounce { animation: bounce 1.5s ease-in-out infinite; }
+    .animate-wiggle { animation: wiggle 1s ease-in-out infinite; }
 
     /* Estilos para las órbitas */
     .orbit-icon {
@@ -105,6 +146,9 @@
     .orbit-icon:nth-child(4) { animation-delay: -9s; }
     .orbit-icon:nth-child(5) { animation-delay: -12s; }
     .orbit-icon:nth-child(6) { animation-delay: -15s; }
+    .orbit-icon:nth-child(7) { animation-delay: -18s; }
+    .orbit-icon:nth-child(8) { animation-delay: -21s; }
+    .orbit-icon:nth-child(9) { animation-delay: -24s; }
 
     .typewriter-cursor {
       animation: cursor-blink 1s step-end infinite;
@@ -112,11 +156,8 @@
 
     /* Estilos para títulos de secciones */
     .section-title {
-      background: linear-gradient(90deg, rgba(59, 130, 246, 0.8), rgba(139, 92, 246, 0.8));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+      color: white;
+      text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
       font-weight: 700;
       letter-spacing: 0.05em;
       padding: 0.2rem 0.5rem;
@@ -125,6 +166,145 @@
       backdrop-filter: blur(4px);
     }
 
+    /* Estilos mejorados para las tarjetas de habilidades */
+    .skill-category {
+      position: relative;
+      background: rgba(31, 41, 55, 0.7);
+      border-radius: 16px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      transition: all 0.3s ease;
+      overflow: hidden;
+      min-height: 320px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .skill-category:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+      animation: rgb-glow 3s infinite;
+    }
+
+    .skill-header {
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .skill-category:hover .skill-header {
+      transform: translateY(-20px);
+    }
+
+    .skill-icons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .skill-icon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.3s ease;
+    }
+
+    .skill-icon:hover {
+      transform: scale(1.15);
+    }
+
+    .icon-container {
+      width: 80px;
+      height: 80px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .skill-icon:hover .icon-container {
+      background: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    }
+
+    .skill-icon img {
+      width: 50px;
+      height: 50px;
+      transition: all 0.3s ease;
+    }
+
+    .skill-icon span {
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.8);
+      transition: all 0.3s ease;
+    }
+
+    .skill-icon:hover span {
+      color: white;
+      font-weight: 600;
+    }
+
+    .skill-description {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px;
+      background: rgba(17, 24, 39, 0.9);
+      transform: translateY(100%);
+      transition: all 0.3s ease;
+      border-radius: 0 0 16px 16px;
+      opacity: 0;
+    }
+
+    .skill-category:hover .skill-description {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .skill-description p {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 15px;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .skill-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .tag {
+      background: rgba(59, 130, 246, 0.2);
+      color: rgba(219, 234, 254, 0.9);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* Efecto typewriter para el título */
+    .typewriter {
+      overflow: hidden;
+      border-right: 2px solid #3b82f6;
+      white-space: nowrap;
+      display: inline-block;
+      animation: 
+        typing 2s steps(20, end),
+        blink-caret 0.75s step-end infinite;
+    }
+
+    /* Estilos para la imagen de perfil */
     .profile-img {
       box-shadow: 0 0 30px rgba(99, 102, 241, 0.5);
       transition: all 0.3s ease;
@@ -240,6 +420,49 @@
         padding: 1rem;
         font-size: 1.25rem;
       }
+
+      .skill-category {
+        min-height: 280px;
+      }
+      
+      .skill-icons {
+        gap: 12px;
+      }
+      
+      .icon-container {
+        width: 60px;
+        height: 60px;
+      }
+      
+      .skill-icon img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    /* Modo claro */
+    .light {
+      --tw-bg-opacity: 1;
+      background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+      color: rgb(31 41 55 / var(--tw-text-opacity));
+    }
+
+    .light .hero-section {
+      background-color: rgb(249 250 251 / var(--tw-bg-opacity));
+    }
+
+    .light .profile-img {
+      border-color: rgba(59, 130, 246, 0.2);
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+    }
+
+    .light .orbit-icon img {
+      filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
+    }
+
+    .light .skill-category {
+      background: rgba(229, 231, 235, 0.7);
+      border-color: rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
@@ -330,10 +553,16 @@
             <img src="public/icons/github.svg" alt="GitHub" class="w-14 h-14">
           </div>
           <div class="orbit-icon orbit-fast">
-            <img src="public/icons/python.svg" alt="Vite" class="w-14 h-14">
+            <img src="public/icons/python.svg" alt="Python" class="w-14 h-14">
           </div>
-            <div class="orbit-icon orbit-fast">
-            <img src="public/icons/dart.svg" alt="Vite" class="w-14 h-14">
+          <div class="orbit-icon orbit-fast">
+            <img src="public/icons/dart.svg" alt="Dart" class="w-14 h-14">
+          </div>
+          <div class="orbit-icon orbit-fast">
+            <img src="public/icons/css.svg" alt="CSS" class="w-14 h-14">
+          </div>
+          <div class="orbit-icon orbit-fast">
+            <img src="public/icons/csharp.svg" alt="C#" class="w-14 h-14">
           </div>
         </div>
       </div>
@@ -366,8 +595,8 @@
                   <span class="text-sm text-white">Dart</span>
                 </div>
                 <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
-                  <img src="public/icons/firebase.svg" alt="Firebase" class="w-5 h-5 mr-2">
-                  <span class="text-sm text-white">Firebase</span>
+                  <img src="public/icons/flask.svg" alt="Flask" class="w-5 h-5 mr-2">
+                  <span class="text-sm text-white">Flask</span>
                 </div>
               </div>
             </div>
@@ -442,7 +671,7 @@
                   <span class="text-sm text-white">C#</span>
                 </div>
                 <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
-                  <img src="public/icons/dotnet.svg" alt=".NET" class="w-5 h-5 mr-2">
+                  <img src="public/icons/vite.svg" alt=".NET" class="w-5 h-5 mr-2">
                   <span class="text-sm text-white">.NET</span>
                 </div>
                 <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
@@ -475,156 +704,233 @@
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
           <h2 class="text-4xl md:text-5xl font-bold section-title animate-fade-in">
-            Dominio Tecnológico
+            <span class="typewriter">Dominio Tecnológico</span>
           </h2>
           <h3 class="text-xl text-gray-400 mt-4 font-light">
             Lenguajes, frameworks y herramientas que domino
           </h3>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="skill-category group relative overflow-hidden rounded-xl p-6 shadow-2xl transition-all duration-500 hover:shadow-blue-500/20">
-            <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <h3 class="text-2xl font-semibold text-center mb-6 text-blue-400 relative z-10">
-              <span class="inline-block transform transition-transform duration-300 group-hover:scale-110">
+          <!-- 01. Desarrollo Móvil -->
+          <div class="skill-category group">
+            <div class="skill-header">
+              <h3 class="text-2xl font-semibold text-center mb-6 text-blue-400">
                 <span class="text-white">01.</span> Desarrollo Móvil
-              </span>
-            </h3>
-            <div class="flex flex-wrap justify-center gap-6 relative z-10">
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-blue-500/20 transition-colors duration-300">
-                  <img src="public/icons/flutter.svg" alt="Flutter" class="w-12 h-12">
+              </h3>
+              <div class="skill-icons">
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/flutter.svg" alt="Flutter" class="hover:animate-float">
+                  </div>
+                  <span>Flutter</span>
                 </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">Flutter</span>
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/dart.svg" alt="Dart" class="hover:animate-spin-slow">
+                  </div>
+                  <span>Dart</span>
+                </div>
               </div>
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-blue-500/20 transition-colors duration-300">
-                  <img src="public/icons/dart.svg" alt="Dart" class="w-12 h-12">
-                </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">Dart</span>
+            </div>
+            <div class="skill-description">
+              <p>Desarrollo de aplicaciones móviles multiplataforma con Flutter y Dart.</p>
+              <div class="skill-tags">
+                <span class="tag">Multiplataforma</span>
+                <span class="tag">UI/UX</span>
+                <span class="tag">Animaciones</span>
               </div>
             </div>
           </div>
-          <div class="skill-category group relative overflow-hidden rounded-xl p-6 shadow-2xl transition-all duration-500 hover:shadow-purple-500/20">
-            <div class="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <h3 class="text-2xl font-semibold text-center mb-6 text-purple-400 relative z-10">
-              <span class="inline-block transform transition-transform duration-300 group-hover:scale-110">
-                <span class="text-white">02.</span> Backend
-              </span>
-            </h3>
-            <div class="flex flex-wrap justify-center gap-6 relative z-10">
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-purple-500/20 transition-colors duration-300">
-                  <img src="public/icons/java.svg" alt="Java" class="w-12 h-12">
+
+          <!-- 02. Desarrollo Web -->
+          <div class="skill-category group">
+            <div class="skill-header">
+              <h3 class="text-2xl font-semibold text-center mb-6 text-purple-400">
+                <span class="text-white">02.</span> Desarrollo Web
+              </h3>
+              <div class="skill-icons">
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/html.svg" alt="HTML" class="hover:animate-pulse">
+                  </div>
+                  <span>HTML</span>
                 </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">Java</span>
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/css.svg" alt="CSS" class="hover:animate-wiggle">
+                  </div>
+                  <span>CSS</span>
+                </div>
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/tp.svg" alt="TypeScript" class="hover:animate-bounce">
+                  </div>
+                  <span>TypeScript</span>
+                </div>
               </div>
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-purple-500/20 transition-colors duration-300">
-                  <img src="public/icons/python.svg" alt="Python" class="w-12 h-12">
-                </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">Python</span>
-              </div>
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-purple-500/20 transition-colors duration-300">
-                  <img src="public/icons/csharp.svg" alt="C#" class="w-12 h-12">
-                </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">C#</span>
+            </div>
+            <div class="skill-description">
+              <p>Construcción de aplicaciones web modernas con tecnologías frontend. Desarrollo de interfaces interactivas y responsivas.</p>
+              <div class="skill-tags">
+                <span class="tag">Responsive</span>
+                <span class="tag">SPA</span>
+                <span class="tag">Accesibilidad</span>
               </div>
             </div>
           </div>
-          <div class="skill-category group relative overflow-hidden rounded-xl p-6 shadow-2xl transition-all duration-500 hover:shadow-green-500/20">
-            <div class="absolute inset-0 bg-gradient-to-br from-green-500/10 to-teal-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <h3 class="text-2xl font-semibold text-center mb-6 text-green-400 relative z-10">
-              <span class="inline-block transform transition-transform duration-300 group-hover:scale-110">
-                <span class="text-white">03.</span> Frontend
-              </span>
-            </h3>
-            <div class="flex flex-wrap justify-center gap-6 relative z-10">
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-green-500/20 transition-colors duration-300">
-                  <img src="public/icons/html.svg" alt="HTML" class="w-12 h-12">
+
+          <!-- 03. Backend -->
+          <div class="skill-category group">
+            <div class="skill-header">
+              <h3 class="text-2xl font-semibold text-center mb-6 text-green-400">
+                <span class="text-white">03.</span> Backend
+              </h3>
+              <div class="skill-icons">
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/csharp.svg" alt="C#" class="hover:animate-float">
+                  </div>
+                  <span>C#</span>
                 </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">HTML</span>
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/python.svg" alt="Python" class="hover:animate-spin-slow">
+                  </div>
+                  <span>Python</span>
+                </div>
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/java.svg" alt="Java" class="hover:animate-pulse">
+                  </div>
+                  <span>Java</span>
+                </div>
               </div>
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-green-500/20 transition-colors duration-300">
-                  <img src="public/icons/css.svg" alt="CSS" class="w-12 h-12">
-                </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">CSS</span>
-              </div>
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-green-500/20 transition-colors duration-300">
-                  <img src="public/icons/tp.svg" alt="TypeScript" class="w-12 h-12">
-                </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">JavaScript</span>
+            </div>
+            <div class="skill-description">
+              <p>Desarrollo de APIs robustas y sistemas backend escalables. Experiencia en arquitecturas de microservicios y RESTful APIs.</p>
+              <div class="skill-tags">
+                <span class="tag">APIs</span>
+                <span class="tag">Microservicios</span>
+                <span class="tag">Seguridad</span>
               </div>
             </div>
           </div>
-          <div class="skill-category group relative overflow-hidden rounded-xl p-6 shadow-2xl transition-all duration-500 hover:shadow-yellow-500/20">
-            <div class="absolute inset-0 bg-gradient-to-br from-yellow-500/10 to-amber-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <h3 class="text-2xl font-semibold text-center mb-6 text-yellow-400 relative z-10">
-              <span class="inline-block transform transition-transform duration-300 group-hover:scale-110">
+
+          <!-- 04. Bases de Datos -->
+          <div class="skill-category group">
+            <div class="skill-header">
+              <h3 class="text-2xl font-semibold text-center mb-6 text-yellow-400">
                 <span class="text-white">04.</span> Bases de Datos
-              </span>
-            </h3>
-            <div class="flex flex-wrap justify-center gap-6 relative z-10">
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-yellow-500/20 transition-colors duration-300">
-                  <img src="public/icons/postgresql.svg" alt="PostgreSQL" class="w-12 h-12">
+              </h3>
+              <div class="skill-icons">
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/sqlserver.svg" alt="SQL Server" class="hover:animate-float">
+                  </div>
+                  <span>SQL Server</span>
                 </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">PostgreSQL</span>
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/postgresql.svg" alt="PostgreSQL" class="hover:animate-spin-slow">
+                  </div>
+                  <span>PostgreSQL</span>
+                </div>
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/mysql.svg" alt="MySQL" class="hover:animate-pulse">
+                  </div>
+                  <span>MySQL</span>
+                </div>
               </div>
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-yellow-500/20 transition-colors duration-300">
-                  <img src="public/icons/sql.svg" alt="SQL Server" class="w-12 h-12">
-                </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">SQL Server</span>
-              </div>
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-yellow-500/20 transition-colors duration-300">
-                  <img src="public/icons/mysql.svg" alt="MySQL" class="w-12 h-12">
-                </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">MySQL</span>
+            </div>
+            <div class="skill-description">
+              <p>Diseño e implementación de bases de datos relacionales y NoSQL.</p>
+              <div class="skill-tags">
+                <span class="tag">SQL</span>
+                <span class="tag">NoSQL</span>
+                <span class="tag">Optimización</span>
               </div>
             </div>
           </div>
-          <div class="skill-category group relative overflow-hidden rounded-xl p-6 shadow-2xl transition-all duration-500 hover:shadow-red-500/20 sm:col-span-2 lg:col-span-1">
-            <div class="absolute inset-0 bg-gradient-to-br from-red-500/10 to-pink-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <h3 class="text-2xl font-semibold text-center mb-6 text-red-400 relative z-10">
-              <span class="inline-block transform transition-transform duration-300 group-hover:scale-110">
-                <span class="text-white">05.</span> Herramientas
-              </span>
-            </h3>
-            <div class="flex flex-wrap justify-center gap-6 relative z-10">
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-red-500/20 transition-colors duration-300">
-                  <img src="public/icons/git.svg" alt="Git" class="w-12 h-12">
+
+          <!-- 05. Hardware y Embebidos -->
+          <div class="skill-category group">
+            <div class="skill-header">
+              <h3 class="text-2xl font-semibold text-center mb-6 text-red-400">
+                <span class="text-white">05.</span> Hardware y Embebidos
+              </h3>
+              <div class="skill-icons">
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/Arduino.png" alt="Arduino" class="hover:animate-bounce">
+                  </div>
+                  <span>Arduino</span>
                 </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">Git</span>
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/Micropython.png" alt="Micropython" class="hover:animate-pulse">
+                  </div>
+                  <span>Micropython</span>
+                </div>
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/esp32.png" alt="ESP32" class="hover:animate-spin-slow">
+                  </div>
+                  <span>ESP32</span>
+                </div>
               </div>
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-red-500/20 transition-colors duration-300">
-                  <img src="public/icons/github.svg" alt="GitHub" class="w-12 h-12">
-                </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">GitHub</span>
+            </div>
+            <div class="skill-description">
+              <p>Desarrollo de prototipos electrónicos con sensores, actuadores y microcontroladores.</p>
+              <div class="skill-tags">
+                <span class="tag">IoT</span>
+                <span class="tag">Microcontroladores</span>
+                <span class="tag">Automatización</span>
               </div>
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-red-500/20 transition-colors duration-300">
-                  <img src="public/icons/vscode.svg" alt="Visual Studio Code" class="w-12 h-12">
+            </div>
+          </div>
+
+          <!-- 06. Herramientas -->
+          <div class="skill-category group">
+            <div class="skill-header">
+              <h3 class="text-2xl font-semibold text-center mb-6 text-indigo-400">
+                <span class="text-white">06.</span> Herramientas
+              </h3>
+              <div class="skill-icons">
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/github.svg" alt="GitHub" class="hover:animate-float">
+                  </div>
+                  <span>GitHub</span>
                 </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">VS Code</span>
-              </div>
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-red-500/20 transition-colors duration-300">
-                  <img src="public/icons/visual.svg" alt="Visual Studio" class="w-12 h-12">
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/vscode.svg" alt="VS Code" class="hover:animate-pulse">
+                  </div>
+                  <span>VS Code</span>
                 </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">Visual Studio</span>
-              </div>
-              <div class="skill-icon transform transition-all duration-300 hover:-translate-y-2">
-                <div class="p-3 bg-gray-800/50 rounded-full backdrop-blur-sm group-hover:bg-red-500/20 transition-colors duration-300">
-                  <img src="public/icons/slack.svg" alt="Slack" class="w-12 h-12">
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/visual.svg" alt="Visual Studio" class="hover:animate-spin-slow">
+                  </div>
+                  <span>Visual Studio</span>
                 </div>
-                <span class="text-sm mt-3 font-medium text-gray-300 group-hover:text-white transition-colors duration-300">Slack</span>
+                <div class="skill-icon">
+                  <div class="icon-container">
+                    <img src="public/icons/slack.svg" alt="Slack" class="hover:animate-pulse">
+                  </div>
+                  <span>Slack</span>
+                </div>
+               
+            <div class="skill-description">
+              <p>Dominio completo de herramientas de desarrollo, colaboración y diseño. Experiencia en:</p>
+              <div class="skill-tags">
+                <span class="tag">Control de versiones</span>
+                <span class="tag">CI/CD</span>
+                <span class="tag">Metodologías Ágiles</span>
+                <span class="tag">Diseño UI/UX</span>
+                <span class="tag">Testing APIs</span>
+                <span class="tag">Contenedores</span>
               </div>
             </div>
           </div>
@@ -694,7 +1000,7 @@
         © <span id="current-year">2025</span> Ezequiel Salazar. Todos los derechos reservados.
       </p>
       <p class="text-gray-500 text-xs">
-        <span id="current-date">29 de Junio de 2025</span>
+        <span id="current-date">2 de Julio de 2025</span>
       </p>
     </div>
   </footer>
