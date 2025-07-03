@@ -24,44 +24,10 @@
       background: #0f172a; /* Color azul oscuro uniforme */
       color: white;
       font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
     }
 
     /* Animaciones personalizadas */
-    @keyframes orbit {
-      0% {
-        transform: rotate(0deg) translateX(var(--orbit-radius)) rotate(0deg) scale(1);
-        opacity: 1;
-      }
-      50% {
-        transform: rotate(180deg) translateX(var(--orbit-radius)) rotate(-180deg) scale(1.1);
-        opacity: 0.9;
-      }
-      100% {
-        transform: rotate(360deg) translateX(var(--orbit-radius)) rotate(-360deg) scale(1);
-        opacity: 1;
-      }
-    }
-
-    @keyframes sun-glow {
-      0%, 100% { 
-        box-shadow: 0 0 30px rgba(255, 165, 0, 0.6), 
-                    0 0 60px rgba(255, 165, 0, 0.3);
-      }
-      50% { 
-        box-shadow: 0 0 50px rgba(255, 165, 0, 0.8), 
-                    0 0 90px rgba(255, 165, 0, 0.4);
-      }
-    }
-
-    @keyframes planet-glow {
-      0%, 100% { 
-        filter: drop-shadow(0 0 10px var(--planet-glow));
-      }
-      50% { 
-        filter: drop-shadow(0 0 15px var(--planet-glow));
-      }
-    }
-
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
@@ -87,96 +53,114 @@
       50% { border-color: #3b82f6; }
     }
 
-    /* Sistema solar mejorado */
-    .solar-system {
+    /* Perfil con efecto neón */
+    .profile-container {
       position: relative;
-      width: 600px;
-      height: 600px;
+      width: 300px;
+      height: 300px;
       margin: 0 auto;
     }
 
-    .sun {
-      position: absolute;
-      width: 150px;
-      height: 150px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #ffde00, #ff8c00);
-      animation: sun-glow 3s ease-in-out infinite, float 6s ease-in-out infinite;
-      z-index: 10;
-      overflow: hidden;
-      border: 4px solid rgba(255, 215, 0, 0.3);
-    }
-
-    .sun img {
+    .profile-img {
+      position: relative;
       width: 100%;
       height: 100%;
+      border-radius: 50%;
       object-fit: cover;
-      border-radius: 50%;
-      transition: all 0.3s ease;
+      border: 4px solid rgba(59, 130, 246, 0.3);
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+      z-index: 10;
+      animation: float 6s ease-in-out infinite;
     }
 
-    .sun:hover img {
-      transform: scale(1.05);
-    }
-
-    .orbit {
+    .profile-glow {
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      border: 1px dashed rgba(255, 255, 255, 0.1);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(59, 130, 246, 0.8), rgba(124, 58, 237, 0.5));
+      filter: blur(30px);
+      animation: glow-pulse 4s ease-in-out infinite alternate;
+      z-index: 5;
     }
 
-    .planet {
+    @keyframes glow-pulse {
+      0% {
+        transform: scale(0.95);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(1.05);
+        opacity: 0.9;
+      }
+    }
+
+    /* Tech orb - Círculos de tecnología */
+    .tech-orb {
       position: absolute;
-      width: 60px;
-      height: 60px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      animation: orbit linear infinite, planet-glow 3s ease-in-out infinite;
-      transform-origin: center;
-      transition: all 0.3s ease;
-      z-index: 5;
-    }
-
-    .planet img {
-      width: 80%;
-      height: 80%;
-      object-fit: contain;
-      transition: all 0.3s ease;
-    }
-
-    .planet:hover {
-      animation-play-state: paused;
-      transform: scale(1.3);
+      background: rgba(31, 41, 55, 0.7);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
       z-index: 20;
+      transition: all 0.3s ease;
+      animation: techOrbFloat 8s ease-in-out infinite;
     }
 
-    .planet:hover img {
-      transform: scale(1.2);
+    @keyframes techOrbFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-15px) scale(1.05); }
     }
 
-    /* Configuración de órbitas */
-    .orbit-1 { width: 220px; height: 220px; }
-    .orbit-2 { width: 320px; height: 320px; }
-    .orbit-3 { width: 420px; height: 420px; }
-    .orbit-4 { width: 520px; height: 520px; }
+    .tech-orb img {
+      width: 50px;
+      height: 50px;
+      transition: all 0.3s ease;
+      animation: techOrbRotate 15s linear infinite;
+    }
 
-    /* Configuración de planetas */
-    .planet-1 { --orbit-radius: 110px; --orbit-speed: 15s; --planet-glow: rgba(66, 133, 244, 0.7); } /* Flutter */
-    .planet-2 { --orbit-radius: 110px; --orbit-speed: 18s; --planet-glow: rgba(0, 180, 216, 0.7); } /* Dart */
-    .planet-3 { --orbit-radius: 160px; --orbit-speed: 20s; --planet-glow: rgba(247, 223, 30, 0.7); } /* Java */
-    .planet-4 { --orbit-radius: 160px; --orbit-speed: 22s; --planet-glow: rgba(97, 218, 251, 0.7); } /* Python */
-    .planet-5 { --orbit-radius: 210px; --orbit-speed: 25s; --planet-glow: rgba(118, 74, 188, 0.7); } /* C# */
-    .planet-6 { --orbit-radius: 210px; --orbit-speed: 28s; --planet-glow: rgba(227, 79, 38, 0.7); } /* HTML */
-    .planet-7 { --orbit-radius: 260px; --orbit-speed: 30s; --planet-glow: rgba(21, 114, 182, 0.7); } /* CSS */
-    .planet-8 { --orbit-radius: 260px; --orbit-speed: 32s; --planet-glow: rgba(49, 120, 198, 0.7); } /* TypeScript */
+    @keyframes techOrbRotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .tech-orb:hover {
+      transform: scale(1.2) !important;
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.6);
+      z-index: 30;
+      animation-play-state: paused;
+    }
+
+    .tech-orb:hover img {
+      animation-play-state: paused;
+    }
+
+    .tech-orb::after {
+      content: attr(data-tech);
+      position: absolute;
+      bottom: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.9);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .tech-orb:hover::after {
+      opacity: 1;
+    }
 
     /* Flip Card Styles */
     .skill-category {
@@ -345,36 +329,87 @@
     .animate-float { animation: float 6s ease-in-out infinite; }
     .animate-fade-in { animation: fade-in 1s ease-out forwards; }
 
+    /* Modal de descarga */
+    .download-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .download-modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .download-modal-content {
+      background: linear-gradient(135deg, #1e3a8a, #1e40af);
+      padding: 2rem;
+      border-radius: 1rem;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      transform: scale(0.9);
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .download-modal.active .download-modal-content {
+      transform: scale(1);
+    }
+
+    .download-modal h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+
+    .download-modal p {
+      color: rgba(255, 255, 255, 0.8);
+      margin-bottom: 1.5rem;
+    }
+
+    .download-modal-close {
+      background: #3b82f6;
+      color: white;
+      border: none;
+      padding: 0.5rem 1.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .download-modal-close:hover {
+      background: #2563eb;
+      transform: translateY(-2px);
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
-      .solar-system {
-        width: 300px;
-        height: 300px;
+      .profile-container {
+        width: 200px;
+        height: 200px;
       }
       
-      .sun {
-        width: 100px;
-        height: 100px;
+      .tech-orb {
+        width: 60px;
+        height: 60px;
       }
       
-      .planet {
+      .tech-orb img {
         width: 40px;
         height: 40px;
       }
-      
-      .orbit-1 { width: 150px; height: 150px; }
-      .orbit-2 { width: 200px; height: 200px; }
-      .orbit-3 { width: 250px; height: 250px; }
-      .orbit-4 { width: 300px; height: 300px; }
-      
-      .planet-1 { --orbit-radius: 75px; }
-      .planet-2 { --orbit-radius: 75px; }
-      .planet-3 { --orbit-radius: 100px; }
-      .planet-4 { --orbit-radius: 100px; }
-      .planet-5 { --orbit-radius: 125px; }
-      .planet-6 { --orbit-radius: 125px; }
-      .planet-7 { --orbit-radius: 150px; }
-      .planet-8 { --orbit-radius: 150px; }
 
       .skill-category {
         min-height: 280px;
@@ -411,10 +446,6 @@
       box-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
     }
 
-    .light .orbit-icon img {
-      filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.2));
-    }
-
     .light .skill-category {
       background: rgba(229, 231, 235, 0.7);
       border-color: rgba(0, 0, 0, 0.1);
@@ -426,6 +457,15 @@
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
+  <!-- Modal de descarga -->
+  <div id="download-modal" class="download-modal">
+    <div class="download-modal-content">
+      <h3>¡Estamos trabajando para ti!</h3>
+      <p>Estamos mejorando tu experiencia para que puedas descargar el CV de la mejor manera posible. Pronto estará disponible.</p>
+      <button id="download-modal-close" class="download-modal-close">Entendido</button>
+    </div>
+  </div>
+
   <header class="fixed w-full bg-gray-800/95 backdrop-blur-md z-50 shadow-lg">
     <div class="container mx-auto px-6 py-4 flex justify-between items-center">
       <h1 class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-600 bg-clip-text text-transparent">Ezequiel Salazar</h1>
@@ -434,6 +474,14 @@
         <a href="#proyectos" class="nav-link">Proyectos</a>
         <a href="#habilidades" class="nav-link">Habilidades</a>
         <a href="#contacto" class="nav-link">Contacto</a>
+        <a href="https://github.com/Ezequie1Sc" target="_blank" class="nav-link flex items-center">
+          <img src="public/icons/github.svg" alt="GitHub" class="w-6 h-6 mr-1">
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/ezequiel-salazar-194975340/" target="_blank" class="nav-link flex items-center">
+          <img src="public/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 mr-1">
+          LinkedIn
+        </a>
       </nav>
       <button id="theme-toggle" class="text-2xl focus:outline-none transition transform hover:scale-125">
         🌙
@@ -447,12 +495,20 @@
       <a href="#proyectos" class="nav-link">Proyectos</a>
       <a href="#habilidades" class="nav-link">Habilidades</a>
       <a href="#contacto" class="nav-link">Contacto</a>
+      <a href="https://github.com/Ezequie1Sc" target="_blank" class="nav-link flex items-center">
+        <img src="public/icons/github.svg" alt="GitHub" class="w-6 h-6 mr-2">
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/ezequiel-salazar-194975340/" target="_blank" class="nav-link flex items-center">
+        <img src="public/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6 mr-2">
+        LinkedIn
+      </a>
     </nav>
   </header>
 
   <main class="pt-24 flex-grow">
-    <!-- Sección Hero con Sistema Solar -->
-    <section id="inicio" class="min-h-screen container mx-auto px-6 flex flex-col md:flex-row items-center justify-center py-16 md:py-0">
+    <!-- Sección Hero -->
+    <section id="inicio" class="min-h-screen container mx-auto px-6 flex flex-col md:flex-row items-center justify-center py-16 md:py-0 relative overflow-hidden">
       <div class="md:w-1/2 z-20 text-center md:text-left mb-16 md:mb-0">
         <h2 class="text-2xl md:text-3xl mb-4 text-blue-400 font-medium animate-fade-in">¡Hola Mundo! 👋</h2>
         <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight animate-fade-in">
@@ -460,7 +516,7 @@
         </h1>
         <div class="typewriter-container mb-8 animate-fade-in">
           <h2 class="text-3xl md:text-4xl font-semibold text-blue-300 inline-block">
-            <span class="typewriter-text">Desarrollador Full Stack</span>
+            <span class="typewriter-text">Desarrollador de Software</span>
             <span class="typewriter-cursor">|</span>
           </h2>
         </div>
@@ -468,7 +524,7 @@
           Especializado en crear soluciones innovadoras con Flutter, Dart, Java y más. Transformo ideas en experiencias digitales excepcionales.
         </p>
         <div class="flex flex-col sm:flex-row gap-6 justify-center md:justify-start animate-fade-in">
-          <a href="#cv" class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg hover:shadow-blue-500/30 flex items-center justify-center text-lg font-medium">
+          <a href="#cv" id="download-cv" class="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white py-4 px-8 rounded-full transition-all transform hover:scale-105 shadow-lg hover:shadow-blue-500/30 flex items-center justify-center text-lg font-medium">
             <span>Descargar CV</span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -482,201 +538,485 @@
           </a>
         </div>
         <div class="flex justify-center md:justify-start mt-12 space-x-8 animate-fade-in">
-          <a href="#" class="social-icon hover:text-blue-400 transition transform hover:scale-125">
+          <a href="https://www.linkedin.com/in/ezequiel-salazar-194975340/" target="_blank" class="social-icon hover:text-blue-400 transition transform hover:scale-125">
             <img src="public/icons/linkedin.svg" alt="LinkedIn" class="w-12 h-12">
           </a>
-          <a href="#" class="social-icon hover:text-purple-400 transition transform hover:scale-125">
+          <a href="https://github.com/Ezequie1Sc" target="_blank" class="social-icon hover:text-purple-400 transition transform hover:scale-125">
             <img src="public/icons/github.svg" alt="GitHub" class="w-12 h-12">
           </a>
         </div>
       </div>
+ <!-- Sistema solar de tecnologías -->
+  <div class="md:w-1/2 relative flex justify-center items-center z-10">
+    <div class="solar-system">
+      <!-- Sol (tu imagen) -->
+      <div class="sun">
+        <img src="public/face.jpg" alt="Ezequiel Salazar" class="profile-img">
+        <div class="sun-glow"></div>
+      </div>
       
-      <!-- Sistema Solar -->
-      <div class="md:w-1/2 relative flex justify-center items-center">
-        <div class="solar-system">
-          <!-- Sol (tu foto) -->
-          <div class="sun">
-            <img src="public/face.jpg" alt="Ezequiel Salazar" class="profile-img">
-          </div>
-          
-          <!-- Órbitas -->
-          <div class="orbit orbit-1"></div>
-          <div class="orbit orbit-2"></div>
-          <div class="orbit orbit-3"></div>
-          <div class="orbit orbit-4"></div>
-          
-          <!-- Planetas (tecnologías) -->
-          <div class="planet planet-1" data-name="Flutter">
-            <img src="public/icons/flutter.svg" alt="Flutter">
-          </div>
-          
-          <div class="planet planet-2" data-name="Dart">
-            <img src="public/icons/dart.svg" alt="Dart">
-          </div>
-          
-          <div class="planet planet-3" data-name="Java">
-            <img src="public/icons/java.svg" alt="Java">
-          </div>
-          
-          <div class="planet planet-4" data-name="Python">
-            <img src="public/icons/python.svg" alt="Python">
-          </div>
-          
-          <div class="planet planet-5" data-name="C#">
-            <img src="public/icons/csharp.svg" alt="C#">
-          </div>
-          
-          <div class="planet planet-6" data-name="HTML">
-            <img src="public/icons/html.svg" alt="HTML">
-          </div>
-          
-          <div class="planet planet-7" data-name="CSS">
-            <img src="public/icons/css.svg" alt="CSS">
-          </div>
-          
-          <div class="planet planet-8" data-name="TypeScript">
-            <img src="public/icons/tp.svg" alt="TypeScript">
-          </div>
+      <!-- Planetas (tecnologías) -->
+      <div class="orbit orbit-1">
+        <div class="planet" data-tech="Flutter">
+          <img src="public/icons/flutter.svg" alt="Flutter">
         </div>
       </div>
-    </section>
+      
+      <div class="orbit orbit-2">
+        <div class="planet" data-tech="Dart">
+          <img src="public/icons/dart.svg" alt="Dart">
+        </div>
+      </div>
+      
+      <div class="orbit orbit-3">
+        <div class="planet" data-tech="Java">
+          <img src="public/icons/java.svg" alt="Java">
+        </div>
+      </div>
+      
+      <div class="orbit orbit-4">
+        <div class="planet" data-tech="Python">
+          <img src="public/icons/python.svg" alt="Python">
+        </div>
+      </div>
+      
+      <div class="orbit orbit-5">
+        <div class="planet" data-tech="C#">
+          <img src="public/icons/csharp.svg" alt="C#">
+        </div>
+      </div>
+      
+      <div class="orbit orbit-6">
+        <div class="planet" data-tech="HTML">
+          <img src="public/icons/html.svg" alt="HTML">
+        </div>
+      </div>
+      
+      <div class="orbit orbit-7">
+        <div class="planet" data-tech="CSS">
+          <img src="public/icons/css.svg" alt="CSS">
+        </div>
+      </div>
+      
+      <div class="orbit orbit-8">
+        <div class="planet" data-tech="TypeScript">
+          <img src="public/icons/tp.svg" alt="TypeScript">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- Sección Proyectos -->
-    <section id="proyectos" class="py-20 bg-gray-800/50 backdrop-blur-sm">
-      <div class="container mx-auto px-4">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title">
-          Mis Proyectos
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="project-card bg-gradient-to-br from-gray-700/80 to-gray-800/80 p-6 rounded-xl shadow-xl hover:border-blue-500 border border-gray-700 transition-all duration-300">
-            <div class="flex items-center mb-4">
-              <div class="w-16 h-16 bg-gray-600/50 rounded-full flex items-center justify-center mr-4">
-                <img src="public/icons/flutter.svg" alt="Flutter" class="w-10 h-10">
-              </div>
-              <h3 class="text-xl font-semibold text-white">Aplicación Flutter</h3>
-            </div>
-            <p class="text-gray-300 mb-4">Aplicación móvil desarrollada con Flutter y Dart para gestión de tareas con Firebase.</p>
-            <div class="mb-4">
-              <h4 class="text-sm font-medium text-gray-400 mb-2">Tecnologías utilizadas:</h4>
-              <div class="flex flex-wrap gap-3">
-                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
-                  <img src="public/icons/flutter.svg" alt="Flutter" class="w-5 h-5 mr-2">
-                  <span class="text-sm text-white">Flutter</span>
-                </div>
-                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
-                  <img src="public/icons/dart.svg" alt="Dart" class="w-5 h-5 mr-2">
-                  <span class="text-sm text-white">Dart</span>
-                </div>
-                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
-                  <img src="public/icons/flask.svg" alt="Flask" class="w-5 h-5 mr-2">
-                  <span class="text-sm text-white">Flask</span>
-                </div>
-              </div>
-            </div>
-            <div class="flex space-x-4">
-              <a href="#" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-300 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-                </svg>
-                Ver Demo
-              </a>
-              <a href="#" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors duration-300 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-                Código
-              </a>
-            </div>
+<style>
+  /* Sistema solar */
+  .solar-system {
+    position: relative;
+    width: 700px;
+    height: 700px;
+    margin: 0 auto;
+  }
+
+  /* Sol (tu imagen) */
+  .sun {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    z-index: 10;
+  }
+
+  .profile-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid rgba(255, 165, 0, 0.5);
+    box-shadow: 0 0 40px rgba(255, 165, 0, 0.6);
+  }
+
+  .sun-glow {
+    position: absolute;
+    top: -20%;
+    left: -20%;
+    width: 140%;
+    height: 140%;
+    border-radius: 50%;
+    background: radial-gradient(circle at center, rgba(255, 165, 0, 0.8), transparent 70%);
+    filter: blur(20px);
+    z-index: -1;
+    animation: sun-pulse 3s infinite alternate;
+  }
+
+  @keyframes sun-pulse {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    100% { transform: scale(1.05); opacity: 0.9; }
+  }
+
+  /* Órbitas */
+  .orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .orbit-1 { width: 220px; height: 220px; animation: orbit 20s linear infinite; }
+  .orbit-2 { width: 260px; height: 260px; animation: orbit 25s linear infinite; }
+  .orbit-3 { width: 300px; height: 300px; animation: orbit 30s linear infinite; }
+  .orbit-4 { width: 340px; height: 340px; animation: orbit 35s linear infinite; }
+  .orbit-5 { width: 380px; height: 380px; animation: orbit 40s linear infinite; }
+  .orbit-6 { width: 420px; height: 420px; animation: orbit 45s linear infinite; }
+  .orbit-7 { width: 460px; height: 460px; animation: orbit 50s linear infinite; }
+  .orbit-8 { width: 500px; height: 500px; animation: orbit 55s linear infinite; }
+
+  @keyframes orbit {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  /* Planetas (tecnologías) */
+  .planet {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(31, 41, 55, 0.8);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transform: translateX(-50%);
+    transition: all 0.3s ease;
+  }
+
+  .planet img {
+    width: 40px;
+    height: 40px;
+    animation: planet-rotate 10s linear infinite;
+  }
+
+  @keyframes planet-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Efecto hover */
+  .planet:hover {
+    transform: translateX(-50%) scale(1.2);
+    box-shadow: 0 0 25px rgba(59, 130, 246, 0.8);
+    z-index: 20;
+  }
+
+  .planet:hover img {
+    animation-play-state: paused;
+  }
+
+  /* Tooltip */
+  .planet::after {
+    content: attr(data-tech);
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(15, 23, 42, 0.9);
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .planet:hover::after {
+    opacity: 1;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .solar-system {
+      width: 350px;
+      height: 350px;
+    }
+    
+    .sun {
+      width: 120px;
+      height: 120px;
+    }
+    
+    .orbit-1 { width: 160px; height: 160px; }
+    .orbit-2 { width: 190px; height: 190px; }
+    .orbit-3 { width: 220px; height: 220px; }
+    .orbit-4 { width: 250px; height: 250px; }
+    .orbit-5 { width: 280px; height: 280px; }
+    
+    .planet {
+      width: 45px;
+      height: 45px;
+    }
+    
+    .planet img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+</style>
+
+<!-- Sección Proyectos -->
+<section id="proyectos" class="py-20 bg-gray-800/50 backdrop-blur-sm relative overflow-hidden">
+  <div class="container mx-auto px-4 relative z-10">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 section-title text-white">
+      Mis Proyectos
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <!-- Proyecto 1 -->
+      <div class="project-card bg-gradient-to-br from-gray-700/80 to-gray-800/80 p-6 rounded-xl shadow-xl hover:border-blue-500 border border-gray-700 transition-all duration-300 relative overflow-hidden group">
+        <div class="absolute inset-0 bg-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="h-48 mb-4 overflow-hidden rounded-lg bg-gray-700 flex items-center justify-center">
+          <img src="public/proyectos/1.png" alt="Pantalla del proyecto" class="w-full h-full object-contain">
+        </div>
+        <div class="flex items-center mb-4 relative z-10">
+          <div class="w-16 h-16 bg-gray-600/50 rounded-full flex items-center justify-center mr-4">
+            <img src="public/icons/flutter.svg" alt="Flutter" class="w-10 h-10">
           </div>
-          
-          <div class="project-card bg-gradient-to-br from-gray-700/80 to-gray-800/80 p-6 rounded-xl shadow-xl hover:border-purple-500 border border-gray-700 transition-all duration-300">
-            <div class="flex items-center mb-4">
-              <div class="w-16 h-16 bg-gray-600/50 rounded-full flex items-center justify-center mr-4">
-                <img src="public/icons/django.svg" alt="Django" class="w-10 h-10">
-              </div>
-              <h3 class="text-xl font-semibold text-white">Sistema Web</h3>
+          <h3 class="text-xl font-semibold text-white">Sigel ITC</h3>
+        </div>
+        <p class="text-gray-300 mb-4 relative z-10">Sistema de Organización Académica, Gestión de Inventario y Entrega de Trabajos Para el Laboratorios del Instituto Tecnológico de Calkiní</p>
+        <div class="mb-4 relative z-10">
+          <h4 class="text-sm font-medium text-gray-400 mb-2">Tecnologías utilizadas:</h4>
+          <div class="flex flex-wrap gap-3">
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/flutter.svg" alt="Flutter" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">Flutter</span>
             </div>
-            <p class="text-gray-300 mb-4">Plataforma de e-commerce con Python (Django) y base de datos PostgreSQL.</p>
-            <div class="mb-4">
-              <h4 class="text-sm font-medium text-gray-400 mb-2">Tecnologías utilizadas:</h4>
-              <div class="flex flex-wrap gap-3">
-                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
-                  <img src="public/icons/python.svg" alt="Python" class="w-5 h-5 mr-2">
-                  <span class="text-sm text-white">Python</span>
-                </div>
-                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
-                  <img src="public/icons/django.svg" alt="Django" class="w-5 h-5 mr-2">
-                  <span class="text-sm text-white">Django</span>
-                </div>
-                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
-                  <img src="public/icons/postgresql.svg" alt="PostgreSQL" class="w-5 h-5 mr-2">
-                  <span class="text-sm text-white">PostgreSQL</span>
-                </div>
-              </div>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/dart.svg" alt="Dart" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">Dart</span>
             </div>
-            <div class="flex space-x-4">
-              <a href="#" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors duration-300 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-                </svg>
-                Ver Demo
-              </a>
-              <a href="#" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors duration-300 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-                Código
-              </a>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/python.svg" alt="Python" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">Python</span>
             </div>
-          </div>
-          
-          <div class="project-card bg-gradient-to-br from-gray-700/80 to-gray-800/80 p-6 rounded-xl shadow-xl hover:border-green-500 border border-gray-700 transition-all duration-300">
-            <div class="flex items-center mb-4">
-              <div class="w-16 h-16 bg-gray-600/50 rounded-full flex items-center justify-center mr-4">
-                <img src="public/icons/csharp.svg" alt="C#" class="w-10 h-10">
-              </div>
-              <h3 class="text-xl font-semibold text-white">Herramienta C#</h3>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/flask.svg" alt="Flask" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">Flask</span>
             </div>
-            <p class="text-gray-300 mb-4">Software de escritorio para análisis de datos desarrollado con C# y .NET.</p>
-            <div class="mb-4">
-              <h4 class="text-sm font-medium text-gray-400 mb-2">Tecnologías utilizadas:</h4>
-              <div class="flex flex-wrap gap-3">
-                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
-                  <img src="public/icons/csharp.svg" alt="C#" class="w-5 h-5 mr-2">
-                  <span class="text-sm text-white">C#</span>
-                </div>
-                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
-                  <img src="public/icons/vite.svg" alt=".NET" class="w-5 h-5 mr-2">
-                  <span class="text-sm text-white">.NET</span>
-                </div>
-                <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
-                  <img src="public/icons/sqlserver.svg" alt="SQL Server" class="w-5 h-5 mr-2">
-                  <span class="text-sm text-white">SQL Server</span>
-                </div>
-              </div>
-            </div>
-            <div class="flex space-x-4">
-              <a href="#" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors duration-300 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
-                </svg>
-                Ver Demo
-              </a>
-              <a href="#" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors duration-300 flex items-center">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-                  <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
-                </svg>
-                Código
-              </a>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/postgresql.svg" alt="PostgreSQL" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">PostgreSQL</span>
             </div>
           </div>
         </div>
+        <div class="flex space-x-4 relative z-10">
+          <button onclick="showMaintenanceModal()" class="demo-btn px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition-colors duration-300 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+            </svg>
+            Ver Demo
+          </button>
+          <a href="https://github.com/Ezequie1Sc" target="_blank" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors duration-300 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+            Código
+          </a>
+        </div>
       </div>
-    </section>
+      
+      <!-- Proyecto 2 -->
+      <div class="project-card bg-gradient-to-br from-gray-700/80 to-gray-800/80 p-6 rounded-xl shadow-xl hover:border-purple-500 border border-gray-700 transition-all duration-300 relative overflow-hidden group">
+        <div class="absolute inset-0 bg-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="h-48 mb-4 overflow-hidden rounded-lg bg-gray-700 flex items-center justify-center">
+          <img src="public/proyectos/barberia/b_1.png" alt="Pantalla del proyecto" class="w-full h-full object-contain">
+        </div>
+        <div class="flex items-center mb-4 relative z-10">
+          <div class="w-16 h-16 bg-gray-600/50 rounded-full flex items-center justify-center mr-4">
+            <img src="public/icons/flutter.svg" alt="Flutter" class="w-10 h-10">
+          </div>
+          <h3 class="text-xl font-semibold text-white">Barber Shop</h3>
+        </div>
+        <p class="text-gray-300 mb-4 relative z-10">Aplicación móvil que permite a los usuarios agendar citas de forma rápida y comprar productos desde un mismo lugar, facilitando la gestión de servicios y compras en un solo entorno digital.</p>
+        <div class="mb-4 relative z-10">
+          <h4 class="text-sm font-medium text-gray-400 mb-2">Tecnologías utilizadas:</h4>
+          <div class="flex flex-wrap gap-3">
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/flutter.svg" alt="Flutter" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">Flutter</span>
+            </div>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/dart.svg" alt="Dart" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">Dart</span>
+            </div>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/python.svg" alt="Python" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">Python</span>
+            </div>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/flask.svg" alt="Flask" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">Flask</span>
+            </div>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/postgresql.svg" alt="PostgreSQL" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">PostgreSQL</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex space-x-4 relative z-10">
+          <button onclick="showMaintenanceModal()" class="demo-btn px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg transition-colors duration-300 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+            </svg>
+            Ver Demo
+          </button>
+          <a href="https://github.com/Ezequie1Sc" target="_blank" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors duration-300 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+            Código
+          </a>
+        </div>
+      </div>
+      
+      <!-- Proyecto 3 -->
+      <div class="project-card bg-gradient-to-br from-gray-700/80 to-gray-800/80 p-6 rounded-xl shadow-xl hover:border-green-500 border border-gray-700 transition-all duration-300 relative overflow-hidden group">
+        <div class="absolute inset-0 bg-green-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="h-48 mb-4 overflow-hidden rounded-lg bg-gray-700 flex items-center justify-center">
+          <img src="public/proyectos/Invernadero/i_1.png" alt="Pantalla del proyecto" class="w-full h-full object-contain">
+        </div>
+        <div class="flex items-center mb-4 relative z-10">
+          <div class="w-16 h-16 bg-gray-600/50 rounded-full flex items-center justify-center mr-4">
+            <img src="public/icons/flutter.svg" alt="Flutter" class="w-10 h-10">
+          </div>
+          <h3 class="text-xl font-semibold text-white">Control de Invernadero</h3>
+        </div>
+        <p class="text-gray-300 mb-4 relative z-10">Sistema de control de invernadero con app móvil para monitoreo de temperatura, humedad y riego en tiempo real.</p>
+        <div class="mb-4 relative z-10">
+          <h4 class="text-sm font-medium text-gray-400 mb-2">Tecnologías utilizadas:</h4>
+          <div class="flex flex-wrap gap-3">
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/flutter.svg" alt="Flutter" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">Flutter</span>
+            </div>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/dart.svg" alt="Dart" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">Dart</span>
+            </div>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/python.svg" alt="Python" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">Python</span>
+            </div>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/flask.svg" alt="Flask" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">Flask</span>
+            </div>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/postgresql.svg" alt="PostgreSQL" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">PostgreSQL</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex space-x-4 relative z-10">
+          <button onclick="showMaintenanceModal()" class="demo-btn px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors duration-300 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+            </svg>
+            Ver Demo
+          </button>
+          <a href="https://github.com/Ezequie1Sc" target="_blank" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors duration-300 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+            Código
+          </a>
+        </div>
+      </div>
+
+      <!-- Proyecto 4 - Escritorio C# -->
+      <div class="project-card bg-gradient-to-br from-gray-700/80 to-gray-800/80 p-6 rounded-xl shadow-xl hover:border-orange-500 border border-gray-700 transition-all duration-300 relative overflow-hidden group">
+        <div class="absolute inset-0 bg-orange-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        <div class="h-48 mb-4 overflow-hidden rounded-lg bg-gray-700 flex items-center justify-center">
+          <img src="public/proyectos/barber/barber.jpg" alt="Pantalla del proyecto" class="w-full h-full object-contain">
+        </div>
+        <div class="flex items-center mb-4 relative z-10">
+          <div class="w-16 h-16 bg-gray-600/50 rounded-full flex items-center justify-center mr-4">
+            <img src="public/icons/csharp.svg" alt="C#" class="w-10 h-10">
+          </div>
+          <h3 class="text-xl font-semibold text-white">Barberia</h3>
+        </div>
+        <p class="text-gray-300 mb-4 relative z-10">Sistema integral para barbería con aplicación de escritorio en C# para agendar citas, gestionar clientes y controlar ventas de productos.</p>
+        <div class="mb-4 relative z-10">
+          <h4 class="text-sm font-medium text-gray-400 mb-2">Tecnologías utilizadas:</h4>
+          <div class="flex flex-wrap gap-3">
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/csharp.svg" alt="C#" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">C#</span>
+            </div>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/sqlserver.svg" alt="SQL Server" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">SQL Server</span>
+            </div>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/python.svg" alt="Python" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">Python</span>
+            </div>
+            <div class="flex items-center bg-gray-600/50 px-3 py-1 rounded-full">
+              <img src="public/icons/flask.svg" alt="Flask" class="w-5 h-5 mr-2">
+              <span class="text-sm text-white">Flask</span>
+            </div>
+          </div>
+        </div>
+        <div class="flex space-x-4 relative z-10">
+          <button onclick="showMaintenanceModal()" class="demo-btn px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white rounded-lg transition-colors duration-300 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd" />
+            </svg>
+            Ver Demo
+          </button>
+          <a href="https://github.com/Ezequie1Sc" target="_blank" class="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg transition-colors duration-300 flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+            Código
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Mantenimiento -->
+  <div id="maintenance-modal" class="download-modal">
+    <div class="download-modal-content">
+      <h3>¡Demo en Mantenimiento!</h3>
+      <p>Actualmente estamos trabajando en mejorar esta demostración. ¡Vuelve pronto para probarla!</p>
+      <button onclick="closeMaintenanceModal()" class="download-modal-close">Entendido</button>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Función para mostrar el modal de mantenimiento
+  function showMaintenanceModal() {
+    document.getElementById('maintenance-modal').classList.add('active');
+  }
+  
+  // Función para cerrar el modal
+  function closeMaintenanceModal() {
+    document.getElementById('maintenance-modal').classList.remove('active');
+  }
+</script>
 
     <!-- Sección Habilidades -->
-    <section id="habilidades" class="py-20 bg-gray-900/50 backdrop-blur-sm">
-      <div class="container mx-auto px-4">
+    <section id="habilidades" class="py-20 bg-gray-900/50 backdrop-blur-sm relative overflow-hidden">
+      <div class="container mx-auto px-4 relative z-10">
         <div class="text-center mb-16">
           <h2 class="text-4xl md:text-5xl font-bold section-title animate-fade-in">
             <span class="typewriter">Mis Habilidades Técnicas</span>
@@ -997,7 +1337,7 @@
                   </div>
                   <div class="skill-icon">
                     <div class="icon-container bg-gradient-to-br from-pink-500/20 to-rose-600/30 group-hover:from-pink-500/30 group-hover:to-rose-600/40">
-                      <img src="public/icons/esp32.png" alt="ESP32" class="hover:animate-spin-slow">
+                      <img src="public/ep32.png" alt="ESP32" class="hover:animate-spin-slow">
                     </div>
                     <span class="font-medium">ESP32</span>
                   </div>
@@ -1122,8 +1462,8 @@
     </section>
 
     <!-- Sección Contacto -->
-    <section id="contacto" class="py-20 bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm">
-      <div class="container mx-auto px-4">
+    <section id="contacto" class="py-20 bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm relative overflow-hidden">
+      <div class="container mx-auto px-4 relative z-10">
         <div class="text-center mb-12">
           <h2 class="text-3xl md:text-4xl font-bold section-title">
             Conectemos Nuestras Ideas
@@ -1172,10 +1512,10 @@
   <footer class="bg-gradient-to-br from-gray-900 to-gray-800 py-8 border-t border-gray-700/50">
     <div class="container mx-auto px-4 text-center">
       <div class="flex justify-center space-x-8 mb-6">
-        <a href="#" class="social-icon hover:text-blue-400 transition transform hover:scale-125">
+        <a href="https://www.linkedin.com/in/ezequiel-salazar-194975340/" target="_blank" class="social-icon hover:text-blue-400 transition transform hover:scale-125">
           <img src="public/icons/linkedin.svg" alt="LinkedIn" class="w-12 h-12">
         </a>
-        <a href="#" class="social-icon hover:text-purple-400 transition transform hover:scale-125">
+        <a href="https://github.com/Ezequie1Sc" target="_blank" class="social-icon hover:text-purple-400 transition transform hover:scale-125">
           <img src="public/icons/github.svg" alt="GitHub" class="w-12 h-12">
         </a>
       </div>
@@ -1258,30 +1598,54 @@
       setTimeout(typeWriter, speed);
     }
 
+    // Animación de tech orbs (círculos de tecnología)
+    function animateTechOrbs() {
+      const techOrbs = document.querySelectorAll('.tech-orb');
+      const centerX = 150; // Centro del contenedor (300px/2)
+      const centerY = 150;
+      const radius = 120;
+      let angle = 0;
+      const speed = 0.002;
+      
+      function updateOrbs() {
+        angle += speed;
+        
+        techOrbs.forEach((orb, index) => {
+          const orbAngle = angle + (index * (Math.PI * 2 / techOrbs.length));
+          const x = centerX + Math.cos(orbAngle) * radius - 40;
+          const y = centerY + Math.sin(orbAngle) * radius - 40;
+          
+          orb.style.transform = `translate(${x}px, ${y}px)`;
+        });
+        
+        requestAnimationFrame(updateOrbs);
+      }
+      
+      updateOrbs();
+    }
+
+    // Modal de descarga
+    const downloadModal = document.getElementById('download-modal');
+    const downloadBtn = document.getElementById('download-cv');
+    const closeModalBtn = document.getElementById('download-modal-close');
+
+    downloadBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      downloadModal.classList.add('active');
+    });
+
+    closeModalBtn.addEventListener('click', () => {
+      downloadModal.classList.remove('active');
+    });
+
+    downloadModal.addEventListener('click', (e) => {
+      if (e.target === downloadModal) {
+        downloadModal.classList.remove('active');
+      }
+    });
+
     // Configuración dinámica de las órbitas
     document.addEventListener('DOMContentLoaded', function() {
-      const planets = document.querySelectorAll('.planet');
-      
-      planets.forEach(planet => {
-        // Configurar animación para cada planeta
-        planet.style.animationDuration = `var(--orbit-speed)`;
-        
-        // Añadir tooltip
-        planet.addEventListener('mouseenter', function() {
-          const tooltip = document.createElement('div');
-          tooltip.className = 'planet-tooltip absolute bg-gray-800 text-white px-2 py-1 rounded text-sm whitespace-nowrap z-50';
-          tooltip.textContent = this.dataset.name;
-          this.appendChild(tooltip);
-        });
-        
-        planet.addEventListener('mouseleave', function() {
-          const tooltip = this.querySelector('.planet-tooltip');
-          if (tooltip) {
-            this.removeChild(tooltip);
-          }
-        });
-      });
-      
       // Iniciar el efecto de máquina de escribir
       setTimeout(typeWriter, 1000);
 
@@ -1289,7 +1653,13 @@
       document.getElementById('current-year').textContent = new Date().getFullYear();
       const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'America/Chicago' };
       document.getElementById('current-date').textContent = new Date().toLocaleString('es-ES', options).replace(' PM', ' p.m.').replace(' AM', ' a.m.');
+
+      // Iniciar animación de tech orbs
+      setTimeout(animateTechOrbs, 1000);
     });
+
+    // Recrear partículas al cambiar el tamaño de la ventana
+    window.addEventListener('resize', createParticles);
   </script>
 </body>
 </html>
