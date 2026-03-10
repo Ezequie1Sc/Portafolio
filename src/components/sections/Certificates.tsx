@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import * as data from '../../data';
 import type { Certificate } from '../../types';
 import CertificateCard from '../ui/CertificateCard';
