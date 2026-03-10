@@ -1,0 +1,260 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-[#0f172a] text-white font-['Poppins'] overflow-x-hidden;
+  }
+}
+
+@layer components {
+  /* Animaciones personalizadas */
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+  }
+
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+
+  @keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: #3b82f6; }
+  }
+
+  @keyframes glow-pulse {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    100% { transform: scale(1.05); opacity: 0.9; }
+  }
+
+  @keyframes techOrbFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-15px) scale(1.05); }
+  }
+
+  @keyframes techOrbRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* Efectos de hover */
+  .nav-link {
+    @apply relative py-3 px-6 font-semibold text-gray-200 transition-all duration-300 rounded-lg;
+  }
+
+  .nav-link:hover {
+    @apply text-blue-500 bg-blue-500/10 -translate-y-0.5;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-1/2 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-300 -translate-x-1/2;
+  }
+
+  .nav-link:hover::after {
+    @apply w-3/5;
+  }
+
+  /* Clases de animación */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1s ease-out forwards;
+  }
+
+  /* Estilos para el perfil */
+  .profile-container {
+    @apply relative w-[300px] h-[300px] mx-auto;
+  }
+
+  .profile-img {
+    @apply relative w-full h-full rounded-full object-cover border-4 border-blue-500/30 shadow-[0_0_30px_rgba(59,130,246,0.3)] z-10 animate-float;
+  }
+
+  .profile-glow {
+    @apply absolute top-0 left-0 w-full h-full rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(59,130,246,0.8),rgba(124,58,237,0.5))] blur-[30px] animate-[glow-pulse_4s_ease-in-out_infinite_alternate] z-5;
+  }
+
+  /* Tech orb */
+  .tech-orb {
+    @apply absolute w-20 h-20 rounded-full flex items-center justify-center bg-gray-800/70 backdrop-blur border border-white/10 shadow-lg z-20 transition-all duration-300 animate-[techOrbFloat_8s_ease-in-out_infinite];
+  }
+
+  .tech-orb img {
+    @apply w-[50px] h-[50px] transition-all duration-300 animate-[techOrbRotate_15s_linear_infinite];
+  }
+
+  .tech-orb:hover {
+    transform: scale(1.2) !important;
+    @apply shadow-[0_0_30px_rgba(59,130,246,0.6)] z-30;
+    animation-play-state: paused;
+  }
+
+  .tech-orb:hover img {
+    animation-play-state: paused;
+  }
+
+  .tech-orb::after {
+    content: attr(data-tech);
+    @apply absolute -bottom-8 left-1/2 -translate-x-1/2 bg-gray-900/90 px-2 py-1 rounded text-xs opacity-0 transition-opacity whitespace-nowrap;
+  }
+
+  .tech-orb:hover::after {
+    @apply opacity-100;
+  }
+
+  /* Flip Card Styles */
+  .skill-category {
+    @apply perspective-[1000px] min-h-[320px] relative;
+  }
+
+  .flip-card-inner {
+    @apply relative w-full h-full transition-transform duration-600 transform-style-3d;
+  }
+
+  .skill-category:hover .flip-card-inner {
+    transform: rotateY(180deg);
+  }
+
+  .flip-card-front,
+  .flip-card-back {
+    @apply absolute w-full h-full backface-hidden flex flex-col items-center justify-center p-6 bg-gray-800/70 backdrop-blur border border-white/10 rounded-xl shadow-lg;
+  }
+
+  .flip-card-back {
+    transform: rotateY(180deg);
+    @apply bg-gray-900/90 text-gray-300 text-center;
+  }
+
+  /* Skill icons */
+  .skill-icons {
+    @apply flex justify-center gap-5 mt-5 flex-wrap;
+  }
+
+  .skill-icon {
+    @apply flex flex-col items-center transition-all duration-300;
+  }
+
+  .skill-icon:hover {
+    @apply scale-115;
+  }
+
+  .icon-container {
+    @apply w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-2 transition-all duration-300;
+  }
+
+  .skill-icon:hover .icon-container {
+    @apply bg-white/20 shadow-[0_0_20px_rgba(59,130,246,0.4)];
+  }
+
+  .skill-icon img {
+    @apply w-[50px] h-[50px] transition-all duration-300;
+  }
+
+  .skill-icon span {
+    @apply text-base font-medium text-white/80 transition-all duration-300;
+  }
+
+  .skill-icon:hover span {
+    @apply text-white font-semibold;
+  }
+
+  /* Mobile menu */
+  .mobile-menu {
+    @apply transition-transform duration-300;
+  }
+
+  .mobile-menu.open {
+    transform: translateX(0);
+  }
+
+  /* Modal */
+  .download-modal {
+    @apply fixed inset-0 bg-black/80 flex justify-center items-center z-[1000] opacity-0 invisible transition-all duration-300;
+  }
+
+  .download-modal.active {
+    @apply opacity-100 visible;
+  }
+
+  .download-modal-content {
+    @apply bg-gradient-to-br from-blue-900 to-blue-800 p-8 rounded-xl max-w-md w-[90%] text-center transform scale-90 transition-all duration-300 border border-white/10;
+  }
+
+  .download-modal.active .download-modal-content {
+    @apply scale-100;
+  }
+
+  .download-modal-close {
+    @apply bg-blue-500 hover:bg-blue-600 text-white border-none py-2 px-6 rounded-lg cursor-pointer transition-all duration-300 hover:-translate-y-0.5;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-container {
+    @apply w-[200px] h-[200px];
+  }
+  
+  .tech-orb {
+    @apply w-[60px] h-[60px];
+  }
+  
+  .tech-orb img {
+    @apply w-10 h-10;
+  }
+
+  .skill-category {
+    @apply min-h-[280px];
+  }
+  
+  .skill-icons {
+    @apply gap-3;
+  }
+  
+  .icon-container {
+    @apply w-[60px] h-[60px];
+  }
+  
+  .skill-icon img {
+    @apply w-10 h-10;
+  }
+}
+
+/* Light mode */
+.light body {
+  @apply bg-gray-100 text-gray-800;
+}
+
+.light .hero-section {
+  @apply bg-gray-50;
+}
+
+.light .profile-img {
+  @apply border-blue-500/20 shadow-[0_0_30px_rgba(59,130,246,0.3)];
+}
+
+.light .skill-category {
+  @apply bg-gray-200/70 border-black/10;
+}
+
+.light .flip-card-back {
+  @apply bg-gray-200/30;
+}
