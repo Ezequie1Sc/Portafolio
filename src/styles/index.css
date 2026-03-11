@@ -3322,3 +3322,34 @@ body {
     font-size: 0.95rem;
   }
 }
+/* Contenedor de la imagen */
+.about-me-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding: 0 1rem;
+}
+
+/* Wrapper para la imagen circular */
+.about-me-image-wrapper {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #3b82f6; /* Borde azul */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.about-me-image-wrapper:hover {
+  transform: scale(1.05);
+}
+
+/* La imagen en sí */
+.about-me-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

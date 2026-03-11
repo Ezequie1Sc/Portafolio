@@ -16,8 +16,8 @@ export interface Project {
   color: 'blue' | 'purple' | 'green' | 'orange';
   github: string;
   demoUrl?: string; 
+  
 }
-
 export interface Certificate {
   id: number;
   title: string;
@@ -26,6 +26,7 @@ export interface Certificate {
   image: string;
   credentialUrl?: string;
   skills: string[];
+  category: 'programacion' | 'datos' | 'ia' | 'ciberseguridad' | 'idiomas' | 'profesional';
 }
 
 export interface SkillItem {
@@ -62,15 +63,4 @@ export interface SocialLink {
 export interface NavLink {
   name: string;
   href: string;
-}
-
-export interface Certificate {
-  id: number;
-  title: string;
-  issuer: string;
-  date: string;
-  image: string;
-  credentialUrl?: string;
-  skills: string[];
-  category: 'programacion' | 'ciberseguridad' | 'ia' | 'idiomas' | 'profesional'; // <-- NUEVO
 }

@@ -20,8 +20,9 @@ export const socialLinks: SocialLink[] = [
     url: 'https://github.com/Ezequie1Sc',
     icon: '/icons/github.svg',
     hoverColor: 'hover:text-purple-400',
-  },
-];/// ===== CERTIFICADOS =====
+  },// En el array de certificates, agrega un nuevo certificado de SQL Server:
+]
+
 export const certificates: Certificate[] = [
   // 1️⃣ PROGRAMACIÓN
   {
@@ -87,8 +88,45 @@ export const certificates: Certificate[] = [
     credentialUrl: '/Certificates/Cert.pdf',
     skills: ['Comunicación Efectiva', 'Habilidades Profesionales', 'Soft Skills'],
     category: 'profesional'
-  }
+  },
+  {
+  id: 7,
+  title: 'Advanced SQL',
+  issuer: 'Kaggle',
+  date: '2026',
+  image: '/Certificates/AdvancedSQL.png', // imagen del certificado
+  credentialUrl: '/Certificates/AdvancedSQL.png', // PDF del certificado
+  skills: [
+    'Advanced SQL',
+    'JOINs',
+    'UNION',
+    'Window Functions',
+    'Query Optimization',
+    'BigQuery'
+  ],
+  category: 'datos'
+},
+
+{
+  id: 8,
+  title: 'Intro to SQL',
+  issuer: 'Kaggle',
+  date: '2026',
+  image: '/Certificates/IntrotoSQL.png', // imagen del certificado
+  credentialUrl: '/Certificates/IntrotoSQL.png', // PDF del certificado
+  skills: [
+    'SQL',
+    'BigQuery',
+    'SELECT',
+    'GROUP BY',
+    'JOIN',
+    'Query Fundamentals'
+  ],
+  category: 'datos'
+}
 ];
+
+
 
 // ===== PROYECTOS =====
 export const projects: Project[] = [

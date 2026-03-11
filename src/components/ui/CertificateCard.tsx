@@ -8,29 +8,45 @@ const CertificateCard = ({ certificate }: CertificateCardProps) => {
   // Función para obtener el color según la categoría
   const getCategoryColor = (category: string) => {
     const colors = {
-      programacion: '#3776AB', // Azul Python
-      ciberseguridad: '#9391ac', // Rojo seguridad
-      ia: '#8B5CF6', // Púrpura IA
-      idiomas: '#10B981', // Verde inglés
-      profesional: '#F59E0B' // Naranja comunicación
+      programacion: '#3776AB',
+      datos: '#DC2626', // Rojo para SQL Server
+      ia: '#8B5CF6',
+      ciberseguridad: '#9391ac',
+      idiomas: '#10B981',
+      profesional: '#F59E0B',
     };
     return colors[category as keyof typeof colors] || '#3B82F6';
+  };
+
+  // Función para obtener el nombre de la categoría
+  const getCategoryName = (category: string) => {
+    const names = {
+      programacion: 'Programación',
+      datos: 'Bases de Datos',
+      ia: 'IA',
+      ciberseguridad: 'Ciberseguridad',
+      idiomas: 'Idiomas',
+      profesional: 'Profesional',
+    };
+    return names[category as keyof typeof names] || category;
   };
 
   // Función para obtener el ícono de categoría
   const getCategoryIcon = (category: string) => {
     const icons = {
       programacion: '',
-      ciberseguridad: '',
+      datos: '',
       ia: '',
+      ciberseguridad: '',
       idiomas: '',
-      profesional: ''
+      profesional: '',
     };
     return icons[category as keyof typeof icons] || '';
   };
 
   const categoryColor = getCategoryColor(certificate.category);
   const categoryIcon = getCategoryIcon(certificate.category);
+  const categoryName = getCategoryName(certificate.category);
 
   const AwardIcon = () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,11 +85,7 @@ const CertificateCard = ({ certificate }: CertificateCardProps) => {
         <div className="certificate-category-tag" style={{ backgroundColor: categoryColor }}>
           <span className="category-icon">{categoryIcon}</span>
           <span className="category-name">
-            {certificate.category === 'programacion' && 'Programación'}
-            {certificate.category === 'ciberseguridad' && 'Ciberseguridad'}
-            {certificate.category === 'ia' && 'IA'}
-            {certificate.category === 'idiomas' && 'Idiomas'}
-            {certificate.category === 'profesional' && 'Profesional'}
+            {categoryName}
           </span>
         </div>
       </div>

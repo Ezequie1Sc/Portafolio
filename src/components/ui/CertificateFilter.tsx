@@ -1,12 +1,12 @@
-
 interface CertificateFilterProps {
   activeFilter: string;
   onFilterChange: (filter: string) => void;
   counts: {
     todos: number;
     programacion: number;
-    ciberseguridad: number;
+    datos: number;
     ia: number;
+    ciberseguridad: number;
     idiomas: number;
     profesional: number;
   };
@@ -14,12 +14,13 @@ interface CertificateFilterProps {
 
 const CertificateFilter = ({ activeFilter, onFilterChange, counts }: CertificateFilterProps) => {
   const filters = [
-    { id: 'todos', label: 'Todos', icon: '', count: counts.todos },
-    { id: 'programacion', label: 'Programación', icon: '', count: counts.programacion },
-    { id: 'ciberseguridad', label: 'Ciberseguridad', icon: '', count: counts.ciberseguridad },
-    { id: 'ia', label: 'Inteligencia Artificial', icon: '', count: counts.ia },
-    { id: 'idiomas', label: 'Idiomas', icon: '', count: counts.idiomas },
-    { id: 'profesional', label: 'Profesional', icon: '', count: counts.profesional },
+    { id: 'todos', label: 'Todos', count: counts.todos },
+    { id: 'programacion', label: 'Programación', count: counts.programacion },
+    { id: 'datos', label: 'Datos', count: counts.datos },
+    { id: 'ia', label: 'Inteligencia Artificial', count: counts.ia },
+    { id: 'ciberseguridad', label: 'Ciberseguridad', count: counts.ciberseguridad },
+    { id: 'idiomas', label: 'Idiomas', count: counts.idiomas },
+    { id: 'profesional', label: 'Profesional', count: counts.profesional },
   ];
 
   return (
@@ -30,7 +31,6 @@ const CertificateFilter = ({ activeFilter, onFilterChange, counts }: Certificate
           className={`certificate-filter-btn ${activeFilter === filter.id ? 'active' : ''}`}
           onClick={() => onFilterChange(filter.id)}
         >
-          <span className="filter-icon">{filter.icon}</span>
           <span className="filter-label">{filter.label}</span>
           <span className="filter-count">{filter.count}</span>
         </button>

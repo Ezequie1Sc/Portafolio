@@ -17,15 +17,26 @@ const Skills = () => {
                 <span className="about-me-border-bottom"></span>
               </div>
               
+              {/* Imagen circular agregada aquí */}
+              <div className="about-me-image-container">
+                <div className="about-me-image-wrapper">
+                  <img 
+                    src="/face.jpg" 
+                    alt="Profile" 
+                    className="about-me-image"
+                  />
+                </div>
+              </div>
+              
               <div className="about-me-grid">
                 {/* Quien Soy */}
                 <div className="about-me-item">
                   <div className="about-me-item-header">
                     <span className="about-me-item-icon">◈</span>
-                    <h4 className="about-me-item-title">Quien soy</h4>
+                    <h4 className="about-me-item-title">Quién soy</h4>
                   </div>
                   <p className="about-me-item-text">
-                    Desarrollador de software enfocado en crear aplicaciones y soluciones tecnológicas.
+                    Desarrollador de software y estudiante de Ingeniería en Sistemas en 8.º semestre, enfocado en crear aplicaciones y soluciones tecnológicas eficientes.
                   </p>
                 </div>
 
