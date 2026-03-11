@@ -29,18 +29,36 @@ export const certificates: Certificate[] = [
     id: 1,
     title: 'Python Programming',
     issuer: 'Cisco Networking Academy',
-    date: '2024',
+    date: '2026',
     image: '/Certificates/python.png',
     credentialUrl: '/Certificates/PythonEssentials.pdf',
     skills: ['Python', 'Automatización', 'Scripting', 'Fundamentos'],
     category: 'programacion'
   },
+
+  {
+  id: 9,
+  title: 'Python Essentials',
+  issuer: 'Cisco Networking Academy',
+  date: '2026',
+  image: '/Certificates/im.png',
+  credentialUrl: '/Certificates/PythonEssentials2.pdf',
+  skills: [
+    'Python',
+    'Programación Orientada a Objetos',
+    'Automatización',
+    'Estructuras de Datos',
+    'Control de Flujo',
+    'Scripting'
+  ],
+  category: 'programacion'
+},
   // 2️⃣ CIBERSEGURIDAD
   {
     id: 2,
     title: 'Introduction to Cybersecurity',
     issuer: 'Cisco Networking Academy',
-    date: '2024',
+    date: '2026',
     image: '/Certificates/IntroductionCibersecurity.png',
     credentialUrl: '/Certificates/cybersecurity.pdf',
     skills: ['Seguridad Informática', 'Protección de Redes', 'Ciberseguridad'],
@@ -50,7 +68,7 @@ export const certificates: Certificate[] = [
   {
     id: 3,
     title: 'Modern AI',
-    issuer: 'Coursera',
+    issuer: 'Cisco',
     date: '2024',
     image: '/Certificates/modernIA.png',
     credentialUrl: '/Certificates/IntrotoModernAI.pdf',
@@ -72,7 +90,7 @@ export const certificates: Certificate[] = [
     id: 5,
     title: 'English Level B1 Certification',
     issuer: 'Cambridge Assessment',
-    date: '2024',
+    date: '2022',
     image: '/Certificates/constanciaB1ingles.png',
     credentialUrl: '/Certificates/constancia.pdf',
     skills: ['Inglés Intermedio', 'Comprensión', 'Comunicación'],
@@ -83,7 +101,7 @@ export const certificates: Certificate[] = [
     id: 6,
     title: 'Professional Communication',
     issuer: 'LinkedIn Learning',
-    date: '2024',
+    date: '2026',
     image: '/Certificates/professionalCommunication.png',
     credentialUrl: '/Certificates/Cert.pdf',
     skills: ['Comunicación Efectiva', 'Habilidades Profesionales', 'Soft Skills'],
