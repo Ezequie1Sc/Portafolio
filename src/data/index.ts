@@ -89,7 +89,7 @@ export const certificates: Certificate[] = [
   {
     id: 5,
     title: 'English Level B1 Certification',
-    issuer: 'Cambridge Assessment',
+    issuer: 'Instituto Tecnologico Superior De Calkini ',
     date: '2022',
     image: '/Certificates/constanciaB1ingles.png',
     credentialUrl: '/Certificates/constancia.pdf',
