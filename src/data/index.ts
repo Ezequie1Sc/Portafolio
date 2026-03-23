@@ -279,6 +279,28 @@ export const projects: Project[] = [
     demoUrl: 'https://practica-web-kappa.vercel.app/', // <-- CAMBIA ESTA URL
   },
   {
+    id: 15,
+    title: 'Restaurant Website',
+    description: 'Plataforma web para la venta de desayunos sorpresa con enfoque en experiencia de usuario, personalización y contacto directo vía WhatsApp.',
+    image: '/proyectos/web/webcasita.png',
+    icon: '/icons/react.svg',
+    type: 'web',
+    technologies: [
+      { name: 'HTML', icon: '/icons/html.svg', bgColor: 'bg-orange-600' },
+      { name: 'CSS', icon: '/icons/css.svg', bgColor: 'bg-blue-600' },
+      { name: 'TypeScript', icon: '/icons/tp.svg', bgColor: 'bg-blue-600' },
+    ],
+    images: [
+      '/proyectos/plenum/1.png',
+      '/proyectos/plenum/2.png',
+      '/proyectos/plenum/3.png',
+    ],
+    color: 'blue',
+    github: 'https://github.com/Ezequie1Sc/web-casita',
+    demoUrl: 'https://web-casita.vercel.app/', // <-- CAMBIA ESTA URL
+  },
+
+  {
     id: 7,
     title: 'JavaScript Laboratory',
     description: 'Laboratorio interactivo de programación con 27 ejercicios de lógica en JavaScript, diseñado como una herramienta educativa que permite visualizar, ejecutar y probar código directamente desde el navegador con una interfaz moderna y amigable.',
