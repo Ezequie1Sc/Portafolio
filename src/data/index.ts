@@ -295,7 +295,7 @@ export const projects: Project[] = [
       '/proyectos/plenum/2.png',
       '/proyectos/plenum/3.png',
     ],
-    color: 'blue',
+    color: 'green',
     github: 'https://github.com/Ezequie1Sc/web-casita',
     demoUrl: 'https://web-casita.vercel.app/', // <-- CAMBIA ESTA URL
   },
