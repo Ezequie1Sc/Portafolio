@@ -15,9 +15,14 @@ export interface Project {
   technologies: Technology[];
   color: 'blue' | 'purple' | 'green' | 'orange';
   github: string;
-  demoUrl?: string; 
-  
+  demoUrl?: string;
+  // NUEVAS PROPIEDADES
+  problem?: string;
+  solution?: string;
+  howItWorks?: string[];
+  impact?: string;
 }
+
 export interface Certificate {
   id: number;
   title: string;

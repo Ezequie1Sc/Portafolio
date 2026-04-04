@@ -1,5 +1,5 @@
-import React from 'react';
-import { useTheme } from '../../hooks/useTheme';
+import React from "react";
+import { useTheme } from "./useTheme";
 
 const ThemeToggle: React.FC = () => {
   const { isDark, toggleTheme } = useTheme();
@@ -7,10 +7,9 @@ const ThemeToggle: React.FC = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="text-2xl focus:outline-none transition transform hover:scale-125"
-      aria-label="Toggle theme"
+      className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-xl transition hover:scale-110"
     >
-      {isDark ? '🌙' : '☀️'}
+      {isDark ? "🌙" : "☀️"}
     </button>
   );
 };
