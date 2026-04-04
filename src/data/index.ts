@@ -54,6 +54,16 @@ export const certificates: Certificate[] = [
     skills: ['Seguridad Informática', 'Protección de Redes', 'Ciberseguridad'],
     category: 'ciberseguridad'
   },
+     {
+  id: 10,
+  title: 'Claude Code in Action',
+  issuer: 'Anthropic',
+  date: '2026-04-04',
+  image: '/Certificates/code.png',  
+  credentialUrl: '/Certificates/code.pdf',
+  skills: ['Claude Code', 'AI Assistants', 'Code Generation', 'LLM Integration'],
+  category: 'ia'
+},
   {
     id: 3,
     title: 'Modern AI',
@@ -113,7 +123,9 @@ export const certificates: Certificate[] = [
     credentialUrl: '/Certificates/IntrotoSQL.png',
     skills: ['SQL', 'BigQuery', 'SELECT', 'GROUP BY', 'JOIN', 'Query Fundamentals'],
     category: 'datos'
-  }
+  },
+ 
+
 ];
 
 // ===== PROYECTOS CON TEXTOS ENRIQUECIDOS =====
@@ -214,19 +226,24 @@ export const projects: Project[] = [
       { name: 'PostgreSQL', icon: '/icons/postgresql.svg', bgColor: 'bg-blue-700' },
       { name: 'Python', icon: '/icons/python.svg', bgColor: 'bg-green-600' },
     ],
-    images: ['/v_1.png'],
-    color: 'green',
-    github: 'https://github.com/Ezequie1Sc',
-    problem: 'Organizadores usaban métodos manuales generando errores y retrasos.',
-    solution: 'App que automatiza gestión de torneos con estadísticas en vivo.',
-    howItWorks: [
-      'Registro de equipos y jugadores',
-      'Ingreso rápido de resultados',
-      'Cálculo automático de estadísticas',
-      'Tabla de posiciones instantánea'
-    ],
-    impact: 'Redujo tiempo de organización en 70% y eliminó errores de cálculo.'
-  },
+  images: ['/v_1.png'],
+color: 'green',
+github: 'https://github.com/Ezequie1Sc',
+
+problem: 'Los organizadores de torneos deportivos gestionan equipos y resultados de forma manual, lo que genera errores y pérdida de tiempo.',
+
+solution: 'Aplicación en desarrollo que automatiza la gestión de torneos, incluyendo registro de equipos, resultados y generación de estadísticas en tiempo real.',
+
+howItWorks: [
+  'Registro de equipos y jugadores',
+  'Ingreso rápido de resultados',
+  'Cálculo automático de estadísticas',
+  'Visualización de tabla de posiciones en tiempo real'
+],
+
+impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneos y reducir errores en el manejo de resultados.'
+},
+
   {
     id: 5,
     title: 'VideoJuego',
@@ -241,7 +258,7 @@ export const projects: Project[] = [
     images: ['/game1.png'],
     color: 'orange',
     github: 'https://github.com/Ezequie1Sc/love_apk',
-    problem: 'Falta de opciones de entretenimiento educativo en dispositivos móviles.',
+   problem: 'Falta de opciones de entretenimiento rápido y accesible para sesiones cortas en dispositivos móviles.',
     solution: 'Juego arcade que mejora reflejos mientras ofrece experiencia divertida.',
     howItWorks: [
       'Control táctil para mover personaje',
@@ -249,7 +266,7 @@ export const projects: Project[] = [
       'Dificultad progresiva',
       'Sistema de puntuación y récords'
     ],
-    impact: '+500 descargas en beta, 4.8/5 estrellas.'
+   impact: 'Diseñado para ofrecer una experiencia entretenida y accesible para sesiones cortas de juego.'
   },
 
   // ===== APLICACIONES WEB =====
@@ -315,7 +332,6 @@ export const projects: Project[] = [
     technologies: [
       { name: 'HTML', icon: '/icons/html.svg', bgColor: 'bg-orange-600' },
       { name: 'CSS', icon: '/icons/css.svg', bgColor: 'bg-blue-600' },
-      { name: 'Tailwind', icon: '/icons/tailwind.svg', bgColor: 'bg-cyan-600' },
       { name: 'JavaScript', icon: '/icons/javascript.svg', bgColor: 'bg-yellow-600' },
     ],
     images: ['/proyectos/js-lab/1.png', '/proyectos/js-lab/2.png', '/proyectos/js-lab/3.png', '/proyectos/js-lab/4.png'],
@@ -330,7 +346,7 @@ export const projects: Project[] = [
       'Sistema de validación',
       'Interfaz limpia sin distracciones'
     ],
-    impact: '+300 estudiantes, 92% reportó mejora significativa.'
+    impact: '+100 estudiantes, 92% reportó mejora significativa.'
   },
   {
     id: 8,
@@ -356,7 +372,7 @@ export const projects: Project[] = [
       'Sección de habilidades con tarjetas',
       'Formulario de contacto funcional'
     ],
-    impact: 'Incrementó entrevistas de trabajo en 150%.'
+   impact: 'Mejoró la presentación de mis proyectos y facilitó la evaluación técnica por reclutadores.'
   },
 
   // ===== PROYECTOS BACKEND =====

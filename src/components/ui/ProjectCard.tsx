@@ -5,10 +5,11 @@ import '../../styles/ProjectCard.css';
 
 interface ProjectCardProps {
   project: Project;
+  isExpanded: boolean;
+  onExpand: () => void;
 }
 
-const ProjectCard = memo(({ project }: ProjectCardProps) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+const ProjectCard = memo(({ project, isExpanded, onExpand }: ProjectCardProps) => {
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
@@ -42,7 +43,7 @@ const ProjectCard = memo(({ project }: ProjectCardProps) => {
   };
 
   const toggleExpand = () => {
-    setIsExpanded(!isExpanded);
+    onExpand();
     if (isExpanded) {
       setActiveSection(null);
     }
@@ -120,117 +121,118 @@ const ProjectCard = memo(({ project }: ProjectCardProps) => {
             </div>
           </div>
 
-          {/* Botón Ver más - MÁS GRANDE Y VISIBLE */}
           {hasExtraInfo && (
             <button className="expand-btn" onClick={toggleExpand}>
               <svg className={`expand-icon ${isExpanded ? 'rotated' : ''}`} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <polyline points="6 9 12 15 18 9"/>
               </svg>
-              <span>{isExpanded ? 'Ver menos información' : 'Ver más información'}</span>
+              <span>{isExpanded ? 'Ver menos información' : 'Más información'}</span>
             </button>
           )}
 
-          {/* Contenido expandible */}
-          <div className={`expandable-content ${isExpanded ? 'expanded' : ''}`}>
-            {/* Problema */}
-            {project.problem && (
-              <div className="info-accordion">
-                <button 
-                  className={`accordion-trigger ${activeSection === 'problem' ? 'active' : ''}`}
-                  onClick={() => toggleSection('problem')}
-                >
-                  <div className="trigger-left">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="12" cy="12" r="10"/>
-                      <line x1="12" y1="8" x2="12" y2="12"/>
-                      <line x1="12" y1="16" x2="12.01" y2="16"/>
+          {/* Contenido expandible - Solo se muestra si esta card está expandida */}
+          {isExpanded && (
+            <div className="expandable-content expanded">
+              {/* Problema */}
+              {project.problem && (
+                <div className={`info-accordion ${activeSection === 'problem' ? 'active' : ''}`}>
+                  <button 
+                    className={`accordion-trigger ${activeSection === 'problem' ? 'active' : ''}`}
+                    onClick={() => toggleSection('problem')}
+                  >
+                    <div className="trigger-left">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="12" y1="8" x2="12" y2="12"/>
+                        <line x1="12" y1="16" x2="12.01" y2="16"/>
+                      </svg>
+                      <span>Problema</span>
+                    </div>
+                    <svg className={`trigger-chevron ${activeSection === 'problem' ? 'rotated' : ''}`} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="6 9 12 15 18 9"/>
                     </svg>
-                    <span>Problema</span>
+                  </button>
+                  <div className={`accordion-content ${activeSection === 'problem' ? 'open' : ''}`}>
+                    <p>{project.problem}</p>
                   </div>
-                  <svg className={`trigger-chevron ${activeSection === 'problem' ? 'rotated' : ''}`} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polyline points="6 9 12 15 18 9"/>
-                  </svg>
-                </button>
-                <div className={`accordion-content ${activeSection === 'problem' ? 'open' : ''}`}>
-                  <p>{project.problem}</p>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Solución */}
-            {project.solution && (
-              <div className="info-accordion">
-                <button 
-                  className={`accordion-trigger ${activeSection === 'solution' ? 'active' : ''}`}
-                  onClick={() => toggleSection('solution')}
-                >
-                  <div className="trigger-left">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              {/* Solución */}
+              {project.solution && (
+                <div className={`info-accordion ${activeSection === 'solution' ? 'active' : ''}`}>
+                  <button 
+                    className={`accordion-trigger ${activeSection === 'solution' ? 'active' : ''}`}
+                    onClick={() => toggleSection('solution')}
+                  >
+                    <div className="trigger-left">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                      </svg>
+                      <span>Solución</span>
+                    </div>
+                    <svg className={`trigger-chevron ${activeSection === 'solution' ? 'rotated' : ''}`} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="6 9 12 15 18 9"/>
                     </svg>
-                    <span>Solución</span>
+                  </button>
+                  <div className={`accordion-content ${activeSection === 'solution' ? 'open' : ''}`}>
+                    <p>{project.solution}</p>
                   </div>
-                  <svg className={`trigger-chevron ${activeSection === 'solution' ? 'rotated' : ''}`} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polyline points="6 9 12 15 18 9"/>
-                  </svg>
-                </button>
-                <div className={`accordion-content ${activeSection === 'solution' ? 'open' : ''}`}>
-                  <p>{project.solution}</p>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Cómo funciona */}
-            {project.howItWorks && project.howItWorks.length > 0 && (
-              <div className="info-accordion">
-                <button 
-                  className={`accordion-trigger ${activeSection === 'howItWorks' ? 'active' : ''}`}
-                  onClick={() => toggleSection('howItWorks')}
-                >
-                  <div className="trigger-left">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
-                      <circle cx="12" cy="12" r="3"/>
+              {/* Cómo funciona */}
+              {project.howItWorks && project.howItWorks.length > 0 && (
+                <div className={`info-accordion ${activeSection === 'howItWorks' ? 'active' : ''}`}>
+                  <button 
+                    className={`accordion-trigger ${activeSection === 'howItWorks' ? 'active' : ''}`}
+                    onClick={() => toggleSection('howItWorks')}
+                  >
+                    <div className="trigger-left">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                        <circle cx="12" cy="12" r="3"/>
+                      </svg>
+                      <span>Cómo funciona</span>
+                    </div>
+                    <svg className={`trigger-chevron ${activeSection === 'howItWorks' ? 'rotated' : ''}`} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="6 9 12 15 18 9"/>
                     </svg>
-                    <span>Cómo funciona</span>
+                  </button>
+                  <div className={`accordion-content ${activeSection === 'howItWorks' ? 'open' : ''}`}>
+                    <ul>
+                      {project.howItWorks.map((item, idx) => (
+                        <li key={idx}>{item}</li>
+                      ))}
+                    </ul>
                   </div>
-                  <svg className={`trigger-chevron ${activeSection === 'howItWorks' ? 'rotated' : ''}`} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polyline points="6 9 12 15 18 9"/>
-                  </svg>
-                </button>
-                <div className={`accordion-content ${activeSection === 'howItWorks' ? 'open' : ''}`}>
-                  <ul>
-                    {project.howItWorks.map((item, idx) => (
-                      <li key={idx}>{item}</li>
-                    ))}
-                  </ul>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Impacto */}
-            {project.impact && (
-              <div className="info-accordion">
-                <button 
-                  className={`accordion-trigger ${activeSection === 'impact' ? 'active' : ''}`}
-                  onClick={() => toggleSection('impact')}
-                >
-                  <div className="trigger-left">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              {/* Impacto */}
+              {project.impact && (
+                <div className={`info-accordion ${activeSection === 'impact' ? 'active' : ''}`}>
+                  <button 
+                    className={`accordion-trigger ${activeSection === 'impact' ? 'active' : ''}`}
+                    onClick={() => toggleSection('impact')}
+                  >
+                    <div className="trigger-left">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                      </svg>
+                      <span>Impacto</span>
+                    </div>
+                    <svg className={`trigger-chevron ${activeSection === 'impact' ? 'rotated' : ''}`} width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <polyline points="6 9 12 15 18 9"/>
                     </svg>
-                    <span>Impacto</span>
+                  </button>
+                  <div className={`accordion-content ${activeSection === 'impact' ? 'open' : ''}`}>
+                    <p>{project.impact}</p>
                   </div>
-                  <svg className={`trigger-chevron ${activeSection === 'impact' ? 'rotated' : ''}`} width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polyline points="6 9 12 15 18 9"/>
-                  </svg>
-                </button>
-                <div className={`accordion-content ${activeSection === 'impact' ? 'open' : ''}`}>
-                  <p>{project.impact}</p>
                 </div>
-              </div>
-            )}
-          </div>
+              )}
+            </div>
+          )}
 
           <div className="project-actions">
             <button

@@ -8,8 +8,9 @@
   flex-direction: column;
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-  align-self: start;
+  height: auto;
   width: 100%;
+  align-self: start;
 }
 
 .project-card:hover {
@@ -106,10 +107,10 @@
   line-height: 1.3;
 }
 
-/* ===== DESCRIPCIÓN - COMPLETA SIN CORTE ===== */
+/* ===== DESCRIPCIÓN ===== */
 .project-description {
   color: #94a3b8;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   line-height: 1.6;
   margin: 0 0 0.75rem 0;
   display: block;
@@ -126,7 +127,7 @@
   align-items: center;
   gap: 0.35rem;
   color: #64748b;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -163,21 +164,21 @@
 
 .tech-name {
   color: #cbd5e1;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 400;
 }
 
-/* ===== BOTÓN VER MÁS - MÁS GRANDE Y VISIBLE ===== */
+/* ===== BOTÓN MÁS INFORMACIÓN ===== */
 .expand-btn {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(139, 92, 246, 0.1));
-  border: 1.5px solid rgba(59, 130, 246, 0.4);
+  background: rgba(59, 130, 246, 0.08);
+  border: 1px solid rgba(59, 130, 246, 0.25);
   border-radius: 0.6rem;
-  color: #7eb8ff;
-  font-size: 0.85rem;
+  color: #93c5fd;
+  font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
   padding: 0.6rem 1rem;
@@ -187,9 +188,9 @@
 }
 
 .expand-btn:hover {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(139, 92, 246, 0.2));
-  border-color: rgba(59, 130, 246, 0.6);
-  color: #add3ff;
+  background: rgba(59, 130, 246, 0.15);
+  border-color: rgba(59, 130, 246, 0.45);
+  color: #bfdbfe;
   transform: translateY(-1px);
 }
 
@@ -205,39 +206,29 @@
 
 /* ===== CONTENIDO EXPANDIBLE ===== */
 .expandable-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.35s ease, margin-top 0.2s ease;
-  margin-top: 0;
-}
-
-.expandable-content.expanded {
-  max-height: 500px;
-  overflow-y: auto;
+  display: block;
   margin-top: 0.65rem;
+  width: 100%;
 }
 
-.expandable-content.expanded::-webkit-scrollbar { width: 3px; }
-.expandable-content.expanded::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-}
-.expandable-content.expanded::-webkit-scrollbar-thumb {
-  background: #3b82f6;
-  border-radius: 10px;
-}
-
-/* ===== ACORDEÓN ===== */
+/* ===== ACORDEÓN UNIFICADO ===== */
 .info-accordion {
-  margin-bottom: 0.5rem;
-  border-radius: 0.5rem;
+  margin-bottom: 0.75rem;
+  border-radius: 0.75rem;
   background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
   overflow: hidden;
+  transition: all 0.2s ease;
 }
 
-.info-accordion:last-child {
-  margin-bottom: 0;
+.info-accordion:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.info-accordion.active {
+  border-color: rgba(59, 130, 246, 0.4);
+  background: rgba(59, 130, 246, 0.04);
 }
 
 .accordion-trigger {
@@ -245,18 +236,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.7rem 0.8rem;
+  padding: 0.85rem 1rem;
   background: transparent;
   border: none;
   cursor: pointer;
   transition: all 0.2s;
   color: #cbd5e1;
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 
 .accordion-trigger:hover {
-  background: rgba(59, 130, 246, 0.08);
   color: white;
 }
 
@@ -270,17 +260,21 @@
   gap: 0.6rem;
 }
 
-.trigger-left svg { 
+.trigger-left svg {
   opacity: 0.7;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+}
+
+.accordion-trigger.active .trigger-left svg {
+  opacity: 1;
 }
 
 .trigger-chevron {
   transition: transform 0.2s;
   opacity: 0.5;
-  width: 12px;
-  height: 12px;
+  width: 14px;
+  height: 14px;
 }
 
 .trigger-chevron.rotated {
@@ -294,24 +288,43 @@
 }
 
 .accordion-content.open {
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
 }
 
 .accordion-content p,
 .accordion-content ul {
-  padding: 0 0.8rem 0.8rem 0.8rem;
+  padding: 0 1rem 1rem 1rem;
   margin: 0;
   color: #94a3b8;
-  font-size: 0.75rem;
-  line-height: 1.5;
+  font-size: 0.85rem;
+  line-height: 1.6;
 }
 
-.accordion-content ul { padding-left: 2rem; }
-.accordion-content li { margin-bottom: 0.35rem; }
-.accordion-content li:last-child { margin-bottom: 0; }
+.accordion-content ul {
+  padding-left: 2rem;
+  list-style-type: none;
+}
 
-.accordion-content.open::-webkit-scrollbar { width: 3px; }
+.accordion-content li {
+  margin-bottom: 0.5rem;
+  position: relative;
+  padding-left: 1.2rem;
+}
+
+.accordion-content li::before {
+  content: "▹";
+  position: absolute;
+  left: 0;
+  color: #3b82f6;
+  font-size: 0.8rem;
+}
+
+.accordion-content li:last-child {
+  margin-bottom: 0;
+}
+
+.accordion-content.open::-webkit-scrollbar { width: 4px; }
 .accordion-content.open::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 10px;
@@ -334,9 +347,9 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.55rem 0.8rem;
+  padding: 0.6rem 0.9rem;
   border-radius: 0.5rem;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
@@ -390,28 +403,29 @@
   .project-image { height: 140px; }
   .project-content { padding: 0.85rem; }
   .project-icon { width: 32px; height: 32px; }
-  .project-title { font-size: 0.9rem; }
-  .project-description { font-size: 0.75rem; }
-  .tech-name { font-size: 0.65rem; }
+  .project-title { font-size: 0.95rem; }
+  .project-description { font-size: 0.8rem; }
+  .tech-name { font-size: 0.7rem; }
   .tech-icon { width: 12px; height: 12px; }
 
   .expand-btn {
-    font-size: 0.78rem;
+    font-size: 0.85rem;
     padding: 0.5rem 0.8rem;
-    gap: 0.5rem;
   }
 
   .accordion-trigger {
-    padding: 0.6rem 0.7rem;
-    font-size: 0.75rem;
+    padding: 0.7rem 0.85rem;
+    font-size: 0.85rem;
   }
 
   .accordion-content p,
-  .accordion-content ul { font-size: 0.7rem; }
+  .accordion-content ul {
+    font-size: 0.8rem;
+  }
 
   .demo-btn,
   .code-btn {
-    padding: 0.45rem 0.7rem;
-    font-size: 0.7rem;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.75rem;
   }
 }
