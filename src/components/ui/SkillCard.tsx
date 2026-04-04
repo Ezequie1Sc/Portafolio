@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import type { Skill } from '../../types';
+import '../../styles/SkillCard.css';
 
 interface SkillCardProps {
   skill: Skill;
@@ -26,6 +27,7 @@ const SkillCard: React.FC<SkillCardProps> = ({ skill }) => {
       className="skill-card-wrapper"
       onMouseEnter={() => setIsFlipped(true)}
       onMouseLeave={() => setIsFlipped(false)}
+      onTouchStart={() => setIsFlipped(!isFlipped)}
     >
       <div className={`skill-card-inner ${isFlipped ? 'flipped' : ''}`}>
         {/* Front */}

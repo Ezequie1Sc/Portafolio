@@ -3,6 +3,7 @@ import * as data from '../../data';
 import type { Certificate } from '../../types';
 import CertificateCard from '../ui/CertificateCard';
 import CertificateFilter from '../ui/CertificateFilter';
+import '../../styles/Certificates.css';
 
 const Certificates = () => {
   const [activeFilter, setActiveFilter] = useState('todos');
@@ -17,12 +18,10 @@ const Certificates = () => {
     profesional: data.certificates.filter(c => c.category === 'profesional').length,
   };
 
-  // Filtrar certificados
   const filteredCertificates = activeFilter === 'todos'
     ? data.certificates
     : data.certificates.filter(c => c.category === activeFilter);
 
-  // Orden personalizado: programación → datos → ia → ciberseguridad → idiomas → profesional
   const getCategoryOrder = (category: string) => {
     const order = {
       programacion: 1,
@@ -35,15 +34,13 @@ const Certificates = () => {
     return order[category as keyof typeof order] || 999;
   };
 
-  // Ordenar certificados filtrados
   const sortedCertificates = [...filteredCertificates].sort((a, b) => {
     if (activeFilter === 'todos') {
-      // Si es "todos", ordenar por categoría según el orden personalizado
       const orderA = getCategoryOrder(a.category);
       const orderB = getCategoryOrder(b.category);
       return orderA - orderB;
     }
-    return 0; // Si hay filtro activo, mantener orden original
+    return 0;
   });
 
   return (

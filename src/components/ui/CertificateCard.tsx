@@ -1,4 +1,5 @@
 import type { Certificate } from '../../types';
+import '../../styles/CertificateCard.css';
 
 interface CertificateCardProps {
   certificate: Certificate;
@@ -9,44 +10,14 @@ const CertificateCard = ({ certificate }: CertificateCardProps) => {
   const getCategoryColor = (category: string) => {
     const colors = {
       programacion: '#3776AB',
-      datos: '#DC2626', // Rojo para SQL Server
+      datos: '#DC2626', 
       ia: '#8B5CF6',
       ciberseguridad: '#9391ac',
-      idiomas: '#10B981',
+      idiomas: '#10B981', 
       profesional: '#F59E0B',
     };
     return colors[category as keyof typeof colors] || '#3B82F6';
   };
-
-  // Función para obtener el nombre de la categoría
-  const getCategoryName = (category: string) => {
-    const names = {
-      programacion: 'Programación',
-      datos: 'Bases de Datos',
-      ia: 'IA',
-      ciberseguridad: 'Ciberseguridad',
-      idiomas: 'Idiomas',
-      profesional: 'Profesional',
-    };
-    return names[category as keyof typeof names] || category;
-  };
-
-  // Función para obtener el ícono de categoría
-  const getCategoryIcon = (category: string) => {
-    const icons = {
-      programacion: '',
-      datos: '',
-      ia: '',
-      ciberseguridad: '',
-      idiomas: '',
-      profesional: '',
-    };
-    return icons[category as keyof typeof icons] || '';
-  };
-
-  const categoryColor = getCategoryColor(certificate.category);
-  const categoryIcon = getCategoryIcon(certificate.category);
-  const categoryName = getCategoryName(certificate.category);
 
   const AwardIcon = () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,18 +46,14 @@ const CertificateCard = ({ certificate }: CertificateCardProps) => {
     }
   };
 
+  const categoryColor = getCategoryColor(certificate.category);
+
   return (
     <div className="certificate-card">
       <div className="certificate-image">
         <img src={certificate.image} alt={certificate.title} />
         <div className="certificate-badge" style={{ backgroundColor: categoryColor }}>
           <AwardIcon />
-        </div>
-        <div className="certificate-category-tag" style={{ backgroundColor: categoryColor }}>
-          <span className="category-icon">{categoryIcon}</span>
-          <span className="category-name">
-            {categoryName}
-          </span>
         </div>
       </div>
 

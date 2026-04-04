@@ -1,5 +1,6 @@
 import { skills } from '../../data';
 import SkillCard from '../ui/SkillCard';
+import '../../styles/Skills.css';
 
 const Skills = () => {
   return (
@@ -8,7 +9,7 @@ const Skills = () => {
         <h2 className="skills-main-title">Mis Habilidades Técnicas</h2>
 
         <div className="skills-layout">
-          {/* Columna izquierda - About Me con diseño de tabla */}
+          {/* Columna izquierda - About Me */}
           <div className="about-me-column">
             <div className="about-me-card">
               <div className="about-me-header">
@@ -17,7 +18,6 @@ const Skills = () => {
                 <span className="about-me-border-bottom"></span>
               </div>
               
-              {/* Imagen circular agregada aquí */}
               <div className="about-me-image-container">
                 <div className="about-me-image-wrapper">
                   <img 
@@ -29,7 +29,6 @@ const Skills = () => {
               </div>
               
               <div className="about-me-grid">
-                {/* Quien Soy */}
                 <div className="about-me-item">
                   <div className="about-me-item-header">
                     <span className="about-me-item-icon">◈</span>
@@ -40,7 +39,6 @@ const Skills = () => {
                   </p>
                 </div>
 
-                {/* Mi objetivo */}
                 <div className="about-me-item">
                   <div className="about-me-item-header">
                     <span className="about-me-item-icon">◈</span>
@@ -51,7 +49,6 @@ const Skills = () => {
                   </p>
                 </div>
 
-                {/* Mi perfil */}
                 <div className="about-me-item">
                   <div className="about-me-item-header">
                     <span className="about-me-item-icon">◈</span>
