@@ -1,0 +1,413 @@
+/* ============================================================
+   FOOTER — Dark Luxury Portfolio
+   Fuentes requeridas en index.html:
+   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,400&display=swap" rel="stylesheet">
+   ============================================================ */
+
+:root {
+  --ft-bg:           #0F172A;
+  --ft-accent-a:     #3b82f6;
+  --ft-accent-b:     #818cf8;
+  --ft-accent-c:     #e879f9;
+  --ft-text-bright:  #f1f5f9;
+  --ft-text-mid:     #94a3b8;
+  --ft-text-dim:     #475569;
+  --ft-border:       rgba(255, 255, 255, 0.07);
+  --ft-radius-sm:    8px;
+  --ft-radius-md:    14px;
+  --ft-radius-pill:  100px;
+  --ft-ease:         cubic-bezier(0.4, 0, 0.2, 1);
+  --ft-duration:     0.22s;
+}
+
+/* ── Base ─────────────────────────────────────────────────── */
+.footer {
+  font-family: 'DM Sans', sans-serif;
+  background-color: var(--ft-bg);
+  padding: 4.5rem 0 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Dot grid texture */
+.footer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(148,163,184,0.055) 1px, transparent 1px);
+  background-size: 26px 26px;
+  pointer-events: none;
+}
+
+/* Glow blob arriba */
+.footer::after {
+  content: '';
+  position: absolute;
+  top: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 280px;
+  background: radial-gradient(ellipse, rgba(99,102,241,0.1) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+/* ── Línea superior ─────────────────────────────────────── */
+.footer-top-line {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    var(--ft-accent-a) 25%,
+    var(--ft-accent-b) 50%,
+    var(--ft-accent-c) 75%,
+    transparent 100%
+  );
+  opacity: 0.65;
+}
+
+/* ── Contenedor ─────────────────────────────────────────── */
+.footer-container {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Grid 3 columnas ────────────────────────────────────── */
+.footer-content {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 3.5rem;
+  padding-bottom: 3rem;
+  align-items: start;
+}
+
+/* ============================================================
+   COL 1 — MARCA
+   ============================================================ */
+.footer-logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.footer-monogram {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: linear-gradient(135deg, var(--ft-accent-a), var(--ft-accent-b));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 1rem;
+  color: #fff;
+  letter-spacing: -1px;
+  flex-shrink: 0;
+  box-shadow: 0 0 22px rgba(99,102,241,0.38);
+  transition: box-shadow var(--ft-duration) var(--ft-ease),
+              transform var(--ft-duration) var(--ft-ease);
+}
+
+.footer-monogram:hover {
+  box-shadow: 0 0 34px rgba(99,102,241,0.58);
+  transform: rotate(-5deg) scale(1.06);
+}
+
+.footer-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--ft-text-bright);
+  letter-spacing: -0.4px;
+  margin: 0;
+}
+
+.footer-tagline {
+  color: var(--ft-text-mid);
+  font-size: 0.875rem;
+  line-height: 1.7;
+  max-width: 290px;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  border-left: 2px solid rgba(99,102,241,0.4);
+  padding-left: 0.85rem;
+}
+
+.footer-email-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 1rem 0.45rem 0.75rem;
+  background: rgba(59,130,246,0.07);
+  border: 1px solid rgba(59,130,246,0.2);
+  border-radius: var(--ft-radius-pill);
+  color: var(--ft-text-mid);
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: 0.1px;
+  transition: all var(--ft-duration) var(--ft-ease);
+}
+
+.footer-email-link svg { color: var(--ft-accent-a); flex-shrink: 0; }
+
+.footer-email-link:hover {
+  background: rgba(59,130,246,0.14);
+  border-color: rgba(59,130,246,0.4);
+  color: #93c5fd;
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   COL 2 — NAVEGACIÓN
+   Lista con línea lateral + indicador animado
+   ============================================================ */
+.footer-col-label {
+  font-family: 'Syne', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--ft-text-dim);
+  margin-bottom: 1.4rem;
+}
+
+.footer-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--ft-border);
+}
+
+.footer-nav-list li a {
+  color: var(--ft-text-mid);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0 0.5rem 1.25rem;
+  position: relative;
+  transition: color var(--ft-duration) var(--ft-ease),
+              padding-left var(--ft-duration) var(--ft-ease);
+}
+
+/* Indicador izquierdo animado */
+.footer-nav-list li a::before {
+  content: '';
+  position: absolute;
+  left: -1px;
+  top: 50%;
+  transform: translateY(-50%) scaleY(0);
+  width: 2px;
+  height: 55%;
+  background: linear-gradient(180deg, var(--ft-accent-a), var(--ft-accent-b));
+  border-radius: 2px;
+  transition: transform var(--ft-duration) var(--ft-ease);
+}
+
+.footer-nav-list li a:hover {
+  color: var(--ft-text-bright);
+  padding-left: 1.6rem;
+}
+
+.footer-nav-list li a:hover::before {
+  transform: translateY(-50%) scaleY(1);
+}
+
+/* ============================================================
+   COL 3 — REDES SOCIALES
+   Panel con border + filas separadas por línea interior
+   ============================================================ */
+.footer-social-panel {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--ft-border);
+  border-radius: var(--ft-radius-md);
+  overflow: hidden;
+}
+
+.footer-social-item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.9rem 1rem;
+  text-decoration: none;
+  background: transparent;
+  transition: background var(--ft-duration) var(--ft-ease);
+  position: relative;
+}
+
+/* Divisor entre filas */
+.footer-social-item + .footer-social-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 1rem; right: 1rem;
+  height: 1px;
+  background: var(--ft-border);
+}
+
+.footer-social-item:hover {
+  background: rgba(255,255,255,0.03);
+}
+
+/* Icono cuadrado con color real de la marca */
+.footer-social-icon-wrap {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--ft-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform var(--ft-duration) var(--ft-ease),
+              box-shadow var(--ft-duration) var(--ft-ease);
+}
+
+.footer-social-item:hover .footer-social-icon-wrap {
+  transform: scale(1.1);
+}
+
+/* LinkedIn — color oficial #0A66C2 */
+.footer-social-icon-wrap.linkedin-icon {
+  background: rgba(10,102,194,0.14);
+  color: #0A66C2;
+  box-shadow: 0 0 0 1px rgba(10,102,194,0.22);
+}
+
+.footer-social-item:hover .footer-social-icon-wrap.linkedin-icon {
+  box-shadow: 0 0 16px rgba(10,102,194,0.4), 0 0 0 1px rgba(10,102,194,0.35);
+}
+
+/* GitHub — color oficial #f0f6fc (casi blanco sobre oscuro) */
+.footer-social-icon-wrap.github-icon {
+  background: rgba(240,246,252,0.07);
+  color: #f0f6fc;
+  box-shadow: 0 0 0 1px rgba(240,246,252,0.1);
+}
+
+.footer-social-item:hover .footer-social-icon-wrap.github-icon {
+  box-shadow: 0 0 16px rgba(240,246,252,0.16), 0 0 0 1px rgba(240,246,252,0.22);
+}
+
+.footer-social-text { flex: 1; min-width: 0; }
+
+.footer-social-platform {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--ft-text-bright);
+  display: block;
+  line-height: 1.2;
+}
+
+.footer-social-user {
+  font-size: 0.72rem;
+  color: var(--ft-text-dim);
+  display: block;
+  margin-top: 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.footer-social-ext {
+  color: var(--ft-text-dim);
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: opacity var(--ft-duration) var(--ft-ease),
+              transform var(--ft-duration) var(--ft-ease);
+  flex-shrink: 0;
+}
+
+.footer-social-item:hover .footer-social-ext {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ============================================================
+   DIVISOR
+   ============================================================ */
+.footer-divider {
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent,
+    var(--ft-border) 20%,
+    var(--ft-border) 80%,
+    transparent
+  );
+  margin-bottom: 1.75rem;
+}
+
+/* ============================================================
+   BARRA INFERIOR
+   ============================================================ */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.footer-copyright {
+  font-size: 0.78rem;
+  color: var(--ft-text-dim);
+}
+
+.footer-copyright span { color: var(--ft-text-mid); }
+
+.footer-datetime {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--ft-text-dim);
+  background: rgba(255,255,255,0.025);
+  border: 1px solid var(--ft-border);
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--ft-radius-pill);
+  letter-spacing: 0.2px;
+}
+
+.footer-datetime svg { opacity: 0.5; flex-shrink: 0; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 960px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 2rem;
+  }
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+  .footer-tagline { max-width: 100%; }
+}
+
+@media (max-width: 580px) {
+  .footer {
+    padding: 3rem 0 1.75rem;
+  }
+  .footer-container {
+    padding: 0 1.25rem;
+  }
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding-bottom: 2rem;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+}
