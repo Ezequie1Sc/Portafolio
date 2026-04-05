@@ -1,4 +1,4 @@
-import '../../styles/Footer.css';
+import './Footer.css';
 const NAV_LINKS = [
   { label: 'Inicio',      href: '#inicio' },
   { label: 'Sobre mí',    href: '#sobre-mi' },
