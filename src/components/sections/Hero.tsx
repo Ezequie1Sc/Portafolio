@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react';
 
-interface HeroProps {
-  onDownloadCV: () => void;
-}
-
-const Hero = ({ onDownloadCV }: HeroProps) => {
+// Eliminar la interfaz HeroProps ya que no se necesita
+const Hero = () => {
   const [typedText, setTypedText] = useState('');
   const [showNotification, setShowNotification] = useState(false);
   const phrases = [
@@ -59,6 +56,7 @@ const Hero = ({ onDownloadCV }: HeroProps) => {
 
   return (
     <section id="inicio" className="hero">
+      {/* Resto del JSX igual... */}
       <div className="hero-content">
         <h2 className="hero-greeting">¡Hola Mundo! 👋</h2>
         <h1 className="hero-title">
@@ -105,13 +103,11 @@ utilizando Flutter, Python y tecnologías web.
 
       <div className="hero-visual">
         <div className="solar-system">
-          {/* Sun (Profile Image) */}
           <div className="sun">
             <img src="/face.jpg" alt="Ezequiel Salazar" className="profile-img" />
             <div className="sun-glow"></div>
           </div>
 
-          {/* Planets */}
           {planets.map((planet) => (
             <div key={planet.tech} className={`orbit orbit-${planet.orbit}`}>
               <div className="planet" data-tech={planet.tech}>
