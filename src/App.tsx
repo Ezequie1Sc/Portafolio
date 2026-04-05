@@ -3,10 +3,10 @@ import Header from './components/common/Header';
 import Hero from './components/sections/Hero';
 import Projects from './components/sections/Projects';
 import Skills from './components/sections/Skills';
-import Certificates from './components/sections/Certificates'; // <-- IMPORTAR CERTIFICADOS
 import Contact from './components/sections/Contact';
 import Footer from './components/common/Footer';
 import Modal from './components/common/Modal';
+import Certificates from './components/sections/Certificates';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -58,7 +58,7 @@ function App() {
       
       <main className="pt-24 flex-grow">
         <Hero onDownloadCV={() => openModal('cv')} />
-        <Projects /> {/* <-- YA NO RECIBE PROPS */}
+        <Projects /> {}
         <Skills />
         <Certificates /> {/* <-- AÑADIR SECCIÓN DE CERTIFICADOS */}
         <Contact />
