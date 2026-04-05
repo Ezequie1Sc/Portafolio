@@ -3,7 +3,7 @@ import Header from './components/common/Header';
 import Hero from './components/sections/Hero';
 import Projects from './components/sections/Projects';
 import Skills from './components/sections/Skills';
-import Certificates from './components/sections/Certificates';
+import Certificates from './components/sections/Certificates'; // <-- IMPORTAR CERTIFICADOS
 import Contact from './components/sections/Contact';
 import Footer from './components/common/Footer';
 
@@ -25,6 +25,10 @@ function App() {
     localStorage.setItem('theme', !darkMode ? 'dark' : 'light');
   };
 
+
+
+ 
+
   return (
     <div className="app min-h-screen flex flex-col bg-[#0f172a] text-white font-['Poppins'] overflow-x-hidden">
       <Header 
@@ -35,14 +39,15 @@ function App() {
       />
       
       <main className="pt-24 flex-grow">
-        <Hero />
-        <Projects />
+       <Hero />
+        <Projects /> {/* <-- YA NO RECIBE PROPS */}
         <Skills />
-        <Certificates />
+        <Certificates /> {/* <-- AÑADIR SECCIÓN DE CERTIFICADOS */}
         <Contact />
       </main>
 
       <Footer />
+    
     </div>
   );
 }
