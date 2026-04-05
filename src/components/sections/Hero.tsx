@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-// Eliminar la interfaz HeroProps completamente
 const Hero = () => {
   const [typedText, setTypedText] = useState('');
   const [showNotification, setShowNotification] = useState(false);
@@ -34,10 +33,8 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, [typedText, phraseIndex, isDeleting]);
 
-  // Función para manejar la descarga del CV con notificación
   const handleDownloadCV = () => {
     setShowNotification(true);
-    // Ocultar la notificación después de 4 segundos
     setTimeout(() => {
       setShowNotification(false);
     }, 4000);
