@@ -3,12 +3,15 @@ import Header from './components/common/Header';
 import Hero from './components/sections/Hero';
 import Projects from './components/sections/Projects';
 import Skills from './components/sections/Skills';
-import Certificates from './components/sections/Certificates'; // <-- IMPORTAR CERTIFICADOS
+import Certificates from './components/sections/Certificates';
 import Contact from './components/sections/Contact';
 import Footer from './components/common/Footer';
+import Modal from './components/common/Modal';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState({ title: '', message: '' });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -25,9 +28,24 @@ function App() {
     localStorage.setItem('theme', !darkMode ? 'dark' : 'light');
   };
 
+  const openModal = (type: 'cv' | 'demo') => {
+    if (type === 'cv') {
+      setModalContent({
+        title: 'CV en mantenimiento',
+        message: 'Estamos actualizando el CV. Pronto estará disponible para descarga.'
+      });
+    } else {
+      setModalContent({
+        title: 'Demo en mantenimiento',
+        message: 'Estamos mejorando esta demo. Vuelve pronto.'
+      });
+    }
+    setModalOpen(true);
+  };
 
-
- 
+  const closeModal = () => {
+    setModalOpen(false);
+  };
 
   return (
     <div className="app min-h-screen flex flex-col bg-[#0f172a] text-white font-['Poppins'] overflow-x-hidden">
@@ -37,17 +55,23 @@ function App() {
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
       />
-      
+
       <main className="pt-24 flex-grow">
-       <Hero />
-        <Projects /> {/* <-- YA NO RECIBE PROPS */}
+        <Hero onDownloadCV={() => openModal('cv')} />
+        <Projects />
         <Skills />
-        <Certificates /> {/* <-- AÑADIR SECCIÓN DE CERTIFICADOS */}
+        <Certificates />
         <Contact />
       </main>
 
       <Footer />
-    
+
+      <Modal 
+        isOpen={modalOpen}
+        onClose={closeModal}
+        title={modalContent.title}
+        message={modalContent.message}
+      />
     </div>
   );
 }
