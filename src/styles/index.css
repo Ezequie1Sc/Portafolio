@@ -2139,7 +2139,6 @@ body {
   }
 }
 
-/* Responsive para la notificación */
 @media (max-width: 768px) {
   .maintenance-notification {
     bottom: 1rem;
