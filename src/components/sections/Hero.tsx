@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 
-const Hero = () => {
+interface HeroProps {
+  onDownloadCV: () => void;
+}
+
+const Hero = ({ onDownloadCV }: HeroProps) => {
   const [typedText, setTypedText] = useState('');
-  const [showNotification, setShowNotification] = useState(false);
   const phrases = [
     'Desarrollador de Software',
     'Desarrollador de Apps con Flutter',
@@ -32,13 +35,6 @@ const Hero = () => {
 
     return () => clearTimeout(timeout);
   }, [typedText, phraseIndex, isDeleting]);
-
-  const handleDownloadCV = () => {
-    setShowNotification(true);
-    setTimeout(() => {
-      setShowNotification(false);
-    }, 4000);
-  };
 
   const planets = [
     { tech: 'Flutter', icon: '/icons/flutter.svg', orbit: 1 },
@@ -72,7 +68,7 @@ utilizando Flutter, Python y tecnologías web.
         </p>
 
         <div className="hero-buttons">
-          <button onClick={handleDownloadCV} className="btn-primary">
+          <button onClick={onDownloadCV} className="btn-primary">
             <span>Descargar CV</span>
             <svg className="btn-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
@@ -99,11 +95,13 @@ utilizando Flutter, Python y tecnologías web.
 
       <div className="hero-visual">
         <div className="solar-system">
+          {/* Sun (Profile Image) */}
           <div className="sun">
             <img src="/face.jpg" alt="Ezequiel Salazar" className="profile-img" />
             <div className="sun-glow"></div>
           </div>
 
+          {/* Planets */}
           {planets.map((planet) => (
             <div key={planet.tech} className={`orbit orbit-${planet.orbit}`}>
               <div className="planet" data-tech={planet.tech}>
@@ -114,25 +112,6 @@ utilizando Flutter, Python y tecnologías web.
           ))}
         </div>
       </div>
-
-      {showNotification && (
-        <div className="maintenance-notification">
-          <div className="notification-content">
-            <div className="notification-icon">🔧</div>
-            <div className="notification-text">
-              <h4>CV en Mantenimiento</h4>
-              <p>Estamos actualizando el CV. Pronto estará disponible para descarga. ¡Gracias por tu paciencia!</p>
-            </div>
-            <button 
-              className="notification-close"
-              onClick={() => setShowNotification(false)}
-            >
-              ✕
-            </button>
-          </div>
-          <div className="notification-progress"></div>
-        </div>
-      )}
     </section>
   );
 };
