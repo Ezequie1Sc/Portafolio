@@ -24,6 +24,25 @@ export const socialLinks: SocialLink[] = [
 ];
 
 export const certificates: Certificate[] = [
+  
+  {
+  id: 11,
+  title: 'Responsive Web Design Certification',
+  issuer: 'freeCodeCamp',
+  date: '2026',
+  image: '/Certificates/diseñoweb.png',
+  credentialUrl: '/Certificates/responsive-web-design.pdf',
+  skills: [
+    'HTML',
+    'CSS',
+    'Diseño Web Responsivo',
+    'Accesibilidad',
+    'Flexbox',
+    'CSS Grid'
+  ],
+  category: 'programacion'
+},
+
   {
     id: 1,
     title: 'Python Programming',
