@@ -31,7 +31,7 @@ export const certificates: Certificate[] = [
   issuer: 'freeCodeCamp',
   date: '2026',
   image: '/Certificates/diseñoweb.png',
-  credentialUrl: '/Certificates/responsive-web-design.pdf',
+  credentialUrl: '/Certificates/Certificado_EzequielWeb.pdf',
   skills: [
     'HTML',
     'CSS',
