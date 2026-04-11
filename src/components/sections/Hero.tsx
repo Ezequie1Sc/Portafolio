@@ -57,7 +57,7 @@ const Hero = () => {
   return (
     <section id="inicio" className="hero">
       <div className="hero-content">
-        <h2 className="hero-greeting">¡Hola Mundo! 👋</h2>
+        <h2 className="hero-greeting">¡Hola Mundo! </h2>
         <h1 className="hero-title">
           Soy <span className="hero-title-gradient">Ezequiel Salazar</span>
         </h1>

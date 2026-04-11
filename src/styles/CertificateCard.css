@@ -6,6 +6,9 @@
   transition: all 0.3s ease;
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .certificate-card:hover {
@@ -14,31 +17,37 @@
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
 }
 
-/* ===== IMAGEN ===== */
+/* ===== IMAGEN - CORREGIDA ===== */
 .certificate-image {
-  height: 180px;
   position: relative;
-  overflow: hidden;
+  width: 100%;
+  padding-bottom: 56.25%; /* Proporción 16:9 - ideal para certificados */
   background: #0f172a;
+  overflow: hidden;
 }
 
 .certificate-image img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* Cambiado de cover a contain para mostrar la imagen completa */
+  object-position: center;
+  background: #0f172a;
+  padding: 0.5rem; /* Pequeño padding para que no toque los bordes */
   transition: transform 0.3s ease;
 }
 
 .certificate-card:hover .certificate-image img {
-  transform: scale(1.05);
+  transform: scale(1.02); /* Reducido de 1.05 a 1.02 para evitar recortes */
 }
 
 /* Badge circular en la esquina superior derecha */
 .certificate-badge {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: rgba(59, 130, 246, 0.9);
+  top: 0.75rem;
+  right: 0.75rem;
   color: white;
   width: 36px;
   height: 36px;
@@ -49,11 +58,15 @@
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.2);
   z-index: 5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* ===== CONTENIDO ===== */
 .certificate-content {
   padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .certificate-title {
@@ -70,6 +83,8 @@
   align-items: center;
   margin-bottom: 1rem;
   font-size: 0.85rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .certificate-issuer {
@@ -89,7 +104,6 @@
   font-size: 0.9rem;
   margin-bottom: 0.75rem;
   line-height: 1.5;
-  min-height: 2.7rem;
 }
 
 /* Skills */
@@ -122,18 +136,17 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.5rem 1rem;
+  padding: 0.6rem 1rem;
   background: rgba(59, 130, 246, 0.1);
   border: 1px solid rgba(59, 130, 246, 0.2);
   border-radius: 0.5rem;
-  color: #3b82f6;
   font-size: 0.85rem;
   font-weight: 500;
   text-decoration: none;
   transition: all 0.2s;
   width: 100%;
-  justify-content: center;
   cursor: pointer;
+  margin-top: auto; /* Empuja el botón hacia abajo */
 }
 
 .certificate-link:hover {
@@ -145,7 +158,7 @@
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .certificate-image {
-    height: 160px;
+    padding-bottom: 56.25%; /* Mantiene proporción 16:9 */
   }
   
   .certificate-content {
@@ -171,13 +184,13 @@
   
   .certificate-link {
     font-size: 0.8rem;
-    padding: 0.4rem 0.8rem;
+    padding: 0.5rem 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .certificate-image {
-    height: 140px;
+    padding-bottom: 56.25%; /* Mantiene proporción 16:9 */
   }
   
   .certificate-content {
@@ -191,8 +204,8 @@
   .certificate-badge {
     width: 30px;
     height: 30px;
-    top: 0.75rem;
-    right: 0.75rem;
+    top: 0.5rem;
+    right: 0.5rem;
   }
   
   .certificate-badge svg {

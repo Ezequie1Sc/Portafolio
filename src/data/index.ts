@@ -342,6 +342,40 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
     impact: 'Aumentó pedidos en 200% en el primer mes.'
   },
   {
+  id: 16,
+  title: 'Atmósfera — Dashboard Meteorológico',
+  description: 'App del clima con diseño editorial que consume API REST para mostrar datos meteorológicos en tiempo real de ciudades globales.',
+  image: '/proyectos/web/atmosfera.png',
+  icon: '/icons/js.svg',
+  type: 'web',
+  technologies: [
+    { name: 'HTML5', icon: '/icons/html.svg', bgColor: 'bg-orange-600' },
+    { name: 'CSS3', icon: '/icons/css.svg', bgColor: 'bg-blue-500' },
+    { name: 'JavaScript ES6+', icon: '/icons/javascript.svg', bgColor: 'bg-yellow-500' },
+   
+  ],
+  images: [
+    '/proyectos/atmosfera/dashboard.png',
+    '/proyectos/atmosfera/metrics.png',
+    '/proyectos/atmosfera/responsive.png'
+  ],
+  color: 'orange',
+  github: 'https://github.com/Ezequie1Sc/Weather-app',
+  demoUrl: 'https://weather-app-theta-one-68.vercel.app/',
+  problem: 'Acceso rápido a información meteorológica precisa sin sobrecarga visual ni publicidad invasiva.',
+  solution: 'Aplicación web con arquitectura modular (HTML/CSS/JS) que consume la API de freeCodeCamp, mostrando datos esenciales del clima con una estética editorial y tipografía cuidada.',
+  howItWorks: [
+    'Selector de 6 ciudades principales (París, Londres, Tokio, Los Ángeles, Chicago, Nueva York)',
+    'Peticiones asíncronas con async/await a la API meteorológica',
+    'Transformación y formateo de datos JSON',
+    'Renderizado dinámico en grid de métricas',
+    'Sistema de fallback "N/A" para valores indefinidos',
+    'Spinner de carga durante peticiones',
+    'Manejo granular de errores con alertas'
+  ],
+  impact: 'Proyecto certificado por freeCodeCamp cumpliendo 24/24 historias de usuario. Código modular y escalable listo para producción.'
+},
+  {
     id: 7,
     title: 'JavaScript Laboratory',
     description: 'Laboratorio interactivo con 27 ejercicios de lógica en JavaScript.',
