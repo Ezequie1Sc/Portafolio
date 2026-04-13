@@ -289,32 +289,7 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
   },
 
   // ===== APLICACIONES WEB =====
-  {
-    id: 6,
-    title: 'Células Plenum',
-    description: 'Plataforma web informativa para el programa de formación "Células Plenum".',
-    image: '/proyectos/web/image1.png',
-    icon: '/icons/bootstrap.svg',
-    type: 'web',
-    technologies: [
-      { name: 'HTML', icon: '/icons/html.svg', bgColor: 'bg-orange-600' },
-      { name: 'CSS', icon: '/icons/css.svg', bgColor: 'bg-blue-600' },
-      { name: 'Bootstrap', icon: '/icons/bootstrap.svg', bgColor: 'bg-purple-600' },
-    ],
-    images: ['/proyectos/plenum/1.png', '/proyectos/plenum/2.png', '/proyectos/plenum/3.png'],
-    color: 'blue',
-    github: 'https://github.com/Ezequie1Sc/Practica-Web',
-    demoUrl: 'https://practica-web-kappa.vercel.app/',
-    problem: 'El programa formativo no tenía presencia digital profesional.',
-    solution: 'Sitio web moderno que presenta información de manera organizada y atractiva.',
-    howItWorks: [
-      'Navegación por unidades temáticas',
-      'Sección de estadísticas interactivas',
-      'Galería de recursos descargables',
-      'Formulario de contacto integrado'
-    ],
-    impact: 'Aumentó consultas al programa en 150%.'
-  },
+ 
   {
     id: 15,
     title: 'Restaurant Website',
@@ -340,6 +315,33 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
       'Diseño responsive'
     ],
     impact: 'Aumentó pedidos en 200% en el primer mes.'
+  },
+
+   {
+    id: 6,
+    title: 'Células Plenum',
+    description: 'Plataforma web informativa para el programa de formación "Células Plenum".',
+    image: '/proyectos/web/image1.png',
+    icon: '/icons/bootstrap.svg',
+    type: 'web',
+    technologies: [
+      { name: 'HTML', icon: '/icons/html.svg', bgColor: 'bg-orange-600' },
+      { name: 'CSS', icon: '/icons/css.svg', bgColor: 'bg-blue-600' },
+      { name: 'Bootstrap', icon: '/icons/bootstrap.svg', bgColor: 'bg-purple-600' },
+    ],
+    images: ['/proyectos/plenum/1.png', '/proyectos/plenum/2.png', '/proyectos/plenum/3.png'],
+    color: 'blue',
+    github: 'https://github.com/Ezequie1Sc/Practica-Web',
+    demoUrl: 'https://practica-web-kappa.vercel.app/',
+    problem: 'El programa formativo no tenía presencia digital profesional.',
+    solution: 'Sitio web moderno que presenta información de manera organizada y atractiva.',
+    howItWorks: [
+      'Navegación por unidades temáticas',
+      'Sección de estadísticas interactivas',
+      'Galería de recursos descargables',
+      'Formulario de contacto integrado'
+    ],
+    impact: 'Aumentó consultas al programa en 150%.'
   },
   {
   id: 16,
