@@ -43,7 +43,7 @@ export const certificates: Certificate[] = [
   category: 'programacion'
 },
 {
-  id: 11,
+  id: 12,
   title: 'Foundational C# with Microsoft Certification',
   issuer: 'Microsoft',
   date: '2026',
