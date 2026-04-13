@@ -35,6 +35,12 @@ const ErrorIcon = () => (
   </svg>
 );
 
+const CloseIcon = () => (
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
+  </svg>
+);
+
 const Contact = () => {
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -98,14 +104,14 @@ const Contact = () => {
   };
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleBlur = (
-    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name } = e.target;
     setTouched((prev) => ({ ...prev, [name]: true }));
@@ -164,13 +170,13 @@ const Contact = () => {
 
   return (
     <section id="contacto" className="contact-section">
+      {/* Fondos decorativos */}
       <div className="contact-grid-bg" />
       <div className="contact-light-left" />
       <div className="contact-light-right" />
 
       <div className="contact-container">
-
-        {/* ===== HEADER ESTILO "CERTIFICACIONES" ===== */}
+        {/* Header */}
         <div className="contact-header">
           <h2 className="contact-title">Contacto</h2>
           <div className="contact-title-underline" />
@@ -180,16 +186,11 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* ===== LAYOUT ===== */}
+        {/* Layout */}
         <div className="contact-layout">
-
-          {/* COLUMNA IZQUIERDA */}
+          {/* Columna izquierda - Info */}
           <div className="contact-left">
-
-            <a
-              href="mailto:ezequielsc017@gmail.com"
-              className="contact-card"
-            >
+            <a href="mailto:ezequielsc017@gmail.com" className="contact-card">
               <div className="contact-card-icon icon-blue">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M22 6L12 13L2 6M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" strokeLinecap="round" />
@@ -232,7 +233,7 @@ const Contact = () => {
               </div>
               <div className="contact-card-body">
                 <span className="contact-card-label">GitHub</span>
-                 <span className="footer-social-user">@Ezequie1Sc</span>
+                <span className="contact-card-value">@Ezequie1Sc</span>
               </div>
             </a>
 
@@ -250,33 +251,12 @@ const Contact = () => {
               </svg>
               Tiempo de respuesta: 24–48 horas
             </div>
-
           </div>
 
-          {/* COLUMNA DERECHA */}
+          {/* Columna derecha - Formulario */}
           <div className="contact-right">
             <div className="contact-form-card">
-
-              {notification.show && (
-                <div className={`contact-notification ${notification.type}`}>
-                  <div className="notification-icon">
-                    {notification.type === "success" ? <SuccessIcon /> : <ErrorIcon />}
-                  </div>
-                  <span className="notification-text">{notification.message}</span>
-                  <button
-                    className="notification-close"
-                    onClick={() => setNotification({ show: false, type: "", message: "" })}
-                  >
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
-                    </svg>
-                  </button>
-                  <div className="notification-progress" />
-                </div>
-              )}
-
               <form onSubmit={handleSubmit} className="contact-form" noValidate>
-
                 {/* Fila: Nombre + Email */}
                 <div className="form-row">
                   <div className={`form-field ${fieldState("name")}`}>
@@ -372,7 +352,7 @@ const Contact = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                       placeholder="Cuéntame sobre tu proyecto, idea o consulta..."
-                      rows={6}
+                      rows={5}
                       className="field-textarea"
                       disabled={loading}
                     />
@@ -417,13 +397,28 @@ const Contact = () => {
                     </>
                   )}
                 </button>
-
               </form>
             </div>
           </div>
-
         </div>
       </div>
+
+      {/* Notificación Toast Flotante */}
+      {notification.show && (
+        <div className={`toast-notification ${notification.type}`}>
+          <div className="toast-icon">
+            {notification.type === "success" ? <SuccessIcon /> : <ErrorIcon />}
+          </div>
+          <span className="toast-message">{notification.message}</span>
+          <button
+            className="toast-close"
+            onClick={() => setNotification({ show: false, type: "", message: "" })}
+          >
+            <CloseIcon />
+          </button>
+          <div className="toast-progress" />
+        </div>
+      )}
     </section>
   );
 };
