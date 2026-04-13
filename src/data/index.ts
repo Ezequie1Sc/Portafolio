@@ -42,6 +42,22 @@ export const certificates: Certificate[] = [
   ],
   category: 'programacion'
 },
+{
+  id: 11,
+  title: 'Foundational C# with Microsoft Certification',
+  issuer: 'Microsoft',
+  date: '2026',
+  image: '/Certificates/csharp.png',
+  credentialUrl: '/Certificates/csharp.pdf',
+  skills: [
+    'C# Fundamentals',
+    'Variables & Data Types',
+    'Control Structures',
+    'Object-Oriented Programming',
+    'Software Development Basics'
+  ],
+  category: 'programacion'
+},
 
   {
     id: 1,
@@ -83,6 +99,7 @@ export const certificates: Certificate[] = [
   skills: ['Claude Code', 'AI Assistants', 'Code Generation', 'LLM Integration'],
   category: 'ia'
 },
+
   {
     id: 3,
     title: 'Modern AI',
