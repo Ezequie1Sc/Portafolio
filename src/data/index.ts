@@ -360,10 +360,10 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
     ],
     impact: 'Aumentó consultas al programa en 150%.'
   },
-  {
+{
   id: 16,
-  title: 'Atmósfera — Dashboard Meteorológico',
-  description: 'App del clima con diseño editorial que consume API REST para mostrar datos meteorológicos en tiempo real de ciudades globales.',
+  title: 'Atmosfera — Dashboard Meteorologico',
+  description: 'App del clima con diseno editorial que consume APIs REST gratuitas para mostrar datos meteorologicos en tiempo real de cualquier ciudad del mundo.',
   image: '/proyectos/web/atmosfera.png',
   icon: '/icons/js.svg',
   type: 'web',
@@ -371,7 +371,6 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
     { name: 'HTML5', icon: '/icons/html.svg', bgColor: 'bg-orange-600' },
     { name: 'CSS3', icon: '/icons/css.svg', bgColor: 'bg-blue-500' },
     { name: 'JavaScript ES6+', icon: '/icons/javascript.svg', bgColor: 'bg-yellow-500' },
-   
   ],
   images: [
     '/proyectos/atmosfera/dashboard.png',
@@ -381,19 +380,23 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
   color: 'orange',
   github: 'https://github.com/Ezequie1Sc/Weather-app',
   demoUrl: 'https://weather-app-theta-one-68.vercel.app/',
-  problem: 'Acceso rápido a información meteorológica precisa sin sobrecarga visual ni publicidad invasiva.',
-  solution: 'Aplicación web con arquitectura modular (HTML/CSS/JS) que consume la API de freeCodeCamp, mostrando datos esenciales del clima con una estética editorial y tipografía cuidada.',
+  problem: 'Necesidad de consultar el clima actual de cualquier ciudad del mundo de forma rapida y visualmente clara, sin distracciones publicitarias ni interfaces sobrecargadas.',
+  solution: 'Aplicacion web con arquitectura modular que integra Open-Meteo (datos meteorologicos) y Nominatim (geocodificacion), mostrando informacion climatica completa con un diseno editorial minimalista y tipografia cuidada.',
   howItWorks: [
-    'Selector de 6 ciudades principales (París, Londres, Tokio, Los Ángeles, Chicago, Nueva York)',
-    'Peticiones asíncronas con async/await a la API meteorológica',
-    'Transformación y formateo de datos JSON',
-    'Renderizado dinámico en grid de métricas',
-    'Sistema de fallback "N/A" para valores indefinidos',
-    'Spinner de carga durante peticiones',
-    'Manejo granular de errores con alertas'
+    'Busqueda inteligente de ciudades con sugerencias en tiempo real y banderas de paises',
+    'Geocodificacion via Nominatim para convertir nombres de ciudades en coordenadas',
+    'Peticiones asincronas a Open-Meteo para obtener datos meteorologicos actuales y prevision de 5 dias',
+    'Sistema de favoritos con persistencia en localStorage',
+    'Renderizado dinamico de metricas: temperatura, sensacion termica, humedad, viento, rafagas, presion y visibilidad',
+    'Iconos meteorologicos profesionales con diferenciacion visual por colores (soleado, nublado, lluvia, nieve, tormenta)',
+    'Deteccion automatica de dia/noche para ajustar iconos',
+    'Sistema de cache inteligente de 10 minutos para optimizar consultas',
+    'Manejo de errores con banner informativo',
+    'Diseno totalmente responsive con grid adaptativo'
   ],
-  impact: 'Proyecto certificado por freeCodeCamp cumpliendo 24/24 historias de usuario. Código modular y escalable listo para producción.'
+  impact: 'Aplicacion meteorologica profesional sin dependencia de APIs de pago. Arquitectura escalable con sistema de favoritos persistente, busqueda global y prevision extendida. Codigo modular preparado para integrar nuevas funcionalidades.'
 },
+
   {
     id: 7,
     title: 'JavaScript Laboratory',
