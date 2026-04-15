@@ -186,75 +186,10 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* Layout */}
+        {/* Layout INVERTIDO */}
         <div className="contact-layout">
-          {/* Columna izquierda - Info */}
+          {/* Columna izquierda - FORMULARIO */}
           <div className="contact-left">
-            <a href="mailto:ezequielsc017@gmail.com" className="contact-card">
-              <div className="contact-card-icon icon-blue">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M22 6L12 13L2 6M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" strokeLinecap="round" />
-                </svg>
-              </div>
-              <div className="contact-card-body">
-                <span className="contact-card-label">Email</span>
-                <span className="contact-card-value">ezequielsc017@gmail.com</span>
-              </div>
-            </a>
-
-            <a
-              href="https://www.linkedin.com/in/ezequiel-salazar-194975340/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-card"
-            >
-              <div className="contact-card-icon icon-purple">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" strokeLinecap="round" />
-                  <circle cx="4" cy="4" r="2" />
-                </svg>
-              </div>
-              <div className="contact-card-body">
-                <span className="contact-card-label">LinkedIn</span>
-                <span className="contact-card-value">Ezequiel Salazar</span>
-              </div>
-            </a>
-
-            <a
-              href="https://github.com/Ezequie1Sc"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-card"
-            >
-              <div className="contact-card-icon icon-pink">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" strokeLinecap="round" />
-                </svg>
-              </div>
-              <div className="contact-card-body">
-                <span className="contact-card-label">GitHub</span>
-                <span className="contact-card-value">@Ezequie1Sc</span>
-              </div>
-            </a>
-
-            <div className="contact-divider" />
-
-            <div className="availability-badge">
-              <span className="availability-dot" />
-              Disponible para proyectos
-            </div>
-
-            <div className="response-note">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 6v6l4 2" strokeLinecap="round" />
-              </svg>
-              Tiempo de respuesta: 24–48 horas
-            </div>
-          </div>
-
-          {/* Columna derecha - Formulario */}
-          <div className="contact-right">
             <div className="contact-form-card">
               <form onSubmit={handleSubmit} className="contact-form" noValidate>
                 {/* Fila: Nombre + Email */}
@@ -398,6 +333,97 @@ const Contact = () => {
                   )}
                 </button>
               </form>
+            </div>
+          </div>
+
+          {/* Columna derecha - INFO DE CONTACTO */}
+          <div className="contact-right">
+            <a href="mailto:ezequielsc017@gmail.com" className="contact-card">
+              <div className="contact-card-icon icon-blue">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M22 6L12 13L2 6M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" strokeLinecap="round" />
+                </svg>
+              </div>
+              <div className="contact-card-body">
+                <span className="contact-card-label">Email</span>
+                <span className="contact-card-value">ezequielsc017@gmail.com</span>
+              </div>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/ezequiel-salazar-194975340/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-card"
+            >
+              <div className="contact-card-icon icon-purple">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" strokeLinecap="round" />
+                  <circle cx="4" cy="4" r="2" />
+                </svg>
+              </div>
+              <div className="contact-card-body">
+                <span className="contact-card-label">LinkedIn</span>
+                <span className="contact-card-value">Ezequiel Salazar</span>
+              </div>
+            </a>
+
+            <a
+              href="https://github.com/Ezequie1Sc"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="contact-card"
+            >
+              <div className="contact-card-icon icon-pink">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" strokeLinecap="round" />
+                </svg>
+              </div>
+              <div className="contact-card-body">
+                <span className="contact-card-label">GitHub</span>
+                <span className="contact-card-value">@Ezequie1Sc</span>
+              </div>
+            </a>
+
+            <div className="contact-divider" />
+
+            {/* SECCIÓN DE DISPONIBILIDAD REDISEÑADA */}
+            <div className="availability-section">
+              <div className="availability-card">
+                <div className="availability-header">
+                  <span className="availability-dot" />
+                  <span className="availability-title">Disponible para proyectos</span>
+                </div>
+                <p className="availability-text">
+                  Abierto a colaboraciones, freelance y oportunidades laborales.
+                  ¡Conversemos sobre tu idea!
+                </p>
+              </div>
+
+              {/* TARJETA DE TIEMPO DE RESPUESTA - DESTACADA */}
+              <div className="response-card">
+                <div className="response-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 6v6l4 2" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <div className="response-content">
+                  <span className="response-label">Tiempo de respuesta</span>
+                  <span className="response-time">24 – 48 horas</span>
+                  <span className="response-subtext">Respondo todos los mensajes</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Nota adicional */}
+            <div className="contact-footer-note">
+              <div className="footer-text">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" />
+                </svg>
+                <span>Tu información está segura</span>
+              </div>
             </div>
           </div>
         </div>
