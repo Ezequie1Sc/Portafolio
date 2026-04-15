@@ -58,6 +58,16 @@ export const certificates: Certificate[] = [
   ],
   category: 'programacion'
 },
+{
+    id: 13,
+    title: 'Desarrollo con IA',
+    issuer: 'BIG school',
+    date: '2026',
+    image: '/Certificates/IADesarrollo.png',
+    credentialUrl: '/Certificates/IADesarrollo.pdf',
+    skills: ['Desarrollo con IA', 'Fundamentos de IA', 'Aplicaciones Prácticas'],
+    category: 'ia'
+},
 
   {
     id: 1,
