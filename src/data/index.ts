@@ -110,16 +110,16 @@ export const certificates: Certificate[] = [
     skills: ['Inteligencia Artificial', 'Machine Learning', 'IA Moderna'],
     category: 'ia'
   },
-  {
-    id: 4,
-    title: 'Teaching with AI',
-    issuer: 'Tec',
-    date: '2024',
-    image: '/Certificates/diplomaenseñanzaconIA.png',
-    credentialUrl: '/Certificates/DIPLOMA.pdf',
-    skills: ['IA Educativa', 'Herramientas IA', 'Prompt Engineering'],
-    category: 'ia'
-  },
+{
+  "id": 4,
+  "title": "Integración de Inteligencia Artificial en Escenarios de Aprendizaje",
+  "issuer": "Tecnológico Nacional de México",
+  "date": "2025-07-08",
+  "image": "/Certificates/diplomaenseñanzaconIA.png",
+  "credentialUrl": "/Certificates/DIPLOMA.pdf",
+  "skills": ["Integración de IA en educación", "Escenarios de aprendizaje con IA", "IA aplicada a la docencia"],
+  "category": "ia"
+},
   {
     id: 5,
     title: 'English Level B1 Certification',
