@@ -191,6 +191,12 @@ const Contact = () => {
           {/* Columna izquierda - FORMULARIO */}
           <div className="contact-left">
             <div className="contact-form-card">
+              {/* Mensaje de invitación */}
+              <div className="form-invitation">
+                <h3>Cuéntame sobre tu proyecto </h3>
+                <p>Completa el formulario y te responderé a la brevedad</p>
+              </div>
+
               <form onSubmit={handleSubmit} className="contact-form" noValidate>
                 {/* Fila: Nombre + Email */}
                 <div className="form-row">
@@ -387,7 +393,7 @@ const Contact = () => {
 
             <div className="contact-divider" />
 
-            {/* SECCIÓN DE DISPONIBILIDAD REDISEÑADA */}
+            {/* SECCIÓN DE DISPONIBILIDAD - COMPACTA */}
             <div className="availability-section">
               <div className="availability-card">
                 <div className="availability-header">
@@ -396,11 +402,10 @@ const Contact = () => {
                 </div>
                 <p className="availability-text">
                   Abierto a colaboraciones, freelance y oportunidades laborales.
-                  ¡Conversemos sobre tu idea!
                 </p>
               </div>
 
-              {/* TARJETA DE TIEMPO DE RESPUESTA - DESTACADA */}
+              {/* TARJETA DE TIEMPO DE RESPUESTA - COMPACTA */}
               <div className="response-card">
                 <div className="response-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -416,13 +421,13 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Nota adicional */}
+            {/* Nota adicional - DATOS SEGUROS */}
             <div className="contact-footer-note">
               <div className="footer-text">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" />
                 </svg>
-                <span>Tu información está segura</span>
+                <span>Tus datos están seguros y protegidos</span>
               </div>
             </div>
           </div>
