@@ -1,10 +1,10 @@
 import './Footer.css';
 
 const NAV_LINKS = [
-  { label: 'Inicio',      href: '#inicio' },
-  { label: 'Proyectos',   href: '#proyectos' },
+  { label: 'Inicio', href: '#inicio' },
+  { label: 'Proyectos', href: '#proyectos' },
   { label: 'Habilidades', href: '#habilidades' },
-  { label: 'Contacto',    href: '#contacto' },
+  { label: 'Contacto', href: '#contacto' },
 ];
 
 const SOCIAL_LINKS = [
@@ -12,7 +12,7 @@ const SOCIAL_LINKS = [
     label: 'LinkedIn',
     href: 'https://www.linkedin.com/in/ezequiel-salazar-194975340/',
     icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853
           0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9
           1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337
@@ -27,7 +27,7 @@ const SOCIAL_LINKS = [
     label: 'GitHub',
     href: 'https://github.com/Ezequie1Sc',
     icon: (
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
         <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205
           11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724
           -4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087
@@ -43,6 +43,17 @@ const SOCIAL_LINKS = [
       </svg>
     ),
   },
+  {
+    label: 'X / Twitter',
+    href: 'https://x.com/salazar_dev',
+    icon: (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 
+          21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 
+          4.126H5.117z"/>
+      </svg>
+    ),
+  },
 ];
 
 const Footer = () => {
@@ -50,66 +61,82 @@ const Footer = () => {
 
   return (
     <footer className="footer">
+      {/* Línea RGB superior */}
       <div className="footer-rule" />
 
       <div className="footer-container">
-
-        {/* ── Fila principal ── */}
-        <div className="footer-row">
-
-          {/* Marca */}
-          <div className="footer-brand">
-            <span className="footer-mono" aria-hidden="true">ES</span>
-            <span className="footer-name">Ezequiel Salazar</span>
+        
+        {/* Sección superior con grid */}
+        <div className="footer-top">
+          
+          {/* Marca y descripción */}
+          <div className="footer-brand-section">
+            <h2 className="footer-logo">
+              Ezequiel<span className="footer-logo-accent">.</span>Salazar
+            </h2>
+            <p className="footer-description">
+              Creando experiencias digitales que combinan elegancia visual con 
+              precisión técnica. Cada línea de código cuenta una historia.
+            </p>
           </div>
 
-          {/* Navegación central */}
-          <nav className="footer-nav" aria-label="Footer navigation">
-            {NAV_LINKS.map(({ label, href }) => (
-              <a key={href} href={href} className="footer-nav-link">
-                {label}
-              </a>
-            ))}
-          </nav>
+          {/* Enlaces rápidos */}
+          <div className="footer-links-section">
+            <h4>Navegación</h4>
+            <div className="footer-links-grid">
+              {NAV_LINKS.map(({ label, href }) => (
+                <a key={href} href={href} className="footer-link">
+                  <span className="link-arrow">→</span>
+                  {label}
+                </a>
+              ))}
+            </div>
+          </div>
 
-          {/* Acciones */}
-          <div className="footer-actions">
-            {SOCIAL_LINKS.map(({ label, href, icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-icon-btn"
-                aria-label={label}
+          {/* Contacto */}
+          <div className="footer-contact-section">
+            <h4>Conectemos</h4>
+            <div className="footer-contact-info">
+              <a 
+                href="mailto:ezequielsc017@gmail.com" 
+                className="footer-email-link"
               >
-                {icon}
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" 
+                  stroke="currentColor" strokeWidth="1.8">
+                  <path d="M22 6L12 13L2 6M4 6h16v12H4V6z" 
+                    strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                ezequielsc017@gmail.com
               </a>
-            ))}
-
-            <a
-              href="mailto:ezequielsc017@gmail.com"
-              className="footer-cta"
-              aria-label="Contactar por correo"
-            >
-              Contacto
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none"
-                stroke="currentColor" strokeWidth="2.5"
-                strokeLinecap="round" strokeLinejoin="round">
-                <path d="M7 17L17 7M17 7H7M17 7v10"/>
-              </svg>
-            </a>
+              
+              <div className="footer-social-links">
+                {SOCIAL_LINKS.map(({ label, href, icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-social-btn"
+                    aria-label={label}
+                  >
+                    {icon}
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
-
         </div>
 
-        {/* ── Barra inferior ── */}
+        {/* Barra inferior */}
         <div className="footer-bottom">
-          <p className="footer-copy">
-            © {year} Ezequiel Salazar — Todos los derechos reservados.
+          <p className="footer-copyright">
+            <span className="copyright-icon">©</span>
+            {year} Ezequiel Salazar — Todos los derechos reservados.
           </p>
           <p className="footer-tagline">
-            Elegancia en diseño, eficiencia en código.
+            <span className="tagline-dot"></span>
+            Elegancia en diseño, eficiencia en código
+            <span className="tagline-dot"></span>
           </p>
         </div>
 
