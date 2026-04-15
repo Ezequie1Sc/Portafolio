@@ -193,7 +193,7 @@ const Contact = () => {
             <div className="contact-form-card">
               {/* Mensaje de invitación */}
               <div className="form-invitation">
-                <h3>Cuéntame sobre tu proyecto </h3>
+                <h3>Cuéntame sobre tu proyecto</h3>
                 <p>Completa el formulario y te responderé a la brevedad</p>
               </div>
 
@@ -393,42 +393,55 @@ const Contact = () => {
 
             <div className="contact-divider" />
 
-            {/* SECCIÓN DE DISPONIBILIDAD - COMPACTA */}
-            <div className="availability-section">
-              <div className="availability-card">
-                <div className="availability-header">
-                  <span className="availability-dot" />
-                  <span className="availability-title">Disponible para proyectos</span>
+            {/* CONTENEDOR DE ESTADO PROFESIONAL */}
+            <div className="status-container">
+              {/* Disponibilidad */}
+              <div className="status-item">
+                <div className="status-icon green">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M20 12H4M12 4v16" strokeLinecap="round" />
+                  </svg>
                 </div>
-                <p className="availability-text">
-                  Abierto a colaboraciones, freelance y oportunidades laborales.
-                </p>
+                <div className="status-content">
+                  <div className="status-header">
+                    <span className="status-dot" />
+                    <span className="status-title">Disponible para proyectos</span>
+                    <span className="status-badge">Activo</span>
+                  </div>
+                  <p className="status-description">
+                    Abierto a colaboraciones, freelance y oportunidades laborales.
+                  </p>
+                </div>
               </div>
 
-              {/* TARJETA DE TIEMPO DE RESPUESTA - COMPACTA */}
-              <div className="response-card">
-                <div className="response-icon">
+              <div className="status-divider" />
+
+              {/* Tiempo de respuesta */}
+              <div className="status-item">
+                <div className="status-icon blue">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <circle cx="12" cy="12" r="10" />
                     <path d="M12 6v6l4 2" strokeLinecap="round" />
                   </svg>
                 </div>
-                <div className="response-content">
-                  <span className="response-label">Tiempo de respuesta</span>
-                  <span className="response-time">24 – 48 horas</span>
-                  <span className="response-subtext">Respondo todos los mensajes</span>
+                <div className="status-content">
+                  <div className="status-header">
+                    <span className="status-title">Tiempo de respuesta</span>
+                  </div>
+                  <div>
+                    <span className="status-time">24 – 48 horas</span>
+                    <span className="status-time-small"> · Respondo todos los mensajes</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Nota adicional - DATOS SEGUROS */}
-            <div className="contact-footer-note">
-              <div className="footer-text">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" />
-                </svg>
-                <span>Tus datos están seguros y protegidos</span>
-              </div>
+            {/* Nota de seguridad */}
+            <div className="security-note">
+              <svg className="security-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" />
+              </svg>
+              <span className="security-text">Tus datos están seguros y protegidos</span>
             </div>
           </div>
         </div>
