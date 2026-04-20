@@ -1,11 +1,49 @@
-/* ===== PROJECTS SECTION ===== */
-.projects-section {
-  padding: 5rem 0;
-  background: #172031;
-  position: relative;
-  overflow: hidden;
+/* ========================================
+   PROJECTS SECTION - OPTIMIZADO v2
+   Variables CSS + Código DRY + Mejores Prácticas
+   ======================================== */
+
+:root {
+  /* Colores base */
+  --bg-projects: #172031;
+  --text-white: #ffffff;
+  --text-gray: #a0aec0;
+  --text-light: #cbd5e1;
+  
+  /* Gradientes y acentos */
+  --gradient-primary: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+  --blue: #3b82f6;
+  --border-dim: rgba(255, 255, 255, 0.1);
+  --border-light: rgba(255, 255, 255, 0.15);
+  
+  /* Espaciado */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.25rem;
+  --spacing-xl: 1.5rem;
+  --spacing-2xl: 2.5rem;
+  --spacing-3xl: 3rem;
+  --spacing-4xl: 5rem;
+  
+  /* Bordes y efectos */
+  --radius-sm: 8px;
+  --radius-full: 2rem;
+  --transition-default: all 0.2s ease;
+  --transition-slow: all 0.3s ease-out;
+  --blur-effect: blur(5px);
 }
 
+/* ===== BASE SECTION ===== */
+.projects-section {
+  padding: var(--spacing-4xl) 0;
+  background: var(--bg-projects);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Línea superior con gradiente */
 .projects-section::before {
   content: '';
   position: absolute;
@@ -13,19 +51,28 @@
   left: 0;
   right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, #ec4899, transparent);
+  background: var(--gradient-primary);
+  opacity: 0.8;
+}
+
+/* ===== HEADER COMPARTIDO ===== */
+.projects-main-title,
+.projects-subtitle {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .projects-main-title {
-  text-align: center;
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 5vw, 2.5rem);
   font-weight: 700;
-  color: white;
-  margin-bottom: 1rem;
+  color: var(--text-white);
+  margin-bottom: var(--spacing-md);
   position: relative;
   letter-spacing: -0.02em;
 }
 
+/* Subrayado animado del título */
 .projects-main-title::after {
   content: '';
   position: absolute;
@@ -34,98 +81,113 @@
   transform: translateX(-50%);
   width: 80px;
   height: 3px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+  background: var(--gradient-primary);
   border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.projects-main-title:hover::after {
+  width: 100px;
 }
 
 .projects-subtitle {
-  text-align: center;
-  color: #a0aec0;
-  font-size: 1.1rem;
-  margin-bottom: 2.5rem;
+  color: var(--text-gray);
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  margin-bottom: var(--spacing-2xl);
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
   line-height: 1.6;
+  padding: 0 var(--spacing-md);
 }
 
-/* Filtros */
+/* ===== FILTROS - OPTIMIZADOS ===== */
 .projects-filter {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.75rem;
-  margin-bottom: 3rem;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-3xl);
+  padding: 0 var(--spacing-md);
 }
 
+/* Botón de filtro base */
 .filter-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--spacing-xs);
   padding: 0.5rem 1.25rem;
-  border-radius: 2rem;
+  border-radius: var(--radius-full);
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color: #cbd5e1;
+  border: 1px solid var(--border-light);
+  color: var(--text-light);
   font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
-  backdrop-filter: blur(5px);
+  transition: var(--transition-default);
+  backdrop-filter: var(--blur-effect);
+  -webkit-backdrop-filter: var(--blur-effect);
+  user-select: none;
+}
+
+/* Iconos dentro de botones */
+.filter-btn svg,
+.category-icon svg {
+  transition: var(--transition-default);
 }
 
 .filter-btn svg {
   width: 14px;
   height: 14px;
-  stroke: #cbd5e1;
+  stroke: var(--text-light);
   stroke-width: 2;
   flex-shrink: 0;
 }
 
-.filter-btn:hover {
-  border-color: #3b82f6;
-  color: white;
+/* Estados hover y active unificados */
+.filter-btn:hover,
+.filter-btn.active {
   transform: translateY(-2px);
+  color: var(--text-white);
 }
 
-.filter-btn:hover svg {
-  stroke: white;
+.filter-btn:hover {
+  border-color: var(--blue);
+}
+
+.filter-btn:hover svg,
+.filter-btn.active svg {
+  stroke: var(--text-white);
 }
 
 .filter-btn.active {
-  background: #3b82f6;
-  color: white;
-  border-color: #3b82f6;
+  background: var(--blue);
+  border-color: var(--blue);
   box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
 }
 
-.filter-btn.active svg {
-  stroke: white;
-}
-
-/* Categorías */
+/* ===== CATEGORÍAS Y GRID ===== */
 .projects-categories {
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
+  gap: var(--spacing-2xl);
 }
 
 .project-category {
   width: 100%;
-  animation: fadeInUp 0.5s ease-out;
+  animation: fadeInUp 0.5s var(--transition-slow);
 }
 
+/* Título de categoría */
 .category-title {
-  font-size: 1.3rem;
+  font-size: clamp(1.1rem, 3vw, 1.3rem);
   font-weight: 600;
-  color: white;
-  margin-bottom: 1.25rem;
+  color: var(--text-white);
+  margin-bottom: var(--spacing-lg);
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  gap: var(--spacing-sm);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px solid var(--border-dim);
 }
 
 .category-icon {
@@ -135,30 +197,41 @@
   width: 32px;
   height: 32px;
   background: rgba(59, 130, 246, 0.1);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-default);
 }
 
 .category-icon svg {
   width: 18px;
   height: 18px;
-  stroke: #3b82f6;
+  stroke: var(--blue);
   stroke-width: 2;
 }
 
-/* ===== GRID CORREGIDO ===== */
-.category-grid {
+.category-title:hover .category-icon {
+  background: rgba(59, 130, 246, 0.15);
+  transform: scale(1.05);
+}
+
+/* ===== GRID SYSTEM - OPTIMIZADO ===== */
+.category-grid,
+.filtered-view {
   display: grid;
+  gap: var(--spacing-xl);
+  width: 100%;
+}
+
+.category-grid {
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  align-items: start; /* ← CLAVE: cada card crece de forma independiente */
+  align-items: start;
 }
 
 .filtered-view {
-  margin-top: 2rem;
-  animation: fadeIn 0.3s ease-out;
+  margin-top: var(--spacing-2xl);
+  animation: fadeIn 0.3s var(--transition-slow);
 }
 
-/* Responsive */
+/* Sistema de grid responsivo unificado */
 @media (min-width: 640px) and (max-width: 1023px) {
   .category-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -171,7 +244,45 @@
   }
 }
 
-/* Animaciones */
+/* ===== RESPONSIVE GENERAL ===== */
+@media (max-width: 768px) {
+  .projects-section {
+    padding: var(--spacing-3xl) 0;
+  }
+  
+  .filter-btn {
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .filter-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .category-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .category-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-filter {
+    gap: 0.5rem;
+  }
+  
+  .filter-btn {
+    padding: 0.35rem 0.85rem;
+    font-size: 0.7rem;
+  }
+}
+
+/* ===== ANIMACIONES OPTIMIZADAS ===== */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -184,45 +295,52 @@
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .project-category,
+  .filtered-view,
+  .filter-btn,
+  .category-icon,
+  .projects-main-title::after {
+    animation: none;
+    transition: none;
   }
-  to {
-    opacity: 1;
+  
+  .filter-btn:hover {
+    transform: none;
   }
 }
 
-@media (max-width: 768px) {
-  .projects-main-title {
-    font-size: 2rem;
-  }
+/* ===== UTILIDADES ===== */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
-  .projects-subtitle {
-    font-size: 0.95rem;
-    padding: 0 1rem;
+/* Soporte para modo oscuro del sistema */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-projects: #172031;
+    --text-white: #ffffff;
+    --text-gray: #a0aec0;
+    --text-light: #cbd5e1;
   }
+}
 
-  .filter-btn {
-    padding: 0.4rem 1rem;
-    font-size: 0.75rem;
-  }
-
-  .filter-btn svg {
-    width: 12px;
-    height: 12px;
-  }
-
-  .category-title {
-    font-size: 1.2rem;
-  }
-
-  .category-icon {
-    width: 28px;
-    height: 28px;
-  }
-
-  .category-icon svg {
-    width: 16px;
-    height: 16px;
+/* Soporte para modo claro (si se necesita en el futuro) */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-projects: #172031; /* Mantenemos oscuro por diseño */
   }
 }
