@@ -5,16 +5,16 @@
   position: relative;
 }
 
+/* Línea superior (sin cambios, es segura) */
 .certificates-section::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset: 0 0 auto 0;
   height: 1px;
   background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, #ec4899, transparent);
 }
 
+/* ===== TITULOS ===== */
 .certificates-main-title {
   text-align: center;
   font-size: 2.5rem;
@@ -50,19 +50,18 @@
   font-size: 1.1rem;
   margin-bottom: 3rem;
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-inline: auto;
   line-height: 1.6;
 }
 
-/* Grid de certificados */
+/* ===== GRID ===== */
 .certificates-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
 }
 
-/* Filtros */
+/* ===== FILTROS ===== */
 .certificate-filters {
   display: flex;
   flex-wrap: wrap;
@@ -76,29 +75,38 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1.2rem;
-  background: rgba(255, 255, 255, 0.03);
+
+  /* ❌ Eliminado backdrop-filter */
+  background: rgba(255, 255, 255, 0.05);
+
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 2rem;
   color: #a0aec0;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease;
-  backdrop-filter: blur(5px);
+
+  /* transitions más ligeras */
+  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
 }
 
-.certificate-filter-btn:hover {
-  border-color: #3b82f6;
-  color: white;
-  transform: translateY(-2px);
-  background: rgba(59, 130, 246, 0.1);
+/* Hover solo en dispositivos con hover */
+@media (hover: hover) {
+  .certificate-filter-btn:hover {
+    border-color: #3b82f6;
+    color: white;
+    transform: translateY(-2px);
+    background: rgba(59, 130, 246, 0.1);
+  }
 }
 
 .certificate-filter-btn.active {
   background: #3b82f6;
   color: white;
   border-color: #3b82f6;
-  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+
+  /* sombra más ligera para mobile */
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
 }
 
 .filter-icon {
@@ -117,7 +125,7 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* Título de categoría activa */
+/* ===== TITULO ACTIVO ===== */
 .category-active-title {
   font-size: 1.5rem;
   font-weight: 600;
@@ -131,7 +139,7 @@
   width: fit-content;
 }
 
-/* Mensaje vacío */
+/* ===== VACÍO ===== */
 .certificates-empty {
   text-align: center;
   color: #a0aec0;
@@ -159,27 +167,27 @@
   .certificates-main-title {
     font-size: 2rem;
   }
-  
+
   .certificates-subtitle {
     font-size: 1rem;
     padding: 0 1rem;
     margin-bottom: 2rem;
   }
-  
+
   .certificate-filters {
     gap: 0.5rem;
     margin: 1.5rem 0 2rem;
   }
-  
+
   .certificate-filter-btn {
     padding: 0.4rem 1rem;
     font-size: 0.8rem;
   }
-  
+
   .filter-icon {
     font-size: 1rem;
   }
-  
+
   .category-active-title {
     font-size: 1.3rem;
   }
@@ -189,16 +197,16 @@
   .certificates-section {
     padding: 3rem 0;
   }
-  
+
   .certificates-main-title {
     font-size: 1.8rem;
   }
-  
+
   .certificate-filter-btn {
     width: calc(50% - 0.5rem);
     justify-content: center;
   }
-  
+
   .category-active-title {
     font-size: 1.2rem;
   }
