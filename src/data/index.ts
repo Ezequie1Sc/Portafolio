@@ -262,7 +262,7 @@ export const projects: Project[] = [
     id: 4,
     title: 'Vodka App Mobile',
     description: 'Aplicación para organización y seguimiento de torneos de fútbol con resultados en tiempo real.',
-    image: '/v_1.png',
+    image: '/v_1.webp',
     icon: '/icons/flutter.svg',
     type: 'mobile',
     technologies: [
@@ -272,7 +272,7 @@ export const projects: Project[] = [
       { name: 'PostgreSQL', icon: '/icons/postgresql.svg', bgColor: 'bg-blue-700' },
       { name: 'Python', icon: '/icons/python.svg', bgColor: 'bg-green-600' },
     ],
-  images: ['/v_1.png'],
+  images: ['/v_1.webp'],
 color: 'green',
 github: 'https://github.com/Ezequie1Sc',
 
@@ -294,14 +294,14 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
     id: 5,
     title: 'VideoJuego',
     description: 'Juego arcade donde controlas un personaje que atrapa regalos mientras esquiva objetos peligrosos.',
-    image: '/game.png',
+    image: '/game.webp',
     icon: '/icons/flutter.svg',
     type: 'mobile',
     technologies: [
       { name: 'Flutter', icon: '/icons/flutter.svg', bgColor: 'bg-blue-600' },
       { name: 'Dart', icon: '/icons/dart.svg', bgColor: 'bg-blue-500' },
     ],
-    images: ['/game1.png'],
+    images: ['/game1.webp'],
     color: 'orange',
     github: 'https://github.com/Ezequie1Sc/love_apk',
    problem: 'Falta de opciones de entretenimiento rápido y accesible para sesiones cortas en dispositivos móviles.',
@@ -542,7 +542,7 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
     id: 12,
     title: 'Barbería Desktop',
     description: 'Sistema de escritorio integral para barberías con gestión de citas e inventario.',
-    image: '/v_2.png',
+    image: '/v_2.webp',
     icon: '/icons/csharp.svg',
     type: 'desktop',
     technologies: [
@@ -592,7 +592,7 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
     id: 14,
     title: 'Inventario',
     description: 'Software de escritorio para gestión completa de inventarios y facturación.',
-    image: '/inve.png',
+    image: '/inve.webp',
     icon: '/icons/csharp.svg',
     type: 'desktop',
     technologies: [

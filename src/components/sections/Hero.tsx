@@ -103,7 +103,7 @@ utilizando Flutter, Python y tecnologías web.
       <div className="hero-visual">
         <div className="solar-system">
           <div className="sun">
-            <img src="/face.jpg" alt="Ezequiel Salazar" className="profile-img" />
+            <img src="/face.webp" alt="Ezequiel Salazar" className="profile-img" />
             <div className="sun-glow"></div>
           </div>
 
