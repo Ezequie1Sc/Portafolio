@@ -1,23 +1,26 @@
 /* ========================================
-   PROJECT GALLERY - PROFESSIONAL v3
-   Sin bloqueos, completamente funcional
+   PROJECT GALLERY - AISLADO v4
+   Sin interferencias con otros componentes
    ======================================== */
 
-:root {
-  --gallery-overlay: rgba(0, 0, 0, 0.95);
-  --gallery-container-bg: #1e293b;
+/* Variables EXCLUSIVAS para la galería */
+.gallery-overlay,
+.gallery-container {
+  --gallery-bg-overlay: rgba(0, 0, 0, 0.95);
+  --gallery-bg-container: #1e293b;
   --gallery-border: rgba(255, 255, 255, 0.12);
   --gallery-accent: #3b82f6;
   --gallery-text: #ffffff;
   --gallery-text-secondary: #cbd5e1;
   --gallery-text-muted: #64748b;
+  --gallery-transition: 0.25s ease;
 }
 
-/* ===== OVERLAY - CORREGIDO ===== */
+/* ===== OVERLAY ===== */
 .gallery-overlay {
   position: fixed;
   inset: 0;
-  background: var(--gallery-overlay);
+  background: var(--gallery-bg-overlay);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   z-index: 9999;
@@ -25,20 +28,23 @@
   align-items: center;
   justify-content: center;
   padding: 1rem;
-  animation: overlayFadeIn 0.25s ease-out;
-  /* IMPORTANTE: Permitir clics en el overlay para cerrar */
   pointer-events: auto;
 }
 
-@keyframes overlayFadeIn {
+/* Animación EXCLUSIVA para gallery */
+@keyframes galleryFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+.gallery-overlay {
+  animation: galleryFadeIn 0.25s ease-out;
 }
 
 /* ===== CONTENEDOR PRINCIPAL ===== */
 .gallery-container {
   position: relative;
-  background: var(--gallery-container-bg);
+  background: var(--gallery-bg-container);
   border-radius: 1.25rem;
   border: 1px solid var(--gallery-border);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5),
@@ -51,12 +57,11 @@
   max-width: min(95vw, 1200px);
   max-height: 90vh;
   overflow: hidden;
-  animation: containerSlideUp 0.3s ease-out;
-  /* IMPORTANTE: Permitir interacción dentro del contenedor */
   pointer-events: auto;
 }
 
-@keyframes containerSlideUp {
+/* Animación EXCLUSIVA para gallery container */
+@keyframes gallerySlideUp {
   from {
     opacity: 0;
     transform: translateY(30px);
@@ -65,6 +70,10 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+.gallery-container {
+  animation: gallerySlideUp 0.3s ease-out;
 }
 
 /* ===== HEADER ===== */
@@ -105,9 +114,8 @@
   justify-content: center;
   cursor: pointer;
   color: var(--gallery-text-secondary);
-  transition: all 0.2s ease;
+  transition: all var(--gallery-transition);
   flex-shrink: 0;
-  /* Asegurar que el botón sea clickeable */
   pointer-events: auto;
   z-index: 10;
 }
@@ -157,10 +165,10 @@
   display: block;
   user-select: none;
   -webkit-user-drag: none;
-  animation: imageFadeIn 0.3s ease-out;
 }
 
-@keyframes imageFadeIn {
+/* Animación EXCLUSIVA para imagen */
+@keyframes galleryImageFade {
   from {
     opacity: 0;
     transform: scale(0.95);
@@ -169,6 +177,10 @@
     opacity: 1;
     transform: scale(1);
   }
+}
+
+.gallery-image {
+  animation: galleryImageFade 0.3s ease-out;
 }
 
 /* ===== BOTONES DE NAVEGACIÓN ===== */
@@ -184,7 +196,7 @@
   justify-content: center;
   cursor: pointer;
   color: var(--gallery-text-secondary);
-  transition: all 0.2s ease;
+  transition: all var(--gallery-transition);
   flex-shrink: 0;
   pointer-events: auto;
 }
@@ -243,7 +255,7 @@
   cursor: pointer;
   padding: 0;
   background: #0f172a;
-  transition: all 0.2s ease;
+  transition: all var(--gallery-transition);
   scroll-snap-align: start;
   pointer-events: auto;
 }
@@ -274,12 +286,31 @@
   font-weight: 500;
   letter-spacing: 0.5px;
   text-align: center;
-  padding-top: 0.25rem;
-  background: rgba(255, 255, 255, 0.03);
   padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
   border-radius: 2rem;
   width: fit-content;
   margin: 0 auto;
+}
+
+/* ===== LOADING (OPCIONAL) ===== */
+.gallery-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--gallery-text-secondary);
+  z-index: 1;
+}
+
+/* Animación EXCLUSIVA para spinner */
+@keyframes gallerySpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.gallery-spinner {
+  animation: gallerySpin 1s linear infinite;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -441,8 +472,13 @@
   .gallery-nav,
   .gallery-thumbnail,
   .gallery-close {
-    animation: none;
-    transition: none;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .gallery-nav:hover:not(:disabled),
+  .gallery-thumbnail:hover {
+    transform: none;
   }
 }
 
@@ -451,23 +487,4 @@
 .gallery-thumbnail:focus-visible {
   outline: 3px solid var(--gallery-accent);
   outline-offset: 2px;
-}
-
-/* ===== ESTADO DE CARGA (OPCIONAL) ===== */
-.gallery-loading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--gallery-text-secondary);
-  z-index: 1;
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
