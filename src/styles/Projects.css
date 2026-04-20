@@ -1,22 +1,19 @@
 /* ========================================
-   PROJECTS SECTION - OPTIMIZADO v2
-   Variables CSS + Código DRY + Mejores Prácticas
+   PROJECTS SECTION - OPTIMIZADO v3
+   Fix: sintaxis animación, align-items grid, transición de vista
    ======================================== */
 
 :root {
-  /* Colores base */
   --bg-projects: #172031;
   --text-white: #ffffff;
   --text-gray: #a0aec0;
   --text-light: #cbd5e1;
-  
-  /* Gradientes y acentos */
+
   --gradient-primary: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
   --blue: #3b82f6;
   --border-dim: rgba(255, 255, 255, 0.1);
   --border-light: rgba(255, 255, 255, 0.15);
-  
-  /* Espaciado */
+
   --spacing-xs: 0.5rem;
   --spacing-sm: 0.75rem;
   --spacing-md: 1rem;
@@ -25,12 +22,17 @@
   --spacing-2xl: 2.5rem;
   --spacing-3xl: 3rem;
   --spacing-4xl: 5rem;
-  
-  /* Bordes y efectos */
+
   --radius-sm: 8px;
   --radius-full: 2rem;
-  --transition-default: all 0.2s ease;
-  --transition-slow: all 0.3s ease-out;
+
+  /* FIX: duraciones separadas — las variables de transición (all 0.2s ease)
+     NO son válidas como timing-function en animation shorthand */
+  --dur-fast: 0.2s;
+  --dur-base: 0.3s;
+  --ease: ease;
+  --ease-out: ease-out;
+
   --blur-effect: blur(5px);
 }
 
@@ -43,7 +45,6 @@
   isolation: isolate;
 }
 
-/* Línea superior con gradiente */
 .projects-section::before {
   content: '';
   position: absolute;
@@ -55,7 +56,7 @@
   opacity: 0.8;
 }
 
-/* ===== HEADER COMPARTIDO ===== */
+/* ===== HEADER ===== */
 .projects-main-title,
 .projects-subtitle {
   text-align: center;
@@ -72,7 +73,6 @@
   letter-spacing: -0.02em;
 }
 
-/* Subrayado animado del título */
 .projects-main-title::after {
   content: '';
   position: absolute;
@@ -83,7 +83,7 @@
   height: 3px;
   background: var(--gradient-primary);
   border-radius: 3px;
-  transition: width 0.3s ease;
+  transition: width var(--dur-base) var(--ease);
 }
 
 .projects-main-title:hover::after {
@@ -99,7 +99,7 @@
   padding: 0 var(--spacing-md);
 }
 
-/* ===== FILTROS - OPTIMIZADOS ===== */
+/* ===== FILTROS ===== */
 .projects-filter {
   display: flex;
   flex-wrap: wrap;
@@ -109,7 +109,6 @@
   padding: 0 var(--spacing-md);
 }
 
-/* Botón de filtro base */
 .filter-btn {
   display: inline-flex;
   align-items: center;
@@ -123,16 +122,15 @@
   font-size: 0.85rem;
   font-weight: 500;
   cursor: pointer;
-  transition: var(--transition-default);
+  transition:
+    background var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease),
+    color var(--dur-fast) var(--ease),
+    box-shadow var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
   backdrop-filter: var(--blur-effect);
   -webkit-backdrop-filter: var(--blur-effect);
   user-select: none;
-}
-
-/* Iconos dentro de botones */
-.filter-btn svg,
-.category-icon svg {
-  transition: var(--transition-default);
 }
 
 .filter-btn svg {
@@ -141,28 +139,33 @@
   stroke: var(--text-light);
   stroke-width: 2;
   flex-shrink: 0;
-}
-
-/* Estados hover y active unificados */
-.filter-btn:hover,
-.filter-btn.active {
-  transform: translateY(-2px);
-  color: var(--text-white);
+  transition: stroke var(--dur-fast) var(--ease);
 }
 
 .filter-btn:hover {
+  transform: translateY(-2px);
+  color: var(--text-white);
   border-color: var(--blue);
 }
 
-.filter-btn:hover svg,
-.filter-btn.active svg {
+.filter-btn:hover svg {
   stroke: var(--text-white);
 }
 
 .filter-btn.active {
+  transform: translateY(-2px);
+  color: var(--text-white);
   background: var(--blue);
   border-color: var(--blue);
   box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+}
+
+.filter-btn.active svg {
+  stroke: var(--text-white);
+}
+
+.filter-btn:active {
+  transform: translateY(0);
 }
 
 /* ===== CATEGORÍAS Y GRID ===== */
@@ -174,10 +177,11 @@
 
 .project-category {
   width: 100%;
-  animation: fadeInUp 0.5s var(--transition-slow);
+  /* FIX: timing-function correcta, no una variable de transición completa.
+     "both" aplica fill-mode en entrada y salida. */
+  animation: fadeInUp 0.5s var(--ease-out) both;
 }
 
-/* Título de categoría */
 .category-title {
   font-size: clamp(1.1rem, 3vw, 1.3rem);
   font-weight: 600;
@@ -198,7 +202,10 @@
   height: 32px;
   background: rgba(59, 130, 246, 0.1);
   border-radius: var(--radius-sm);
-  transition: var(--transition-default);
+  transition:
+    background var(--dur-fast) var(--ease),
+    transform var(--dur-fast) var(--ease);
+  flex-shrink: 0;
 }
 
 .category-icon svg {
@@ -213,25 +220,31 @@
   transform: scale(1.05);
 }
 
-/* ===== GRID SYSTEM - OPTIMIZADO ===== */
-.category-grid,
-.filtered-view {
+/* ===== GRID SYSTEM =====
+   FIX: align-items: start evita que las cards se estiren al alto de
+   la más alta en la misma fila — esto deformaba el botón expand
+   y causaba saltos visuales al expandir contenido. */
+.category-grid {
   display: grid;
   gap: var(--spacing-xl);
   width: 100%;
-}
-
-.category-grid {
   grid-template-columns: repeat(3, 1fr);
   align-items: start;
 }
 
-.filtered-view {
-  margin-top: var(--spacing-2xl);
-  animation: fadeIn 0.3s var(--transition-slow);
+/* ===== CONTENEDOR DE VISTA =====
+   FIX: envoltura para transición suave al cambiar entre
+   vista "todos" y vista filtrada. La key en React fuerza
+   remount y dispara la animación en cada cambio de filtro. */
+.view-container {
+  animation: fadeInUp 0.3s var(--ease-out) both;
 }
 
-/* Sistema de grid responsivo unificado */
+.filtered-view {
+  /* La animación la hereda de .view-container */
+}
+
+/* ===== RESPONSIVE ===== */
 @media (min-width: 640px) and (max-width: 1023px) {
   .category-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -244,12 +257,11 @@
   }
 }
 
-/* ===== RESPONSIVE GENERAL ===== */
 @media (max-width: 768px) {
   .projects-section {
     padding: var(--spacing-3xl) 0;
   }
-  
+
   .filter-btn {
     padding: 0.4rem 1rem;
     font-size: 0.75rem;
@@ -275,18 +287,18 @@
   .projects-filter {
     gap: 0.5rem;
   }
-  
+
   .filter-btn {
     padding: 0.35rem 0.85rem;
     font-size: 0.7rem;
   }
 }
 
-/* ===== ANIMACIONES OPTIMIZADAS ===== */
+/* ===== ANIMACIONES ===== */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -294,23 +306,19 @@
   }
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* Preferencias de movimiento reducido */
+/* ===== MOVIMIENTO REDUCIDO ===== */
 @media (prefers-reduced-motion: reduce) {
   .project-category,
-  .filtered-view,
+  .view-container,
   .filter-btn,
   .category-icon,
   .projects-main-title::after {
-    animation: none;
-    transition: none;
+    animation: none !important;
+    transition: none !important;
   }
-  
-  .filter-btn:hover {
+
+  .filter-btn:hover,
+  .filter-btn.active {
     transform: none;
   }
 }
@@ -326,21 +334,4 @@
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
-}
-
-/* Soporte para modo oscuro del sistema */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-projects: #172031;
-    --text-white: #ffffff;
-    --text-gray: #a0aec0;
-    --text-light: #cbd5e1;
-  }
-}
-
-/* Soporte para modo claro (si se necesita en el futuro) */
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg-projects: #172031; /* Mantenemos oscuro por diseño */
-  }
 }
