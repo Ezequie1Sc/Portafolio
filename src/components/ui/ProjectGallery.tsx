@@ -17,7 +17,6 @@ const ProjectGallery = memo(({
 }: ProjectGalleryProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const overlayRef = useRef<HTMLDivElement>(null);
 
   // Navegación
   const prev = useCallback(() => {
@@ -35,32 +34,6 @@ const ProjectGallery = memo(({
     }
   }, [isOpen, projectTitle]);
 
-  // CRÍTICO: Bloquear scroll del body y asegurar que la galería esté visible
-  useEffect(() => {
-    if (isOpen) {
-      // Bloquear scroll
-      document.body.classList.add('gallery-open');
-      document.body.style.overflow = 'hidden';
-      
-      // Scroll al top si es necesario
-      window.scrollTo(0, 0);
-      
-      // Asegurar que el overlay esté visible
-      setTimeout(() => {
-        if (overlayRef.current) {
-          overlayRef.current.style.opacity = '1';
-          overlayRef.current.style.visibility = 'visible';
-        }
-      }, 10);
-    }
-    
-    return () => {
-      document.body.classList.remove('gallery-open');
-      document.body.style.overflow = '';
-      document.body.style.position = '';
-    };
-  }, [isOpen]);
-
   // Teclado
   useEffect(() => {
     if (!isOpen) return;
@@ -69,17 +42,17 @@ const ProjectGallery = memo(({
       if (e.key === 'Escape') {
         onClose();
       } else if (e.key === 'ArrowLeft') {
-        e.preventDefault();
         prev();
       } else if (e.key === 'ArrowRight') {
-        e.preventDefault();
         next();
       }
     };
 
+    document.body.style.overflow = 'hidden';
     window.addEventListener('keydown', handleKeyDown);
 
     return () => {
+      document.body.style.overflow = '';
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, prev, next, onClose]);
@@ -121,12 +94,15 @@ const ProjectGallery = memo(({
     }
   }, [currentIndex, images.length]);
 
-  // Prevenir clic en overlay que no sea intencional
-  const handleOverlayClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onClose();
+  // Prevenir scroll del body
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
     }
-  };
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -134,13 +110,11 @@ const ProjectGallery = memo(({
 
   return (
     <div
-      ref={overlayRef}
       className="gallery-overlay"
-      onClick={handleOverlayClick}
+      onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label={`Galería de ${projectTitle}`}
-      style={{ opacity: 1, visibility: 'visible' }}
     >
       <div
         className="gallery-container"
