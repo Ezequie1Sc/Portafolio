@@ -209,6 +209,7 @@ export const projects: Project[] = [
     title: 'Barber Shop App',
     description: 'Aplicación integral para barberías que facilita la reserva de turnos, la compra de productos y la gestión de clientes.',
     image: '/proyectos/barberia/b_1.png',
+    demoVideo: '/barberAPK.webm',
     icon: '/icons/flutter.svg',
     type: 'mobile',
     technologies: [
@@ -259,6 +260,31 @@ export const projects: Project[] = [
     ],
     impact: 'Redujo consumo de agua en 60% y aumentó producción en 45%.'
 },
+{
+    id: 5,
+    title: 'VideoJuego',
+    description: 'Juego arcade donde controlas un personaje que atrapa regalos mientras esquiva objetos peligrosos.',
+    image: '/game.webp',
+    demoVideo: '/VideoGameAPK.webm',
+    icon: '/icons/flutter.svg',
+    type: 'mobile',
+    technologies: [
+      { name: 'Flutter', icon: '/icons/flutter.svg', bgColor: 'bg-blue-600' },
+      { name: 'Dart', icon: '/icons/dart.svg', bgColor: 'bg-blue-500' },
+    ],
+    images: ['/game1.webp'],
+    color: 'orange',
+    github: 'https://github.com/Ezequie1Sc/love_apk',
+   problem: 'Falta de opciones de entretenimiento rápido y accesible para sesiones cortas en dispositivos móviles.',
+    solution: 'Juego arcade que mejora reflejos mientras ofrece experiencia divertida.',
+    howItWorks: [
+      'Control táctil para mover personaje',
+      'Sistema de colisiones',
+      'Dificultad progresiva',
+      'Sistema de puntuación y récords'
+    ],
+   impact: 'Diseñado para ofrecer una experiencia entretenida y accesible para sesiones cortas de juego.'
+  },
   {
     id: 4,
     title: 'Vodka App Mobile',
@@ -291,30 +317,7 @@ howItWorks: [
 impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneos y reducir errores en el manejo de resultados.'
 },
 
-  {
-    id: 5,
-    title: 'VideoJuego',
-    description: 'Juego arcade donde controlas un personaje que atrapa regalos mientras esquiva objetos peligrosos.',
-    image: '/game.webp',
-    icon: '/icons/flutter.svg',
-    type: 'mobile',
-    technologies: [
-      { name: 'Flutter', icon: '/icons/flutter.svg', bgColor: 'bg-blue-600' },
-      { name: 'Dart', icon: '/icons/dart.svg', bgColor: 'bg-blue-500' },
-    ],
-    images: ['/game1.webp'],
-    color: 'orange',
-    github: 'https://github.com/Ezequie1Sc/love_apk',
-   problem: 'Falta de opciones de entretenimiento rápido y accesible para sesiones cortas en dispositivos móviles.',
-    solution: 'Juego arcade que mejora reflejos mientras ofrece experiencia divertida.',
-    howItWorks: [
-      'Control táctil para mover personaje',
-      'Sistema de colisiones',
-      'Dificultad progresiva',
-      'Sistema de puntuación y récords'
-    ],
-   impact: 'Diseñado para ofrecer una experiencia entretenida y accesible para sesiones cortas de juego.'
-  },
+  
 
   // ===== APLICACIONES WEB =====
  
