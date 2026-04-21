@@ -21,7 +21,7 @@ const Skills = () => {
               <div className="about-me-image-container">
                 <div className="about-me-image-wrapper">
                   <img 
-                    src="/face.jpg" 
+                    src="face.webp" 
                     alt="Profile" 
                     className="about-me-image"
                   />
