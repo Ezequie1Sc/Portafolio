@@ -451,7 +451,7 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
     ],
     images: ['/proyectos/portafolio/1.png', '/proyectos/portafolio/2.png', '/proyectos/portafolio/3.png'],
     color: 'green',
-    github: 'https://github.com/Ezequie1Sc',
+    github: 'https://github.com/Ezequie1Sc/Portafolio',
     demoUrl: 'https://portafolio-phi-six-35.vercel.app/',
     problem: 'Desarrolladores necesitan destacar profesionalmente con un portafolio moderno.',
     solution: 'Portafolio con arquitectura limpia y animaciones suaves.',
