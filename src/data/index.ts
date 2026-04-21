@@ -236,7 +236,7 @@ export const projects: Project[] = [
     title: 'Invernadero Mobile',
     description: 'Sistema de monitoreo para invernaderos con visualización en tiempo real y control automático de riego.',
     image: '/proyectos/Invernadero/i_1.png',
-    demoVideo: '/videos/InvernaderoAPK.mp4', // Video que se mostrará en la galería
+    demoVideo: '/InveAPK.webm', // Video que se mostrará en la galería
     icon: '/icons/flutter.svg',
     type: 'mobile',
     technologies: [
