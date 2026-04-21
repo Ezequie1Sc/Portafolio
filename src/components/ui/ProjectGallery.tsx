@@ -1,4 +1,4 @@
-import { useEffect, useState, useCallback, useRef, memo } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import '../../styles/ProjectGallery.css';
 
@@ -9,14 +9,21 @@ interface ProjectGalleryProps {
   images: string[];
 }
 
-const ProjectGallery = memo(({
+const ProjectGallery = ({
   isOpen,
   onClose,
   projectTitle,
   images,
 }: ProjectGalleryProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const thumbnailsRef = useRef<HTMLDivElement>(null);
+
+  // Reset al abrir
+  useEffect(() => {
+    if (isOpen) {
+      setCurrentIndex(0);
+    }
+  }, [isOpen]);
 
   // Navegación
   const prev = useCallback(() => {
@@ -27,63 +34,33 @@ const ProjectGallery = memo(({
     setCurrentIndex(i => (i === images.length - 1 ? 0 : i + 1));
   }, [images.length]);
 
-  // Reset al abrir
-  useEffect(() => {
-    if (isOpen) {
-      setCurrentIndex(0);
-    }
-  }, [isOpen, projectTitle]);
-
-  // Teclado
+  // Teclado y bloqueo de scroll
   useEffect(() => {
     if (!isOpen) return;
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         onClose();
-      } else if (e.key === 'ArrowLeft') {
+      } else if (e.key === 'ArrowLeft' && images.length > 1) {
         prev();
-      } else if (e.key === 'ArrowRight') {
+      } else if (e.key === 'ArrowRight' && images.length > 1) {
         next();
       }
     };
 
     document.body.style.overflow = 'hidden';
-    window.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
 
     return () => {
       document.body.style.overflow = '';
-      window.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [isOpen, prev, next, onClose]);
+  }, [isOpen, prev, next, onClose, images.length]);
 
-  // Swipe táctil
-  const touchStartX = useRef<number | null>(null);
-  const touchStartY = useRef<number | null>(null);
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null || touchStartY.current === null) return;
-    
-    const deltaX = touchStartX.current - e.changedTouches[0].clientX;
-    const deltaY = touchStartY.current - e.changedTouches[0].clientY;
-    
-    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
-      deltaX > 0 ? next() : prev();
-    }
-    
-    touchStartX.current = null;
-    touchStartY.current = null;
-  };
-
-  // Scroll de thumbnails
+  // Scroll thumbnail activo
   useEffect(() => {
-    if (containerRef.current && images.length > 1) {
-      const activeThumb = containerRef.current.querySelector('.gallery-thumbnail.active');
+    if (thumbnailsRef.current && images.length > 1) {
+      const activeThumb = thumbnailsRef.current.querySelector('.gallery-thumbnail.active');
       if (activeThumb) {
         activeThumb.scrollIntoView({
           behavior: 'smooth',
@@ -94,31 +71,36 @@ const ProjectGallery = memo(({
     }
   }, [currentIndex, images.length]);
 
-  // Prevenir scroll del body
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
+  // Touch swipe
+  const touchStartX = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || images.length <= 1) return;
+    
+    const deltaX = touchStartX.current - e.changedTouches[0].clientX;
+    
+    if (Math.abs(deltaX) > 50) {
+      deltaX > 0 ? next() : prev();
     }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isOpen]);
+    
+    touchStartX.current = null;
+  };
 
   if (!isOpen) return null;
 
-  const hasMultiple = images.length > 1;
-
   return (
-    <div
-      className="gallery-overlay"
+    <div 
+      className="gallery-overlay" 
       onClick={onClose}
       role="dialog"
       aria-modal="true"
-      aria-label={`Galería de ${projectTitle}`}
     >
-      <div
-        className="gallery-container"
-        ref={containerRef}
+      <div 
+        className="gallery-container" 
         onClick={e => e.stopPropagation()}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
@@ -126,91 +108,75 @@ const ProjectGallery = memo(({
         {/* Header */}
         <div className="gallery-header">
           <h3 className="gallery-title">{projectTitle}</h3>
-          <button
-            className="gallery-close"
+          <button 
+            className="gallery-close" 
             onClick={onClose}
-            aria-label="Cerrar galería"
-            type="button"
+            aria-label="Cerrar"
           >
-            <X size={20} strokeWidth={2.5} />
+            <X size={20} />
           </button>
         </div>
 
-        {/* Contenido principal */}
+        {/* Contenido */}
         <div className="gallery-content">
-          <button
-            className="gallery-nav"
-            onClick={(e) => {
-              e.stopPropagation();
-              prev();
-            }}
-            disabled={!hasMultiple}
-            aria-label="Imagen anterior"
-            type="button"
-          >
-            <ChevronLeft size={24} strokeWidth={2.5} />
-          </button>
+          {images.length > 1 && (
+            <button 
+              className="gallery-nav" 
+              onClick={prev}
+              aria-label="Anterior"
+            >
+              <ChevronLeft size={24} />
+            </button>
+          )}
 
-          <div className="gallery-image-container">
+          <div className="gallery-image-wrapper">
             <img
               src={images[currentIndex]}
-              alt={`${projectTitle} — imagen ${currentIndex + 1} de ${images.length}`}
+              alt={`${projectTitle} - Imagen ${currentIndex + 1}`}
               className="gallery-image"
               draggable={false}
             />
           </div>
 
-          <button
-            className="gallery-nav"
-            onClick={(e) => {
-              e.stopPropagation();
-              next();
-            }}
-            disabled={!hasMultiple}
-            aria-label="Imagen siguiente"
-            type="button"
-          >
-            <ChevronRight size={24} strokeWidth={2.5} />
-          </button>
+          {images.length > 1 && (
+            <button 
+              className="gallery-nav" 
+              onClick={next}
+              aria-label="Siguiente"
+            >
+              <ChevronRight size={24} />
+            </button>
+          )}
         </div>
 
         {/* Thumbnails */}
-        {hasMultiple && (
+        {images.length > 1 && (
           <div 
             className="gallery-thumbnails" 
-            role="tablist" 
-            aria-label="Miniaturas de imágenes"
+            ref={thumbnailsRef}
           >
             {images.map((img, index) => (
               <button
                 key={index}
-                className={`gallery-thumbnail${index === currentIndex ? ' active' : ''}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setCurrentIndex(index);
-                }}
-                role="tab"
-                aria-selected={index === currentIndex}
-                aria-label={`Ir a imagen ${index + 1}`}
-                type="button"
+                className={`gallery-thumbnail ${index === currentIndex ? 'active' : ''}`}
+                onClick={() => setCurrentIndex(index)}
+                aria-label={`Ver imagen ${index + 1}`}
               >
-                <img src={img} alt="" aria-hidden="true" loading="lazy" />
+                <img src={img} alt="" loading="lazy" />
               </button>
             ))}
           </div>
         )}
 
         {/* Counter */}
-        {hasMultiple && (
-          <div className="gallery-counter" aria-live="polite">
+        {images.length > 1 && (
+          <div className="gallery-counter">
             {currentIndex + 1} / {images.length}
           </div>
         )}
       </div>
     </div>
   );
-});
-
-ProjectGallery.displayName = 'ProjectGallery';
+};
 
 export default ProjectGallery;
