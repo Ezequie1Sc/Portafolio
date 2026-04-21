@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
-import { X, ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Play, Pause, Volume2, VolumeX, Video } from 'lucide-react';
 import '../../styles/ProjectGallery.css';
 
 interface ProjectGalleryProps {
@@ -193,7 +193,14 @@ const ProjectGallery = ({
       >
         <div className="gallery-header">
           <h3 className="gallery-title">
-            {showOnlyVideo ? `🎬 Demo: ${projectTitle}` : projectTitle}
+            {showOnlyVideo ? (
+              <>
+                <Video size={18} className="title-icon" />
+                Demo: {projectTitle}
+              </>
+            ) : (
+              projectTitle
+            )}
           </h3>
           <button
             className="gallery-close"
@@ -216,7 +223,7 @@ const ProjectGallery = ({
               aria-label="Imagen anterior"
               type="button"
             >
-              <ChevronLeft size={24} strokeWidth={2.5} />
+              <ChevronLeft size={28} strokeWidth={2} />
             </button>
           )}
 
@@ -229,7 +236,6 @@ const ProjectGallery = ({
                     <p>Cargando video...</p>
                   </div>
                 )}
-                {/* ✅ FIX: transform + isolation evitan la pantalla verde por compositing */}
                 <video
                   ref={videoRef}
                   src={videoUrl}
@@ -301,7 +307,7 @@ const ProjectGallery = ({
               aria-label="Imagen siguiente"
               type="button"
             >
-              <ChevronRight size={24} strokeWidth={2.5} />
+              <ChevronRight size={28} strokeWidth={2} />
             </button>
           )}
         </div>
