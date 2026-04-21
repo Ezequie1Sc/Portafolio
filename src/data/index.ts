@@ -231,11 +231,12 @@ export const projects: Project[] = [
     ],
     impact: 'Aumentó reservas en 80% y generó 40% más ingresos por venta de productos.'
   },
-  {
+ {
     id: 3,
     title: 'Invernadero Mobile',
     description: 'Sistema de monitoreo para invernaderos con visualización en tiempo real y control automático de riego.',
     image: '/proyectos/Invernadero/i_1.png',
+    demoVideo: '/videos/InvernaderoAPK.mp4', // Video que se mostrará en la galería
     icon: '/icons/flutter.svg',
     type: 'mobile',
     technologies: [
@@ -257,7 +258,7 @@ export const projects: Project[] = [
       'Alertas push para condiciones críticas'
     ],
     impact: 'Redujo consumo de agua en 60% y aumentó producción en 45%.'
-  },
+},
   {
     id: 4,
     title: 'Vodka App Mobile',

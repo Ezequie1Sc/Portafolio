@@ -1,193 +1,312 @@
-/* ProjectGallery.css - CORREGIDO FINAL */
+/* ProjectGallery.css - CORREGIDO */
 
+/* ============================================================
+   OVERLAY
+   ✅ FIX: Sin backdrop-filter para evitar pantalla verde en video.
+   Usamos background rgba en lugar de blur.
+   ============================================================ */
 .gallery-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.95);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  z-index: 100000;
+  inset: 0;
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  /* ❌ NO usar backdrop-filter: blur() — causa pantalla verde en <video> */
   padding: 16px;
+  box-sizing: border-box;
 }
 
+/* ============================================================
+   CONTAINER
+   ============================================================ */
 .gallery-container {
-  background: #1a1a2e;
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  width: 100%;
-  max-width: 1200px;
-  max-height: 90vh;
+  position: relative;
+  background: #1a1a1a;
+  border-radius: 12px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  max-width: 900px;
+  max-height: 90vh;
+  width: 100%;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
+  /* ✅ Capa propia de composición para el container */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 }
 
+.gallery-container.video-mode {
+  max-width: 420px;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
 .gallery-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 14px 18px;
+  background: #111;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   flex-shrink: 0;
 }
 
 .gallery-title {
-  color: #ffffff;
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 600;
+  color: #fff;
   margin: 0;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
-  padding-right: 16px;
+  max-width: calc(100% - 48px);
 }
 
 .gallery-close {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 8px;
-  width: 40px;
-  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ccc;
   cursor: pointer;
-  color: #ffffff;
+  transition: background 0.15s ease, color 0.15s ease;
   flex-shrink: 0;
-  transition: background 0.2s;
 }
 
 .gallery-close:hover {
-  background: rgba(239, 68, 68, 0.3);
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
 }
 
+/* ============================================================
+   CONTENT
+   ============================================================ */
 .gallery-content {
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 1;
   min-height: 0;
-  padding: 20px;
-  gap: 16px;
+  position: relative;
+  padding: 12px 0;
   overflow: hidden;
 }
 
-.gallery-image-wrapper {
-  flex: 1;
+/* ============================================================
+   NAV ARROWS
+   ============================================================ */
+.gallery-nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 0;
-  height: 100%;
-  max-height: 65vh;
-  overflow: auto;
-  position: relative;
-  background: #0f0f1a;
-  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+  flex-shrink: 0;
+  margin: 0 6px;
+  transition: background 0.15s ease;
+  z-index: 2;
 }
 
+.gallery-nav:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ============================================================
+   MEDIA WRAPPER
+   ============================================================ */
+.gallery-media-wrapper {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-media-wrapper.image-wrapper {
+  max-height: calc(90vh - 180px);
+}
+
+.gallery-media-wrapper.video-wrapper {
+  max-height: calc(90vh - 120px);
+}
+
+/* ============================================================
+   IMAGE
+   ============================================================ */
 .gallery-image {
+  max-width: 100%;
+  max-height: calc(90vh - 200px);
+  object-fit: contain;
+  display: block;
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+  user-select: none;
+}
+
+.gallery-image[data-orientation='portrait'] {
+  max-height: calc(90vh - 180px);
+  max-width: min(100%, 420px);
+}
+
+/* ============================================================
+   IMAGE LOADING
+   ============================================================ */
+.image-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================
+   VIDEO PLAYER CONTAINER
+   ✅ FIX: Capa GPU propia, sin heredar filtros del padre
+   ============================================================ */
+.video-player-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* ✅ Fuerza capa GPU independiente */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  isolation: isolate;
+}
+
+/* ============================================================
+   VIDEO PLAYER
+   ✅ CORE FIX: Estas propiedades evitan la pantalla verde
+   ============================================================ */
+.gallery-video-player {
   display: block;
   max-width: 100%;
+  max-height: calc(90vh - 160px);
   width: auto;
   height: auto;
+  border-radius: 6px;
   object-fit: contain;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: opacity 0.25s ease;
+  /* ✅ Composición GPU aislada */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  isolation: isolate;
+  will-change: transform;
+  /* ✅ Anula cualquier filter heredado del árbol padre */
+  filter: none !important;
+  -webkit-filter: none !important;
 }
 
-/* Para imágenes verticales (como screenshots de móvil) */
-.gallery-image[data-orientation="portrait"] {
-  max-height: 100%;
-  width: auto;
+/* ============================================================
+   VIDEO LOADING
+   ============================================================ */
+.video-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 14px;
+  z-index: 1;
 }
 
-/* Para imágenes horizontales */
-.gallery-image[data-orientation="landscape"] {
-  max-width: 100%;
-  height: auto;
+/* ============================================================
+   VIDEO CONTROLS BAR
+   ============================================================ */
+.video-controls-bar {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.65);
+  border-radius: 100px;
+  padding: 6px 14px;
+  z-index: 10;
 }
 
-.gallery-nav {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  width: 44px;
-  height: 44px;
+.video-btn {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: #fff;
   cursor: pointer;
-  color: #ffffff;
-  flex-shrink: 0;
-  transition: all 0.2s;
+  transition: background 0.15s ease;
 }
 
-.gallery-nav:hover:not(:disabled) {
-  background: #3b82f6;
-  border-color: #3b82f6;
+.video-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
 
-.gallery-nav:disabled {
-  opacity: 0.3;
-  cursor: not-allowed;
-}
-
+/* ============================================================
+   THUMBNAILS
+   ============================================================ */
 .gallery-thumbnails {
   display: flex;
-  gap: 8px;
-  padding: 16px 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 6px;
+  padding: 10px 14px;
   overflow-x: auto;
-  overflow-y: hidden;
   flex-shrink: 0;
-  min-height: 100px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
   scrollbar-width: thin;
-  scrollbar-color: #3b82f6 rgba(255, 255, 255, 0.1);
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }
 
 .gallery-thumbnails::-webkit-scrollbar {
-  height: 6px;
-}
-
-.gallery-thumbnails::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 3px;
+  height: 4px;
 }
 
 .gallery-thumbnails::-webkit-scrollbar-thumb {
-  background: #3b82f6;
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 2px;
 }
 
 .gallery-thumbnail {
   flex-shrink: 0;
-  width: 80px;
-  height: 80px;
+  width: 52px;
+  height: 52px;
   border-radius: 6px;
   overflow: hidden;
   border: 2px solid transparent;
-  cursor: pointer;
   padding: 0;
-  background: #2a2a4a;
-  transition: all 0.2s;
-}
-
-.gallery-thumbnail:hover {
-  border-color: #3b82f6;
-  transform: translateY(-2px);
+  background: #333;
+  cursor: pointer;
+  transition: border-color 0.15s ease, opacity 0.15s ease;
+  opacity: 0.55;
 }
 
 .gallery-thumbnail.active {
-  border-color: #3b82f6;
-  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+  border-color: #fff;
+  opacity: 1;
+}
+
+.gallery-thumbnail:hover:not(.active) {
+  opacity: 0.85;
 }
 
 .gallery-thumbnail img {
@@ -197,185 +316,66 @@
   display: block;
 }
 
+/* ============================================================
+   COUNTER
+   ============================================================ */
 .gallery-counter {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 14px;
   text-align: center;
-  padding: 8px 16px 16px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  padding: 6px 0 10px;
   flex-shrink: 0;
 }
 
-/* CORRECCIÓN: Permitir scroll en la imagen si es muy grande */
-.gallery-image-wrapper {
-  overflow: auto !important;
+/* ============================================================
+   SPINNER
+   ============================================================ */
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(255, 255, 255, 0.15);
+  border-top-color: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
 }
 
-/* Asegurar que la imagen se vea completa */
-.gallery-image {
-  max-width: none;
-  max-height: none;
-  width: auto !important;
-  height: auto !important;
-  min-width: min(100%, 100%);
-  min-height: min(100%, 100%);
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-/* Para pantallas pequeñas */
-@media (max-width: 768px) {
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
   .gallery-overlay {
     padding: 8px;
   }
 
   .gallery-container {
     max-height: 95vh;
+    border-radius: 10px;
   }
 
-  .gallery-header {
-    padding: 12px 16px;
-  }
-
-  .gallery-title {
-    font-size: 16px;
-  }
-
-  .gallery-close {
-    width: 36px;
-    height: 36px;
-  }
-
-  .gallery-content {
-    padding: 16px;
-    gap: 8px;
-  }
-
-  .gallery-image-wrapper {
-    max-height: 55vh;
+  .gallery-container.video-mode {
+    max-width: 100%;
   }
 
   .gallery-nav {
-    width: 36px;
-    height: 36px;
+    width: 34px;
+    height: 34px;
+    margin: 0 2px;
   }
 
-  .gallery-thumbnails {
-    padding: 12px 16px;
-    min-height: 90px;
+  .gallery-image {
+    max-height: calc(95vh - 200px);
   }
 
-  .gallery-thumbnail {
-    width: 70px;
-    height: 70px;
-  }
-}
-
-@media (max-width: 480px) {
-  .gallery-content {
-    padding: 12px;
-  }
-
-  .gallery-image-wrapper {
-    max-height: 50vh;
-  }
-
-  .gallery-nav {
-    width: 32px;
-    height: 32px;
+  .gallery-video-player {
+    max-height: calc(95vh - 140px);
   }
 
   .gallery-thumbnail {
-    width: 60px;
-    height: 60px;
-  }
-}
-
-/* Modo landscape */
-@media (max-height: 500px) and (orientation: landscape) {
-  .gallery-container {
-    flex-direction: row;
-    flex-wrap: wrap;
-    max-height: 95vh;
-  }
-
-  .gallery-header {
-    width: 100%;
-  }
-
-  .gallery-content {
-    flex: 2;
-    min-width: 250px;
-  }
-
-  .gallery-image-wrapper {
-    max-height: 70vh;
-  }
-
-  .gallery-thumbnails {
-    flex-direction: column;
-    max-height: 70vh;
-    overflow-y: auto;
-    overflow-x: hidden;
-    border-top: none;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 16px 12px;
-  }
-
-  .gallery-counter {
-    width: 100%;
-  }
-}
-
-/* Permitir zoom con scroll si la imagen es más grande que el contenedor */
-.gallery-image-wrapper {
-  overflow: auto !important;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.gallery-image {
-  flex-shrink: 0;
-}
-
-/* Ajuste para imágenes de móvil (verticales largas) */
-.gallery-image {
-  width: auto !important;
-  height: auto !important;
-  max-width: 100%;
-  max-height: none;
-}
-
-/* Hacer que el contenedor se ajuste al contenido */
-.gallery-image-wrapper {
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-/* Estilo para scrollbar dentro del wrapper de imagen */
-.gallery-image-wrapper::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-
-.gallery-image-wrapper::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 4px;
-}
-
-.gallery-image-wrapper::-webkit-scrollbar-thumb {
-  background: #3b82f6;
-  border-radius: 4px;
-}
-
-.gallery-image-wrapper {
-  scrollbar-width: thin;
-  scrollbar-color: #3b82f6 rgba(255, 255, 255, 0.05);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .gallery-close,
-  .gallery-nav,
-  .gallery-thumbnail {
-    transition: none !important;
+    width: 44px;
+    height: 44px;
   }
 }

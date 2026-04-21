@@ -1,4 +1,5 @@
-import { useState, memo } from 'react';
+// components/ui/ProjectCard.tsx
+import { useState, memo, useEffect } from 'react';
 import type { Project } from '../../types';
 import '../../styles/ProjectCard.css';
 
@@ -59,6 +60,22 @@ const ProjectCard = memo(({
   onOpenGallery 
 }: ProjectCardProps) => {
   const [activeSection, setActiveSection] = useState<string | null>(null);
+  const [isMobileDevice, setIsMobileDevice] = useState(false);
+  const [videoError, setVideoError] = useState(false);
+
+  // Detectar si es dispositivo móvil
+  useEffect(() => {
+    const checkMobile = () => {
+      // Detectar por user agent Y por tamaño de pantalla
+      const isMobileUA = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      const isMobileScreen = window.innerWidth <= 768;
+      setIsMobileDevice(isMobileUA || isMobileScreen);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const getColorClass = (color: string): string => {
     const colors: Record<string, string> = {
@@ -113,10 +130,40 @@ const ProjectCard = memo(({
     backend: 'Backend',
   };
 
+  // Determinar si mostrar video MP4 en móvil
+  const shouldShowMobileVideo = isMobileDevice && 
+                                project.type === 'mobile' && 
+                                project.demoVideo && 
+                                !videoError;
+
   return (
     <div className={`project-card ${getColorClass(project.color)}`} data-type={project.color}>
       <div className="project-image">
-        <img src={project.image} alt={project.title} loading="lazy" />
+        {shouldShowMobileVideo ? (
+          <video
+            key={project.demoVideo}
+            src={project.demoVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            className="project-video"
+            aria-label={`Demo de ${project.title}`}
+            onError={() => setVideoError(true)}
+          />
+        ) : (
+          <img 
+            src={project.image} 
+            alt={project.title} 
+            loading="lazy"
+            onError={(e) => {
+              // Fallback si la imagen falla
+              const target = e.target as HTMLImageElement;
+              target.src = '/placeholder-project.jpg';
+            }}
+          />
+        )}
         <div className="project-type-badge">
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
             {project.type === 'web' && (

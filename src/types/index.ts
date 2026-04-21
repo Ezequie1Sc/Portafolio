@@ -3,7 +3,7 @@ export interface Technology {
   icon: string;
   bgColor: string;
 }
-
+// types/index.ts
 export interface Project {
   id: number;
   title: string;
@@ -16,7 +16,7 @@ export interface Project {
   color: 'blue' | 'purple' | 'green' | 'orange';
   github: string;
   demoUrl?: string;
-  // NUEVAS PROPIEDADES
+  demoVideo?: string; // NUEVO: URL del video MP4 para móvil
   problem?: string;
   solution?: string;
   howItWorks?: string[];

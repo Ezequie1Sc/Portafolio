@@ -259,6 +259,8 @@ const Projects = () => {
           onClose={handleCloseGallery}
           projectTitle={galleryProject.title}
           images={getGalleryImages(galleryProject)}
+          videoUrl={galleryProject.type === 'mobile' ? galleryProject.demoVideo : undefined}
+          isMobileProject={galleryProject.type === 'mobile'}
         />
       )}
     </>

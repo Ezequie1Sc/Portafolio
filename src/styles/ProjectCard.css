@@ -633,3 +633,46 @@
   pointer-events: none;
   filter: grayscale(0.5);
 }
+/* ===== VIDEO MP4 PARA PROYECTOS MÓVILES ===== */
+.project-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-base) var(--ease);
+  will-change: transform;
+  display: block;
+}
+
+.project-card:hover .project-video {
+  transform: scale(1.05);
+}
+
+/* Ajustes para video en móvil */
+@media (max-width: 768px) {
+  .project-video {
+    object-fit: contain;
+    padding: var(--spacing-sm);
+    background: var(--bg-dark);
+  }
+  
+  /* Asegurar que el video se reproduzca correctamente en iOS */
+  .project-video::-webkit-media-controls {
+    display: none !important;
+  }
+  
+  .project-video::-webkit-media-controls-enclosure {
+    display: none !important;
+  }
+}
+
+/* Fallback cuando el video no carga */
+.project-video-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-dark);
+  color: var(--text-muted);
+  font-size: 0.8rem;
+}
