@@ -610,7 +610,6 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
     problem: 'PYMEs sufrían descontrol de inventario con métodos manuales.',
     solution: 'Sistema profesional con control preciso y alertas automáticas.',
     howItWorks: [
-      'Escáner de códigos de barras',
       'Alertas de stock mínimo/máximo',
       'Dashboard con KPIs',
       'Historial con auditoría'
