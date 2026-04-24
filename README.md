@@ -130,4 +130,6 @@ npm run dev
 # o
 yarn dev
 
-# Abrir http://localhost:5173 en tu navegador
+# Abrir http://localhost:5173 en tu navegado
+autor: Ezequiel
+
