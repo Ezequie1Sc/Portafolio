@@ -1,7 +1,7 @@
 <div align="center">
   <h1>💼 Portafolio Web</h1>
   <p>Portafolio profesional con React y TypeScript</p>
-  k
+  j
   <div>
     <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
     <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
