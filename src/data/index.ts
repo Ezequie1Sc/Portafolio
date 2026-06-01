@@ -347,6 +347,38 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
     ],
     impact: 'Aumentó pedidos en 200% en el primer mes.'
   },
+{
+  id: 16,
+  title: 'Sitio Web para Técnico de Climatización',
+  description: 'Página web profesional para promocionar servicios de climatización, instalaciones y mantenimiento con contacto directo vía WhatsApp.',
+  image: '/proyectos/web/Tecnico.png',
+  icon: '/icons/html.svg',
+  type: 'web',
+  technologies: [
+    { name: 'HTML', icon: '/icons/html.svg', bgColor: 'bg-orange-600' },
+    { name: 'CSS', icon: '/icons/css.svg', bgColor: 'bg-blue-600' },
+    { name: 'JavaScript', icon: '/icons/javascript.svg', bgColor: 'bg-yellow-500' },
+  ],
+  images: [
+    '/proyectos/tecnico/1.png',
+    '/proyectos/tecnico/2.png',
+    '/proyectos/tecnico/3.png'
+  ],
+  color: 'blue',
+  github: 'https://github.com/Ezequie1Sc/IceCold.git',
+  demoUrl: 'https://tenico-miguel-2ptq67wfi-ezequiel-s-projects-d1487261.vercel.app/',
+  problem: 'Muchos técnicos independientes carecen de una presencia digital profesional para mostrar sus servicios y facilitar el contacto con clientes potenciales.',
+  solution: 'Desarrollo de una landing page moderna y responsive que presenta los servicios ofrecidos y permite la comunicación inmediata mediante WhatsApp.',
+  howItWorks: [
+    'Presentación de servicios de climatización',
+    'Galería de trabajos realizados',
+    'Información de contacto visible',
+    'Botón flotante de WhatsApp',
+    'Diseño adaptable a dispositivos móviles'
+  ],
+  impact: 'Mejoró la visibilidad online del negocio y facilitó la captación de nuevos clientes.'
+},
+
 
    {
     id: 6,
