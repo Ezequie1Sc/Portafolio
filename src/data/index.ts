@@ -380,6 +380,7 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
 },
 
 
+
    {
     id: 6,
     title: 'Células Plenum',
@@ -406,6 +407,42 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
     ],
     impact: 'Aumentó consultas al programa en 150%.'
   },
+
+
+  {
+  id: 17,
+  title: 'SkillMatch - Plataforma de Formación de Equipos',
+  description: 'Plataforma web diseñada para analizar habilidades, intereses y roles de estudiantes con el fin de generar equipos de trabajo equilibrados para proyectos académicos y eventos de innovación.',
+  image: '/proyectos/web/skill.png',
+  icon: '/icons/react.svg',
+  type: 'web',
+  technologies: [
+    { name: 'React', icon: '/icons/react.svg', bgColor: 'bg-cyan-500' },
+    { name: 'TypeScript', icon: '/icons/typescript.svg', bgColor: 'bg-blue-600' },
+    { name: 'Tailwind CSS', icon: '/icons/tailwind.svg', bgColor: 'bg-sky-500' },
+    { name: 'Python', icon: '/icons/python.svg', bgColor: 'bg-yellow-500' },
+    { name: 'FastAPI', icon: '/icons/fastapi.svg', bgColor: 'bg-green-600' },
+  ],
+  images: [
+    '/proyectos/skillmatch/1.png',
+    '/proyectos/skillmatch/2.png',
+    '/proyectos/skillmatch/3.png'
+  ],
+  color: 'purple',
+  github: 'https://github.com/Arturo-Chi/Skill_Match_Frontend',
+  demoUrl: 'https://skill-match-frontend-lemon.vercel.app/landing-page',
+  problem: 'La formación de equipos en proyectos académicos suele realizarse de manera informal, basándose en amistades o decisiones rápidas, lo que genera grupos desequilibrados, distribución desigual de responsabilidades y una menor eficiencia en el desarrollo de proyectos.',
+  solution: 'Se desarrolló una plataforma web que permite registrar perfiles de estudiantes, analizar habilidades, intereses y roles preferidos para generar equipos equilibrados de forma automática, mejorando la colaboración y organización.',
+  howItWorks: [
+    'Registro de estudiantes y creación de perfiles',
+    'Captura de habilidades, intereses y roles preferidos',
+    'Análisis de información mediante el sistema',
+    'Generación automática de equipos equilibrados',
+    'Visualización de métricas y estadísticas en un dashboard administrativo'
+  ],
+  impact: 'Facilitó la organización de equipos de trabajo, mejoró la distribución de habilidades dentro de los grupos y permitió a docentes y organizadores tomar decisiones basadas en datos para optimizar proyectos colaborativos.'
+},
+
 {
   id: 16,
   title: 'Atmosfera — Dashboard Meteorologico',
