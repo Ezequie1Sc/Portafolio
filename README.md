@@ -1,7 +1,7 @@
 <div align="center">
   <h1>💼 Portafolio Web</h1>
   <p>Portafolio profesional con React y TypeScript</p>
-  
+  j
   <div>
     <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
     <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white" />
@@ -130,4 +130,6 @@ npm run dev
 # o
 yarn dev
 
-# Abrir http://localhost:5173 en tu navegador
+# Abrir http://localhost:5173 en tu navegado
+autor: Ezequiel
+
