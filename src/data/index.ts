@@ -449,7 +449,7 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
   type: 'web',
   technologies: [
     { name: 'React', icon: '/icons/react.svg', bgColor: 'bg-cyan-500' },
-    { name: 'TypeScript', icon: '/icons/typescript.svg', bgColor: 'bg-blue-600' },
+    { name: 'TypeScript', icon: '/icons/tp.svg', bgColor: 'bg-blue-600' },
     { name: 'Tailwind CSS', icon: '/icons/tailwind.svg', bgColor: 'bg-sky-500' },
     { name: 'Python', icon: '/icons/python.svg', bgColor: 'bg-yellow-500' },
     { name: 'FastAPI', icon: '/icons/fastapi.svg', bgColor: 'bg-green-600' },
