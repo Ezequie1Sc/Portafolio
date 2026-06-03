@@ -390,7 +390,7 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
     { name: 'HTML5', icon: '/icons/html.svg', bgColor: 'bg-orange-500' },
     { name: 'CSS3', icon: '/icons/css.svg', bgColor: 'bg-blue-500' },
     { name: 'JavaScript', icon: '/icons/javascript.svg', bgColor: 'bg-yellow-500' },
-    { name: 'Vercel', icon: '/icons/vercel.svg', bgColor: 'bg-black' },
+    { name: 'Vercel', icon: '/icons/Vercel.svg', bgColor: 'bg-black' },
   ],
   images: [
     '/proyectos/kermes/1.png',
@@ -452,7 +452,7 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
     { name: 'TypeScript', icon: '/icons/tp.svg', bgColor: 'bg-blue-600' },
     { name: 'Tailwind CSS', icon: '/icons/tailwind.svg', bgColor: 'bg-sky-500' },
     { name: 'Python', icon: '/icons/python.svg', bgColor: 'bg-yellow-500' },
-    { name: 'FastAPI', icon: '/icons/fastapi.svg', bgColor: 'bg-green-600' },
+    { name: 'FastAPI', icon: '/icons/Fastapi.svg', bgColor: 'bg-green-600' },
   ],
   images: [
     '/proyectos/skillmatch/1.png',
