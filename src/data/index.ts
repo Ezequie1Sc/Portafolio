@@ -366,7 +366,7 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
   ],
   color: 'blue',
   github: 'https://github.com/Ezequie1Sc/IceCold.git',
-  demoUrl: 'https://tenico-miguel-2ptq67wfi-ezequiel-s-projects-d1487261.vercel.app/',
+  demoUrl: 'https://tenico-miguel.vercel.app/',
   problem: 'Muchos técnicos independientes carecen de una presencia digital profesional para mostrar sus servicios y facilitar el contacto con clientes potenciales.',
   solution: 'Desarrollo de una landing page moderna y responsive que presenta los servicios ofrecidos y permite la comunicación inmediata mediante WhatsApp.',
   howItWorks: [
@@ -379,7 +379,38 @@ impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneo
   impact: 'Mejoró la visibilidad online del negocio y facilitó la captación de nuevos clientes.'
 },
 
-
+{
+  id: 18,
+  title: 'Kermés Rockera 2026',
+  description: 'Landing page promocional desarrollada para difundir la Kermés Rockera 2026, un evento organizado por la Fundación Avanza Amor y Liderazgo Vida, con información del evento, temática, actividades y medios de contacto.',
+  image: '/proyectos/web/kermes.png',
+  icon: '/icons/html.svg',
+  type: 'web',
+  technologies: [
+    { name: 'HTML5', icon: '/icons/html.svg', bgColor: 'bg-orange-500' },
+    { name: 'CSS3', icon: '/icons/css.svg', bgColor: 'bg-blue-500' },
+    { name: 'JavaScript', icon: '/icons/javascript.svg', bgColor: 'bg-yellow-500' },
+    { name: 'Vercel', icon: '/icons/vercel.svg', bgColor: 'bg-black' },
+  ],
+  images: [
+    '/proyectos/kermes/1.png',
+    '/proyectos/kermes/2.png',
+    '/proyectos/kermes/3.png'
+  ],
+  color: 'blue',
+  github: 'https://github.com/Ezequie1Sc/Kermes.git',
+  demoUrl: 'https://kermes-six.vercel.app/',
+  problem: 'La Fundación Avanza Amor y Liderazgo Vida necesitaba una forma moderna y accesible de promocionar la Kermés Rockera 2026, centralizando la información del evento y facilitando su difusión en redes sociales y medios digitales.',
+  solution: 'Se desarrolló una landing page responsiva con una identidad visual inspirada en la temática rockera del evento. El sitio permite presentar información relevante de manera clara y atractiva, mejorando el alcance y la experiencia de los visitantes.',
+  howItWorks: [
+    'Presenta la información principal del evento en una sección destacada',
+    'Muestra detalles como fecha, horario y temática',
+    'Incluye información sobre la fundación organizadora',
+    'Facilita el acceso a redes sociales y canales de contacto',
+    'Se adapta automáticamente a dispositivos móviles y de escritorio'
+  ],
+  impact: 'La landing page fortaleció la presencia digital del evento, facilitó la difusión de la información y proporcionó una experiencia visual profesional para los asistentes potenciales.'
+},
 
    {
     id: 6,
