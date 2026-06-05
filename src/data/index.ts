@@ -178,6 +178,34 @@ export const certificates: Certificate[] = [
 export const projects: Project[] = [
   // ===== APLICACIONES MÓVILES =====
   {
+    id: 3,
+    title: 'Invernadero Mobile',
+    description: 'Sistema de monitoreo para invernaderos con visualización en tiempo real y control automático de riego.',
+    image: '/proyectos/Invernadero/i_1.png',
+    demoVideo: '/InveAPK.webm', // Video que se mostrará en la galería
+    icon: '/icons/flutter.svg',
+    type: 'mobile',
+    technologies: [
+      { name: 'Flutter', icon: '/icons/flutter.svg', bgColor: 'bg-blue-600' },
+      { name: 'Dart', icon: '/icons/dart.svg', bgColor: 'bg-blue-500' },
+      { name: 'Flask', icon: '/icons/flask.svg', bgColor: 'bg-gray-600' },
+      { name: 'PostgreSQL', icon: '/icons/postgresql.svg', bgColor: 'bg-blue-700' },
+      { name: 'Python', icon: '/icons/python.svg', bgColor: 'bg-green-600' },
+    ],
+    images: ['/proyectos/Invernadero/i_2.png', '/proyectos/Invernadero/i_3.png'],
+    color: 'green',
+    github: 'https://github.com/Ezequie1Sc/ServerInvernadero',
+    problem: 'Agricultores perdían cosechas por falta de monitoreo preciso y riego ineficiente.',
+    solution: 'Sistema IoT con sensores que automatiza el riego basado en datos reales.',
+    howItWorks: [
+      'Sensores ESP32 miden condiciones cada 5 minutos',
+      'Algoritmo decide cuándo activar el riego',
+      'App muestra datos en tiempo real',
+      'Alertas push para condiciones críticas'
+    ],
+    impact: 'Redujo consumo de agua en 60% y aumentó producción en 45%.'
+},
+  {
     id: 1,
     title: 'Sigel ITC Mobile',
     description: 'Aplicación móvil para gestión académica que permite a estudiantes y profesores administrar inventario de laboratorios, entregar trabajos prácticos y realizar seguimiento de asignaciones.',
@@ -232,34 +260,7 @@ export const projects: Project[] = [
     ],
     impact: 'Aumentó reservas en 80% y generó 40% más ingresos por venta de productos.'
   },
- {
-    id: 3,
-    title: 'Invernadero Mobile',
-    description: 'Sistema de monitoreo para invernaderos con visualización en tiempo real y control automático de riego.',
-    image: '/proyectos/Invernadero/i_1.png',
-    demoVideo: '/InveAPK.webm', // Video que se mostrará en la galería
-    icon: '/icons/flutter.svg',
-    type: 'mobile',
-    technologies: [
-      { name: 'Flutter', icon: '/icons/flutter.svg', bgColor: 'bg-blue-600' },
-      { name: 'Dart', icon: '/icons/dart.svg', bgColor: 'bg-blue-500' },
-      { name: 'Flask', icon: '/icons/flask.svg', bgColor: 'bg-gray-600' },
-      { name: 'PostgreSQL', icon: '/icons/postgresql.svg', bgColor: 'bg-blue-700' },
-      { name: 'Python', icon: '/icons/python.svg', bgColor: 'bg-green-600' },
-    ],
-    images: ['/proyectos/Invernadero/i_2.png', '/proyectos/Invernadero/i_3.png'],
-    color: 'green',
-    github: 'https://github.com/Ezequie1Sc/ServerInvernadero',
-    problem: 'Agricultores perdían cosechas por falta de monitoreo preciso y riego ineficiente.',
-    solution: 'Sistema IoT con sensores que automatiza el riego basado en datos reales.',
-    howItWorks: [
-      'Sensores ESP32 miden condiciones cada 5 minutos',
-      'Algoritmo decide cuándo activar el riego',
-      'App muestra datos en tiempo real',
-      'Alertas push para condiciones críticas'
-    ],
-    impact: 'Redujo consumo de agua en 60% y aumentó producción en 45%.'
-},
+ 
 {
     id: 5,
     title: 'VideoJuego',
@@ -285,38 +286,7 @@ export const projects: Project[] = [
     ],
    impact: 'Diseñado para ofrecer una experiencia entretenida y accesible para sesiones cortas de juego.'
   },
-  {
-    id: 4,
-    title: 'Vodka App Mobile',
-    description: 'Aplicación para organización y seguimiento de torneos de fútbol con resultados en tiempo real.',
-    image: '/v_1.webp',
-    icon: '/icons/flutter.svg',
-    type: 'mobile',
-    technologies: [
-      { name: 'Flutter', icon: '/icons/flutter.svg', bgColor: 'bg-blue-600' },
-      { name: 'Dart', icon: '/icons/dart.svg', bgColor: 'bg-blue-500' },
-      { name: 'Flask', icon: '/icons/flask.svg', bgColor: 'bg-gray-600' },
-      { name: 'PostgreSQL', icon: '/icons/postgresql.svg', bgColor: 'bg-blue-700' },
-      { name: 'Python', icon: '/icons/python.svg', bgColor: 'bg-green-600' },
-    ],
-  images: ['/v_1.webp'],
-color: 'green',
-github: 'https://github.com/Ezequie1Sc',
-
-problem: 'Los organizadores de torneos deportivos gestionan equipos y resultados de forma manual, lo que genera errores y pérdida de tiempo.',
-
-solution: 'Aplicación en desarrollo que automatiza la gestión de torneos, incluyendo registro de equipos, resultados y generación de estadísticas en tiempo real.',
-
-howItWorks: [
-  'Registro de equipos y jugadores',
-  'Ingreso rápido de resultados',
-  'Cálculo automático de estadísticas',
-  'Visualización de tabla de posiciones en tiempo real'
-],
-
-impact: 'Proyecto en desarrollo enfocado en optimizar la organización de torneos y reducir errores en el manejo de resultados.'
-},
-
+ 
   
 
   // ===== APLICACIONES WEB =====
