@@ -112,26 +112,6 @@ const Hero = () => {
             </svg>
           </a>
         </div>
-
-        <div className="social-links">
-          <a
-            href="https://www.linkedin.com/in/ezequiel-salazar-194975340/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-link linkedin"
-          >
-            <img src="/icons/linkedin.svg" alt="LinkedIn" />
-          </a>
-
-          <a
-            href="https://github.com/Ezequie1Sc"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-link github"
-          >
-            <img src="/icons/github.svg" alt="GitHub" />
-          </a>
-        </div>
       </div>
 
       <div className="hero-visual">
