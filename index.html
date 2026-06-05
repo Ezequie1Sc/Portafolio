@@ -22,7 +22,7 @@
     html, body {
       width: 100%;
       height: 100%;
-      overflow: hidden;
+      overflow: auto;
       background: #0F172A;
     }
 
@@ -46,7 +46,10 @@
     #splash-screen.exit {
         opacity: 0;
         transform: scale(1.1);
-        pointer-events: none;
+        pointer-events: none !important;
+        display: none !important;
+        visibility: hidden !important;
+        z-index: -9999 !important;
     }
 
     /* Animated Background */
@@ -652,6 +655,31 @@
   
   <!-- Enhanced Splash Controller -->
   <script>
+    function removeSplashScreen() {
+        const splashScreen = document.getElementById('splash-screen');
+        if (splashScreen) {
+            splashScreen.classList.add('exit');
+            
+            setTimeout(() => {
+                splashScreen.style.display = 'none';
+                splashScreen.style.visibility = 'hidden';
+                splashScreen.style.pointerEvents = 'none';
+                splashScreen.style.zIndex = '-9999';
+                
+                // Restaurar scroll
+                document.body.style.overflow = 'auto';
+                document.body.style.height = 'auto';
+                document.documentElement.style.overflow = 'auto';
+                document.documentElement.style.height = 'auto';
+                
+                // Remover completamente
+                setTimeout(() => {
+                    splashScreen.remove();
+                }, 100);
+            }, 800);
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         const splashScreen = document.getElementById('splash-screen');
         const statusText = document.querySelector('.status-text');
@@ -661,8 +689,7 @@
             'Inicializando sistema',
             'Cargando módulos',
             'Preparando interfaz',
-            'Optimizando recursos',
-            'Casi listo...'
+            'Listo'
         ];
         
         // Cambiar texto de estado durante la carga
@@ -672,7 +699,11 @@
                 statusText.textContent = loadingStates[stateIndex];
                 stateIndex++;
             }
-        }, 500);
+        }, 400);
+        
+        // Cerrar splash screen más rápido en mobile
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const closeTime = isMobile ? 2000 : 2800;
         
         // Tiempo total antes de la salida
         setTimeout(() => {
@@ -681,17 +712,16 @@
             
             // Pequeña pausa antes de salir
             setTimeout(() => {
-                splashScreen.classList.add('exit');
-                
-                // Remover completamente después de la animación
-                setTimeout(() => {
-                    splashScreen.style.display = 'none';
-                    // Limpiar el DOM para liberar memoria
-                    splashScreen.remove();
-                }, 800);
-            }, 400);
+                removeSplashScreen();
+            }, 300);
             
-        }, 2800);
+        }, closeTime);
+        
+        // Cerrar también si el usuario hace click o toca la pantalla
+        document.addEventListener('click', function() {
+            clearInterval(stateInterval);
+            removeSplashScreen();
+        }, { once: true });
     });
   </script>
 </body>
