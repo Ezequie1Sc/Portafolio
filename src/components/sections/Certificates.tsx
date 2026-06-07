@@ -51,7 +51,7 @@ const Certificates = () => {
         </h2>
         
         <p className="certificates-subtitle">
-          Formación continua en desarrollo de software, inteligencia artificial y ciberseguridad
+          Actualización profesional y aprendizaje continuo
         </p>
 
         <CertificateFilter 

@@ -49,6 +49,9 @@ const CATEGORY_LABELS: Record<string, string> = {
   desktop: 'Aplicaciones Desktop',
 };
 
+// Orden de categorías cuando se muestran todas
+const CATEGORY_ORDER = ['web', 'mobile', 'desktop', 'backend'] as const;
+
 interface CategoryIconProps {
   type: string;
 }
@@ -109,19 +112,19 @@ const CategorySection = memo(({
 
 CategorySection.displayName = 'CategorySection';
 
-const FILTER_TYPES = ['todos', 'mobile', 'web', 'backend', 'desktop'] as const;
+const FILTER_TYPES = ['todos', 'web', 'mobile', 'backend', 'desktop'] as const;
 type FilterType = typeof FILTER_TYPES[number];
 
 const FILTER_LABELS: Record<FilterType, string> = {
   todos: 'Todos',
-  mobile: 'Móvil',
   web: 'Web',
+  mobile: 'Móvil',
   backend: 'Backend',
   desktop: 'Desktop',
 };
 
 const Projects = () => {
-  const [filter, setFilter] = useState<FilterType>('todos');
+  const [filter, setFilter] = useState<FilterType>('web');
   const [expandedCardId, setExpandedCardId] = useState<number | null>(null);
   const [galleryProject, setGalleryProject] = useState<Project | null>(null);
 
@@ -156,8 +159,8 @@ const Projects = () => {
 
   const counts: Record<FilterType, number> = {
     todos: projects.length,
-    mobile: categorized.mobile.length,
     web: categorized.web.length,
+    mobile: categorized.mobile.length,
     backend: categorized.backend.length,
     desktop: categorized.desktop.length,
   };
@@ -167,6 +170,18 @@ const Projects = () => {
       return project.images;
     }
     return [project.image];
+  };
+
+  // Función para ordenar las categorías
+  const getOrderedCategories = (): [string, Project[]][] => {
+    const entries = Object.entries(categorized) as [string, Project[]][];
+    return entries
+      .filter(([, list]) => list.length > 0)
+      .sort(([typeA], [typeB]) => {
+        const indexA = CATEGORY_ORDER.indexOf(typeA as any);
+        const indexB = CATEGORY_ORDER.indexOf(typeB as any);
+        return indexA - indexB;
+      });
   };
 
   return (
@@ -215,18 +230,16 @@ const Projects = () => {
           <div key={filter} className="view-container">
             {filter === 'todos' ? (
               <div className="projects-categories">
-                {(Object.entries(categorized) as [string, Project[]][])
-                  .filter(([, list]) => list.length > 0)
-                  .map(([type, list]) => (
-                    <CategorySection
-                      key={type}
-                      type={type}
-                      projectList={list}
-                      expandedCardId={expandedCardId}
-                      onExpand={handleCardExpand}
-                      onOpenGallery={handleOpenGallery}
-                    />
-                  ))}
+                {getOrderedCategories().map(([type, list]) => (
+                  <CategorySection
+                    key={type}
+                    type={type}
+                    projectList={list}
+                    expandedCardId={expandedCardId}
+                    onExpand={handleCardExpand}
+                    onOpenGallery={handleOpenGallery}
+                  />
+                ))}
               </div>
             ) : (
               <div className="filtered-view">
