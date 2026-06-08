@@ -2,8 +2,10 @@ import { useState, useMemo, useCallback, memo } from 'react';
 import { projects } from '../../data';
 import type { Project } from '../../types';
 import ProjectCard from '../ui/ProjectCard';
+import ProjectCardMac from '../ui/ProjectCardMac';
 import ProjectGallery from '../ui/ProjectGallery';
 import '../../styles/Projects.css';
+import '../../styles/ProjectCardMac.css';
 
 const ICON_PATHS: Record<string, React.ReactNode> = {
   mobile: (
@@ -49,7 +51,6 @@ const CATEGORY_LABELS: Record<string, string> = {
   desktop: 'Aplicaciones Desktop',
 };
 
-// Orden de categorías cuando se muestran todas
 const CATEGORY_ORDER = ['web', 'mobile', 'desktop', 'backend'] as const;
 
 interface CategoryIconProps {
@@ -73,6 +74,35 @@ const CategoryIcon = memo(({ type }: CategoryIconProps) => (
 ));
 
 CategoryIcon.displayName = 'CategoryIcon';
+
+// ===== FUNCIÓN PARA RENDERIZAR LA CARD CORRECTA =====
+const renderProjectCard = (
+  project: Project,
+  isExpanded: boolean,
+  onExpand: (id: number) => void,
+  onOpenGallery: (project: Project) => void
+) => {
+  if (project.type === 'web') {
+    return (
+      <ProjectCardMac
+        key={project.id}
+        project={project}
+        isExpanded={isExpanded}
+        onExpand={() => onExpand(project.id)}
+        onOpenGallery={onOpenGallery}
+      />
+    );
+  }
+  return (
+    <ProjectCard
+      key={project.id}
+      project={project}
+      isExpanded={isExpanded}
+      onExpand={() => onExpand(project.id)}
+      onOpenGallery={onOpenGallery}
+    />
+  );
+};
 
 interface CategorySectionProps {
   type: string;
@@ -98,13 +128,12 @@ const CategorySection = memo(({
     </h3>
     <div className="category-grid">
       {projectList.map((project) => (
-        <ProjectCard
-          key={project.id}
-          project={project}
-          isExpanded={expandedCardId === project.id}
-          onExpand={() => onExpand(project.id)}
-          onOpenGallery={onOpenGallery}
-        />
+        renderProjectCard(
+          project, 
+          expandedCardId === project.id, 
+          onExpand, 
+          onOpenGallery
+        )
       ))}
     </div>
   </div>
@@ -142,11 +171,16 @@ const Projects = () => {
 
   const handleFilterChange = useCallback((newFilter: FilterType) => {
     setFilter(newFilter);
-    setExpandedCardId(null);
+    setExpandedCardId(null); // Cerrar cualquier card expandida al cambiar filtro
   }, []);
 
+  // ===== CORRECCIÓN PRINCIPAL AQUÍ =====
   const handleCardExpand = useCallback((cardId: number) => {
-    setExpandedCardId(prev => (prev === cardId ? null : cardId));
+    setExpandedCardId(prev => {
+      // Si la card ya está expandida, la colapsa (toggle)
+      // Si no, expande solo esa (y colapsa las demás)
+      return prev === cardId ? null : cardId;
+    });
   }, []);
 
   const handleOpenGallery = useCallback((project: Project) => {
@@ -172,7 +206,6 @@ const Projects = () => {
     return [project.image];
   };
 
-  // Función para ordenar las categorías
   const getOrderedCategories = (): [string, Project[]][] => {
     const entries = Object.entries(categorized) as [string, Project[]][];
     return entries
@@ -251,13 +284,12 @@ const Projects = () => {
                 </h3>
                 <div className="category-grid">
                   {filteredProjects.map((project) => (
-                    <ProjectCard
-                      key={project.id}
-                      project={project}
-                      isExpanded={expandedCardId === project.id}
-                      onExpand={() => handleCardExpand(project.id)}
-                      onOpenGallery={handleOpenGallery}
-                    />
+                    renderProjectCard(
+                      project, 
+                      expandedCardId === project.id, 
+                      handleCardExpand, 
+                      handleOpenGallery
+                    )
                   ))}
                 </div>
               </div>

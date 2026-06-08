@@ -1,0 +1,584 @@
+/* ========================================
+   PROJECT CARD MAC STYLE - RESPONSIVE FIX
+   ======================================== */
+
+:root {
+  --mac-bg-dark: #1e293b;
+  --mac-bg-darker: #0f172a;
+  --mac-browser-bar: #0f172a;
+  --mac-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  --mac-radius: 12px;
+  --mac-dot-red: #ff5f57;
+  --mac-dot-yellow: #ffbd2e;
+  --mac-dot-green: #28c840;
+  --text-white: #ffffff;
+  --text-primary: #cbd5e1;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border-light: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(59, 130, 246, 0.3);
+}
+
+/* ===== CARD PRINCIPAL ===== */
+.project-card-mac {
+  width: 100%;
+  height: auto;
+  align-self: start;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--mac-bg-dark);
+  border: 1px solid var(--border-light);
+  border-radius: var(--mac-radius);
+  box-shadow: var(--mac-shadow);
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card-mac:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-hover);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ===== BARRA DEL NAVEGADOR ===== */
+.mac-browser-bar {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--mac-browser-bar);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.mac-dots {
+  display: flex;
+  flex-shrink: 0;
+  gap: 6px;
+}
+
+.mac-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+}
+
+.mac-dot.red { background: var(--mac-dot-red); }
+.mac-dot.yellow { background: var(--mac-dot-yellow); }
+.mac-dot.green { background: var(--mac-dot-green); }
+
+.mac-url-bar {
+  flex: 1;
+  min-width: 0;
+  padding: 4px 12px;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+}
+
+/* ===== IMAGEN ===== */
+.mac-image-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: var(--mac-bg-darker);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.mac-image-wrapper img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.project-card-mac:hover .mac-image-wrapper img {
+  transform: scale(1.035);
+}
+
+/* ===== BOTÓN FLOTANTE EN IMAGEN ===== */
+.mac-image-btn {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 999px;
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.28);
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.mac-image-btn:hover {
+  transform: scale(1.05);
+  filter: brightness(1.05);
+}
+
+.mac-image-btn svg {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+/* ===== CONTENIDO ===== */
+.mac-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 20px 20px;
+}
+
+.mac-header {
+  display: flex;
+  align-items: center;
+}
+
+.mac-title {
+  margin: 0;
+  color: var(--text-white);
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* ===== BOTÓN MÁS INFORMACIÓN ===== */
+.mac-expand-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+  padding: 8px 14px;
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.mac-expand-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+.mac-expand-icon {
+  width: 14px;
+  height: 14px;
+  opacity: 0.5;
+  transition: transform 0.3s ease;
+}
+
+.mac-expand-icon.rotated {
+  transform: rotate(180deg);
+}
+
+/* ===== EXPANDIBLE ===== */
+.mac-expandable-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.3s ease, opacity 0.3s ease;
+}
+
+.mac-expandable-wrapper.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.mac-expandable-inner {
+  overflow: hidden;
+}
+
+.mac-expandable-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 12px;
+  margin-top: 4px;
+  border-top: 1px solid var(--border-light);
+}
+
+/* ===== ICONO DEL PROYECTO ===== */
+.mac-expand-icon-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mac-expand-icon-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+/* ===== DESCRIPCIÓN ===== */
+.mac-full-description p {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* ===== TECNOLOGÍAS ===== */
+.mac-tech-section {
+  margin-top: 2px;
+}
+
+.mac-tech-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mac-tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.mac-tech-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  color: var(--text-primary);
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+}
+
+.mac-tech-item:hover {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.15);
+}
+
+.mac-tech-item img {
+  width: 12px;
+  height: 12px;
+  object-fit: contain;
+}
+
+/* ===== ACORDEÓN ===== */
+.mac-accordion {
+  margin-bottom: 6px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+}
+
+.mac-accordion.active {
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+.mac-accordion-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  cursor: pointer;
+  padding: 8px 12px;
+  color: var(--text-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: left;
+  background: transparent;
+  border: none;
+}
+
+.mac-accordion-trigger:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.mac-accordion-trigger.active {
+  color: #60a5fa;
+}
+
+.mac-accordion-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mac-accordion-left svg {
+  width: 16px;
+  height: 16px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.mac-accordion-trigger.active .mac-accordion-left svg {
+  color: #60a5fa;
+}
+
+.mac-accordion-chevron {
+  width: 12px;
+  height: 12px;
+  opacity: 0.5;
+  transition: transform 0.2s ease;
+}
+
+.mac-accordion-chevron.rotated {
+  transform: rotate(180deg);
+}
+
+.mac-accordion-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.mac-accordion-body.open {
+  grid-template-rows: 1fr;
+}
+
+.mac-accordion-inner {
+  overflow: hidden;
+}
+
+.mac-accordion-inner p,
+.mac-accordion-inner ul {
+  margin: 0;
+  padding: 0 12px 12px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.mac-accordion-inner ul {
+  padding-left: 24px;
+  list-style: none;
+}
+
+.mac-accordion-inner li {
+  position: relative;
+  margin-bottom: 4px;
+  padding-left: 14px;
+}
+
+.mac-accordion-inner li::before {
+  position: absolute;
+  left: 0;
+  color: #3b82f6;
+  content: "▹";
+}
+
+/* ===== GITHUB ===== */
+.mac-github-section {
+  margin-top: 2px;
+}
+
+.mac-btn-secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  cursor: pointer;
+  padding: 8px 14px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-light);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.mac-btn-secondary:hover {
+  color: var(--text-white);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.mac-btn-secondary svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   RESPONSIVE - CORREGIDO PARA MÓVIL
+   ======================================== */
+
+/* Tablet y móvil grande */
+@media (max-width: 768px) {
+  .project-card-mac {
+    border-radius: 10px;
+  }
+
+  .mac-browser-bar {
+    gap: 6px;
+    padding: 6px 10px;
+  }
+
+  .mac-dots {
+    gap: 4px;
+  }
+
+  .mac-dot {
+    width: 7px;
+    height: 7px;
+  }
+
+  .mac-url-bar {
+    padding: 2px 8px;
+    font-size: 0.55rem;
+  }
+
+  .mac-image-wrapper {
+    height: 150px;
+  }
+
+  .mac-image-btn {
+    right: 10px;
+    bottom: 10px;
+    padding: 4px 10px;
+    font-size: 0.6rem;
+    gap: 4px;
+  }
+
+  .mac-image-btn svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .mac-content {
+    gap: 8px;
+    padding: 12px 14px 16px;
+  }
+
+  .mac-title {
+    font-size: 0.95rem;
+  }
+
+  .mac-expand-btn {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .mac-full-description p {
+    font-size: 0.8rem;
+  }
+
+  .mac-tech-item {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+
+  .mac-accordion-trigger {
+    padding: 6px 10px;
+    font-size: 0.75rem;
+  }
+
+  .mac-accordion-inner p,
+  .mac-accordion-inner ul {
+    font-size: 0.75rem;
+    padding: 0 10px 10px;
+  }
+
+  .mac-btn-secondary {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+}
+
+/* Móvil pequeño */
+@media (max-width: 480px) {
+  .mac-image-wrapper {
+    height: 130px;
+  }
+
+  .mac-image-btn {
+    right: 8px;
+    bottom: 8px;
+    padding: 3px 8px;
+    font-size: 0.55rem;
+  }
+
+  .mac-image-btn svg {
+    width: 10px;
+    height: 10px;
+  }
+
+  .mac-content {
+    padding: 10px 12px 14px;
+  }
+
+  .mac-title {
+    font-size: 0.9rem;
+  }
+
+  .mac-url-bar {
+    font-size: 0.5rem;
+    padding: 2px 6px;
+  }
+
+  .mac-tech-item img {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Móvil muy pequeño */
+@media (max-width: 380px) {
+  .mac-image-wrapper {
+    height: 110px;
+  }
+
+  .mac-title {
+    font-size: 0.85rem;
+  }
+
+  .mac-expand-btn {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+}
+
+/* ===== MOVIMIENTO REDUCIDO ===== */
+@media (prefers-reduced-motion: reduce) {
+  .project-card-mac,
+  .project-card-mac:hover,
+  .mac-image-wrapper img,
+  .mac-expandable-wrapper,
+  .mac-accordion-body,
+  .mac-btn-secondary,
+  .mac-expand-btn,
+  .mac-image-btn {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .project-card-mac:hover {
+    transform: none;
+  }
+}
