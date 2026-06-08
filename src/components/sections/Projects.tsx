@@ -153,7 +153,7 @@ const FILTER_LABELS: Record<FilterType, string> = {
 };
 
 const Projects = () => {
-  const [filter, setFilter] = useState<FilterType>('web');
+  const [filter, setFilter] = useState<FilterType>('todos');
   const [expandedCardId, setExpandedCardId] = useState<number | null>(null);
   const [galleryProject, setGalleryProject] = useState<Project | null>(null);
 

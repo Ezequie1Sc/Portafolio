@@ -1,4 +1,3 @@
-// components/ui/ProjectCard.tsx
 import { useState, memo } from 'react';
 import type { Project } from '../../types';
 import '../../styles/ProjectCard.css';
@@ -101,10 +100,12 @@ const ProjectCard = memo(({
   };
 
   const hasExtraInfo = !!(
+    project.technologies.length > 0 ||
     project.problem ||
     project.solution ||
     (project.howItWorks && project.howItWorks.length > 0) ||
-    project.impact
+    project.impact ||
+    project.github
   );
 
   const typeLabel: Record<string, string> = {
@@ -116,8 +117,8 @@ const ProjectCard = memo(({
 
   return (
     <div className={`project-card ${getColorClass(project.color)}`} data-type={project.color}>
+      {/* ===== IMAGEN ===== */}
       <div className="project-image">
-        {/* Siempre imagen estática — el video solo se ve en la galería */}
         <img
           src={project.image}
           alt={project.title}
@@ -153,7 +154,9 @@ const ProjectCard = memo(({
         </div>
       </div>
 
+      {/* ===== CONTENIDO ===== */}
       <div className="project-content">
+        {/* Título con icono */}
         <div className="project-header">
           <div className="project-icon">
             <img src={project.icon} alt="" aria-hidden="true" />
@@ -161,27 +164,22 @@ const ProjectCard = memo(({
           <h3 className="project-title">{project.title}</h3>
         </div>
 
+        {/* Resumen visible siempre */}
         <p className="project-description">{project.description}</p>
 
-        <div className="project-tech">
-          <div className="tech-label">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
-              <line x1="8" y1="21" x2="16" y2="21" />
-              <line x1="12" y1="17" x2="12" y2="21" />
-            </svg>
-            <span>Tecnologías</span>
-          </div>
-          <div className="tech-list">
-            {project.technologies.map((tech) => (
-              <span key={tech.name} className="tech-item">
-                <img src={tech.icon} alt="" aria-hidden="true" className="tech-icon" />
-                <span className="tech-name">{tech.name}</span>
-              </span>
-            ))}
-          </div>
-        </div>
+        {/* Botón Ver sitio / Ver demo */}
+        <button
+          onClick={handleDemoClick}
+          className={`demo-btn ${getDemoBtnClass(project.color)}`}
+          type="button"
+        >
+          <svg className="btn-icon-small" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <polygon points="5 3 19 12 5 21 5 3" />
+          </svg>
+          {project.type === 'web' ? 'Ver sitio' : 'Ver demo'}
+        </button>
 
+        {/* Botón Más información */}
         {hasExtraInfo && (
           <button
             className="expand-btn"
@@ -201,13 +199,38 @@ const ProjectCard = memo(({
             >
               <polyline points="6 9 12 15 18 9" />
             </svg>
-            <span>{isExpanded ? 'Ver menos información' : 'Más información'}</span>
+            <span>{isExpanded ? 'Ocultar información' : 'Más información'}</span>
           </button>
         )}
 
+        {/* ===== CONTENIDO EXPANDIBLE ===== */}
         <div className={`expandable-wrapper${isExpanded ? ' open' : ''}`} aria-hidden={!isExpanded}>
           <div className="expandable-inner">
             <div className="expandable-content">
+              
+              {/* Tecnologías */}
+              {project.technologies.length > 0 && (
+                <div className="project-tech">
+                  <div className="tech-label">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
+                      <line x1="8" y1="21" x2="16" y2="21" />
+                      <line x1="12" y1="17" x2="12" y2="21" />
+                    </svg>
+                    <span>Tecnologías</span>
+                  </div>
+                  <div className="tech-list">
+                    {project.technologies.map((tech) => (
+                      <span key={tech.name} className="tech-item">
+                        <img src={tech.icon} alt="" aria-hidden="true" className="tech-icon" />
+                        <span className="tech-name">{tech.name}</span>
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Problema */}
               {project.problem && (
                 <Accordion
                   active={activeSection === 'problem'}
@@ -225,6 +248,7 @@ const ProjectCard = memo(({
                 </Accordion>
               )}
 
+              {/* Solución */}
               {project.solution && (
                 <Accordion
                   active={activeSection === 'solution'}
@@ -240,6 +264,7 @@ const ProjectCard = memo(({
                 </Accordion>
               )}
 
+              {/* Cómo funciona */}
               {project.howItWorks && project.howItWorks.length > 0 && (
                 <Accordion
                   active={activeSection === 'howItWorks'}
@@ -260,6 +285,7 @@ const ProjectCard = memo(({
                 </Accordion>
               )}
 
+              {/* Impacto */}
               {project.impact && (
                 <Accordion
                   active={activeSection === 'impact'}
@@ -274,32 +300,25 @@ const ProjectCard = memo(({
                   <p>{project.impact}</p>
                 </Accordion>
               )}
+
+              {/* Código / GitHub */}
+              {project.github && (
+                <div className="project-actions" style={{ marginTop: '0.5rem' }}>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="code-btn"
+                  >
+                    <svg className="btn-icon-small" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                      <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                    </svg>
+                    Código
+                  </a>
+                </div>
+              )}
             </div>
           </div>
-        </div>
-
-        <div className="project-actions">
-          <button
-            onClick={handleDemoClick}
-            className={`demo-btn ${getDemoBtnClass(project.color)}`}
-            type="button"
-          >
-            <svg className="btn-icon-small" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <polygon points="5 3 19 12 5 21 5 3" />
-            </svg>
-            {project.type === 'web' ? 'Ver sitio' : 'Ver demo'}
-          </button>
-          <a
-            href={project.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="code-btn"
-          >
-            <svg className="btn-icon-small" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
-            </svg>
-            Código
-          </a>
         </div>
       </div>
     </div>
