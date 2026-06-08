@@ -42,6 +42,8 @@ export const certificates: Certificate[] = [
   ],
   category: 'programacion'
 },
+
+
 {
   id: 12,
   title: 'Foundational C# with Microsoft Certification',
@@ -58,6 +60,8 @@ export const certificates: Certificate[] = [
   ],
   category: 'programacion'
 },
+
+
 {
     id: 13,
     title: 'Desarrollo con IA',
@@ -69,6 +73,7 @@ export const certificates: Certificate[] = [
     category: 'ia'
 },
 
+
   {
     id: 1,
     title: 'Python Programming',
@@ -79,6 +84,23 @@ export const certificates: Certificate[] = [
     skills: ['Python', 'Automatización', 'Scripting', 'Fundamentos'],
     category: 'programacion'
   },
+  {
+  id: 14,
+  title: 'JavaScript Algorithms and Data Structures Certification',
+  issuer: 'freeCodeCamp',
+  date: '2026',
+  image: '/Certificates/certificadeJS.png',
+  credentialUrl: '/Certificates/Certificado_JS.pdf',
+  skills: [
+    'JavaScript',
+    'ES6+',
+    'Algoritmos',
+    'Estructuras de Datos',
+    'Programación Funcional',
+    'Programación Orientada a Objetos'
+  ],
+  category: 'programacion'
+},
   {
     id: 9,
     title: 'Python Essentials',
