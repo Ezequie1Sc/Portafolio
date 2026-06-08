@@ -118,7 +118,7 @@ const Hero = () => {
         <div className="solar-system">
           <div className="sun">
             <img
-              src="face.webp"
+              src="foto.png"
               alt="Ezequiel Salazar"
               className="profile-img"
             />
