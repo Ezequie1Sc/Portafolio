@@ -11,7 +11,7 @@ u<div align="center">
 
   <br />
   
-  <img src="/proyectos/web/image3.png" width="800" alt="Portafolio Preview" />
+  <img src="/proyectos/web/image.png" width="800" alt="Portafolio Preview" />
   
   <br />
   
