@@ -1,8 +1,4 @@
-/* ============================================================
-   FOOTER — Diseño Moderno Vibrante
-   Color base: #172031
-   Fuentes: Syne + DM Sans
-   ============================================================ */
+/* Footer.css - Versión completa */
 
 :root {
   --ft-bg:          #172031;
@@ -19,7 +15,7 @@
   --ft-ease:        cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* ── Línea RGB superior ─────────────────────────────────── */
+/* Línea RGB superior */
 .footer-rule {
   height: 2px;
   background: linear-gradient(
@@ -40,7 +36,7 @@
   50% { opacity: 1; }
 }
 
-/* ── Base ─────────────────────────────────────────────────── */
+/* Base del Footer */
 .footer {
   font-family: 'DM Sans', sans-serif;
   background: linear-gradient(180deg, #172031 0%, #0f1624 100%);
@@ -90,7 +86,7 @@
   66% { transform: translate(-20px, 30px) scale(0.95); }
 }
 
-/* ── Contenedor principal ────────────────────────────────── */
+/* Contenedor principal */
 .footer-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -99,7 +95,7 @@
   z-index: 1;
 }
 
-/* ── Grid superior ───────────────────────────────────────── */
+/* Grid superior */
 .footer-top {
   display: grid;
   grid-template-columns: 1.5fr 1fr 1.2fr;
@@ -109,7 +105,7 @@
   position: relative;
 }
 
-/* ── Sección Marca ──────────────────────────────────────── */
+/* Sección Marca */
 .footer-brand-section {
   display: flex;
   flex-direction: column;
@@ -151,7 +147,7 @@
   border-left: 2px solid var(--ft-accent-a);
 }
 
-/* ── Sección Enlaces rápidos ────────────────────────────── */
+/* Sección Enlaces rápidos */
 .footer-links-section h4,
 .footer-contact-section h4 {
   font-family: 'Syne', sans-serif;
@@ -205,7 +201,6 @@
   transform: translateX(0);
 }
 
-/* Línea de brillo en hover */
 .footer-link::after {
   content: '';
   position: absolute;
@@ -222,7 +217,7 @@
   width: 100%;
 }
 
-/* ── Sección Contacto ────────────────────────────────────── */
+/* Sección Contacto */
 .footer-contact-info {
   display: flex;
   flex-direction: column;
@@ -347,7 +342,69 @@
   transform: scale(1.15);
 }
 
-/* ── Barra inferior ─────────────────────────────────────── */
+/* Sección Legal - Política de Privacidad */
+.footer-legal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 1.5rem 0 1rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(148, 163, 184, 0.12);
+  flex-wrap: wrap;
+}
+
+.footer-legal-link {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s var(--ft-ease);
+  position: relative;
+  padding: 0.25rem 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Icono decorativo para el enlace legal */
+.footer-legal-link::before {
+  content: '→';
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: all 0.3s var(--ft-ease);
+  color: var(--ft-accent-a);
+  font-weight: 600;
+}
+
+.footer-legal-link:hover::before {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.footer-legal-link:hover {
+  color: #60a5fa;
+  transform: translateX(6px);
+}
+
+/* Línea decorativa bajo el enlace legal */
+.footer-legal-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--ft-accent-a), var(--ft-accent-b));
+  transition: width 0.35s var(--ft-ease);
+  border-radius: 2px;
+}
+
+.footer-legal-link:hover::after {
+  width: 100%;
+}
+
+/* Barra inferior */
 .footer-bottom {
   display: flex;
   justify-content: space-between;
@@ -424,6 +481,17 @@
   }
 }
 
+@media (max-width: 768px) {
+  .footer-legal {
+    gap: 1.5rem;
+    padding: 1.2rem 0 0.8rem;
+  }
+
+  .footer-legal-link {
+    font-size: 0.85rem;
+  }
+}
+
 @media (max-width: 600px) {
   .footer-container {
     padding: 2.5rem 1.5rem 1.5rem;
@@ -433,6 +501,16 @@
     grid-template-columns: 1fr;
     gap: 2rem;
     padding-bottom: 2rem;
+  }
+
+  .footer-legal {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .footer-legal-link::before {
+    font-size: 0.8rem;
   }
 
   .footer-bottom {
@@ -464,5 +542,250 @@
   .footer-social-btn {
     width: 38px;
     height: 38px;
+  }
+
+  .footer-legal-link {
+    font-size: 0.8rem;
+  }
+}
+
+/* Animación de entrada para el footer */
+@keyframes footerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.footer {
+  animation: footerFadeIn 0.8s var(--ft-ease) forwards;
+}
+/* Añade estos estilos al final de tu Footer.css */
+
+/* Estilos del Modal de Política de Privacidad */
+.privacy-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+  padding: 2rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.privacy-modal-container {
+  max-width: 900px;
+  width: 100%;
+  max-height: 85vh;
+  background: #0f172a;
+  border-radius: 1.5rem;
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+  position: relative;
+  animation: slideUp 0.3s ease;
+  overflow: hidden;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.privacy-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #94a3b8;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.privacy-modal-close:hover {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60a5fa;
+  transform: scale(1.05);
+}
+
+.privacy-modal-content {
+  padding: 2.5rem;
+  overflow-y: auto;
+  max-height: 85vh;
+  scrollbar-width: thin;
+  scrollbar-color: #3b82f6 #1e293b;
+}
+
+.privacy-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.privacy-modal-content::-webkit-scrollbar-track {
+  background: #1e293b;
+  border-radius: 10px;
+}
+
+.privacy-modal-content::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 10px;
+}
+
+.privacy-modal-content::-webkit-scrollbar-thumb:hover {
+  background: #2563eb;
+}
+
+.privacy-modal-content .privacy-badge {
+  display: inline-flex;
+  margin-bottom: 1.2rem;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(59, 130, 246, 0.15);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #93c5fd;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.privacy-modal-content h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.privacy-modal-content .privacy-updated {
+  margin-bottom: 2rem;
+  color: #94a3b8;
+  font-size: 0.95rem;
+}
+
+.privacy-modal-content .info-section {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  align-items: flex-start;
+}
+
+.privacy-modal-content .info-icon {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  color: #60a5fa;
+}
+
+.privacy-modal-content h2 {
+  margin: 0 0 0.6rem;
+  color: #e2e8f0;
+  font-size: 1.2rem;
+}
+
+.privacy-modal-content p {
+  margin: 0;
+  color: #cbd5e1;
+  line-height: 1.8;
+}
+
+.privacy-modal-content .privacy-owner {
+  margin-top: 2rem;
+  padding: 1rem 1.25rem;
+  border-radius: 1rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.privacy-modal-content .owner-icon {
+  flex-shrink: 0;
+  color: #60a5fa;
+}
+
+.privacy-modal-content .privacy-owner strong {
+  color: #ffffff;
+}
+
+.privacy-modal-content .privacy-owner span {
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+/* Actualizar el enlace legal para que sea un botón */
+.footer-legal-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* Responsive para el modal */
+@media (max-width: 768px) {
+  .privacy-modal-overlay {
+    padding: 1rem;
+  }
+  
+  .privacy-modal-content {
+    padding: 1.5rem;
+  }
+  
+  .privacy-modal-content .info-section {
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .privacy-modal-close {
+    width: 35px;
+    height: 35px;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .privacy-modal-content {
+    padding: 1.25rem;
+  }
+  
+  .privacy-modal-content .info-section {
+    gap: 0.6rem;
+  }
+  
+  .privacy-modal-content .info-icon {
+    width: 18px;
+    height: 18px;
   }
 }

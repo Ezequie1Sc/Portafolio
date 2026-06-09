@@ -36,7 +36,7 @@ function App() {
       />
 
       <main className="pt-24 flex-grow">
-        <Hero /> {/* 🔥 YA SIN PROPS */}
+        <Hero /> {}
         <Projects />
         <Skills />
         <Certificates />

@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './Footer.css';
 
 const NAV_LINKS = [
@@ -43,95 +44,242 @@ const SOCIAL_LINKS = [
       </svg>
     ),
   },
- 
 ];
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const [showPrivacyPolicy, setShowPrivacyPolicy] = useState(false);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      const elementId = href.substring(1);
+      const element = document.getElementById(elementId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
-    <footer className="footer">
-      {/* Línea RGB superior */}
-      <div className="footer-rule" />
+    <>
+      <footer className="footer">
+        <div className="footer-rule" />
 
-      <div className="footer-container">
-        
-        {/* Sección superior con grid */}
-        <div className="footer-top">
-          
-          {/* Marca y descripción */}
-          <div className="footer-brand-section">
-            <h2 className="footer-logo">
-              Ezequiel<span className="footer-logo-accent">.</span>Salazar
-            </h2>
-            <p className="footer-description">
-              Creando experiencias digitales que combinan elegancia visual con 
-              precisión técnica. Cada línea de código cuenta una historia.
-            </p>
-          </div>
+        <div className="footer-container">
+          <div className="footer-top">
+            <div className="footer-brand-section">
+              <h2 className="footer-logo">
+                Ezequiel<span className="footer-logo-accent">.</span>Salazar
+              </h2>
 
-          {/* Enlaces rápidos */}
-          <div className="footer-links-section">
-            <h4>Navegación</h4>
-            <div className="footer-links-grid">
-              {NAV_LINKS.map(({ label, href }) => (
-                <a key={href} href={href} className="footer-link">
-                  <span className="link-arrow">→</span>
-                  {label}
-                </a>
-              ))}
+              <p className="footer-description">
+                Creando experiencias digitales que combinan elegancia visual con
+                precisión técnica. Cada línea de código cuenta una historia.
+              </p>
             </div>
-          </div>
 
-          {/* Contacto */}
-          <div className="footer-contact-section">
-            <h4>Conectemos</h4>
-            <div className="footer-contact-info">
-              <a 
-                href="mailto:ezequielsc017@gmail.com" 
-                className="footer-email-link"
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" 
-                  stroke="currentColor" strokeWidth="1.8">
-                  <path d="M22 6L12 13L2 6M4 6h16v12H4V6z" 
-                    strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                ezequielsc017@gmail.com
-              </a>
-              
-              <div className="footer-social-links">
-                {SOCIAL_LINKS.map(({ label, href, icon }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="footer-social-btn"
-                    aria-label={label}
+            <div className="footer-links-section">
+              <h4>Navegación</h4>
+
+              <div className="footer-links-grid">
+                {NAV_LINKS.map(({ label, href }) => (
+                  <a 
+                    key={href} 
+                    href={href} 
+                    className="footer-link"
+                    onClick={(e) => handleNavClick(e, href)}
                   >
-                    {icon}
+                    <span className="link-arrow">→</span>
+                    {label}
                   </a>
                 ))}
               </div>
             </div>
+
+            <div className="footer-contact-section">
+              <h4>Conectemos</h4>
+
+              <div className="footer-contact-info">
+                <a
+                  href="mailto:ezequielsc017@gmail.com"
+                  className="footer-email-link"
+                >
+                  <svg
+                    width="18"
+                    height="18"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.8"
+                  >
+                    <path
+                      d="M22 6L12 13L2 6M4 6h16v12H4V6z"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  ezequielsc017@gmail.com
+                </a>
+
+                <div className="footer-social-links">
+                  {SOCIAL_LINKS.map(({ label, href, icon }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="footer-social-btn"
+                      aria-label={label}
+                    >
+                      {icon}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="footer-legal">
+            <button 
+              className="footer-legal-link"
+              onClick={() => setShowPrivacyPolicy(true)}
+            >
+              Política de Privacidad
+            </button>
+          </div>
+
+          <div className="footer-bottom">
+            <p className="footer-copyright">
+              <span className="copyright-icon">©</span>
+              {year} Ezequiel Salazar — Todos los derechos reservados.
+            </p>
+
+            <p className="footer-tagline">
+              <span className="tagline-dot"></span>
+              Elegancia en diseño, eficiencia en código
+              <span className="tagline-dot"></span>
+            </p>
           </div>
         </div>
+      </footer>
 
-        {/* Barra inferior */}
-        <div className="footer-bottom">
-          <p className="footer-copyright">
-            <span className="copyright-icon">©</span>
-            {year} Ezequiel Salazar — Todos los derechos reservados.
-          </p>
-          <p className="footer-tagline">
-            <span className="tagline-dot"></span>
-            Elegancia en diseño, eficiencia en código
-            <span className="tagline-dot"></span>
-          </p>
+      {/* Modal de Política de Privacidad */}
+      {showPrivacyPolicy && (
+        <div className="privacy-modal-overlay" onClick={() => setShowPrivacyPolicy(false)}>
+          <div className="privacy-modal-container" onClick={(e) => e.stopPropagation()}>
+            <button className="privacy-modal-close" onClick={() => setShowPrivacyPolicy(false)}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+
+            <div className="privacy-modal-content">
+              <span className="privacy-badge">Portafolio personal</span>
+
+              <h1>Política de Privacidad</h1>
+
+              <p className="privacy-updated">
+                Última actualización: Junio 2026
+              </p>
+
+              <div className="info-section">
+                <svg className="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="12" y1="8" x2="12" y2="12"></line>
+                  <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                </svg>
+                <div>
+                  <h2>Recopilación de información</h2>
+                  <p>
+                    Este sitio web recopila información proporcionada voluntariamente
+                    por los usuarios a través del formulario de contacto, incluyendo
+                    nombre, correo electrónico y mensaje.
+                  </p>
+                </div>
+              </div>
+
+              <div className="info-section">
+                <svg className="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <path d="M21 10.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9.5"></path>
+                  <polyline points="16 2 22 8 16 8"></polyline>
+                  <line x1="10" y1="14" x2="21" y2="14"></line>
+                  <line x1="10" y1="18" x2="18" y2="18"></line>
+                  <line x1="3" y1="10" x2="8" y2="10"></line>
+                </svg>
+                <div>
+                  <h2>Uso de la información</h2>
+                  <p>
+                    La información enviada se utiliza únicamente para responder
+                    consultas, propuestas, solicitudes de contacto o mensajes
+                    relacionados con proyectos profesionales.
+                  </p>
+                </div>
+              </div>
+
+              <div className="info-section">
+                <svg className="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+                  <path d="m22 7-10 7L2 7"></path>
+                </svg>
+                <div>
+                  <h2>Uso de EmailJS</h2>
+                  <p>
+                    Este portafolio utiliza EmailJS para gestionar el envío de mensajes
+                    desde el formulario de contacto. Los datos ingresados pueden ser
+                    procesados por este servicio para permitir la entrega del correo.
+                  </p>
+                </div>
+              </div>
+
+              <div className="info-section">
+                <svg className="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <div>
+                  <h2>Protección de datos</h2>
+                  <p>
+                    No vendo, alquilo ni comparto información personal con terceros para
+                    fines comerciales. La información recibida se maneja únicamente con
+                    fines de comunicación.
+                  </p>
+                </div>
+              </div>
+
+              <div className="info-section">
+                <svg className="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h6"></path>
+                  <path d="M16 2h6v6"></path>
+                  <path d="m15 9-6 6"></path>
+                  <path d="M12 15h3v-3"></path>
+                </svg>
+                <div>
+                  <h2>Eliminación de datos</h2>
+                  <p>
+                    Si deseas solicitar la eliminación de tus datos o realizar alguna
+                    consulta relacionada con esta política, puedes contactarme a través
+                    del formulario de contacto de este sitio.
+                  </p>
+                </div>
+              </div>
+
+              <div className="privacy-owner">
+                <svg className="owner-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+                <div>
+                  <strong>Orlando Ezequiel Salazar Cruz</strong>
+                  <span>         ---Desarrollador de Software</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
-      </div>
-    </footer>
+      )}
+    </>
   );
 };
 
