@@ -379,7 +379,7 @@ export const projects: Project[] = [
   id: 17,
   title: 'SkillMatch - Plataforma de Formación de Equipos',
   description: 'Plataforma web diseñada para analizar habilidades, intereses y roles de estudiantes con el fin de generar equipos de trabajo equilibrados para proyectos académicos y eventos de innovación.',
-  image: '/proyectos/web/skill.png',
+  image: '/proyectos/web/skill.webp',
   icon: '/icons/react.svg',
   type: 'web',
   technologies: [
@@ -478,7 +478,7 @@ export const projects: Project[] = [
     id: 6,
     title: 'Células Plenum',
     description: 'Plataforma web informativa para el programa de formación "Células Plenum".',
-    image: '/proyectos/web/image1.png',
+    image: '/proyectos/web/plenum.webp',
     icon: '/icons/bootstrap.svg',
     type: 'web',
     technologies: [
