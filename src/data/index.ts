@@ -196,7 +196,7 @@ export const certificates: Certificate[] = [
 
 ];
 
-// ===== PROYECTOS CON TEXTOS ENRIQUECIDOS =====
+// ===== PROYECTOS=====
 export const projects: Project[] = [
   // ===== APLICACIONES MÓVILES =====
   {
@@ -403,7 +403,40 @@ export const projects: Project[] = [
   ],
   impact: 'La landing page fortaleció la presencia digital del evento, facilitó la difusión de la información y proporcionó una experiencia visual profesional para los asistentes potenciales.'
 },
-
+{
+  id: 19,
+  title: 'Jobly',
+  description: 'Plataforma web desarrollada en Angular para explorar vacantes tecnológicas, filtrar oportunidades por categoría, guardar empleos favoritos y consultar detalles de cada oferta desde una interfaz moderna, responsiva y minimalista.',
+  image: '/icons/jobly.png',
+  icon: '/icons/angular.svg.svg',
+  type: 'web',
+  technologies: [
+    { name: 'Angular', icon: '/icons/angular.svg.svg', bgColor: 'bg-red-500' },
+    { name: 'TypeScript', icon: '/icons/tp.svg', bgColor: 'bg-blue-500' },
+    { name: 'Tailwind CSS', icon: '/icons/tailwind.svg', bgColor: 'bg-cyan-500' },
+    { name: 'API REST', icon: '/icons/api.svg.svg', bgColor: 'bg-green-500' },
+    { name: 'Vercel', icon: '/icons/Vercel.svg', bgColor: 'bg-black' },
+  ],
+  images: [
+    '/proyectos/jobly/1.png',
+    '/proyectos/jobly/2.png',
+    '/proyectos/jobly/3.png'
+  ],
+  color: 'blue',
+  github: 'https://github.com/Ezequie1Sc/techhire-dashboard.git',
+  demoUrl: 'https://techhire-dashboard.vercel.app/',
+  problem: 'Los usuarios que buscan empleo en tecnología suelen navegar entre múltiples plataformas con interfaces saturadas, filtros poco claros y una experiencia poco práctica para encontrar, guardar y revisar oportunidades relevantes.',
+  solution: 'Se desarrolló una aplicación web moderna con Angular que centraliza vacantes tecnológicas en una interfaz limpia, rápida y responsiva. La plataforma permite explorar empleos, aplicar filtros por categoría, consultar detalles y guardar vacantes favoritas mediante almacenamiento local.',
+  howItWorks: [
+    'Consume vacantes desde una API externa de empleos tecnológicos',
+    'Muestra las oportunidades en tarjetas limpias y responsivas',
+    'Permite filtrar empleos por categoría o tecnología',
+    'Incluye una vista de detalle para consultar la información completa de cada vacante',
+    'Permite guardar y administrar vacantes favoritas con localStorage',
+    'Cuenta con diseño adaptable para dispositivos móviles y de escritorio'
+  ],
+  impact: 'Jobly ofrece una experiencia más clara y ordenada para buscar empleos tecnológicos, reduciendo la saturación visual y facilitando que los usuarios encuentren oportunidades relevantes de forma rápida desde cualquier dispositivo.'
+},
    {
     id: 6,
     title: 'Células Plenum',
