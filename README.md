@@ -11,7 +11,7 @@ u<div align="center">
 
   <br />
   
-  <img src="C:\Users\EZEQUIEL SALAZAR\Documents\Portafolio\public\image.png" width="800" alt="Portafolio Preview" />
+  <img src="./public/image.png" width="800" alt="Portafolio Preview" />
   
   <br />
   
