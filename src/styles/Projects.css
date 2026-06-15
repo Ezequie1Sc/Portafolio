@@ -1,8 +1,3 @@
-/* ========================================
-   PROJECTS SECTION - OPTIMIZADO v3
-   Fix: sintaxis animación, align-items grid, transición de vista
-   ======================================== */
-
 :root {
   --bg-projects: #172031;
   --text-white: #ffffff;
@@ -26,14 +21,10 @@
   --radius-sm: 8px;
   --radius-full: 2rem;
 
-  /* FIX: duraciones separadas — las variables de transición (all 0.2s ease)
-     NO son válidas como timing-function en animation shorthand */
   --dur-fast: 0.2s;
   --dur-base: 0.3s;
   --ease: ease;
   --ease-out: ease-out;
-
-  --blur-effect: blur(5px);
 }
 
 /* ===== BASE SECTION ===== */
@@ -41,8 +32,8 @@
   padding: var(--spacing-4xl) 0;
   background: var(--bg-projects);
   position: relative;
-  overflow: hidden;
-  isolation: isolate;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .projects-section::before {
@@ -116,7 +107,7 @@
   gap: var(--spacing-xs);
   padding: 0.5rem 1.25rem;
   border-radius: var(--radius-full);
-  background: transparent;
+  background: rgba(255, 255, 255, 0.02);
   border: 1px solid var(--border-light);
   color: var(--text-light);
   font-size: 0.85rem;
@@ -126,10 +117,7 @@
     background var(--dur-fast) var(--ease),
     border-color var(--dur-fast) var(--ease),
     color var(--dur-fast) var(--ease),
-    box-shadow var(--dur-fast) var(--ease),
-    transform var(--dur-fast) var(--ease);
-  backdrop-filter: var(--blur-effect);
-  -webkit-backdrop-filter: var(--blur-effect);
+    box-shadow var(--dur-fast) var(--ease);
   user-select: none;
 }
 
@@ -143,7 +131,6 @@
 }
 
 .filter-btn:hover {
-  transform: translateY(-2px);
   color: var(--text-white);
   border-color: var(--blue);
 }
@@ -153,7 +140,6 @@
 }
 
 .filter-btn.active {
-  transform: translateY(-2px);
   color: var(--text-white);
   background: var(--blue);
   border-color: var(--blue);
@@ -164,11 +150,7 @@
   stroke: var(--text-white);
 }
 
-.filter-btn:active {
-  transform: translateY(0);
-}
-
-/* ===== CATEGORÍAS Y GRID ===== */
+/* ===== CATEGORÍAS ===== */
 .projects-categories {
   display: flex;
   flex-direction: column;
@@ -177,9 +159,7 @@
 
 .project-category {
   width: 100%;
-  /* FIX: timing-function correcta, no una variable de transición completa.
-     "both" aplica fill-mode en entrada y salida. */
-  animation: fadeInUp 0.5s var(--ease-out) both;
+  min-width: 0;
 }
 
 .category-title {
@@ -202,9 +182,6 @@
   height: 32px;
   background: rgba(59, 130, 246, 0.1);
   border-radius: var(--radius-sm);
-  transition:
-    background var(--dur-fast) var(--ease),
-    transform var(--dur-fast) var(--ease);
   flex-shrink: 0;
 }
 
@@ -215,43 +192,32 @@
   stroke-width: 2;
 }
 
-.category-title:hover .category-icon {
-  background: rgba(59, 130, 246, 0.15);
-  transform: scale(1.05);
-}
-
-/* ===== GRID SYSTEM =====
-   FIX: align-items: start evita que las cards se estiren al alto de
-   la más alta en la misma fila — esto deformaba el botón expand
-   y causaba saltos visuales al expandir contenido. */
+/* ===== GRID ===== */
 .category-grid {
   display: grid;
   gap: var(--spacing-xl);
   width: 100%;
-  grid-template-columns: repeat(3, 1fr);
+  min-width: 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: start;
 }
 
-/* ===== CONTENEDOR DE VISTA =====
-   FIX: envoltura para transición suave al cambiar entre
-   vista "todos" y vista filtrada. La key en React fuerza
-   remount y dispara la animación en cada cambio de filtro. */
-.view-container {
-  animation: fadeInUp 0.3s var(--ease-out) both;
+.view-container,
+.filtered-view {
+  width: 100%;
+  min-width: 0;
 }
-
-
 
 /* ===== RESPONSIVE ===== */
 @media (min-width: 640px) and (max-width: 1023px) {
   .category-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 639px) {
   .category-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -292,15 +258,33 @@
   }
 }
 
-/* ===== ANIMACIONES ===== */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+/* ===== FIX ANDROID / TOUCH ===== */
+@media (hover: none), (pointer: coarse) {
+  .projects-section,
+  .project-category,
+  .view-container,
+  .filtered-view,
+  .category-grid,
+  .filter-btn,
+  .category-icon,
+  .projects-main-title::after {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+    contain: none !important;
+    backface-visibility: visible !important;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .filter-btn {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active,
+  .category-title:hover .category-icon {
+    transform: none !important;
   }
 }
 
@@ -313,11 +297,6 @@
   .projects-main-title::after {
     animation: none !important;
     transition: none !important;
-  }
-
-  .filter-btn:hover,
-  .filter-btn.active {
-    transform: none;
   }
 }
 
