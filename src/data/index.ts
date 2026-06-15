@@ -317,7 +317,7 @@ export const projects: Project[] = [
     id: 15,
     title: 'Restaurant Website',
     description: 'Plataforma web para venta de desayunos sorpresa con contacto directo vía WhatsApp.',
-    image: '/proyectos/web/webcasita.png',
+    image: '/proyectos/web/webcasita.webp',
     icon: '/icons/react.svg',
     type: 'web',
     technologies: [
@@ -343,7 +343,7 @@ export const projects: Project[] = [
   id: 16,
   title: 'Sitio Web para Técnico de Climatización',
   description: 'Página web profesional para promocionar servicios de climatización, instalaciones y mantenimiento con contacto directo vía WhatsApp.',
-  image: '/proyectos/web/Tecnico.png',
+  image: '/proyectos/web/Tecnico.webp',
   icon: '/icons/html.svg',
   type: 'web',
   technologies: [
@@ -375,7 +375,7 @@ export const projects: Project[] = [
   id: 18,
   title: 'Kermés Rockera 2026',
   description: 'Landing page promocional desarrollada para difundir la Kermés Rockera 2026, un evento organizado por la Fundación Avanza Amor y Liderazgo Vida, con información del evento, temática, actividades y medios de contacto.',
-  image: '/proyectos/web/kermes.png',
+  image: '/proyectos/web/kermes.webp',
   icon: '/icons/html.svg',
   type: 'web',
   technologies: [
@@ -503,7 +503,7 @@ export const projects: Project[] = [
   id: 16,
   title: 'Atmosfera — Dashboard Meteorologico',
   description: 'App del clima con diseno editorial que consume APIs REST gratuitas para mostrar datos meteorologicos en tiempo real de cualquier ciudad del mundo.',
-  image: '/proyectos/web/atmosfera.png',
+  image: '/proyectos/web/atmosfera.webp',
   icon: '/icons/js.svg',
   type: 'web',
   technologies: [
