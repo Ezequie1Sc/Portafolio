@@ -313,97 +313,8 @@ export const projects: Project[] = [
 
   // ===== APLICACIONES WEB =====
  
-  {
-    id: 15,
-    title: 'Restaurant Website',
-    description: 'Plataforma web para venta de desayunos sorpresa con contacto directo vía WhatsApp.',
-    image: '/proyectos/web/webcasita.webp',
-    icon: '/icons/react.svg',
-    type: 'web',
-    technologies: [
-      { name: 'HTML', icon: '/icons/html.svg', bgColor: 'bg-orange-600' },
-      { name: 'CSS', icon: '/icons/css.svg', bgColor: 'bg-blue-600' },
-      { name: 'TypeScript', icon: '/icons/tp.svg', bgColor: 'bg-blue-600' },
-    ],
-    images: ['/proyectos/plenum/1.png', '/proyectos/plenum/2.png', '/proyectos/plenum/3.png'],
-    color: 'orange',
-    github: 'https://github.com/Ezequie1Sc/web-casita',
-    demoUrl: 'https://web-casita.vercel.app/',
-    problem: 'Negocios gastronómicos no tenían presencia digital para recibir pedidos.',
-    solution: 'Landing page optimizada que conecta directamente con WhatsApp.',
-    howItWorks: [
-      'Galería visual de productos',
-      'Sistema de personalización',
-      'Botón flotante de WhatsApp',
-      'Diseño responsive'
-    ],
-    impact: 'Aumentó pedidos en 200% en el primer mes.'
-  },
-{
-  id: 16,
-  title: 'Sitio Web para Técnico de Climatización',
-  description: 'Página web profesional para promocionar servicios de climatización, instalaciones y mantenimiento con contacto directo vía WhatsApp.',
-  image: '/proyectos/web/Tecnico.webp',
-  icon: '/icons/html.svg',
-  type: 'web',
-  technologies: [
-    { name: 'HTML', icon: '/icons/html.svg', bgColor: 'bg-orange-600' },
-    { name: 'CSS', icon: '/icons/css.svg', bgColor: 'bg-blue-600' },
-    { name: 'JavaScript', icon: '/icons/javascript.svg', bgColor: 'bg-yellow-500' },
-  ],
-  images: [
-    '/proyectos/tecnico/1.png',
-    '/proyectos/tecnico/2.png',
-    '/proyectos/tecnico/3.png'
-  ],
-  color: 'blue',
-  github: 'https://github.com/Ezequie1Sc/IceCold.git',
-  demoUrl: 'https://tenico-miguel.vercel.app/',
-  problem: 'Muchos técnicos independientes carecen de una presencia digital profesional para mostrar sus servicios y facilitar el contacto con clientes potenciales.',
-  solution: 'Desarrollo de una landing page moderna y responsive que presenta los servicios ofrecidos y permite la comunicación inmediata mediante WhatsApp.',
-  howItWorks: [
-    'Presentación de servicios de climatización',
-    'Galería de trabajos realizados',
-    'Información de contacto visible',
-    'Botón flotante de WhatsApp',
-    'Diseño adaptable a dispositivos móviles'
-  ],
-  impact: 'Mejoró la visibilidad online del negocio y facilitó la captación de nuevos clientes.'
-},
 
-{
-  id: 18,
-  title: 'Kermés Rockera 2026',
-  description: 'Landing page promocional desarrollada para difundir la Kermés Rockera 2026, un evento organizado por la Fundación Avanza Amor y Liderazgo Vida, con información del evento, temática, actividades y medios de contacto.',
-  image: '/proyectos/web/kermes.webp',
-  icon: '/icons/html.svg',
-  type: 'web',
-  technologies: [
-    { name: 'HTML5', icon: '/icons/html.svg', bgColor: 'bg-orange-500' },
-    { name: 'CSS3', icon: '/icons/css.svg', bgColor: 'bg-blue-500' },
-    { name: 'JavaScript', icon: '/icons/javascript.svg', bgColor: 'bg-yellow-500' },
-    { name: 'Vercel', icon: '/icons/Vercel.svg', bgColor: 'bg-black' },
-  ],
-  images: [
-    '/proyectos/kermes/1.png',
-    '/proyectos/kermes/2.png',
-    '/proyectos/kermes/3.png'
-  ],
-  color: 'blue',
-  github: 'https://github.com/Ezequie1Sc/Kermes.git',
-  demoUrl: 'https://kermes-six.vercel.app/',
-  problem: 'La Fundación Avanza Amor y Liderazgo Vida necesitaba una forma moderna y accesible de promocionar la Kermés Rockera 2026, centralizando la información del evento y facilitando su difusión en redes sociales y medios digitales.',
-  solution: 'Se desarrolló una landing page responsiva con una identidad visual inspirada en la temática rockera del evento. El sitio permite presentar información relevante de manera clara y atractiva, mejorando el alcance y la experiencia de los visitantes.',
-  howItWorks: [
-    'Presenta la información principal del evento en una sección destacada',
-    'Muestra detalles como fecha, horario y temática',
-    'Incluye información sobre la fundación organizadora',
-    'Facilita el acceso a redes sociales y canales de contacto',
-    'Se adapta automáticamente a dispositivos móviles y de escritorio'
-  ],
-  impact: 'La landing page fortaleció la presencia digital del evento, facilitó la difusión de la información y proporcionó una experiencia visual profesional para los asistentes potenciales.'
-},
-{
+  {
   id: 19,
   title: 'Jobly',
   description: 'Plataforma web desarrollada en Angular para explorar vacantes tecnológicas, filtrar oportunidades por categoría, guardar empleos favoritos y consultar detalles de cada oferta desde una interfaz moderna, responsiva y minimalista.',
@@ -437,33 +348,32 @@ export const projects: Project[] = [
   ],
   impact: 'Jobly ofrece una experiencia más clara y ordenada para buscar empleos tecnológicos, reduciendo la saturación visual y facilitando que los usuarios encuentren oportunidades relevantes de forma rápida desde cualquier dispositivo.'
 },
-   {
-    id: 6,
-    title: 'Células Plenum',
-    description: 'Plataforma web informativa para el programa de formación "Células Plenum".',
-    image: '/proyectos/web/image1.png',
-    icon: '/icons/bootstrap.svg',
+  {
+    id: 15,
+    title: 'Restaurant Website',
+    description: 'Plataforma web para venta de desayunos sorpresa con contacto directo vía WhatsApp.',
+    image: '/proyectos/web/webcasita.webp',
+    icon: '/icons/react.svg',
     type: 'web',
     technologies: [
       { name: 'HTML', icon: '/icons/html.svg', bgColor: 'bg-orange-600' },
       { name: 'CSS', icon: '/icons/css.svg', bgColor: 'bg-blue-600' },
-      { name: 'Bootstrap', icon: '/icons/bootstrap.svg', bgColor: 'bg-purple-600' },
+      { name: 'TypeScript', icon: '/icons/tp.svg', bgColor: 'bg-blue-600' },
     ],
     images: ['/proyectos/plenum/1.png', '/proyectos/plenum/2.png', '/proyectos/plenum/3.png'],
-    color: 'blue',
-    github: 'https://github.com/Ezequie1Sc/Practica-Web',
-    demoUrl: 'https://practica-web-kappa.vercel.app/',
-    problem: 'El programa formativo no tenía presencia digital profesional.',
-    solution: 'Sitio web moderno que presenta información de manera organizada y atractiva.',
+    color: 'orange',
+    github: 'https://github.com/Ezequie1Sc/web-casita',
+    demoUrl: 'https://web-casita.vercel.app/',
+    problem: 'Negocios gastronómicos no tenían presencia digital para recibir pedidos.',
+    solution: 'Landing page optimizada que conecta directamente con WhatsApp.',
     howItWorks: [
-      'Navegación por unidades temáticas',
-      'Sección de estadísticas interactivas',
-      'Galería de recursos descargables',
-      'Formulario de contacto integrado'
+      'Galería visual de productos',
+      'Sistema de personalización',
+      'Botón flotante de WhatsApp',
+      'Diseño responsive'
     ],
-    impact: 'Aumentó consultas al programa en 150%.'
+    impact: 'Aumentó pedidos en 200% en el primer mes.'
   },
-
 
   {
   id: 17,
@@ -498,6 +408,100 @@ export const projects: Project[] = [
   ],
   impact: 'Facilitó la organización de equipos de trabajo, mejoró la distribución de habilidades dentro de los grupos y permitió a docentes y organizadores tomar decisiones basadas en datos para optimizar proyectos colaborativos.'
 },
+{
+  id: 18,
+  title: 'Kermés Rockera 2026',
+  description: 'Landing page promocional desarrollada para difundir la Kermés Rockera 2026, un evento organizado por la Fundación Avanza Amor y Liderazgo Vida, con información del evento, temática, actividades y medios de contacto.',
+  image: '/proyectos/web/kermes.webp',
+  icon: '/icons/html.svg',
+  type: 'web',
+  technologies: [
+    { name: 'HTML5', icon: '/icons/html.svg', bgColor: 'bg-orange-500' },
+    { name: 'CSS3', icon: '/icons/css.svg', bgColor: 'bg-blue-500' },
+    { name: 'JavaScript', icon: '/icons/javascript.svg', bgColor: 'bg-yellow-500' },
+    { name: 'Vercel', icon: '/icons/Vercel.svg', bgColor: 'bg-black' },
+  ],
+  images: [
+    '/proyectos/kermes/1.png',
+    '/proyectos/kermes/2.png',
+    '/proyectos/kermes/3.png'
+  ],
+  color: 'blue',
+  github: 'https://github.com/Ezequie1Sc/Kermes.git',
+  demoUrl: 'https://kermes-six.vercel.app/',
+  problem: 'La Fundación Avanza Amor y Liderazgo Vida necesitaba una forma moderna y accesible de promocionar la Kermés Rockera 2026, centralizando la información del evento y facilitando su difusión en redes sociales y medios digitales.',
+  solution: 'Se desarrolló una landing page responsiva con una identidad visual inspirada en la temática rockera del evento. El sitio permite presentar información relevante de manera clara y atractiva, mejorando el alcance y la experiencia de los visitantes.',
+  howItWorks: [
+    'Presenta la información principal del evento en una sección destacada',
+    'Muestra detalles como fecha, horario y temática',
+    'Incluye información sobre la fundación organizadora',
+    'Facilita el acceso a redes sociales y canales de contacto',
+    'Se adapta automáticamente a dispositivos móviles y de escritorio'
+  ],
+  impact: 'La landing page fortaleció la presencia digital del evento, facilitó la difusión de la información y proporcionó una experiencia visual profesional para los asistentes potenciales.'
+},
+
+{
+  id: 16,
+  title: 'Sitio Web para Técnico de Climatización',
+  description: 'Página web profesional para promocionar servicios de climatización, instalaciones y mantenimiento con contacto directo vía WhatsApp.',
+  image: '/proyectos/web/Tecnico.webp',
+  icon: '/icons/html.svg',
+  type: 'web',
+  technologies: [
+    { name: 'HTML', icon: '/icons/html.svg', bgColor: 'bg-orange-600' },
+    { name: 'CSS', icon: '/icons/css.svg', bgColor: 'bg-blue-600' },
+    { name: 'JavaScript', icon: '/icons/javascript.svg', bgColor: 'bg-yellow-500' },
+  ],
+  images: [
+    '/proyectos/tecnico/1.png',
+    '/proyectos/tecnico/2.png',
+    '/proyectos/tecnico/3.png'
+  ],
+  color: 'blue',
+  github: 'https://github.com/Ezequie1Sc/IceCold.git',
+  demoUrl: 'https://tenico-miguel.vercel.app/',
+  problem: 'Muchos técnicos independientes carecen de una presencia digital profesional para mostrar sus servicios y facilitar el contacto con clientes potenciales.',
+  solution: 'Desarrollo de una landing page moderna y responsive que presenta los servicios ofrecidos y permite la comunicación inmediata mediante WhatsApp.',
+  howItWorks: [
+    'Presentación de servicios de climatización',
+    'Galería de trabajos realizados',
+    'Información de contacto visible',
+    'Botón flotante de WhatsApp',
+    'Diseño adaptable a dispositivos móviles'
+  ],
+  impact: 'Mejoró la visibilidad online del negocio y facilitó la captación de nuevos clientes.'
+},
+
+
+   {
+    id: 6,
+    title: 'Células Plenum',
+    description: 'Plataforma web informativa para el programa de formación "Células Plenum".',
+    image: '/proyectos/web/image1.png',
+    icon: '/icons/bootstrap.svg',
+    type: 'web',
+    technologies: [
+      { name: 'HTML', icon: '/icons/html.svg', bgColor: 'bg-orange-600' },
+      { name: 'CSS', icon: '/icons/css.svg', bgColor: 'bg-blue-600' },
+      { name: 'Bootstrap', icon: '/icons/bootstrap.svg', bgColor: 'bg-purple-600' },
+    ],
+    images: ['/proyectos/plenum/1.png', '/proyectos/plenum/2.png', '/proyectos/plenum/3.png'],
+    color: 'blue',
+    github: 'https://github.com/Ezequie1Sc/Practica-Web',
+    demoUrl: 'https://practica-web-kappa.vercel.app/',
+    problem: 'El programa formativo no tenía presencia digital profesional.',
+    solution: 'Sitio web moderno que presenta información de manera organizada y atractiva.',
+    howItWorks: [
+      'Navegación por unidades temáticas',
+      'Sección de estadísticas interactivas',
+      'Galería de recursos descargables',
+      'Formulario de contacto integrado'
+    ],
+    impact: 'Aumentó consultas al programa en 150%.'
+  },
+
+
 
 {
   id: 16,
