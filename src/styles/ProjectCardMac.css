@@ -664,6 +664,19 @@
     transform: none;
   }
 }
+
+/* ============================================================
+   FIX GLITCH ANDROID (Chrome/WebView móvil)
+   ------------------------------------------------------------
+   Igual que en ProjectCard.css: animar grid-template-rows
+   0fr -> 1fr en .mac-expandable-wrapper, junto con overflow:hidden
+   y contain en .project-card-mac, provoca corrupción del
+   compositor (ruido/glitch) en Chrome para Android al pulsar
+   "Más información" / "Ver detalles".
+
+   Solución: en táctil, quitamos esa transición animada y
+   alternamos el contenido con max-height instantáneo.
+   ============================================================ */
 @media (hover: none), (pointer: coarse) {
   .project-card,
   .project-card-mac,
@@ -682,5 +695,22 @@
   .project-card:hover .project-video,
   .project-card-mac:hover .mac-image-wrapper img {
     transform: none !important;
+  }
+
+  .mac-expandable-wrapper {
+    display: block !important;
+    grid-template-rows: unset !important;
+    transition: none !important;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 1 !important;
+  }
+
+  .mac-expandable-wrapper.open {
+    max-height: none;
+  }
+
+  .mac-accordion-body {
+    transition: none !important;
   }
 }
