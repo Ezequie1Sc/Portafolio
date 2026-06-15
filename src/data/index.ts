@@ -318,7 +318,7 @@ export const projects: Project[] = [
   id: 19,
   title: 'Jobly',
   description: 'Plataforma web desarrollada en Angular para explorar vacantes tecnológicas, filtrar oportunidades por categoría, guardar empleos favoritos y consultar detalles de cada oferta desde una interfaz moderna, responsiva y minimalista.',
-  image: '/icons/jobly.png',
+  image: '/icons/jobly.webp',
   icon: '/icons/angular.svg.svg',
   type: 'web',
   technologies: [
