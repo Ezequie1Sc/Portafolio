@@ -570,8 +570,9 @@ export const projects: Project[] = [
     id: 8,
     title: 'Portafolio Web',
     description: 'Portafolio profesional con React y TypeScript.',
-    image: '/proyectos/web/image.png',
+    image: 'public\image.png',
     icon: '/icons/react.svg',
+    
     type: 'web',
     technologies: [
       { name: 'React', icon: '/icons/react.svg', bgColor: 'bg-cyan-600' },
