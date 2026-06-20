@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../../styles/Header.css'; 
 
 interface HeaderProps {
   darkMode: boolean;
@@ -63,10 +64,11 @@ const Header = ({ darkMode, toggleDarkMode, mobileMenuOpen, setMobileMenuOpen }:
   return (
     <header className={`header ${scrolled ? 'header-scrolled' : ''}`}>
       <div className="header-container">
+        
+        {/* LOGO A LA IZQUIERDA (SIN TEXTO) */}
         <div className="brand-wrapper">
           <a href="#inicio" className="brand-link" onClick={(e) => handleNavClick(e, '#inicio')}>
-            <h1 className="brand-name">Ezequiel Salazar</h1>
-            <div className="brand-underline"></div>
+            <img src="/logo_sin.png" alt="Logo Ezequiel" className="brand-logo-eze" />
           </a>
         </div>
         
@@ -114,31 +116,39 @@ const Header = ({ darkMode, toggleDarkMode, mobileMenuOpen, setMobileMenuOpen }:
             ))}
           </div>
 
+          {/* ÚNICO BOTÓN DE HAMBURGUESA / CIERRE (INTELIGENTE) */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`mobile-menu-toggle ${mobileMenuOpen ? 'active' : ''}`}
+            className="mobile-menu-toggle"
             aria-label="Menú"
           >
-            <span className="toggle-bar"></span>
-            <span className="toggle-bar"></span>
-            <span className="toggle-bar"></span>
+            {/* Cuando está abierto: muestra una 'X' con degradado. Cuando está cerrado: muestra las 3 líneas */}
+            {mobileMenuOpen ? (
+              <svg viewBox="0 0 24 24" fill="none" className="hamburger-x-icon">
+                <path d="M6 18L18 6M6 6l12 12" stroke="url(#gradient-x)" strokeWidth="2.5" strokeLinecap="round" />
+                <defs>
+                  <linearGradient id="gradient-x" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#3b82f6" />
+                    <stop offset="100%" stopColor="#8b5cf6" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            ) : (
+              <>
+                <span className="toggle-bar"></span>
+                <span className="toggle-bar"></span>
+                <span className="toggle-bar"></span>
+              </>
+            )}
           </button>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* ÚNICO MENÚ MÓVIL (YA NO HAY DOS) */}
       <div className={`mobile-menu ${mobileMenuOpen ? 'open' : ''}`}>
         <div className="mobile-menu-header">
           <h2 className="mobile-brand-name">Ezequiel Salazar</h2>
-          <button
-            onClick={() => setMobileMenuOpen(false)}
-            className="mobile-menu-close"
-            aria-label="Cerrar menú"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M6 18L18 6M6 6l12 12" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
+          {/* Este botón de cerrar del menú desplegable se ha eliminado para evitar la doble X */}
         </div>
         
         <nav className="mobile-nav">
