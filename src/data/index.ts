@@ -395,8 +395,8 @@ export const projects: Project[] = [
     '/proyectos/skillmatch/3.png'
   ],
   color: 'purple',
-  github: 'https://github.com/Arturo-Chi/Skill_Match_Frontend',
-  demoUrl: 'https://skill-match-frontend-lemon.vercel.app/landing-page',
+  github: 'https://github.com/Ezequie1Sc/skill-match-demo.git',
+  demoUrl: 'https://skill-match-demo-nine.vercel.app/landing-page',
   problem: 'La formación de equipos en proyectos académicos suele realizarse de manera informal, basándose en amistades o decisiones rápidas, lo que genera grupos desequilibrados, distribución desigual de responsabilidades y una menor eficiencia en el desarrollo de proyectos.',
   solution: 'Se desarrolló una plataforma web que permite registrar perfiles de estudiantes, analizar habilidades, intereses y roles preferidos para generar equipos equilibrados de forma automática, mejorando la colaboración y organización.',
   howItWorks: [
