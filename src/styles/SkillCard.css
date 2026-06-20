@@ -292,3 +292,42 @@
     padding: 1rem;
   }
 }
+/* Asegurar que la cuadrícula de iconos se adapte bien */
+.skill-icons-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columnas fijas */
+  gap: 0.8rem; /* Un poco más de espacio entre iconos */
+  flex: 1;
+  margin: 0.5rem 0;
+  align-content: center; /* Centra los iconos verticalmente si sobran espacios */
+}
+
+/* Ajuste específico para el icono de Tailwind (si es blanco se pierde en el borde) */
+.skill-icon-circle {
+  width: 65px; /* Un poco más pequeño para que quepan 4 en una fila */
+  height: 65px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+  margin-bottom: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.2s;
+}
+
+/* Ajuste para pantallas pequeñas (evitar que se salga el texto) */
+@media (max-width: 480px) {
+  .skill-card-wrapper {
+    height: 340px; /* Un poco más alto para que quepa la info */
+  }
+  .skill-icon-circle {
+    width: 50px;
+    height: 50px;
+    padding: 8px;
+  }
+  .skill-icons-grid {
+    gap: 0.5rem;
+  }
+}
