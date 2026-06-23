@@ -312,3 +312,62 @@
   white-space: nowrap;
   border: 0;
 }
+/* ===== FIX PARA MÓVIL: ASEGURAR QUE EL TEXTO SE VEA ===== */
+@media (max-width: 768px) {
+  .projects-subtitle {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-width: 100% !important;
+    padding: 0 1rem !important;
+    font-size: 0.95rem !important;
+    color: var(--text-gray) !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1.5rem !important;
+    text-align: center !important;
+    overflow: visible !important;
+    word-wrap: break-word !important;
+  }
+}
+
+/* ===== CORRECCIÓN DEL MEDIA QUERY TÁCTIL ===== */
+@media (hover: none), (pointer: coarse) {
+  /* Solo afecta a elementos animables, NO al texto */
+  .projects-section,
+  .project-category,
+  .view-container,
+  .filtered-view,
+  .category-grid,
+  .filter-btn,
+  .category-icon,
+  .projects-main-title::after {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+    contain: none !important;
+    backface-visibility: visible !important;
+  }
+
+  /* Asegurar que el título y subtítulo SIEMPRE se vean */
+  .projects-main-title,
+  .projects-subtitle {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+
+  .filter-btn {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active,
+  .category-title:hover .category-icon {
+    transform: none !important;
+  }
+}
