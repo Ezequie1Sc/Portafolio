@@ -66,81 +66,58 @@ const Header = ({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) => {
   return (
     <header className={`header ${scrolled ? 'header-scrolled' : ''}`}>
       <div className="header-container">
-        {/* Desktop Nav */}
-        <div className="nav-pill-wrapper">
-          <motion.nav className="nav-desktop nav-pill" initial={{ opacity: 0, y: -24, scale: 0.96 }} animate={{ opacity: 1, y: 0, scale: 1 }} transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}>
-            {navLinks.map((link, index) => (
-              <motion.a key={link.name} href={link.href} className={`nav-link ${activeSection === link.href.substring(1) ? 'nav-link-active' : ''}`} onClick={(e) => handleNavClick(e, link.href)} initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 + index * 0.06 }}>
-                <span>{link.name}</span>
-                <span className="nav-link-indicator" />
-              </motion.a>
-            ))}
-          </motion.nav>
-        </div>
-
-        {/* Mobile Toggle */}
-        <motion.button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className={`mobile-menu-toggle ${mobileMenuOpen ? 'mobile-menu-toggle-open' : ''}`} aria-label="Menú" initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}>
-          <span className="toggle-bar"></span>
-          <span className="toggle-bar"></span>
-          <span className="toggle-bar"></span>
+        
+        {/* Botón de MENU */}
+        <motion.button 
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+          className={`mobile-menu-toggle ${mobileMenuOpen ? 'mobile-menu-toggle-hidden' : ''}`} 
+          aria-label="Menú" 
+          initial={{ opacity: 0, y: -16 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ duration: 0.5 }}
+        >
+          <span className="toggle-text">MENU</span>
         </motion.button>
       </div>
 
-      {/* Mobile Menu - Efecto Persiana */}
+      {/* Menú desplegable - Animación lenta de expansión desde arriba */}
       <AnimatePresence>
         {mobileMenuOpen && (
-          <>
-            <motion.div 
-              className="mobile-menu-backdrop" 
-              initial={{ opacity: 0 }} 
-              animate={{ opacity: 1 }} 
-              exit={{ opacity: 0 }} 
-              onClick={() => setMobileMenuOpen(false)} 
-            />
-            
-            <motion.div 
-              className="mobile-menu" 
-              /* Aquí está la magia: baja desde arriba (translateY negativo) */
-              initial={{ opacity: 0, y: -150 }} 
-              animate={{ opacity: 1, y: 0 }} 
-              exit={{ opacity: 0, y: -150 }} 
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          <motion.div 
+            className="mobile-menu" 
+            initial={{ opacity: 0, scaleY: 0.5, y: -50 }} 
+            animate={{ opacity: 1, scaleY: 1, y: 0 }} 
+            exit={{ opacity: 0, scaleY: 0.5, y: -50 }} 
+            transition={{ 
+              duration: 0.6, 
+              ease: [0.25, 0.46, 0.45, 0.94] // Curva de aceleración suave al final
+            }}
+            style={{ transformOrigin: 'top center' }}
+          >
+            {/* Botón CERRAR */}
+            <button 
+              className="mobile-menu-close-btn" 
+              onClick={() => setMobileMenuOpen(false)}
             >
-              <div className="mobile-menu-top">
-                <div className="mobile-brand">
-                  <img src="/logo_sin.png" alt="Ezeq" />
-                  <span>Ezequiel</span>
-                </div>
-              </div>
+              CERRAR
+            </button>
 
-              <nav className="mobile-nav">
-                {navLinks.map((link) => (
-                  <motion.a 
-                    key={link.name} 
-                    href={link.href} 
-                    className={`mobile-nav-link ${activeSection === link.href.substring(1) ? 'mobile-nav-link-active' : ''}`} 
-                    onClick={(e) => handleNavClick(e, link.href)}
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.1 * navLinks.indexOf(link) }}
-                  >
-                    {link.name}
-                  </motion.a>
-                ))}
-              </nav>
-
-              <motion.a 
-                href="#proyectos" 
-                className="mobile-main-btn" 
-                onClick={(e) => handleNavClick(e, '#proyectos')}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-              >
-                Explorar proyectos
-              </motion.a>
-            </motion.div>
-          </>
+            <nav className="mobile-nav">
+              {navLinks.map((link, index) => (
+                <motion.a 
+                  key={link.name} 
+                  href={link.href} 
+                  className={`mobile-nav-link ${activeSection === link.href.substring(1) ? 'mobile-nav-link-active' : ''}`} 
+                  onClick={(e) => handleNavClick(e, link.href)}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                >
+                  {link.name.toUpperCase()}
+                </motion.a>
+              ))}
+            </nav>
+          </motion.div>
         )}
       </AnimatePresence>
     </header>
