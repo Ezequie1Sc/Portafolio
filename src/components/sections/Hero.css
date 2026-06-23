@@ -118,7 +118,7 @@
   animation: fadeIn 1s ease-out;
 }
 
-/* --- BOTONES PRINCIPALES (PROYECTOS Y SOBRE MÍ) --- */
+/* --- BOTONES --- */
 .hero-buttons {
   display: flex;
   flex-direction: row;
@@ -168,7 +168,7 @@
   transform: translateY(-2px);
 }
 
-/* --- BOTONES DE REDES SOCIALES (CUADRADOS) --- */
+/* --- BOTONES DE REDES SOCIALES --- */
 .hero-socials {
   display: flex;
   gap: 1rem;
@@ -206,7 +206,10 @@
   border-color: #3b82f6;
 }
 
-/* --- IMAGEN POLIGONAL --- */
+/* ========================================
+   IMAGEN POLIGONAL + FONDO RELLENO + GLITCH ELEGANTE
+   ======================================== */
+
 .hero-visual {
   flex: 1;
   position: relative;
@@ -218,14 +221,15 @@
 
 .profile-polygon-wrapper {
   position: relative;
-  width: 380px;
-  height: 460px;
+  width: 340px;
+  height: 420px;
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden; 
 }
 
+/* El fondo Azul (Sin bordes) */
 .hero-shape-background {
   position: absolute;
   width: 100%;
@@ -234,21 +238,34 @@
   clip-path: polygon(0 0, 80% 0, 100% 20%, 100% 100%, 20% 100%, 0 80%);
   z-index: 1;
   box-shadow: 0 20px 50px rgba(59, 130, 246, 0.3);
-  transition: transform 0.5s ease;
 }
 
-.hero-shape-background:hover {
-  transform: scale(1.02);
+/* 
+   NUEVO: Fondo Gris Oscuro dentro del recorte.
+   Esto evita que el PNG sin fondo se vea negro.
+*/
+.profile-polygon-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 5%; /* Ajustado al 94% de tamaño de la imagen */
+  left: 5%;
+  width: 94%;
+  height: 94%;
+  z-index: 2;
+  background-color: #2a3346; /* Color gris oscuro con matiz azulado */
+  clip-path: polygon(0 0, 80% 0, 100% 20%, 100% 100%, 20% 100%, 0 80%);
+  pointer-events: none;
 }
 
+/* La foto de perfil */
 .profile-img-polygon {
   position: relative;
-  z-index: 2;
-  width: 90%;
-  height: 90%;
+  z-index: 3;
+  width: 94%;
+  height: 94%;
   object-fit: cover;
   clip-path: polygon(0 0, 80% 0, 100% 20%, 100% 100%, 20% 100%, 0 80%);
-  background-color: #0f172a;
+  /* Quitamos el background-color oscuro porque ahora tenemos el fondo gris atrás */
   filter: grayscale(100%);
   transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -256,6 +273,77 @@
 .profile-img-polygon:hover {
   filter: grayscale(0%);
   transform: scale(1.08);
+}
+
+/* =============================================
+   NUEVO EFECTO GLITCH (CORTES HORIZONTALES SUTILES)
+   ============================================= */
+
+/* Creamos una capa encima de la foto que simula "ruido" digital */
+.profile-img-polygon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+  background: transparent;
+  animation: digitalGlitch 8s infinite steps(1);
+}
+
+@keyframes digitalGlitch {
+  0%, 100% { 
+    opacity: 0; 
+    transform: translateX(0); 
+    background: transparent;
+  }
+  5% { 
+    opacity: 0.4; 
+    transform: translateX(-3px); 
+    background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.5) 30%, rgba(0,0,0,0.5) 35%, transparent 35%);
+  }
+  5.5% { 
+    opacity: 0.3; 
+    transform: translateX(4px); 
+    background: linear-gradient(to bottom, transparent 65%, rgba(0,0,0,0.5) 65%, rgba(0,0,0,0.5) 70%, transparent 70%);
+  }
+  6% { 
+    opacity: 0; 
+    transform: translateX(0); 
+    background: transparent;
+  }
+  15% { 
+    opacity: 0.4; 
+    transform: translateX(-2px); 
+    background: linear-gradient(to bottom, transparent 10%, rgba(59, 130, 246, 0.3) 10%, rgba(59, 130, 246, 0.3) 15%, transparent 15%);
+  }
+  15.5% { 
+    opacity: 0; 
+    transform: translateX(0); 
+    background: transparent;
+  }
+  45% { 
+    opacity: 0.3; 
+    transform: translateX(5px); 
+    background: linear-gradient(to bottom, transparent 80%, rgba(0,0,0,0.4) 80%, rgba(0,0,0,0.4) 85%, transparent 85%);
+  }
+  45.5% { 
+    opacity: 0; 
+    transform: translateX(0); 
+    background: transparent;
+  }
+  70% { 
+    opacity: 0.2; 
+    transform: translateX(-3px); 
+    background: linear-gradient(to bottom, transparent 50%, rgba(139, 92, 246, 0.2) 50%, rgba(139, 92, 246, 0.2) 55%, transparent 55%);
+  }
+  70.5% { 
+    opacity: 0; 
+    transform: translateX(0); 
+    background: transparent;
+  }
 }
 
 /* --- CARRUSEL DE TECNOLOGÍAS --- */
