@@ -70,6 +70,20 @@ const Footer = () => {
           <div className="footer-top">
             <div className="footer-brand-section">
               <h2 className="footer-logo">
+               <span className="footer-logo-icon">
+  <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="50" cy="50" r="48" stroke="url(#logoGradient)" strokeWidth="3"/>
+    <path d="M35 70L50 55L65 70L50 85L35 70Z" fill="url(#logoGradient)" opacity="0.9"/>
+    <path d="M42 50L58 50L65 42L58 34L42 34L35 42L42 50Z" fill="url(#logoGradient)" opacity="0.6"/>
+    <defs>
+      <linearGradient id="logoGradient" x1="0" y1="0" x2="100" y2="100">
+        <stop offset="0%" stopColor="#3b82f6"/>
+        <stop offset="50%" stopColor="#818cf8"/>
+        <stop offset="100%" stopColor="#e879f9"/>
+      </linearGradient>
+    </defs>
+  </svg>
+</span>
                 Ezequiel<span className="footer-logo-accent">.</span>Salazar
               </h2>
 

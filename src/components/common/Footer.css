@@ -789,3 +789,39 @@
     height: 18px;
   }
 }
+/* Logo icon styling */
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  animation: logoFloat 4s ease-in-out infinite;
+}
+
+.footer-logo-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+@keyframes logoFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Responsive adjustments for the logo */
+@media (max-width: 600px) {
+  .footer-logo-icon svg {
+    width: 28px;
+    height: 28px;
+  }
+}
