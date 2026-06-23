@@ -477,28 +477,43 @@
 }
 
 @media (max-width: 768px) {
+  /* CAMBIO CLAVE: Pantalla pequeña -> 1 columna, todo centrado */
   .hero-main-container {
     grid-template-columns: 1fr;
-    display: grid;
-    gap: 2rem;
+    gap: 1.5rem;
+    justify-items: center; /* Centra los elementos horizontalmente */
   }
 
-  .hero-visual,
+  .hero-visual {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centra la imagen dentro de su contenedor */
+    margin-bottom: 0.5rem;
+  }
+
   .hero-content {
     width: 100%;
-  }
-
-  .hero-content {
     text-align: center;
+    padding: 0 1rem;
   }
 
-  .hero-greeting { font-size: 2rem; justify-content: center; height: 3rem; }
+  .hero-greeting { 
+    font-size: 2rem; 
+    justify-content: center; 
+    height: 3rem; 
+    margin: 0 auto;
+  }
+
   .hero-title { font-size: 2.2rem; }
   .hero-description { margin-left: auto; margin-right: auto; }
   .hero-buttons { justify-content: center; }
   .hero-socials { justify-content: center; }
 
-  .profile-polygon-wrapper { width: 260px; height: 320px; }
+  .profile-polygon-wrapper { 
+    width: 280px; 
+    height: 340px; 
+    margin: 0 auto; /* Centra el polígono */
+  }
   
   .tech-scroll-track { gap: 2rem; }
   .tech-logo-img { height: 30px; }
