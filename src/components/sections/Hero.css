@@ -100,10 +100,9 @@
   animation: letterExplodeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* FIX: Añadido position: relative para evitar saltos en el blur */
 .greeting-letter.letter-out {
   animation: letterExplodeOut 0.55s cubic-bezier(0.7, 0, 0.84, 0) both;
-  position: relative;
+  position: relative; /* Evita saltos visuales en el blur */
 }
 
 .greeting-world {
@@ -338,7 +337,7 @@
 @keyframes cursor-blink { from, to { opacity: 1; } 50% { opacity: 0; } }
 
 /* ========================================
-   RESPONSIVE MOBILE CORREGIDO
+   RESPONSIVE MOBILE (CON ESPACIO ARRIBA CORREGIDO)
    ======================================== */
 @media (max-width: 1024px) {
   .profile-polygon-wrapper { width: 320px; height: 390px; }
@@ -348,7 +347,7 @@
   .hero {
     min-height: 100vh;
     justify-content: flex-start;
-    padding: 0 1.1rem 1rem;
+    padding: 1.6rem 1.1rem 1rem; /* 1.6rem de espacio arriba para que respire */
   }
 
   .hero-main-container {
@@ -365,7 +364,7 @@
     display: flex;
     justify-content: center;
     order: 1;
-    margin-top: 0;
+    margin-top: 0.4rem; /* Pequeño margen extra opcional */
   }
 
   .profile-polygon-wrapper {
@@ -452,6 +451,6 @@
   }
 
   .hero {
-    padding-top: 0;
+    padding-top: 1.2rem; /* Un poco menos de espacio en pantallas muy pequeñas */
   }
 }
