@@ -26,7 +26,6 @@ const Hero: React.FC = () => {
     { name: 'HTML', icon: '/icons/html.svg' },
     { name: 'CSS', icon: '/icons/css.svg' },
     { name: 'TypeScript', icon: '/icons/tp.svg' },
-    // Duplicados para el efecto de scroll infinito
     { name: 'Flutter', icon: '/icons/flutter.svg' },
     { name: 'Dart', icon: '/icons/dart.svg' },
     { name: 'Java', icon: '/icons/java.svg' },
@@ -37,88 +36,56 @@ const Hero: React.FC = () => {
     { name: 'TypeScript', icon: '/icons/tp.svg' },
   ];
 
-  // Efecto para el cambio de saludos (Animación más lenta para que se note)
+  // Efecto para el cambio de saludos
   useEffect(() => {
     const interval = setInterval(() => {
-      setFadeGreeting(false); // Inicia la animación de salida
+      setFadeGreeting(false);
       setTimeout(() => {
         setGreetingIndex((prev) => (prev + 1) % greetings.length);
-        setFadeGreeting(true); // Inicia la animación de entrada
-      }, 550); // Tiempo de la transición de salida
-
+        setFadeGreeting(true);
+      }, 550);
       return () => clearInterval(interval);
-    }, 3500); // Cambia cada 3.5 segundos
-
+    }, 3500);
     return () => clearInterval(interval);
   }, [greetings.length]);
 
   return (
     <section id="inicio" className="hero">
       
-      {/* Fondo de cuadrícula */}
       <div className="hero-grid-background">
         <div className="grid-pattern"></div>
         <div className="grid-overlay"></div>
       </div>
 
-      {/* Contenedor Principal - Usando Grid */}
       <div className="hero-main-container">
-        
-        {/* Imagen a la izquierda */}
         <div className="hero-visual">
           <div className="profile-polygon-wrapper">
             <div className="hero-shape-background"></div>
-            
             <div className="glitch-image">
-              <img
-                src="/ezequielemovebg.png"
-                alt="Ezequiel Salazar"
-                className="profile-img-polygon profile-img-main"
-              />
-
-              <img
-                src="/ezequielemovebg.png"
-                alt=""
-                className="profile-img-polygon profile-img-glitch glitch-blue"
-              />
-
-              <img
-                src="/ezequielemovebg.png"
-                alt=""
-                className="profile-img-polygon profile-img-glitch glitch-purple"
-              />
+              <img src="/ezequielemovebg.png" alt="Ezequiel Salazar" className="profile-img-polygon profile-img-main" />
+              <img src="/ezequielemovebg.png" alt="" className="profile-img-polygon profile-img-glitch glitch-blue" />
+              <img src="/ezequielemovebg.png" alt="" className="profile-img-polygon profile-img-glitch glitch-purple" />
             </div>
           </div>
         </div>
 
-        {/* Texto a la derecha */}
         <div className="hero-content">
-          
-          {/* SALUDO CON ANIMACIÓN DE LETRAS Y SIN ESPACIO MANUAL */}
           <h2 className="hero-greeting">
             <span className="greeting-word">
               {greetings[greetingIndex].split('').map((letter, index) => {
                 const direction = index % 2 === 0 ? '-18px' : '18px';
                 const rotation = index % 2 === 0 ? '-10deg' : '10deg';
-
                 return (
                   <span
                     key={`${letter}-${index}-${greetingIndex}`}
                     className={`greeting-letter ${fadeGreeting ? 'letter-in' : 'letter-out'}`}
-                    style={
-                      {
-                        animationDelay: `${index * 40}ms`,
-                        '--x': direction,
-                        '--r': rotation,
-                      } as React.CSSProperties
-                    }
+                    style={{ animationDelay: `${index * 40}ms`, '--x': direction, '--r': rotation } as React.CSSProperties}
                   >
                     {letter}
                   </span>
                 );
               })}
             </span>
-
             <span className="greeting-world">World!</span>
           </h2>
 
@@ -132,14 +99,8 @@ const Hero: React.FC = () => {
             que los productos sean los mejores y más eficientes.
           </p>
 
-          {/* BOTONES PRINCIPALES */}
           <div className="hero-buttons">
-            <a
-              href="/Orlando_Ezequiel_Salazar_Cruz_CV_.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary"
-            >
+            <a href="/Orlando_Ezequiel_Salazar_Cruz_CV_.pdf" target="_blank" rel="noopener noreferrer" className="btn-primary">
               <span>Descargar CV</span>
             </a>
             <a href="#proyectos" className="btn-secondary">
@@ -147,46 +108,31 @@ const Hero: React.FC = () => {
             </a>
           </div>
 
-          {/* BOTONES DE REDES SOCIALES */}
           <div className="hero-socials">
             <a href="https://github.com/Ezequie1Sc" target="_blank" rel="noopener noreferrer" className="social-btn" title="GitHub">
-              <svg viewBox="0 0 16 16">
-                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
-              </svg>
+              <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
             </a>
             <a href="https://www.linkedin.com/in/ezequiel-salazar-194975340/" target="_blank" rel="noopener noreferrer" className="social-btn" title="LinkedIn">
-              <svg viewBox="0 0 24 24">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
+              <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
             </a>
             <a href="mailto:ezequielsc017@gmail.com" className="social-btn" title="Gmail">
-              <svg viewBox="0 0 24 24">
-                <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-1.023.92-1.804 1.885-1.393L12 10.53l10.115-6.466C23.08 3.653 24 4.434 24 5.457z"/>
-              </svg>
+              <svg viewBox="0 0 24 24"><path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 010 19.366V5.457c0-1.023.92-1.804 1.885-1.393L12 10.53l10.115-6.466C23.08 3.653 24 4.434 24 5.457z"/></svg>
             </a>
           </div>
-
         </div>
       </div>
 
-      {/* Carrusel de Logos / Tecnologías en el Footer */}
       <div className="hero-tech-footer">
         <div className="tech-scroll-container">
           <div className="tech-scroll-track">
             {techLogos.map((tech: TechLogo, index: number) => (
               <div key={`${tech.name}-${index}`} className="tech-logo-item">
-                <img 
-                  src={tech.icon} 
-                  alt={tech.name} 
-                  className="tech-logo-img"
-                  title={tech.name}
-                />
+                <img src={tech.icon} alt={tech.name} className="tech-logo-img" title={tech.name} />
               </div>
             ))}
           </div>
         </div>
       </div>
-
     </section>
   );
 };
