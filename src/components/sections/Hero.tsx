@@ -1,20 +1,25 @@
 import { useEffect, useState } from 'react';
 import './Hero.css';
 
-const Hero = () => {
-  const [typedText, setTypedText] = useState('');
+// Definimos el tipo para cada elemento del array de tecnologías
+interface TechLogo {
+  name: string;
+  icon: string;
+}
 
-  const phrases = [
+const Hero: React.FC = () => {
+  const [typedText, setTypedText] = useState<string>('');
+  const [phraseIndex, setPhraseIndex] = useState<number>(0);
+  const [isDeleting, setIsDeleting] = useState<boolean>(false);
+
+  const phrases: string[] = [
     'Desarrollador de Software',
     'Desarrollador de Apps con Flutter',
     'Apasionado por crear tecnología',
     'Apasionado por la tecnología'
   ];
 
-  const [phraseIndex, setPhraseIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  const techLogos = [
+  const techLogos: TechLogo[] = [
     { name: 'Flutter', icon: '/icons/flutter.svg' },
     { name: 'Dart', icon: '/icons/dart.svg' },
     { name: 'Java', icon: '/icons/java.svg' },
@@ -37,7 +42,7 @@ const Hero = () => {
   // Efecto para el typewriter
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const currentPhrase = phrases[phraseIndex];
+      const currentPhrase: string = phrases[phraseIndex];
 
       if (isDeleting) {
         setTypedText(currentPhrase.substring(0, typedText.length - 1));
@@ -54,7 +59,7 @@ const Hero = () => {
     }, isDeleting ? 50 : 100);
 
     return () => clearTimeout(timeout);
-  }, [typedText, phraseIndex, isDeleting]);
+  }, [typedText, phraseIndex, isDeleting, phrases]);
 
   return (
     <section id="inicio" className="hero">
@@ -103,11 +108,16 @@ const Hero = () => {
 
           {/* BOTONES PRINCIPALES */}
           <div className="hero-buttons">
-            <a href="#proyectos" className="btn-primary">
-              <span>Mis Proyectos</span>
+            <a
+              href="/Orlando_Ezequiel_Salazar_Cruz_CV_.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary"
+            >
+              <span>Descargar CV</span>
             </a>
-            <a href="#sobre-mi" className="btn-secondary">
-              <span>Sobre Mí</span>
+            <a href="#proyectos" className="btn-secondary">
+              <span>Mis Proyectos</span>
             </a>
           </div>
 
@@ -144,7 +154,7 @@ const Hero = () => {
       <div className="hero-tech-footer">
         <div className="tech-scroll-container">
           <div className="tech-scroll-track">
-            {techLogos.map((tech, index) => (
+            {techLogos.map((tech: TechLogo, index: number) => (
               <div key={`${tech.name}-${index}`} className="tech-logo-item">
                 <img 
                   src={tech.icon} 
