@@ -12,6 +12,11 @@ const Hero: React.FC = () => {
   const [phraseIndex, setPhraseIndex] = useState<number>(0);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
+  // Array de saludos en diferentes idiomas
+  const greetings: string[] = ['Hola', 'Hello', 'Ciao', 'Bonjour', 'Hallo', 'Olá'];
+  const [greetingIndex, setGreetingIndex] = useState<number>(0);
+  const [fadeGreeting, setFadeGreeting] = useState<boolean>(true);
+
   const phrases: string[] = [
     'Desarrollador de Software',
     'Desarrollador de Apps con Flutter',
@@ -61,6 +66,19 @@ const Hero: React.FC = () => {
     return () => clearTimeout(timeout);
   }, [typedText, phraseIndex, isDeleting, phrases]);
 
+  // Efecto para el cambio de saludos (Animación FUERTE y NOTORIA)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFadeGreeting(false); // Inicia la animación de salida (fuerte)
+      setTimeout(() => {
+        setGreetingIndex((prev) => (prev + 1) % greetings.length);
+        setFadeGreeting(true); // Inicia la animación de entrada (fuerte)
+      }, 400); // Tiempo de la transición
+    }, 2800); // Cambia cada 2.8 segundos
+
+    return () => clearInterval(interval);
+  }, [greetings.length]);
+
   return (
     <section id="inicio" className="hero">
       
@@ -70,7 +88,7 @@ const Hero: React.FC = () => {
         <div className="grid-overlay"></div>
       </div>
 
-      {/* Contenedor Principal - Usando Grid (Ancho fijo y pegado) */}
+      {/* Contenedor Principal - Usando Grid */}
       <div className="hero-main-container">
         
         {/* Imagen a la izquierda */}
@@ -78,23 +96,19 @@ const Hero: React.FC = () => {
           <div className="profile-polygon-wrapper">
             <div className="hero-shape-background"></div>
             
-            {/* NUEVO SISTEMA DE GLITCH POR CAPAS */}
             <div className="glitch-image">
-              {/* Imagen principal (Blanco y negro, se colorea al hacer hover) */}
               <img
                 src="/ezequielemovebg.png"
                 alt="Ezequiel Salazar"
                 className="profile-img-polygon profile-img-main"
               />
 
-              {/* Capa de glitch Azul (Cian) */}
               <img
                 src="/ezequielemovebg.png"
                 alt=""
                 className="profile-img-polygon profile-img-glitch glitch-blue"
               />
 
-              {/* Capa de glitch Morada (Magenta) */}
               <img
                 src="/ezequielemovebg.png"
                 alt=""
@@ -104,12 +118,18 @@ const Hero: React.FC = () => {
           </div>
         </div>
 
-        {/* Texto a la derecha - Ancho fijo de 560px */}
+        {/* Texto a la derecha */}
         <div className="hero-content">
-          <h2 className="hero-greeting">Ciao World!</h2>
+          <h2 className="hero-greeting">
+            {/* Saludo con animación FUERTE */}
+            <span className={`greeting-text ${fadeGreeting ? 'fade-in' : 'fade-out'}`}>
+              {greetings[greetingIndex]}
+            </span>
+            <span className="greeting-world"> World!</span>
+          </h2>
 
           <h1 className="hero-title">
-            Im <span className="hero-title-gradient">Ezequiel</span>
+            Im <span className="hero-title-name">Ezequiel Salazar</span>
           </h1>
 
           <div className="typewriter-container">
