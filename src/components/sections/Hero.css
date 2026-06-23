@@ -1,0 +1,355 @@
+/* ========================================
+   HERO.CSS - Estilos de la sección Hero
+   ======================================== */
+
+/* Hero Section */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4rem 1.5rem 1rem;
+  position: relative;
+  overflow: hidden;
+  background-color: #0f172a;
+}
+
+.hero-main-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+  flex: 1;
+  padding-bottom: 2rem;
+}
+
+/* Fondo de cuadrícula */
+.hero-grid-background {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridMove 20s linear infinite;
+}
+
+.grid-overlay {
+  position: absolute;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse at 30% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 50%, rgba(139, 92, 246, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 50%, transparent 0%, #0f172a 100%);
+}
+
+@keyframes gridMove {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 60px 60px, 60px 60px; }
+}
+
+/* --- CONTENIDO (TEXTO) --- */
+.hero-content {
+  flex: 1;
+  text-align: left;
+  z-index: 20;
+  max-width: 600px;
+}
+
+.hero-greeting {
+  font-size: 2.5rem;
+  color: #f8fafc;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+  animation: fadeIn 1s ease-out;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  animation: fadeIn 1s ease-out;
+}
+
+.hero-title-gradient {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-style: italic;
+}
+
+.typewriter-container {
+  margin-bottom: 1.5rem;
+  animation: fadeIn 1s ease-out;
+}
+
+.typewriter {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #93c5fd;
+  display: inline-block;
+}
+
+.typewriter-text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.typewriter-cursor {
+  animation: cursor-blink 0.75s step-end infinite;
+}
+
+.hero-description {
+  font-size: 1.1rem;
+  color: #94a3b8;
+  margin-bottom: 2.5rem;
+  line-height: 1.7;
+  animation: fadeIn 1s ease-out;
+}
+
+/* --- BOTONES PRINCIPALES (PROYECTOS Y SOBRE MÍ) --- */
+.hero-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  animation: fadeIn 1s ease-out;
+}
+
+@media (max-width: 640px) {
+  .hero-buttons { flex-direction: column; align-items: center; }
+}
+
+.btn-primary, .btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 2.5rem;
+  border-radius: 0;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+  min-width: 140px;
+}
+
+.btn-primary {
+  background: #3b82f6;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 2px solid #3b82f6;
+  color: #f8fafc;
+}
+
+.btn-secondary:hover {
+  background: rgba(59, 130, 246, 0.1);
+  transform: translateY(-2px);
+}
+
+/* --- BOTONES DE REDES SOCIALES (CUADRADOS) --- */
+.hero-socials {
+  display: flex;
+  gap: 1rem;
+  animation: fadeIn 1.2s ease-out;
+}
+
+@media (max-width: 640px) {
+  .hero-socials { justify-content: center; }
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: #1e293b;
+  color: #f8fafc;
+  border: 1px solid transparent;
+  border-radius: 0;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: currentColor;
+}
+
+.social-btn:hover {
+  background-color: #3b82f6;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.4);
+  border-color: #3b82f6;
+}
+
+/* --- IMAGEN POLIGONAL --- */
+.hero-visual {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.profile-polygon-wrapper {
+  position: relative;
+  width: 380px;
+  height: 460px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; 
+}
+
+.hero-shape-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #3b82f6;
+  clip-path: polygon(0 0, 80% 0, 100% 20%, 100% 100%, 20% 100%, 0 80%);
+  z-index: 1;
+  box-shadow: 0 20px 50px rgba(59, 130, 246, 0.3);
+  transition: transform 0.5s ease;
+}
+
+.hero-shape-background:hover {
+  transform: scale(1.02);
+}
+
+.profile-img-polygon {
+  position: relative;
+  z-index: 2;
+  width: 90%;
+  height: 90%;
+  object-fit: cover;
+  clip-path: polygon(0 0, 80% 0, 100% 20%, 100% 100%, 20% 100%, 0 80%);
+  background-color: #0f172a;
+  filter: grayscale(100%);
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.profile-img-polygon:hover {
+  filter: grayscale(0%);
+  transform: scale(1.08);
+}
+
+/* --- CARRUSEL DE TECNOLOGÍAS --- */
+.hero-tech-footer {
+  width: 100%;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(148, 163, 184, 0.15);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+}
+
+.tech-scroll-container {
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+}
+
+.tech-scroll-track {
+  display: flex;
+  gap: 4rem;
+  animation: scrollLogos 30s linear infinite;
+  width: max-content;
+}
+
+.tech-logo-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  filter: grayscale(100%) brightness(1.2);
+  transition: all 0.4s ease;
+}
+
+.tech-logo-item:hover {
+  opacity: 1;
+  filter: grayscale(0%) drop-shadow(0 0 8px rgba(59, 130, 246, 0.3));
+  transform: scale(1.1);
+}
+
+.tech-logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+}
+
+@keyframes scrollLogos {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes cursor-blink {
+  from, to { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1024px) {
+  .profile-polygon-wrapper { width: 320px; height: 390px; }
+}
+
+@media (max-width: 768px) {
+  .hero-main-container {
+    flex-direction: column-reverse;
+    gap: 2rem;
+  }
+
+  .hero-content {
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .hero-greeting { font-size: 2rem; }
+  .hero-title { font-size: 2.2rem; }
+  .hero-description { margin-left: auto; margin-right: auto; }
+  .hero-buttons { justify-content: center; }
+  .hero-socials { justify-content: center; }
+
+  .profile-polygon-wrapper { width: 260px; height: 320px; }
+  
+  .tech-scroll-track { gap: 2rem; }
+  .tech-logo-img { height: 30px; }
+}
+
+@media (max-width: 480px) {
+  .profile-polygon-wrapper { width: 220px; height: 280px; }
+  .hero-title { font-size: 1.8rem; }
+  .typewriter { font-size: 1.2rem; }
+  .tech-logo-img { height: 25px; }
+}
