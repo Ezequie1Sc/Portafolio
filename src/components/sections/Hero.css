@@ -82,8 +82,8 @@
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem; /* <-- ESTO ARREGLA EL ESPACIO */
-  height: 3.5rem; /* Altura fija para que el contenido no brinque */
+  gap: 0.5rem;
+  height: 3.5rem;
 }
 
 .greeting-word {
@@ -109,7 +109,7 @@
 .greeting-world {
   display: inline-block;
   color: #f8fafc;
-  margin-left: 0.15rem; /* <-- REFUERZO DE SEGURIDAD */
+  margin-left: 0.15rem;
 }
 
 @keyframes letterExplodeIn {
@@ -172,28 +172,6 @@
   margin-bottom: 1.5rem;
   line-height: 1.1;
   animation: fadeIn 1s ease-out;
-}
-
-.typewriter-container {
-  margin-bottom: 1.5rem;
-  animation: fadeIn 1s ease-out;
-}
-
-.typewriter {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #93c5fd;
-  display: inline-block;
-}
-
-.typewriter-text {
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.typewriter-cursor {
-  animation: cursor-blink 0.75s step-end infinite;
 }
 
 .hero-description {
@@ -529,6 +507,5 @@
 @media (max-width: 480px) {
   .profile-polygon-wrapper { width: 220px; height: 280px; }
   .hero-title { font-size: 1.8rem; }
-  .typewriter { font-size: 1.2rem; }
   .tech-logo-img { height: 25px; }
 }

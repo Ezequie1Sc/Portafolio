@@ -8,10 +8,6 @@ interface TechLogo {
 }
 
 const Hero: React.FC = () => {
-  const [typedText, setTypedText] = useState<string>('');
-  const [phraseIndex, setPhraseIndex] = useState<number>(0);
-  const [isDeleting, setIsDeleting] = useState<boolean>(false);
-
   // Array de saludos en diferentes idiomas (10 saludos en total)
   const greetings: string[] = [
     'Hola', 'Hello', 'Ciao', 'Bonjour', 'Salut', 
@@ -20,13 +16,7 @@ const Hero: React.FC = () => {
   const [greetingIndex, setGreetingIndex] = useState<number>(0);
   const [fadeGreeting, setFadeGreeting] = useState<boolean>(true);
 
-  const phrases: string[] = [
-    'Desarrollador de Software',
-    'Desarrollador de Apps con Flutter',
-    'Apasionado por crear tecnología',
-    'Apasionado por la tecnología'
-  ];
-
+  // Array de tecnologías para el footer
   const techLogos: TechLogo[] = [
     { name: 'Flutter', icon: '/icons/flutter.svg' },
     { name: 'Dart', icon: '/icons/dart.svg' },
@@ -46,28 +36,6 @@ const Hero: React.FC = () => {
     { name: 'CSS', icon: '/icons/css.svg' },
     { name: 'TypeScript', icon: '/icons/tp.svg' },
   ];
-
-  // Efecto para el typewriter
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      const currentPhrase: string = phrases[phraseIndex];
-
-      if (isDeleting) {
-        setTypedText(currentPhrase.substring(0, typedText.length - 1));
-      } else {
-        setTypedText(currentPhrase.substring(0, typedText.length + 1));
-      }
-
-      if (!isDeleting && typedText === currentPhrase) {
-        setTimeout(() => setIsDeleting(true), 1500);
-      } else if (isDeleting && typedText === '') {
-        setIsDeleting(false);
-        setPhraseIndex((prev) => (prev + 1) % phrases.length);
-      }
-    }, isDeleting ? 50 : 100);
-
-    return () => clearTimeout(timeout);
-  }, [typedText, phraseIndex, isDeleting, phrases]);
 
   // Efecto para el cambio de saludos (Animación más lenta para que se note)
   useEffect(() => {
@@ -157,13 +125,6 @@ const Hero: React.FC = () => {
           <h1 className="hero-title">
             Im <span className="hero-title-name">Ezequiel Salazar</span>
           </h1>
-
-          <div className="typewriter-container">
-            <h3 className="typewriter">
-              <span className="typewriter-text">{typedText}</span>
-              <span className="typewriter-cursor">|</span>
-            </h3>
-          </div>
 
           <p className="hero-description">
             Desarrollador Fullstack con pensamiento creativo. Me encanta crear
