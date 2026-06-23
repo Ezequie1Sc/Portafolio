@@ -73,7 +73,7 @@
 
 /* --- CONTENIDO (TEXTO) --- */
 
-/* SALUDO CON ANIMACIÓN FUERTE */
+/* SALUDO CON ANIMACIÓN DE LETRAS Y GAP CORREGIDO */
 .hero-greeting {
   font-size: 2.5rem;
   color: #f8fafc;
@@ -81,32 +81,81 @@
   font-weight: 400;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   flex-wrap: wrap;
+  gap: 0.5rem; /* <-- ESTO ARREGLA EL ESPACIO */
   height: 3.5rem; /* Altura fija para que el contenido no brinque */
 }
 
-/* ESTADO DE ENTRADA (FUERTE) */
-.greeting-text {
+.greeting-word {
+  display: inline-flex;
+  align-items: center;
+  color: #f8fafc;
+}
+
+.greeting-letter {
   display: inline-block;
-  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* Rebote suave */
-  transform-origin: center bottom;
+  transform-origin: center;
+  will-change: transform, opacity, filter;
 }
 
-.greeting-text.fade-in {
-  opacity: 1;
-  transform: translateY(0) scale(1) skewX(0deg);
+.greeting-letter.letter-in {
+  animation: letterExplodeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-/* ESTADO DE SALIDA (IMPACTO VISUAL) */
-.greeting-text.fade-out {
-  opacity: 0;
-  /* Se comprime, se inclina (skew) y sale volando hacia arriba */
-  transform: translateY(-25px) scale(0.7) skewX(-8deg); 
+.greeting-letter.letter-out {
+  animation: letterExplodeOut 0.55s cubic-bezier(0.7, 0, 0.84, 0) both;
 }
 
 .greeting-world {
   display: inline-block;
+  color: #f8fafc;
+  margin-left: 0.15rem; /* <-- REFUERZO DE SEGURIDAD */
+}
+
+@keyframes letterExplodeIn {
+  0% {
+    opacity: 0;
+    filter: blur(10px);
+    transform:
+      translate3d(var(--x, 0), 24px, 0)
+      rotate(var(--r, -8deg))
+      scale(0.55);
+  }
+
+  55% {
+    opacity: 1;
+    filter: blur(2px);
+    transform:
+      translate3d(0, -4px, 0)
+      rotate(2deg)
+      scale(1.08);
+  }
+
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform:
+      translate3d(0, 0, 0)
+      rotate(0deg)
+      scale(1);
+  }
+}
+
+@keyframes letterExplodeOut {
+  0% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    filter: blur(12px);
+    transform:
+      translate3d(0, -28px, 0)
+      rotate(12deg)
+      scale(0.55);
+  }
 }
 
 /* NOMBRE COMPLETO AZUL SÓLIDO */

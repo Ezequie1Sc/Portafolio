@@ -12,8 +12,11 @@ const Hero: React.FC = () => {
   const [phraseIndex, setPhraseIndex] = useState<number>(0);
   const [isDeleting, setIsDeleting] = useState<boolean>(false);
 
-  // Array de saludos en diferentes idiomas
-  const greetings: string[] = ['Hola', 'Hello', 'Ciao', 'Bonjour', 'Hallo', 'Olá'];
+  // Array de saludos en diferentes idiomas (10 saludos en total)
+  const greetings: string[] = [
+    'Hola', 'Hello', 'Ciao', 'Bonjour', 'Salut', 
+    'Hallo', 'Olá', 'Namaste', 'Konnichiwa', 'Nihao'
+  ];
   const [greetingIndex, setGreetingIndex] = useState<number>(0);
   const [fadeGreeting, setFadeGreeting] = useState<boolean>(true);
 
@@ -66,15 +69,17 @@ const Hero: React.FC = () => {
     return () => clearTimeout(timeout);
   }, [typedText, phraseIndex, isDeleting, phrases]);
 
-  // Efecto para el cambio de saludos (Animación FUERTE y NOTORIA)
+  // Efecto para el cambio de saludos (Animación más lenta para que se note)
   useEffect(() => {
     const interval = setInterval(() => {
-      setFadeGreeting(false); // Inicia la animación de salida (fuerte)
+      setFadeGreeting(false); // Inicia la animación de salida
       setTimeout(() => {
         setGreetingIndex((prev) => (prev + 1) % greetings.length);
-        setFadeGreeting(true); // Inicia la animación de entrada (fuerte)
-      }, 400); // Tiempo de la transición
-    }, 2800); // Cambia cada 2.8 segundos
+        setFadeGreeting(true); // Inicia la animación de entrada
+      }, 550); // Tiempo de la transición de salida
+
+      return () => clearInterval(interval);
+    }, 3500); // Cambia cada 3.5 segundos
 
     return () => clearInterval(interval);
   }, [greetings.length]);
@@ -120,12 +125,33 @@ const Hero: React.FC = () => {
 
         {/* Texto a la derecha */}
         <div className="hero-content">
+          
+          {/* SALUDO CON ANIMACIÓN DE LETRAS Y SIN ESPACIO MANUAL */}
           <h2 className="hero-greeting">
-            {/* Saludo con animación FUERTE */}
-            <span className={`greeting-text ${fadeGreeting ? 'fade-in' : 'fade-out'}`}>
-              {greetings[greetingIndex]}
+            <span className="greeting-word">
+              {greetings[greetingIndex].split('').map((letter, index) => {
+                const direction = index % 2 === 0 ? '-18px' : '18px';
+                const rotation = index % 2 === 0 ? '-10deg' : '10deg';
+
+                return (
+                  <span
+                    key={`${letter}-${index}-${greetingIndex}`}
+                    className={`greeting-letter ${fadeGreeting ? 'letter-in' : 'letter-out'}`}
+                    style={
+                      {
+                        animationDelay: `${index * 40}ms`,
+                        '--x': direction,
+                        '--r': rotation,
+                      } as React.CSSProperties
+                    }
+                  >
+                    {letter}
+                  </span>
+                );
+              })}
             </span>
-            <span className="greeting-world"> World!</span>
+
+            <span className="greeting-world">World!</span>
           </h2>
 
           <h1 className="hero-title">
