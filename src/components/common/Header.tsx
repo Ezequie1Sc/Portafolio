@@ -80,19 +80,19 @@ const Header = ({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) => {
         </motion.button>
       </div>
 
-      {/* Menú desplegable - Animación lenta de expansión desde arriba */}
+      {/* Menú desplegable */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
             className="mobile-menu" 
-            initial={{ opacity: 0, scaleY: 0.5, y: -50 }} 
-            animate={{ opacity: 1, scaleY: 1, y: 0 }} 
-            exit={{ opacity: 0, scaleY: 0.5, y: -50 }} 
-            transition={{ 
-              duration: 0.6, 
-              ease: [0.25, 0.46, 0.45, 0.94] // Curva de aceleración suave al final
+            initial={{ opacity: 0, scale: 0.82, x: 24, y: -24 }}
+            animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
+            exit={{ opacity: 0, scale: 0.82, x: 24, y: -24 }}
+            transition={{
+              duration: 0.35,
+              ease: [0.16, 1, 0.3, 1]
             }}
-            style={{ transformOrigin: 'top center' }}
+            style={{ transformOrigin: 'top right' }}
           >
             {/* Botón CERRAR */}
             <button 

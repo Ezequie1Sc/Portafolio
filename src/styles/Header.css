@@ -63,85 +63,127 @@ BOTÓN DE MENÚ FLOTANTE
 }
 
 /* ========================================
-MENÚ DESPLEGABLE (AZUL OSCURO Y CASI PEGADO ARRIBA)
+MENÚ DESPLEGABLE (FONDO DEGRADADO OSCURO)
 ======================================== */
 
 .mobile-menu {
   position: fixed;
-  top: 10px; /* CASI PEGADO ARRIBA, mínimo espacio */
-  right: 24px;
-  
-  width: 340px;
-  min-height: 380px;
-  padding: 2.5rem 2rem 2.5rem;
-  border-radius: 24px;
-  
-  /* NUEVO COLOR AZUL OSCURO Y ELEGANTE */
-  background: #1e3a8a;
-  box-shadow: 0 30px 60px rgba(30, 58, 138, 0.4);
-  
+  top: 10px;
+  right: 16px;
+
+  width: min(300px, calc(100vw - 32px));
+  min-height: auto;
+  padding: 4rem 2.1rem 2.2rem;
+  border-radius: 0 22px 22px 22px;
+
+  /* NUEVO FONDO DEGRADADO OSCURO ELEGANTE */
+  background: linear-gradient(
+    135deg,
+    rgba(15, 23, 42, 0.98),
+    rgba(30, 41, 59, 0.98)
+  );
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.6);
+
   display: flex;
   flex-direction: column;
   pointer-events: auto;
+  overflow: hidden;
 }
 
-/* Botón CERRAR (Píldora negra) */
+/* Fondo con degradado sutil y luz interior */
+.mobile-menu::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.08), transparent 40%);
+  pointer-events: none;
+}
+
+/* ========================================
+BOTÓN CERRAR (AZUL CON TEXTO BLANCO)
+======================================== */
+
 .mobile-menu-close-btn {
   position: absolute;
-  top: 18px;
-  right: 18px;
-  
-  padding: 8px 20px;
-  height: 34px;
+  top: 12px;
+  right: 12px;
+
+  height: 38px;
+  padding: 0 26px;
   border: none;
   border-radius: 999px;
-  background: #0f172a;
-  color: #ffffff;
+
+  background: #3b82f6; /* AZUL */
+  color: #ffffff; /* TEXTO BLANCO */
+
   font-family: system-ui, -apple-system, sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 0.78rem;
+  font-weight: 700;
   letter-spacing: 1px;
+
   cursor: pointer;
+  z-index: 2;
   transition: transform 0.2s ease, background 0.2s ease;
 }
 
 .mobile-menu-close-btn:hover {
-  transform: scale(1.05);
-  background: #1e293b;
+  transform: scale(1.04);
+  background: #2563eb;
 }
 
-/* Enlaces del menú */
+/* ========================================
+ENLACES DEL MENÚ (SIN SUBRAYADO)
+======================================== */
+
 .mobile-nav {
+  position: relative;
+  z-index: 2;
+
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
-  margin-top: 1.5rem;
+  gap: 0.55rem;
+  margin-top: 0;
 }
 
 .mobile-nav-link {
-  padding: 0.5rem 0.5rem;
-  border-radius: 12px;
-  
+  width: fit-content;
+  padding: 0.6rem 1rem; /* Agregado padding para que se vea el borde */
+  margin-left: -1rem; /* Compensa el padding para que quede alineado */
+
   font-family: system-ui, -apple-system, sans-serif;
-  color: #ffffff; 
+  color: #ffffff;
   text-decoration: none;
-  font-weight: 700;
-  font-size: 2rem;
-  letter-spacing: -0.5px;
+
+  font-size: clamp(1.45rem, 3vw, 1.75rem);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
   text-transform: uppercase;
-  
-  transition: all 0.2s ease;
-  cursor: pointer;
+
+  transition: transform 0.2s ease, opacity 0.2s ease, background 0.2s ease;
 }
 
 .mobile-nav-link:hover {
-  background: rgba(255, 255, 255, 0.1);
-  padding-left: 1.5rem;
+  transform: translateX(6px);
+  opacity: 0.8;
 }
 
+/* ========================================
+ENLACE ACTIVO (BORDE IZQUIERDO AZUL)
+======================================== */
+
 .mobile-nav-link-active {
-  background: rgba(255, 255, 255, 0.15);
-  padding-left: 1.5rem;
+  background: rgba(59, 130, 246, 0.12); /* Fondo azul transparente */
+  border-left: 3px solid #3b82f6; /* Borde azul sólido a la izquierda */
+  border-radius: 0 8px 8px 0; /* Suaviza las esquinas derechas */
+  transform: translateX(0);
+  opacity: 1;
+  padding-left: 1.5rem; /* Un poco más de espacio para el borde */
+}
+
+.mobile-nav-link-active:hover {
+  transform: translateX(4px);
 }
 
 /* ========================================
@@ -159,16 +201,19 @@ RESPONSIVE
   .toggle-text { font-size: 0.75rem; }
   
   .mobile-menu {
-    top: 6px; /* Aún más pegado en móviles */
+    top: 6px; 
     right: 16px;
-    width: 90vw;
-    min-height: auto;
-    padding: 1.8rem 1.5rem 2rem;
-    border-radius: 20px;
+    width: min(280px, calc(100vw - 32px)); /* Un poco más pequeño en móvil */
+    padding: 3.5rem 1.8rem 2rem;
   }
-  
+
   .mobile-nav-link {
-    font-size: 1.6rem;
-    padding: 0.4rem 0.5rem;
+    font-size: 1.4rem;
+    padding: 0.4rem 0.8rem;
+    margin-left: -0.8rem;
+  }
+
+  .mobile-nav-link-active {
+    padding-left: 1.2rem;
   }
 }
