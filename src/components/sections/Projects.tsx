@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback, memo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { projects } from '../../data';
 import type { Project } from '../../types';
 import ProjectCard from '../ui/ProjectCard';
@@ -6,6 +7,45 @@ import ProjectCardMac from '../ui/ProjectCardMac';
 import ProjectGallery from '../ui/ProjectGallery';
 import '../../styles/Projects.css';
 import '../../styles/ProjectCardMac.css';
+
+const fadeUp = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.7,
+    },
+  },
+};
+
+const staggerContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+    },
+  },
+};
+
+const cardReveal = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+    scale: 0.98,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.6,
+    },
+  },
+};
 
 const ICON_PATHS: Record<string, React.ReactNode> = {
   mobile: (
@@ -75,7 +115,6 @@ const CategoryIcon = memo(({ type }: CategoryIconProps) => (
 
 CategoryIcon.displayName = 'CategoryIcon';
 
-// ===== FUNCIÓN PARA RENDERIZAR LA CARD CORRECTA =====
 const renderProjectCard = (
   project: Project,
   isExpanded: boolean,
@@ -85,7 +124,6 @@ const renderProjectCard = (
   if (project.type === 'web') {
     return (
       <ProjectCardMac
-        key={project.id}
         project={project}
         isExpanded={isExpanded}
         onExpand={() => onExpand(project.id)}
@@ -93,9 +131,9 @@ const renderProjectCard = (
       />
     );
   }
+
   return (
     <ProjectCard
-      key={project.id}
       project={project}
       isExpanded={isExpanded}
       onExpand={() => onExpand(project.id)}
@@ -112,31 +150,46 @@ interface CategorySectionProps {
   onOpenGallery: (project: Project) => void;
 }
 
-const CategorySection = memo(({ 
-  type, 
-  projectList, 
-  expandedCardId, 
-  onExpand, 
-  onOpenGallery 
+const CategorySection = memo(({
+  type,
+  projectList,
+  expandedCardId,
+  onExpand,
+  onOpenGallery,
 }: CategorySectionProps) => (
-  <div className="project-category">
+  <motion.div
+    className="project-category"
+    variants={fadeUp}
+    initial="hidden"
+    whileInView="visible"
+    viewport={{ once: true, amount: 0.15 }}
+  >
     <h3 className="category-title">
       <span className="category-icon">
         <CategoryIcon type={type} />
       </span>
       {CATEGORY_LABELS[type]} ({projectList.length})
     </h3>
-    <div className="category-grid">
+
+    <motion.div
+      className="category-grid"
+      variants={staggerContainer}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.1 }}
+    >
       {projectList.map((project) => (
-        renderProjectCard(
-          project, 
-          expandedCardId === project.id, 
-          onExpand, 
-          onOpenGallery
-        )
+        <motion.div key={project.id} variants={cardReveal}>
+          {renderProjectCard(
+            project,
+            expandedCardId === project.id,
+            onExpand,
+            onOpenGallery
+          )}
+        </motion.div>
       ))}
-    </div>
-  </div>
+    </motion.div>
+  </motion.div>
 ));
 
 CategorySection.displayName = 'CategorySection';
@@ -158,29 +211,26 @@ const Projects = () => {
   const [galleryProject, setGalleryProject] = useState<Project | null>(null);
 
   const categorized = useMemo(() => ({
-    mobile: projects.filter(p => p.type === 'mobile'),
-    web: projects.filter(p => p.type === 'web'),
-    backend: projects.filter(p => p.type === 'backend'),
-    desktop: projects.filter(p => p.type === 'desktop'),
+    mobile: projects.filter((p) => p.type === 'mobile'),
+    web: projects.filter((p) => p.type === 'web'),
+    backend: projects.filter((p) => p.type === 'backend'),
+    desktop: projects.filter((p) => p.type === 'desktop'),
   }), []);
 
   const filteredProjects = useMemo(
-    () => filter === 'todos' ? projects : projects.filter(p => p.type === filter),
+    () => filter === 'todos'
+      ? projects
+      : projects.filter((p) => p.type === filter),
     [filter]
   );
 
   const handleFilterChange = useCallback((newFilter: FilterType) => {
     setFilter(newFilter);
-    setExpandedCardId(null); // Cerrar cualquier card expandida al cambiar filtro
+    setExpandedCardId(null);
   }, []);
 
-  // ===== CORRECCIÓN PRINCIPAL AQUÍ =====
   const handleCardExpand = useCallback((cardId: number) => {
-    setExpandedCardId(prev => {
-      // Si la card ya está expandida, la colapsa (toggle)
-      // Si no, expande solo esa (y colapsa las demás)
-      return prev === cardId ? null : cardId;
-    });
+    setExpandedCardId((prev) => (prev === cardId ? null : cardId));
   }, []);
 
   const handleOpenGallery = useCallback((project: Project) => {
@@ -203,30 +253,47 @@ const Projects = () => {
     if (project.images && project.images.length > 0) {
       return project.images;
     }
+
     return [project.image];
   };
 
   const getOrderedCategories = (): [string, Project[]][] => {
     const entries = Object.entries(categorized) as [string, Project[]][];
+
     return entries
       .filter(([, list]) => list.length > 0)
       .sort(([typeA], [typeB]) => {
         const indexA = CATEGORY_ORDER.indexOf(typeA as any);
         const indexB = CATEGORY_ORDER.indexOf(typeB as any);
+
         return indexA - indexB;
       });
   };
 
   return (
     <>
-      <section id="proyectos" className="projects-section">
+      <motion.section
+        id="proyectos"
+        className="projects-section"
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+        variants={staggerContainer}
+      >
         <div className="container">
-          <h2 className="projects-main-title">Proyectos Destacados</h2>
-          <p className="projects-subtitle">
-            Una selección de mis mejores trabajos en diferentes áreas del desarrollo
-          </p>
+          <motion.h2 className="projects-main-title" variants={fadeUp}>
+            Proyectos Destacados
+          </motion.h2>
 
-          <nav className="projects-filter" aria-label="Filtrar proyectos por tipo">
+          <motion.p className="projects-subtitle" variants={fadeUp}>
+            Una selección de mis mejores trabajos en diferentes áreas del desarrollo
+          </motion.p>
+
+          <motion.nav
+            className="projects-filter"
+            aria-label="Filtrar proyectos por tipo"
+            variants={fadeUp}
+          >
             {FILTER_TYPES.map((type) => (
               <button
                 key={type}
@@ -258,45 +325,67 @@ const Projects = () => {
                 {FILTER_LABELS[type]} ({counts[type]})
               </button>
             ))}
-          </nav>
+          </motion.nav>
 
-          <div key={filter} className="view-container">
-            {filter === 'todos' ? (
-              <div className="projects-categories">
-                {getOrderedCategories().map(([type, list]) => (
-                  <CategorySection
-                    key={type}
-                    type={type}
-                    projectList={list}
-                    expandedCardId={expandedCardId}
-                    onExpand={handleCardExpand}
-                    onOpenGallery={handleOpenGallery}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="filtered-view">
-                <h3 className="category-title">
-                  <span className="category-icon">
-                    <CategoryIcon type={filter} />
-                  </span>
-                  {CATEGORY_LABELS[filter]}
-                </h3>
-                <div className="category-grid">
-                  {filteredProjects.map((project) => (
-                    renderProjectCard(
-                      project, 
-                      expandedCardId === project.id, 
-                      handleCardExpand, 
-                      handleOpenGallery
-                    )
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={filter}
+              className="view-container"
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4 }}
+            >
+              {filter === 'todos' ? (
+                <div className="projects-categories">
+                  {getOrderedCategories().map(([type, list]) => (
+                    <CategorySection
+                      key={type}
+                      type={type}
+                      projectList={list}
+                      expandedCardId={expandedCardId}
+                      onExpand={handleCardExpand}
+                      onOpenGallery={handleOpenGallery}
+                    />
                   ))}
                 </div>
-              </div>
-            )}
-          </div>
+              ) : (
+                <motion.div
+                  className="filtered-view"
+                  variants={fadeUp}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <h3 className="category-title">
+                    <span className="category-icon">
+                      <CategoryIcon type={filter} />
+                    </span>
+                    {CATEGORY_LABELS[filter]}
+                  </h3>
+
+                  <motion.div
+                    className="category-grid"
+                    variants={staggerContainer}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    {filteredProjects.map((project) => (
+                      <motion.div key={project.id} variants={cardReveal}>
+                        {renderProjectCard(
+                          project,
+                          expandedCardId === project.id,
+                          handleCardExpand,
+                          handleOpenGallery
+                        )}
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </motion.div>
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
-      </section>
+      </motion.section>
 
       {galleryProject && (
         <ProjectGallery

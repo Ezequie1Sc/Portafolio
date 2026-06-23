@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+
 
 const Hero = () => {
   const [typedText, setTypedText] = useState('');
@@ -48,115 +48,97 @@ const Hero = () => {
 
   return (
     <section id="inicio" className="hero">
-      <motion.div
-        className="hero-content"
-        initial={{ opacity: 0, y: 45 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: 'easeOut' }}
-      >
-        <motion.h2
-          className="hero-greeting"
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          ¡Hola Mundo!
-        </motion.h2>
+      <div className="hero-content">
+        <h2 className="hero-greeting">¡Hola Mundo!</h2>
 
-        <motion.h1
-          className="hero-title"
-          initial={{ opacity: 0, y: 35 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.15 }}
-        >
+        <h1 className="hero-title">
           Soy <span className="hero-title-gradient">Ezequiel Salazar</span>
-        </motion.h1>
+        </h1>
 
-        <motion.div
-          className="typewriter-container"
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-        >
+        <div className="typewriter-container">
           <h3 className="typewriter">
             <span className="typewriter-text">{typedText}</span>
             <span className="typewriter-cursor">|</span>
           </h3>
-        </motion.div>
+        </div>
 
-        <motion.p
-          className="hero-description"
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.45 }}
-        >
+        <p className="hero-description">
           Desarrollador enfocado en crear aplicaciones modernas y soluciones
           tecnológicas utilizando Flutter, Python y tecnologías web.
-        </motion.p>
+        </p>
 
-        <motion.div
-          className="hero-buttons"
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.6 }}
-        >
-          <motion.a
-            whileHover={{ y: -4, scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+        <div className="hero-buttons">
+          <a
             href="/Orlando_Ezequiel_Salazar_Cruz_CV_.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="btn-primary"
           >
             <span>Ver Currículum</span>
-          </motion.a>
+            <svg
+              className="btn-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+              />
+            </svg>
+          </a>
 
-          <motion.a
-            whileHover={{ y: -4, scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            href="#contacto"
-            className="btn-secondary"
-          >
+          <a href="#contacto" className="btn-secondary">
             <span>Contáctame</span>
-          </motion.a>
-        </motion.div>
-      </motion.div>
+            <svg
+              className="btn-icon"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
 
-      <motion.div
-        className="hero-visual"
-        initial={{ opacity: 0, scale: 0.85, rotate: -4 }}
-        animate={{ opacity: 1, scale: 1, rotate: 0 }}
-        transition={{ duration: 1, delay: 0.35, ease: 'easeOut' }}
-      >
+      <div className="hero-visual">
         <div className="solar-system">
-          <motion.div
-            className="sun"
-            whileHover={{ scale: 1.06 }}
-            transition={{ type: 'spring', stiffness: 220 }}
-          >
+          <div className="sun">
             <img
-              src="/foto.webp"
+              src="foto.webp"
               alt="Ezequiel Salazar"
               className="profile-img"
             />
             <div className="sun-glow"></div>
-          </motion.div>
+          </div>
 
           {planets.map((planet) => (
-            <div key={planet.tech} className={`orbit orbit-${planet.orbit}`}>
-              <motion.div
-                className="planet"
-                data-tech={planet.tech}
-                whileHover={{ scale: 1.25 }}
-                transition={{ type: 'spring', stiffness: 300 }}
-              >
+            <div
+              key={planet.tech}
+              className={`orbit orbit-${planet.orbit}`}
+            >
+              <div className="planet" data-tech={planet.tech}>
                 <img src={planet.icon} alt={planet.tech} />
                 <span className="planet-tooltip">{planet.tech}</span>
-              </motion.div>
+              </div>
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 };
