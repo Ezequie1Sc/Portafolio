@@ -62,16 +62,32 @@ const Hero: React.FC = () => {
       {/* Contenedor Principal - Usando Grid */}
       <div className="hero-main-container">
         
-        {/* Imagen a la izquierda (Nuevo sistema de revelado) */}
+        {/* Imagen a la izquierda (Revelado + Glitch + Hover a color) */}
         <div className="hero-visual">
           <div className="profile-polygon-wrapper">
+            {/* Marco azul exterior */}
             <div className="hero-shape-background"></div>
             
             <div className="hero-photo-reveal">
+              {/* 1. Imagen principal (Blanco y negro, se colorea y hace zoom al hacer hover) */}
               <img
                 src="/ezequielemovebg.png"
                 alt="Ezequiel Salazar"
                 className="hero-person-img"
+              />
+
+              {/* 2. Capa de Glitch Azul (Cian) */}
+              <img
+                src="/ezequielemovebg.png"
+                alt=""
+                className="hero-img-glitch glitch-blue"
+              />
+
+              {/* 3. Capa de Glitch Morada (Magenta) */}
+              <img
+                src="/ezequielemovebg.png"
+                alt=""
+                className="hero-img-glitch glitch-purple"
               />
             </div>
           </div>
