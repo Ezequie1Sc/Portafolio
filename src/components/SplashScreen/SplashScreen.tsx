@@ -12,15 +12,15 @@ const SplashScreen = () => {
       <div className="splash-noise" />
       <div className="splash-light" />
       
-      {/* CORTINA SÓLIDA AZUL */}
+      {/* CORTINA DE SALIDA: AZUL SÓLIDO, ESTILO APPLE */}
       <motion.div
         className="splash-curtain"
         initial={{ y: '100%' }}
         animate={{ y: '100%' }}
-        exit={{ y: '0%' }}
+        exit={{ y: '-100%' }}
         transition={{
-          duration: 1,
-          ease: [0.65, 0, 0.35, 1],
+          duration: 1.15,
+          ease: [0.83, 0, 0.17, 1], /* Curva de aceleración premium */
         }}
       />
 

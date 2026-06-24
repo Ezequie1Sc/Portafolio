@@ -130,6 +130,20 @@
   animation: glowPulse 4s ease-in-out infinite;
 }
 
+/* ==========================================================
+   CORTINA DE SALIDA: AZUL SÓLIDO, 100% RECTA
+   ========================================================== */
+.splash-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+
+  background: #2563eb; /* Azul sólido, sin degradados ni curvas */
+
+  pointer-events: none;
+  will-change: transform;
+}
+
 /* ==================== ANIMACIONES GENERALES ==================== */
 @keyframes premiumLight {
   0%,100% {
@@ -155,26 +169,14 @@
   }
 }
 
-/* ==========================================================
-   CORTINA PREMIUM AZUL SÓLIDA
-   ========================================================== */
-.splash-curtain {
-  position: fixed;
-  inset: 0;
+@keyframes logoFloat {
+  0%,100% {
+    transform: translateY(0);
+  }
 
-  z-index: 999999;
-
-  background:
-    linear-gradient(
-      180deg,
-      #60a5fa 0%,
-      #3b82f6 25%,
-      #2563eb 60%,
-      #1d4ed8 100%
-    );
-
-  pointer-events: none;
-  will-change: transform;
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 /* ==================== RESPONSIVE ==================== */
