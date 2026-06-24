@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback, memo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { projects } from '../../data';
 import type { Project } from '../../types';
 import ProjectCard from '../ui/ProjectCard';
@@ -213,12 +214,29 @@ const Projects = () => {
     <>
       <section id="proyectos" className="projects-section">
         <div className="container">
-          <h2 className="projects-main-title">Proyectos Destacados</h2>
-          <p className="projects-subtitle">
-            Una selección de mis mejores trabajos en diferentes áreas del desarrollo
-          </p>
+          
+          {/* === TÍTULO Y SUBTÍTULO CON ANIMACIÓN === */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <h2 className="projects-main-title">Proyectos Destacados</h2>
+            <p className="projects-subtitle">
+              Una selección de mis mejores trabajos en diferentes áreas del desarrollo
+            </p>
+          </motion.div>
 
-          <nav className="projects-filter" aria-label="Filtrar proyectos por tipo">
+          {/* === FILTROS CON ANIMACIÓN === */}
+          <motion.nav
+            className="projects-filter"
+            aria-label="Filtrar proyectos por tipo"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          >
             {FILTER_TYPES.map((type) => (
               <button
                 key={type}
@@ -250,43 +268,53 @@ const Projects = () => {
                 {FILTER_LABELS[type]} ({counts[type]})
               </button>
             ))}
-          </nav>
+          </motion.nav>
 
-          <div key={filter} className="view-container">
-            {filter === 'todos' ? (
-              <div className="projects-categories">
-                {getOrderedCategories().map(([type, list]) => (
-                  <CategorySection
-                    key={type}
-                    type={type}
-                    projectList={list}
-                    expandedCardId={expandedCardId}
-                    onExpand={handleCardExpand}
-                    onOpenGallery={handleOpenGallery}
-                  />
-                ))}
-              </div>
-            ) : (
-              <div className="filtered-view">
-                <h3 className="category-title">
-                  <span className="category-icon">
-                    <CategoryIcon type={filter} />
-                  </span>
-                  {CATEGORY_LABELS[filter]}
-                </h3>
-                <div className="category-grid">
-                  {filteredProjects.map((project) =>
-                    renderProjectCard(
-                      project,
-                      expandedCardId === project.id,
-                      handleCardExpand,
-                      handleOpenGallery
-                    )
-                  )}
+          {/* === CONTENEDOR DE CATEGORÍAS CON ANIMACIÓN PREMIUM === */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={filter}
+              className="view-container"
+              initial={{ opacity: 0, y: 28, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+            >
+              {filter === 'todos' ? (
+                <div className="projects-categories">
+                  {getOrderedCategories().map(([type, list]) => (
+                    <CategorySection
+                      key={type}
+                      type={type}
+                      projectList={list}
+                      expandedCardId={expandedCardId}
+                      onExpand={handleCardExpand}
+                      onOpenGallery={handleOpenGallery}
+                    />
+                  ))}
                 </div>
-              </div>
-            )}
-          </div>
+              ) : (
+                <div className="filtered-view">
+                  <h3 className="category-title">
+                    <span className="category-icon">
+                      <CategoryIcon type={filter} />
+                    </span>
+                    {CATEGORY_LABELS[filter]}
+                  </h3>
+                  <div className="category-grid">
+                    {filteredProjects.map((project) =>
+                      renderProjectCard(
+                        project,
+                        expandedCardId === project.id,
+                        handleCardExpand,
+                        handleOpenGallery
+                      )
+                    )}
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
 

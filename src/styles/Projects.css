@@ -31,7 +31,6 @@
    BASE SECTION (UN PEQUEÑO ESPACIO ARRIBA: 3rem)
    ======================================== */
 .projects-section {
-  /* 3rem (aprox 48px) es el espacio perfecto para que respire, pero sin estar lejos */
   padding: 3rem 0 var(--spacing-4xl); 
   background: var(--bg-projects);
   position: relative;
@@ -209,6 +208,7 @@
 .filtered-view {
   width: 100%;
   min-width: 0;
+  position: relative;
 }
 
 /* ===== RESPONSIVE ===== */
