@@ -67,6 +67,16 @@ const Header = ({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) => {
     <header className={`header ${scrolled ? 'header-scrolled' : ''}`}>
       <div className="header-container">
         
+        {/* LOGO */}
+        <motion.img
+          src="/e_logo.png"
+          alt="Ezequiel Logo"
+          className="header-logo"
+          initial={{ opacity: 0, x: -16 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5 }}
+        />
+
         {/* Botón de MENU */}
         <motion.button 
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
@@ -80,17 +90,17 @@ const Header = ({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) => {
         </motion.button>
       </div>
 
-      {/* Menú desplegable */}
+      {/* Menú desplegable - Animación LENTA (0.8s) */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
             className="mobile-menu" 
-            initial={{ opacity: 0, scale: 0.82, x: 24, y: -24 }}
+            initial={{ opacity: 0, scale: 0.8, x: 40, y: -40 }}
             animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-            exit={{ opacity: 0, scale: 0.82, x: 24, y: -24 }}
+            exit={{ opacity: 0, scale: 0.8, x: 40, y: -40 }}
             transition={{
-              duration: 0.35,
-              ease: [0.16, 1, 0.3, 1]
+              duration: 0.8,          /* Más lento (0.8s) para que se sienta muy fluido */
+              ease: [0.16, 1, 0.3, 1] /* Curva de aceleración suave */
             }}
             style={{ transformOrigin: 'top right' }}
           >
