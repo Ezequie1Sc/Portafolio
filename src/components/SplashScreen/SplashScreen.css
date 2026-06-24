@@ -3,178 +3,183 @@
   inset: 0;
   z-index: 99999;
   overflow: hidden;
+
   background:
-    radial-gradient(circle at 50% 42%, rgba(37, 99, 235, 0.22), transparent 32%),
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.08), transparent 22%),
-    linear-gradient(180deg, #0f172a 0%, #020617 100%);
+    radial-gradient(
+      circle at center,
+      rgba(37, 99, 235, 0.08) 0%,
+      transparent 40%
+    ),
+    #020617;
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* --- CAPA DE BARRIDO / CORTINA --- */
-.splash-wipe {
+/* ==================== NOISE ==================== */
+.splash-noise {
   position: absolute;
   inset: 0;
-  z-index: 10;
-  background: #ffffff; /* Si quieres tu color azul oscuro, cambia esto a #0f172a */
-  pointer-events: none;
-  will-change: transform;
-}
+  opacity: .03;
+  mix-blend-mode: soft-light;
 
-.splash-grid {
-  position: absolute;
-  inset: 0;
-  opacity: 0.055;
   background-image:
-    linear-gradient(rgba(255,255,255,.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.12) 1px, transparent 1px);
-  background-size: 46px 46px;
-  mask-image: radial-gradient(circle at center, black, transparent 72%);
+  url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
 }
 
+/* ==================== LUZ CENTRAL ELEGANTE ==================== */
 .splash-light {
   position: absolute;
-  width: 620px;
-  height: 620px;
-  border-radius: 999px;
-  background: radial-gradient(circle, rgba(59, 130, 246, .28), transparent 68%);
-  filter: blur(60px);
+
+  width: 500px;
+  height: 500px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(59,130,246,.18),
+      transparent 70%
+    );
+
+  filter: blur(120px);
+
   animation: premiumLight 4s ease-in-out infinite;
 }
 
+/* ==================== CONTENIDO ==================== */
 .splash-content {
   position: relative;
-  z-index: 11;
+  z-index: 10;
   text-align: center;
   padding: 2rem;
 }
 
+/* ==================== LOGO WRAPPER ==================== */
 .splash-logo-wrap {
   position: relative;
-  width: min(460px, 82vw);
-  margin: 0 auto 2.2rem;
+
+  width: min(420px, 82vw);
+
+  margin: 0 auto;
+
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.splash-logo {
-  width: 100%;
-  height: auto;
-  object-fit: contain;
-  position: relative;
-  z-index: 3;
-  filter:
-    drop-shadow(0 0 18px rgba(147, 197, 253, 0.34))
-    drop-shadow(0 0 70px rgba(37, 99, 235, 0.28));
-  animation: logoBreath 3.2s ease-in-out infinite;
+/* ==================== LOGO SVG ANIMADO ==================== */
+.draw-logo {
+  width: min(520px, 82vw);
+  filter: drop-shadow(0 0 28px rgba(59, 130, 246, 0.45));
 }
 
+.logo-piece {
+  fill: transparent;
+  stroke: #38bdf8;
+  stroke-width: 5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: drawLogo 1.5s ease forwards, fillLogo 0.7s ease forwards;
+}
+
+.piece-1 {
+  animation-delay: 0s, 1.2s;
+}
+
+.piece-2 {
+  animation-delay: 0.25s, 1.35s;
+}
+
+.piece-3 {
+  animation-delay: 0.5s, 1.5s;
+}
+
+@keyframes drawLogo {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fillLogo {
+  to {
+    fill: url(#logoGradient);
+  }
+}
+
+/* ==================== GLOW ==================== */
 .splash-glow {
   position: absolute;
-  inset: -40px;
-  border-radius: 999px;
+  inset: -50px;
+
+  border-radius: 50%;
+
   background:
-    radial-gradient(circle, rgba(147, 197, 253, .34), transparent 62%);
-  filter: blur(42px);
-  opacity: .7;
-  animation: glowBreath 3.2s ease-in-out infinite;
+    radial-gradient(
+      circle,
+      rgba(59,130,246,.35),
+      transparent 65%
+    );
+
+  filter: blur(50px);
+
+  animation: glowPulse 4s ease-in-out infinite;
 }
 
-.splash-kicker {
-  margin: 0 0 .85rem;
-  color: rgba(191, 219, 254, .62);
-  font-size: .72rem;
-  letter-spacing: .42em;
-  font-weight: 700;
-}
-
-.splash-title {
-  margin: 0;
-  color: #fff;
-  font-size: clamp(1.7rem, 4.8vw, 3.6rem);
-  font-weight: 800;
-  line-height: 1;
-  text-shadow: 0 0 34px rgba(147,197,253,.18);
-}
-
-.splash-subtitle {
-  margin: 1rem 0 2rem;
-  color: rgba(226, 232, 240, .65);
-  font-size: .95rem;
-  letter-spacing: .12em;
-}
-
-.splash-progress {
-  width: 240px;
-  height: 2px;
-  margin: 0 auto;
-  background: rgba(148, 163, 184, .18);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.splash-progress span {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    #93c5fd,
-    #ffffff,
-    #93c5fd,
-    transparent
-  );
-  transform-origin: left;
-}
-
+/* ==================== ANIMACIONES GENERALES ==================== */
 @keyframes premiumLight {
-  0%, 100% {
-    transform: scale(1) translateY(0);
-    opacity: .52;
-  }
-
-  50% {
-    transform: scale(1.15) translateY(-18px);
-    opacity: .85;
-  }
-}
-
-@keyframes logoBreath {
-  0%, 100% {
-    transform: translateY(0) scale(1);
-  }
-
-  50% {
-    transform: translateY(-8px) scale(1.025);
-  }
-}
-
-@keyframes glowBreath {
-  0%, 100% {
-    transform: scale(.95);
+  0%,100% {
+    transform: scale(1);
     opacity: .45;
   }
 
   50% {
     transform: scale(1.15);
-    opacity: .85;
+    opacity: .8;
   }
 }
 
+@keyframes glowPulse {
+  0%,100% {
+    transform: scale(.95);
+    opacity: .5;
+  }
+
+  50% {
+    transform: scale(1.2);
+    opacity: .9;
+  }
+}
+
+/* ==========================================================
+   CORTINA PREMIUM AZUL SÓLIDA
+   ========================================================== */
+.splash-curtain {
+  position: fixed;
+  inset: 0;
+
+  z-index: 999999;
+
+  background:
+    linear-gradient(
+      180deg,
+      #60a5fa 0%,
+      #3b82f6 25%,
+      #2563eb 60%,
+      #1d4ed8 100%
+    );
+
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ==================== RESPONSIVE ==================== */
 @media (max-width: 520px) {
   .splash-logo-wrap {
     width: min(320px, 86vw);
-    margin-bottom: 1.8rem;
-  }
-
-  .splash-title {
-    letter-spacing: .12em !important;
-  }
-
-  .splash-progress {
-    width: 200px;
   }
 }

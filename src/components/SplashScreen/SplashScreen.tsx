@@ -12,13 +12,16 @@ const SplashScreen = () => {
       <div className="splash-noise" />
       <div className="splash-light" />
       
-      {/* CAPA DE BARRIDO (Cortina) - MÁS LENTA (1.2s) */}
+      {/* CORTINA SÓLIDA AZUL */}
       <motion.div
-        className="splash-wipe"
-        initial={{ translateY: '100%' }}
-        animate={{ translateY: '100%' }}
-        exit={{ translateY: '0%' }}
-        transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
+        className="splash-curtain"
+        initial={{ y: '100%' }}
+        animate={{ y: '100%' }}
+        exit={{ y: '0%' }}
+        transition={{
+          duration: 1,
+          ease: [0.65, 0, 0.35, 1],
+        }}
       />
 
       <motion.div
@@ -26,7 +29,7 @@ const SplashScreen = () => {
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
         <motion.div
           className="splash-logo-wrap"
@@ -37,51 +40,20 @@ const SplashScreen = () => {
           <div className="splash-orbit" />
           <div className="splash-glow" />
 
-          <img
-            src=".\logo_sin.png"
-            alt="Ezequiel Salazar"
-            className="splash-logo"
-          />
-        </motion.div>
+          {/* LOGO ANIMADO SVG */}
+          <svg className="draw-logo" viewBox="0 0 700 440" fill="none">
+            <defs>
+              <linearGradient id="logoGradient" x1="80" y1="400" x2="610" y2="60">
+                <stop stopColor="#7c3aed" />
+                <stop offset="0.45" stopColor="#2563eb" />
+                <stop offset="1" stopColor="#22d3ee" />
+              </linearGradient>
+            </defs>
 
-        <motion.p
-          className="splash-kicker"
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.45, duration: 0.7 }}
-        >
-          PORTFOLIO
-        </motion.p>
-
-        <motion.h1
-          className="splash-title"
-          initial={{ opacity: 0, y: 18, letterSpacing: '0.35em' }}
-          animate={{ opacity: 1, y: 0, letterSpacing: '0.18em' }}
-          transition={{ delay: 0.65, duration: 0.9, ease: 'easeOut' }}
-        >
-          EZEQUIEL SALAZAR
-        </motion.h1>
-
-        <motion.p
-          className="splash-subtitle"
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.9, duration: 0.7 }}
-        >
-          Software Developer
-        </motion.p>
-
-        <motion.div
-          className="splash-progress"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.1 }}
-        >
-          <motion.span
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ delay: 1.15, duration: 1.35, ease: 'easeInOut' }}
-          />
+            <path className="logo-piece piece-1" d="M330 65 H610 L515 115 H250 Z" />
+            <path className="logo-piece piece-2" d="M275 170 H560 L470 220 H200 Z" />
+            <path className="logo-piece piece-3" d="M190 285 H520 L80 405 Z" />
+          </svg>
         </motion.div>
       </motion.div>
     </motion.div>
