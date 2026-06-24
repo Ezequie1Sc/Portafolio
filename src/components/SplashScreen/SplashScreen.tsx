@@ -6,17 +6,27 @@ const SplashScreen = () => {
     <motion.div
       className="splash-screen"
       initial={{ opacity: 1 }}
-      exit={{ opacity: 0, filter: 'blur(18px)' }}
-      transition={{ duration: 0.9, ease: 'easeInOut' }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.8, ease: 'easeInOut' }}
     >
       <div className="splash-noise" />
       <div className="splash-light" />
+      
+      {/* CAPA DE BARRIDO (Cortina) */}
+      <motion.div
+        className="splash-wipe"
+        initial={{ translateY: '100%' }}
+        animate={{ translateY: '100%' }}
+        exit={{ translateY: '0%' }}
+        transition={{ duration: 0.85, ease: [0.65, 0, 0.35, 1] }}
+      />
 
       <motion.div
         className="splash-content"
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
         <motion.div
           className="splash-logo-wrap"
