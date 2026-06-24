@@ -40,7 +40,7 @@ const SOCIAL_LINKS = [
           .645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61
           -2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015
           2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24
-          12.297c0-6.627-5.373-12-12-12"/>
+          12.297c0-6.627-5.373-12-12"/>
       </svg>
     ),
   },
@@ -68,34 +68,23 @@ const Footer = () => {
 
         <div className="footer-container">
           <div className="footer-top">
+            {/* Marca */}
             <div className="footer-brand-section">
-              <h2 className="footer-logo">
-               <span className="footer-logo-icon">
-  <svg width="32" height="32" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="50" cy="50" r="48" stroke="url(#logoGradient)" strokeWidth="3"/>
-    <path d="M35 70L50 55L65 70L50 85L35 70Z" fill="url(#logoGradient)" opacity="0.9"/>
-    <path d="M42 50L58 50L65 42L58 34L42 34L35 42L42 50Z" fill="url(#logoGradient)" opacity="0.6"/>
-    <defs>
-      <linearGradient id="logoGradient" x1="0" y1="0" x2="100" y2="100">
-        <stop offset="0%" stopColor="#3b82f6"/>
-        <stop offset="50%" stopColor="#818cf8"/>
-        <stop offset="100%" stopColor="#e879f9"/>
-      </linearGradient>
-    </defs>
-  </svg>
-</span>
-                Ezequiel<span className="footer-logo-accent">.</span>Salazar
-              </h2>
-
+              <div className="footer-logo-wrapper">
+                <img src="./e_logo.png" alt="Ezequiel Salazar Logo" className="footer-logo-img" />
+                <h2 className="footer-logo">
+                  Ezequiel<span className="footer-logo-accent">.</span>Salazar
+                </h2>
+              </div>
               <p className="footer-description">
                 Creando experiencias digitales que combinan elegancia visual con
                 precisión técnica. Cada línea de código cuenta una historia.
               </p>
             </div>
 
+            {/* Navegación */}
             <div className="footer-links-section">
               <h4>Navegación</h4>
-
               <div className="footer-links-grid">
                 {NAV_LINKS.map(({ label, href }) => (
                   <a 
@@ -111,68 +100,55 @@ const Footer = () => {
               </div>
             </div>
 
+            {/* Redes Sociales */}
             <div className="footer-contact-section">
               <h4>Conectemos</h4>
-
-              <div className="footer-contact-info">
-                <a
-                  href="mailto:ezequielsc017@gmail.com"
-                  className="footer-email-link"
-                >
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
+              <div className="footer-social-links">
+                {SOCIAL_LINKS.map(({ label, href, icon }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="footer-social-btn"
+                    aria-label={label}
                   >
-                    <path
-                      d="M22 6L12 13L2 6M4 6h16v12H4V6z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  ezequielsc017@gmail.com
-                </a>
-
-                <div className="footer-social-links">
-                  {SOCIAL_LINKS.map(({ label, href, icon }) => (
-                    <a
-                      key={label}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="footer-social-btn"
-                      aria-label={label}
-                    >
-                      {icon}
-                    </a>
-                  ))}
-                </div>
+                    {icon}
+                  </a>
+                ))}
               </div>
+              <a
+                href="mailto:ezequielsc017@gmail.com"
+                className="footer-email-link"
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                >
+                  <path d="M22 6L12 13L2 6M4 6h16v12H4V6z" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                ezequielsc017@gmail.com
+              </a>
             </div>
           </div>
 
-          <div className="footer-legal">
-            <button 
-              className="footer-legal-link"
-              onClick={() => setShowPrivacyPolicy(true)}
-            >
-              Política de Privacidad
-            </button>
-          </div>
-
           <div className="footer-bottom">
+            <div className="footer-legal">
+              <button 
+                className="footer-legal-link"
+                onClick={() => setShowPrivacyPolicy(true)}
+              >
+                Política de Privacidad
+              </button>
+            </div>
+
             <p className="footer-copyright">
               <span className="copyright-icon">©</span>
-              {year} Ezequiel Salazar — Todos los derechos reservados.
-            </p>
-
-            <p className="footer-tagline">
-              <span className="tagline-dot"></span>
-              Elegancia en diseño, eficiencia en código
-              <span className="tagline-dot"></span>
+              {year} Ezequiel Salazar
             </p>
           </div>
         </div>
@@ -191,12 +167,8 @@ const Footer = () => {
 
             <div className="privacy-modal-content">
               <span className="privacy-badge">Portafolio personal</span>
-
               <h1>Política de Privacidad</h1>
-
-              <p className="privacy-updated">
-                Última actualización: Junio 2026
-              </p>
+              <p className="privacy-updated">Última actualización: Junio 2026</p>
 
               <div className="info-section">
                 <svg className="info-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -286,7 +258,7 @@ const Footer = () => {
                 </svg>
                 <div>
                   <strong>Orlando Ezequiel Salazar Cruz</strong>
-                  <span>         ---Desarrollador de Software</span>
+                  <span>Desarrollador de Software</span>
                 </div>
               </div>
             </div>
