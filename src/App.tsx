@@ -44,7 +44,7 @@ function App() {
 
       {!loading && (
         <div className="app min-h-screen flex flex-col bg-[#0f172a] text-white font-['Poppins'] overflow-x-hidden">
-          <Header 
+          <Header
             darkMode={darkMode}
             toggleDarkMode={toggleDarkMode}
             mobileMenuOpen={mobileMenuOpen}

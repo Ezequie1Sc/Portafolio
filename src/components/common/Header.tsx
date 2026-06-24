@@ -12,6 +12,7 @@ interface HeaderProps {
 const Header = ({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('inicio');
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const navLinks = [
     { name: 'Inicio', href: '#inicio' },
@@ -47,20 +48,49 @@ const Header = ({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) => {
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    href: string
+  ) => {
     e.preventDefault();
     const targetId = href.substring(1);
-    const element = document.getElementById(targetId);
-    if (element) {
+
+    // ===== INICIO =====
+    if (targetId === 'inicio') {
       setMobileMenuOpen(false);
+      setIsTransitioning(true);
+
       setTimeout(() => {
-        const headerOffset = 80;
-        const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-        setActiveSection(targetId);
-      }, 150);
+        window.location.reload();
+      }, 600);
+
+      return;
     }
+
+    const element = document.getElementById(targetId);
+    if (!element) return;
+
+    // ===== RESTO DE SECCIONES =====
+    setMobileMenuOpen(false);
+    setIsTransitioning(true);
+
+    setTimeout(() => {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition =
+        elementPosition + window.pageYOffset - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+
+      setActiveSection(targetId);
+
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 700);
+    }, 600);
   };
 
   return (
@@ -88,6 +118,35 @@ const Header = ({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) => {
         </motion.button>
       </div>
 
+      {/* --- CORTINA DE TRANSICIÓN PREMIUM --- */}
+      <AnimatePresence>
+        {isTransitioning && (
+          <motion.div
+            className="transition-overlay"
+            initial={{
+              opacity: 0,
+              scaleY: 0,
+            }}
+            animate={{
+              opacity: 1,
+              scaleY: 1,
+            }}
+            exit={{
+              opacity: 0,
+              scaleY: 0,
+            }}
+            transition={{
+              duration: 0.55,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            style={{
+              transformOrigin: 'top',
+            }}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* MENÚ DESPLEGABLE */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 

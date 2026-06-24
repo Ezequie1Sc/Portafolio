@@ -75,7 +75,6 @@ const CategoryIcon = memo(({ type }: CategoryIconProps) => (
 
 CategoryIcon.displayName = 'CategoryIcon';
 
-// ===== FUNCIÓN PARA RENDERIZAR LA CARD CORRECTA =====
 const renderProjectCard = (
   project: Project,
   isExpanded: boolean,
@@ -112,12 +111,12 @@ interface CategorySectionProps {
   onOpenGallery: (project: Project) => void;
 }
 
-const CategorySection = memo(({ 
-  type, 
-  projectList, 
-  expandedCardId, 
-  onExpand, 
-  onOpenGallery 
+const CategorySection = memo(({
+  type,
+  projectList,
+  expandedCardId,
+  onExpand,
+  onOpenGallery,
 }: CategorySectionProps) => (
   <div className="project-category">
     <h3 className="category-title">
@@ -127,14 +126,9 @@ const CategorySection = memo(({
       {CATEGORY_LABELS[type]} ({projectList.length})
     </h3>
     <div className="category-grid">
-      {projectList.map((project) => (
-        renderProjectCard(
-          project, 
-          expandedCardId === project.id, 
-          onExpand, 
-          onOpenGallery
-        )
-      ))}
+      {projectList.map((project) =>
+        renderProjectCard(project, expandedCardId === project.id, onExpand, onOpenGallery)
+      )}
     </div>
   </div>
 ));
@@ -142,7 +136,7 @@ const CategorySection = memo(({
 CategorySection.displayName = 'CategorySection';
 
 const FILTER_TYPES = ['todos', 'web', 'mobile', 'backend', 'desktop'] as const;
-type FilterType = typeof FILTER_TYPES[number];
+type FilterType = (typeof FILTER_TYPES)[number];
 
 const FILTER_LABELS: Record<FilterType, string> = {
   todos: 'Todos',
@@ -157,30 +151,28 @@ const Projects = () => {
   const [expandedCardId, setExpandedCardId] = useState<number | null>(null);
   const [galleryProject, setGalleryProject] = useState<Project | null>(null);
 
-  const categorized = useMemo(() => ({
-    mobile: projects.filter(p => p.type === 'mobile'),
-    web: projects.filter(p => p.type === 'web'),
-    backend: projects.filter(p => p.type === 'backend'),
-    desktop: projects.filter(p => p.type === 'desktop'),
-  }), []);
+  const categorized = useMemo(
+    () => ({
+      mobile: projects.filter((p) => p.type === 'mobile'),
+      web: projects.filter((p) => p.type === 'web'),
+      backend: projects.filter((p) => p.type === 'backend'),
+      desktop: projects.filter((p) => p.type === 'desktop'),
+    }),
+    []
+  );
 
   const filteredProjects = useMemo(
-    () => filter === 'todos' ? projects : projects.filter(p => p.type === filter),
+    () => (filter === 'todos' ? projects : projects.filter((p) => p.type === filter)),
     [filter]
   );
 
   const handleFilterChange = useCallback((newFilter: FilterType) => {
     setFilter(newFilter);
-    setExpandedCardId(null); // Cerrar cualquier card expandida al cambiar filtro
+    setExpandedCardId(null);
   }, []);
 
-  // ===== CORRECCIÓN PRINCIPAL AQUÍ =====
   const handleCardExpand = useCallback((cardId: number) => {
-    setExpandedCardId(prev => {
-      // Si la card ya está expandida, la colapsa (toggle)
-      // Si no, expande solo esa (y colapsa las demás)
-      return prev === cardId ? null : cardId;
-    });
+    setExpandedCardId((prev) => (prev === cardId ? null : cardId));
   }, []);
 
   const handleOpenGallery = useCallback((project: Project) => {
@@ -283,14 +275,14 @@ const Projects = () => {
                   {CATEGORY_LABELS[filter]}
                 </h3>
                 <div className="category-grid">
-                  {filteredProjects.map((project) => (
+                  {filteredProjects.map((project) =>
                     renderProjectCard(
-                      project, 
-                      expandedCardId === project.id, 
-                      handleCardExpand, 
+                      project,
+                      expandedCardId === project.id,
+                      handleCardExpand,
                       handleOpenGallery
                     )
-                  ))}
+                  )}
                 </div>
               </div>
             )}

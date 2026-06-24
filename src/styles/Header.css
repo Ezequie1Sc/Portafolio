@@ -275,3 +275,14 @@ RESPONSIVE (MÓVIL)
     font-size: 1.45rem;
   }
 }
+/* ========================================
+CORTINA DE TRANSICIÓN PREMIUM
+======================================== */
+
+.transition-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998; /* Justo debajo del menú, pero encima de todo lo demás */
+  background: #020617; /* Negro profundo */
+  pointer-events: none;
+}

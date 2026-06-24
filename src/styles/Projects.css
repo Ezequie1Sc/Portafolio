@@ -27,9 +27,12 @@
   --ease-out: ease-out;
 }
 
-/* ===== BASE SECTION ===== */
+/* ========================================
+   BASE SECTION (UN PEQUEÑO ESPACIO ARRIBA: 3rem)
+   ======================================== */
 .projects-section {
-  padding: var(--spacing-4xl) 0;
+  /* 3rem (aprox 48px) es el espacio perfecto para que respire, pero sin estar lejos */
+  padding: 3rem 0 var(--spacing-4xl); 
   background: var(--bg-projects);
   position: relative;
   overflow-x: hidden;
@@ -223,7 +226,7 @@
 
 @media (max-width: 768px) {
   .projects-section {
-    padding: var(--spacing-3xl) 0;
+    padding: 2rem 0 var(--spacing-3xl);
   }
 
   .filter-btn {
@@ -286,6 +289,17 @@
   .category-title:hover .category-icon {
     transform: none !important;
   }
+
+  /* Asegurar que el título y subtítulo SIEMPRE se vean */
+  .projects-main-title,
+  .projects-subtitle {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
 }
 
 /* ===== MOVIMIENTO REDUCIDO ===== */
@@ -312,7 +326,8 @@
   white-space: nowrap;
   border: 0;
 }
-/* ===== FIX PARA MÓVIL: ASEGURAR QUE EL TEXTO SE VEA ===== */
+
+/* ===== FIX MÓVIL: TEXTO SIEMPRE VISIBLE ===== */
 @media (max-width: 768px) {
   .projects-subtitle {
     display: block !important;
@@ -327,47 +342,5 @@
     text-align: center !important;
     overflow: visible !important;
     word-wrap: break-word !important;
-  }
-}
-
-/* ===== CORRECCIÓN DEL MEDIA QUERY TÁCTIL ===== */
-@media (hover: none), (pointer: coarse) {
-  /* Solo afecta a elementos animables, NO al texto */
-  .projects-section,
-  .project-category,
-  .view-container,
-  .filtered-view,
-  .category-grid,
-  .filter-btn,
-  .category-icon,
-  .projects-main-title::after {
-    animation: none !important;
-    transform: none !important;
-    transition: none !important;
-    will-change: auto !important;
-    contain: none !important;
-    backface-visibility: visible !important;
-  }
-
-  /* Asegurar que el título y subtítulo SIEMPRE se vean */
-  .projects-main-title,
-  .projects-subtitle {
-    animation: none !important;
-    transform: none !important;
-    transition: none !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    display: block !important;
-  }
-
-  .filter-btn {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-
-  .filter-btn:hover,
-  .filter-btn.active,
-  .category-title:hover .category-icon {
-    transform: none !important;
   }
 }
