@@ -67,7 +67,6 @@ const Header = ({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) => {
     <header className={`header ${scrolled ? 'header-scrolled' : ''}`}>
       <div className="header-container">
         
-        {/* LOGO */}
         <motion.img
           src="/e_logo.png"
           alt="Ezequiel Logo"
@@ -77,7 +76,6 @@ const Header = ({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) => {
           transition={{ duration: 0.5 }}
         />
 
-        {/* Botón de MENU */}
         <motion.button 
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
           className={`mobile-menu-toggle ${mobileMenuOpen ? 'mobile-menu-toggle-hidden' : ''}`} 
@@ -90,21 +88,19 @@ const Header = ({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) => {
         </motion.button>
       </div>
 
-      {/* Menú desplegable - Animación LENTA (0.8s) */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
             className="mobile-menu" 
-            initial={{ opacity: 0, scale: 0.8, x: 40, y: -40 }}
-            animate={{ opacity: 1, scale: 1, x: 0, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, x: 40, y: -40 }}
+            initial={{ opacity: 0, scale: 0.86, x: 32, y: -28, filter: 'blur(14px)' }}
+            animate={{ opacity: 1, scale: 1, x: 0, y: 0, filter: 'blur(0px)' }}
+            exit={{ opacity: 0, scale: 0.9, x: 24, y: -24, filter: 'blur(12px)' }}
             transition={{
-              duration: 0.8,          /* Más lento (0.8s) para que se sienta muy fluido */
-              ease: [0.16, 1, 0.3, 1] /* Curva de aceleración suave */
+              duration: 0.55,
+              ease: [0.16, 1, 0.3, 1],
             }}
             style={{ transformOrigin: 'top right' }}
           >
-            {/* Botón CERRAR */}
             <button 
               className="mobile-menu-close-btn" 
               onClick={() => setMobileMenuOpen(false)}
@@ -114,16 +110,34 @@ const Header = ({ mobileMenuOpen, setMobileMenuOpen }: HeaderProps) => {
 
             <nav className="mobile-nav">
               {navLinks.map((link, index) => (
-                <motion.a 
-                  key={link.name} 
-                  href={link.href} 
-                  className={`mobile-nav-link ${activeSection === link.href.substring(1) ? 'mobile-nav-link-active' : ''}`} 
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  className={`mobile-nav-link ${
+                    activeSection === link.href.substring(1) ? 'mobile-nav-link-active' : ''
+                  }`}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  initial={{ opacity: 0, y: -10 }}
+                  initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index }}
+                  transition={{ delay: 0.08 * index, duration: 0.45 }}
                 >
-                  {link.name.toUpperCase()}
+                  {link.name.toUpperCase().split('').map((char, i) => (
+                    <span className="letter-wrap" key={`${link.name}-${i}`}>
+                      <span
+                        className="letter-front"
+                        style={{ '--i': i } as React.CSSProperties}
+                      >
+                        {char === ' ' ? '\u00A0' : char}
+                      </span>
+
+                      <span
+                        className="letter-back"
+                        style={{ '--i': i } as React.CSSProperties}
+                      >
+                        {char === ' ' ? '\u00A0' : char}
+                      </span>
+                    </span>
+                  ))}
                 </motion.a>
               ))}
             </nav>

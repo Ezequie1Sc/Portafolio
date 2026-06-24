@@ -11,7 +11,6 @@ HEADER - BASE
   pointer-events: none; 
 }
 
-/* --- CONTENEDOR PRINCIPAL --- */
 .header-container {
   width: 100%;
   position: relative;
@@ -90,12 +89,12 @@ BOTÓN DE MENÚ
 }
 
 /* ========================================
-MENÚ DESPLEGABLE
+MENÚ DESPLEGABLE (CASI PEGADO ARRIBA)
 ======================================== */
 
 .mobile-menu {
   position: fixed;
-  top: 58px;
+  top: 10px;
   right: 16px;
 
   width: min(300px, calc(100vw - 32px));
@@ -158,7 +157,7 @@ BOTÓN CERRAR
 }
 
 /* ========================================
-ENLACES DEL MENÚ (GIRO 3D MÁS LENTO Y PROFUNDO)
+ENLACES DEL MENÚ (ESTILO PERSIANA/POR LETRA)
 ======================================== */
 
 .mobile-nav {
@@ -167,54 +166,81 @@ ENLACES DEL MENÚ (GIRO 3D MÁS LENTO Y PROFUNDO)
 
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 0.38rem;
   margin-top: 0;
 }
 
 .mobile-nav-link {
+  position: relative;
   width: fit-content;
-  padding: 0.6rem 1rem;
-  margin-left: -1rem;
 
-  font-family: system-ui, -apple-system, sans-serif;
+  display: flex;
+  align-items: center;
+
+  padding: 0.35rem 0;
+  margin-left: 0;
+
+  font-family: 'Space Grotesk', system-ui, sans-serif;
   color: #ffffff;
   text-decoration: none;
 
-  font-size: clamp(1.45rem, 3vw, 1.75rem);
-  font-weight: 500;
-  line-height: 1.15;
-  letter-spacing: -0.04em;
+  font-size: clamp(1.55rem, 3vw, 1.95rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.05em;
   text-transform: uppercase;
 
-  /* TRANSICIÓN PARA EL GIRO 3D (MÁS LENTA Y CON REBOTE) */
-  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), 
-              color 0.4s ease;
+  perspective: 900px;
   transform-style: preserve-3d;
-  perspective: 800px;
+  background: transparent;
 }
 
-/* EFECTO DE GIRO 3D MÁS MARCADO AL HACER HOVER */
-.mobile-nav-link:hover {
-  transform: rotateY(-20deg) scale(1.05); /* Giro más pronunciado y un poco de zoom */
-  color: #93c5fd; /* Cambia a un azul claro al girar */
-  background: rgba(255, 255, 255, 0.05);
+.letter-wrap {
+  position: relative;
+  display: inline-block;
+  height: 1em;
+  overflow: hidden;
 }
 
-/* ========================================
-ENLACE ACTIVO
-======================================== */
+.letter-front,
+.letter-back {
+  display: block;
+  transform-style: preserve-3d;
+  transition:
+    transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--i) * 28ms);
+}
+
+.letter-front {
+  transform: translateY(0) rotateX(0deg);
+  opacity: 1;
+}
+
+.letter-back {
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #93c5fd;
+  transform: translateY(105%) rotateX(-90deg);
+  opacity: 0;
+}
+
+.mobile-nav-link:hover .letter-front {
+  transform: translateY(-105%) rotateX(90deg);
+  opacity: 0;
+}
+
+.mobile-nav-link:hover .letter-back {
+  transform: translateY(0) rotateX(0deg);
+  opacity: 1;
+}
 
 .mobile-nav-link-active {
-  background: rgba(59, 130, 246, 0.12);
-  border-left: 3px solid #3b82f6;
-  border-radius: 0 8px 8px 0;
-  transform: translateX(0);
-  opacity: 1;
-  padding-left: 1.5rem;
-}
-
-.mobile-nav-link-active:hover {
-  transform: rotateY(-15deg) scale(1.05) translateX(4px);
+  color: #ffffff;
+  background: transparent;
+  border-left: none;
+  padding-left: 0;
 }
 
 /* ========================================
@@ -239,23 +265,13 @@ RESPONSIVE (MÓVIL)
   .toggle-text { font-size: 0.65rem; }
   
   .mobile-menu {
-    top: 46px;
+    top: 6px;
     right: 16px;
     width: min(280px, calc(100vw - 32px));
     padding: 3.5rem 1.8rem 2rem;
   }
 
   .mobile-nav-link {
-    font-size: 1.4rem;
-    padding: 0.4rem 0.8rem;
-    margin-left: -0.8rem;
-  }
-
-  .mobile-nav-link:hover {
-    transform: rotateY(-12deg) scale(1.02); /* Giro un poco más suave en móvil */
-  }
-
-  .mobile-nav-link-active {
-    padding-left: 1.2rem;
+    font-size: 1.45rem;
   }
 }
