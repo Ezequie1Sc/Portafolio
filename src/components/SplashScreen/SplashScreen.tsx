@@ -12,13 +12,13 @@ const SplashScreen = () => {
       <div className="splash-noise" />
       <div className="splash-light" />
       
-      {/* CAPA DE BARRIDO (Cortina) */}
+      {/* CAPA DE BARRIDO (Cortina) - MÁS LENTA (1.2s) */}
       <motion.div
         className="splash-wipe"
         initial={{ translateY: '100%' }}
         animate={{ translateY: '100%' }}
         exit={{ translateY: '0%' }}
-        transition={{ duration: 0.85, ease: [0.65, 0, 0.35, 1] }}
+        transition={{ duration: 1.2, ease: [0.65, 0, 0.35, 1] }}
       />
 
       <motion.div
@@ -26,7 +26,7 @@ const SplashScreen = () => {
         initial={{ opacity: 0, scale: 0.96 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       >
         <motion.div
           className="splash-logo-wrap"

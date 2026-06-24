@@ -12,11 +12,11 @@
   justify-content: center;
 }
 
-/* --- NUEVO: CAPA DE BARRIDO / CORTINA --- */
+/* --- CAPA DE BARRIDO / CORTINA --- */
 .splash-wipe {
   position: absolute;
   inset: 0;
-  z-index: 10; /* Justo por encima del fondo, pero debajo del contenido */
+  z-index: 10;
   background: #ffffff; /* Si quieres tu color azul oscuro, cambia esto a #0f172a */
   pointer-events: none;
   will-change: transform;
@@ -45,7 +45,7 @@
 
 .splash-content {
   position: relative;
-  z-index: 11; /* Justo por encima de la capa de barrido */
+  z-index: 11;
   text-align: center;
   padding: 2rem;
 }
