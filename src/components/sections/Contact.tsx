@@ -170,38 +170,31 @@ const Contact = () => {
 
   return (
     <section id="contacto" className="contact-section">
-      {/* Fondos decorativos */}
       <div className="contact-grid-bg" />
       <div className="contact-light-left" />
       <div className="contact-light-right" />
 
       <div className="contact-container">
-        {/* Header */}
-        <div className="contact-header">
-          <h2 className="contact-title">Contacto</h2>
-          <div className="contact-title-underline" />
-          <p className="contact-description">
-            ¿Tienes un proyecto en mente o quieres colaborar?
-            Escríbeme y hablemos sobre cómo puedo ayudarte.
-          </p>
-        </div>
-
-        {/* Layout INVERTIDO */}
         <div className="contact-layout">
-          {/* Columna izquierda - FORMULARIO */}
+          
+          {/* COLUMNA IZQUIERDA - FORMULARIO */}
           <div className="contact-left">
-            <div className="contact-form-card">
-              {/* Mensaje de invitación */}
-              <div className="form-invitation">
-                <h3>Cuéntame sobre tu proyecto</h3>
-                <p>Completa el formulario y te responderé a la brevedad</p>
+            <div className="contact-form-wrapper">
+              
+              {/* Título y Subtítulo con animación de entrada */}
+              <div className="contact-header">
+                <h2 className="contact-title">
+                  Cuéntame sobre <span className="title-highlight">tu proyecto</span>
+                </h2>
+                <p className="contact-subtitle">
+                  Completa el formulario y te responderé a la brevedad
+                </p>
               </div>
 
               <form onSubmit={handleSubmit} className="contact-form" noValidate>
-                {/* Fila: Nombre + Email */}
                 <div className="form-row">
                   <div className={`form-field ${fieldState("name")}`}>
-                    <label htmlFor="name" className="field-label">Nombre</label>
+                    <label htmlFor="name" className="field-label">NOMBRE</label>
                     <div className="input-wrapper">
                       <input
                         type="text"
@@ -228,7 +221,7 @@ const Contact = () => {
                   </div>
 
                   <div className={`form-field ${fieldState("email")}`}>
-                    <label htmlFor="email" className="field-label">Email</label>
+                    <label htmlFor="email" className="field-label">EMAIL</label>
                     <div className="input-wrapper">
                       <input
                         type="email"
@@ -255,9 +248,8 @@ const Contact = () => {
                   </div>
                 </div>
 
-                {/* Campo: Asunto */}
                 <div className={`form-field ${fieldState("subject")}`}>
-                  <label htmlFor="subject" className="field-label">Asunto</label>
+                  <label htmlFor="subject" className="field-label">ASUNTO</label>
                   <div className="input-wrapper">
                     <input
                       type="text"
@@ -282,9 +274,8 @@ const Contact = () => {
                   )}
                 </div>
 
-                {/* Campo: Mensaje */}
                 <div className={`form-field ${fieldState("message")}`}>
-                  <label htmlFor="message" className="field-label">Mensaje</label>
+                  <label htmlFor="message" className="field-label">MENSAJE</label>
                   <div className="input-wrapper">
                     <textarea
                       id="message"
@@ -304,21 +295,10 @@ const Contact = () => {
                     ) : (
                       <span />
                     )}
-                    <span
-                      className={`char-counter ${
-                        messageLength > 900 && messageLength <= messageMaxLength
-                          ? "counter-warning"
-                          : messageLength > messageMaxLength
-                          ? "counter-error"
-                          : ""
-                      }`}
-                    >
-                      {messageLength}/{messageMaxLength}
-                    </span>
+                    <span className="char-counter">{messageLength}/{messageMaxLength}</span>
                   </div>
                 </div>
 
-                {/* Botón */}
                 <button
                   type="submit"
                   className={`submit-button ${loading ? "loading" : ""}`}
@@ -331,7 +311,7 @@ const Contact = () => {
                     </>
                   ) : (
                     <>
-                      <span>Enviar mensaje</span>
+                      <span>ENVIAR MENSAJE</span>
                       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                         <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
@@ -342,122 +322,91 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Columna derecha - INFO DE CONTACTO */}
+          {/* COLUMNA DERECHA - GLOBO 3D ANIMADO Y CONTACTO */}
           <div className="contact-right">
-            <a href="mailto:ezequielsc017@gmail.com" className="contact-card">
-              <div className="contact-card-icon icon-blue">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M22 6L12 13L2 6M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" strokeLinecap="round" />
-                </svg>
-              </div>
-              <div className="contact-card-body">
-                <span className="contact-card-label">Email</span>
-                <span className="contact-card-value">ezequielsc017@gmail.com</span>
-              </div>
-            </a>
-
-            <a
-              href="https://www.linkedin.com/in/ezequiel-salazar-194975340/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-card"
-            >
-              <div className="contact-card-icon icon-purple">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" strokeLinecap="round" />
-                  <circle cx="4" cy="4" r="2" />
-                </svg>
-              </div>
-              <div className="contact-card-body">
-                <span className="contact-card-label">LinkedIn</span>
-                <span className="contact-card-value">Ezequiel Salazar</span>
-              </div>
-            </a>
-
-            <a
-              href="https://github.com/Ezequie1Sc"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-card"
-            >
-              <div className="contact-card-icon icon-pink">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" strokeLinecap="round" />
-                </svg>
-              </div>
-              <div className="contact-card-body">
-                <span className="contact-card-label">GitHub</span>
-                <span className="contact-card-value">@Ezequie1Sc</span>
-              </div>
-            </a>
-
-            <div className="contact-divider" />
-
-            {/* CONTENEDOR DE ESTADO PROFESIONAL */}
-            <div className="status-container">
-              {/* Disponibilidad */}
-              <div className="status-item">
-                <div className="status-icon green">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M20 12H4M12 4v16" strokeLinecap="round" />
-                  </svg>
-                </div>
-                <div className="status-content">
-                  <div className="status-header">
-                    <span className="status-dot" />
-                    <span className="status-title">Disponible para proyectos</span>
-                    <span className="status-badge">Activo</span>
-                  </div>
-                  <p className="status-description">
-                    Abierto a colaboraciones, freelance y oportunidades laborales.
-                  </p>
-                </div>
-              </div>
-
-              <div className="status-divider" />
-
-              {/* Tiempo de respuesta */}
-              <div className="status-item">
-                <div className="status-icon blue">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10" />
-                    <path d="M12 6v6l4 2" strokeLinecap="round" />
-                  </svg>
-                </div>
-                <div className="status-content">
-                  <div className="status-header">
-                    <span className="status-title">Tiempo de respuesta</span>
-                  </div>
-                  <div>
-                    <span className="status-time">24 – 48 horas</span>
-                    <span className="status-time-small"> · Respondo todos los mensajes</span>
+            
+            {/* Contenedor del Globo y Texto de invitación */}
+            <div className="contact-globe-card">
+              <div className="globe-wrapper">
+                {/* Globo Terráqueo SVG animado con CSS puro */}
+                <div className="globe-3d">
+                  <div className="globe-sphere"></div>
+                  <div className="globe-ring"></div>
+                  <div className="globe-dots">
+                    <span className="dot d1"></span>
+                    <span className="dot d2"></span>
+                    <span className="dot d3"></span>
+                    <span className="dot d4"></span>
+                    <span className="dot d5"></span>
+                    <span className="dot d6"></span>
+                    <span className="dot d7"></span>
+                    <span className="dot d8"></span>
+                    <span className="dot d9"></span>
+                    <span className="dot d10"></span>
                   </div>
                 </div>
+              </div>
+
+              <div className="invitation-text">
+                <p className="invitation-headline">
+                  Tienes las <em>ideas</em>, <br />
+                  yo tengo las <em>habilidades</em>. <br />
+                  <span className="invitation-highlight">¡Trabajemos juntos!</span>
+                </p>
               </div>
             </div>
 
-            {/* Nota de seguridad */}
-            <div className="security-note">
-              <svg className="security-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" strokeLinecap="round" />
-              </svg>
-              <span className="security-text">Tus datos están seguros y protegidos</span>
+            {/* Enlaces de contacto rápidos */}
+            <div className="contact-links-grid">
+              <a href="mailto:ezequielsc017@gmail.com" className="contact-link">
+                <div className="link-icon icon-blue">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M22 6L12 13L2 6M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <div className="link-content">
+                  <span className="link-label">Email</span>
+                  <span className="link-value">ezequielsc017@gmail.com</span>
+                </div>
+              </a>
+
+              <a href="https://www.linkedin.com/in/ezequiel-salazar-194975340/" target="_blank" rel="noopener noreferrer" className="contact-link">
+                <div className="link-icon icon-purple">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z" strokeLinecap="round" />
+                    <circle cx="4" cy="4" r="2" />
+                  </svg>
+                </div>
+                <div className="link-content">
+                  <span className="link-label">LinkedIn</span>
+                  <span className="link-value">Ezequiel Salazar</span>
+                </div>
+              </a>
+
+              <a href="https://github.com/Ezequie1Sc" target="_blank" rel="noopener noreferrer" className="contact-link">
+                <div className="link-icon icon-pink">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" strokeLinecap="round" />
+                  </svg>
+                </div>
+                <div className="link-content">
+                  <span className="link-label">GitHub</span>
+                  <span className="link-value">@Ezequie1Sc</span>
+                </div>
+              </a>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Notificación Toast Flotante */}
+      {/* Toast Notification */}
       {notification.show && (
         <div className={`toast-notification ${notification.type}`}>
           <div className="toast-icon">
             {notification.type === "success" ? <SuccessIcon /> : <ErrorIcon />}
           </div>
           <span className="toast-message">{notification.message}</span>
-          <button
-            className="toast-close"
-            onClick={() => setNotification({ show: false, type: "", message: "" })}
-          >
+          <button className="toast-close" onClick={() => setNotification({ show: false, type: "", message: "" })}>
             <CloseIcon />
           </button>
           <div className="toast-progress" />
