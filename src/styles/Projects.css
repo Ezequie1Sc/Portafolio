@@ -28,14 +28,13 @@
 }
 
 /* ========================================
-   BASE SECTION (UN PEQUEÑO ESPACIO ARRIBA: 3rem)
+   BASE SECTION (NUEVO ESTILO PREMIUM)
    ======================================== */
 .projects-section {
-  padding: 3rem 0 var(--spacing-4xl); 
-  background: var(--bg-projects);
+  padding: 7rem 0;
+  background: #172031;
   position: relative;
-  overflow-x: hidden;
-  overflow-y: visible;
+  overflow: hidden;
 }
 
 .projects-section::before {
@@ -58,12 +57,12 @@
 }
 
 .projects-main-title {
-  font-size: clamp(2rem, 5vw, 2.5rem);
-  font-weight: 700;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.06em;
   color: var(--text-white);
   margin-bottom: var(--spacing-md);
   position: relative;
-  letter-spacing: -0.02em;
 }
 
 .projects-main-title::after {
@@ -87,12 +86,12 @@
   color: var(--text-gray);
   font-size: clamp(0.95rem, 2vw, 1.1rem);
   margin-bottom: var(--spacing-2xl);
-  max-width: 600px;
+  max-width: 540px;
   line-height: 1.6;
   padding: 0 var(--spacing-md);
 }
 
-/* ===== FILTROS ===== */
+/* ===== FILTROS TIPO PILLS MODERNOS ===== */
 .projects-filter {
   display: flex;
   flex-wrap: wrap;
@@ -107,19 +106,15 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-xs);
-  padding: 0.5rem 1.25rem;
+  padding: 0.6rem 1.5rem;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid var(--border-light);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text-light);
   font-size: 0.85rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition:
-    background var(--dur-fast) var(--ease),
-    border-color var(--dur-fast) var(--ease),
-    color var(--dur-fast) var(--ease),
-    box-shadow var(--dur-fast) var(--ease);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   user-select: none;
 }
 
@@ -129,12 +124,13 @@
   stroke: var(--text-light);
   stroke-width: 2;
   flex-shrink: 0;
-  transition: stroke var(--dur-fast) var(--ease);
+  transition: stroke 0.3s ease;
 }
 
 .filter-btn:hover {
   color: var(--text-white);
   border-color: var(--blue);
+  transform: translateY(-2px);
 }
 
 .filter-btn:hover svg {
@@ -145,7 +141,8 @@
   color: var(--text-white);
   background: var(--blue);
   border-color: var(--blue);
-  box-shadow: 0 5px 15px rgba(59, 130, 246, 0.3);
+  box-shadow: 0 8px 25px rgba(59, 130, 246, 0.25);
+  transform: translateY(-2px);
 }
 
 .filter-btn.active svg {
@@ -156,7 +153,7 @@
 .projects-categories {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2xl);
+  gap: var(--spacing-3xl);
 }
 
 .project-category {
@@ -165,14 +162,14 @@
 }
 
 .category-title {
-  font-size: clamp(1.1rem, 3vw, 1.3rem);
-  font-weight: 600;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 700;
   color: var(--text-white);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
   display: flex;
   align-items: center;
   gap: var(--spacing-sm);
-  padding-bottom: var(--spacing-xs);
+  padding-bottom: var(--spacing-sm);
   border-bottom: 1px solid var(--border-dim);
 }
 
@@ -180,9 +177,9 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: rgba(59, 130, 246, 0.1);
+  width: 36px;
+  height: 36px;
+  background: rgba(59, 130, 246, 0.12);
   border-radius: var(--radius-sm);
   flex-shrink: 0;
 }
@@ -194,14 +191,16 @@
   stroke-width: 2;
 }
 
-/* ===== GRID ===== */
+/* ========================================
+   GRID PREMIUM (2 COLUMNAS, CARDS GRANDES)
+   ======================================== */
 .category-grid {
   display: grid;
-  gap: var(--spacing-xl);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  align-items: stretch;
   width: 100%;
   min-width: 0;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: start;
 }
 
 .view-container,
@@ -209,9 +208,12 @@
   width: 100%;
   min-width: 0;
   position: relative;
+  will-change: transform, opacity, filter;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ========================================
+   RESPONSIVE
+   ======================================== */
 @media (min-width: 640px) and (max-width: 1023px) {
   .category-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -221,12 +223,13 @@
 @media (max-width: 639px) {
   .category-grid {
     grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
   }
 }
 
 @media (max-width: 768px) {
   .projects-section {
-    padding: 2rem 0 var(--spacing-3xl);
+    padding: 4rem 0;
   }
 
   .filter-btn {
@@ -290,7 +293,6 @@
     transform: none !important;
   }
 
-  /* Asegurar que el título y subtítulo SIEMPRE se vean */
   .projects-main-title,
   .projects-subtitle {
     animation: none !important;
