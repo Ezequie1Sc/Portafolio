@@ -4,8 +4,8 @@
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
   --blue: #3b82f6;
-  --purple: #8b5cf6;
-  --pink: #ec4899;
+  --linkedin: #0a66c2;
+  --github: #171515;
   --green: #10b981;
   --red: #ef4444;
 }
@@ -90,10 +90,7 @@
 
 .title-highlight {
   font-style: italic;
-  background: linear-gradient(135deg, var(--blue), var(--purple));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--blue);
 }
 
 .contact-subtitle {
@@ -195,7 +192,7 @@
   font-variant-numeric: tabular-nums;
 }
 
-/* ===== BOTÓN ===== */
+/* ===== BOTÓN AZUL SÓLIDO ===== */
 .submit-button {
   display: flex;
   align-items: center;
@@ -203,7 +200,7 @@
   gap: 0.75rem;
   width: 100%;
   padding: 1rem 2rem;
-  background: linear-gradient(135deg, var(--blue) 0%, var(--purple) 100%);
+  background: var(--blue);
   border: none;
   border-radius: 0.75rem;
   color: white;
@@ -222,9 +219,6 @@
 }
 
 .submit-button:disabled { opacity: 0.5; cursor: not-allowed; }
-
-.submit-button svg { width: 18px; height: 18px; transition: transform 0.3s; }
-.submit-button:hover:not(:disabled) svg { transform: translateX(4px) translateY(-2px); }
 
 .spinner {
   width: 18px;
@@ -409,13 +403,10 @@
   display: inline-block;
   margin-top: 0.3rem;
   font-weight: 700;
-  background: linear-gradient(90deg, var(--blue), var(--purple));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--blue);
 }
 
-/* ----- ENLACES DE CONTACTO ----- */
+/* ----- ENLACES DE CONTACTO CON ICONOS OFICIALES ----- */
 .contact-links-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -452,11 +443,11 @@
   flex-shrink: 0;
 }
 
-.link-icon svg { width: 20px; height: 20px; }
+.link-icon svg { width: 22px; height: 22px; }
 
-.icon-blue { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
-.icon-purple { background: rgba(139, 92, 246, 0.15); color: #a78bfa; }
-.icon-pink { background: rgba(236, 72, 153, 0.15); color: #f472b6; }
+.icon-email { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+.icon-linkedin { background: rgba(10, 102, 194, 0.15); color: var(--linkedin); }
+.icon-github { background: rgba(255, 255, 255, 0.08); color: var(--github); }
 
 .link-content {
   display: flex;
