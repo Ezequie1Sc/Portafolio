@@ -164,9 +164,11 @@
 
 .input-icon {
   position: absolute;
-  right: 0.85rem; top: 50%;
+  right: 0.85rem;
+  top: 50%;
   transform: translateY(-50%);
-  width: 18px; height: 18px;
+  width: 18px;
+  height: 18px;
   pointer-events: none;
 }
 
@@ -225,7 +227,8 @@
 .submit-button:hover:not(:disabled) svg { transform: translateX(4px) translateY(-2px); }
 
 .spinner {
-  width: 18px; height: 18px;
+  width: 18px;
+  height: 18px;
   border: 2.5px solid rgba(255, 255, 255, 0.3);
   border-top-color: white;
   border-radius: 50%;
@@ -235,11 +238,11 @@
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ========================================
-   COLUMNA DERECHA - GLOBO 3D Y ENLACES
+   COLUMNA DERECHA - NUBE 3D Y ENLACES
    ======================================== */
 .contact-right { display: flex; flex-direction: column; gap: 1.5rem; }
 
-/* ----- GLOBO 3D ANIMADO ----- */
+/* ----- NUBE 3D DE TECNOLOGÍAS ----- */
 .contact-globe-card {
   position: relative;
   background: linear-gradient(145deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.9));
@@ -258,74 +261,123 @@
 .globe-wrapper {
   position: relative;
   width: 100%;
-  max-width: 220px;
-  aspect-ratio: 1 / 1;
+  max-width: 280px;
   margin: 0 auto 1.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* El globo en sí (esfera azul brillante) */
-.globe-3d {
+/* ===== NUBE 3D DE TECNOLOGÍAS ===== */
+.tech-cloud-scene {
+  width: 280px;
+  height: 235px;
   position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: radial-gradient(circle at 40% 30%, rgba(59, 130, 246, 0.3), rgba(15, 23, 42, 0.9) 70%);
-  box-shadow: inset 0 0 30px rgba(59, 130, 246, 0.2), 0 0 40px rgba(59, 130, 246, 0.15);
-  animation: globeFloat 4s ease-in-out infinite;
+  perspective: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
 }
 
-@keyframes globeFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+.tech-cloud-scene:active {
+  cursor: grabbing;
 }
 
-/* Línea de longitud (el anillo) girando */
-.globe-ring {
+.tech-cloud {
+  position: relative;
+  width: 210px;
+  height: 180px;
+  transform-style: preserve-3d;
+  animation: techCloudSpin 18s linear infinite;
+  transition: transform 0.25s ease;
+}
+
+.tech-cloud-scene:hover .tech-cloud {
+  animation-play-state: paused;
+  transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+}
+
+.tech-cloud::before {
+  content: "";
   position: absolute;
-  inset: -8px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(59, 130, 246, 0.25);
-  mask-image: linear-gradient(90deg, transparent, black 20%, black 80%, transparent);
-  animation: spinRing 10s linear infinite;
+  inset: 30px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 40% 35%, rgba(96, 165, 250, 0.18), transparent 45%),
+    radial-gradient(circle at center, rgba(59, 130, 246, 0.08), transparent 65%);
+  filter: blur(4px);
+  transform: translateZ(-80px);
 }
 
-@keyframes spinRing {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-/* Puntos de conexión (las "ciudades" del globo) */
-.globe-dots {
+.cloud-tech-icon {
   position: absolute;
-  inset: 0;
+  top: 50%;
+  left: 50%;
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  font-size: 2.35rem;
+  background: transparent;
+  transform:
+    translate3d(var(--x), var(--y), var(--z))
+    translate(-50%, -50%)
+    scale(var(--s));
+  filter:
+    drop-shadow(0 10px 14px rgba(0, 0, 0, 0.5))
+    drop-shadow(0 0 8px rgba(59, 130, 246, 0.15));
+  animation: cloudIconFloat 4s ease-in-out infinite;
 }
 
-.dot {
-  position: absolute;
-  width: 4px;
-  height: 4px;
-  background: #60a5fa;
-  border-radius: 50%;
-  box-shadow: 0 0 10px rgba(96, 165, 250, 0.8);
+.cloud-tech-icon:nth-child(2n) {
+  animation-delay: -1.2s;
 }
 
-.d1 { top: 25%; left: 20%; animation: pulseDot 3s infinite; }
-.d2 { top: 45%; left: 60%; animation: pulseDot 3s infinite 0.5s; }
-.d3 { top: 70%; left: 35%; animation: pulseDot 3s infinite 1s; }
-.d4 { top: 30%; left: 75%; animation: pulseDot 3s infinite 1.5s; }
-.d5 { top: 65%; left: 80%; animation: pulseDot 3s infinite 2s; }
-.d6 { top: 15%; left: 50%; animation: pulseDot 3s infinite 0.3s; }
-.d7 { top: 80%; left: 15%; animation: pulseDot 3s infinite 0.8s; }
-.d8 { top: 55%; left: 25%; animation: pulseDot 3s infinite 1.3s; }
-.d9 { top: 10%; left: 85%; animation: pulseDot 3s infinite 1.8s; }
-.d10 { top: 90%; left: 65%; animation: pulseDot 3s infinite 2.3s; }
+.cloud-tech-icon:nth-child(3n) {
+  animation-delay: -2s;
+}
 
-@keyframes pulseDot {
-  0%, 100% { opacity: 0.3; transform: scale(0.8); }
-  50% { opacity: 1; transform: scale(1.3); }
+.cloud-tech-icon:hover {
+  filter:
+    drop-shadow(0 0 14px currentColor)
+    drop-shadow(0 12px 18px rgba(0, 0, 0, 0.55));
+  z-index: 20;
+}
+
+.cloud-tech-icon.javascript { color: #f7df1e; }
+.cloud-tech-icon.typescript { color: #3178c6; }
+.cloud-tech-icon.html { color: #e34f26; }
+.cloud-tech-icon.css { color: #1572b6; }
+.cloud-tech-icon.react { color: #61dafb; }
+.cloud-tech-icon.node { color: #5fa04e; }
+.cloud-tech-icon.python { color: #3776ab; }
+.cloud-tech-icon.git { color: #f05032; }
+.cloud-tech-icon.github { color: #f8fafc; }
+.cloud-tech-icon.mongodb { color: #47a248; }
+.cloud-tech-icon.postgres { color: #4169e1; }
+.cloud-tech-icon.flutter { color: #02569b; }
+.cloud-tech-icon.dart { color: #0175c2; }
+.cloud-tech-icon.firebase { color: #ffca28; }
+.cloud-tech-icon.angular { color: #dd0031; }
+.cloud-tech-icon.vite { color: #646cff; }
+
+@keyframes techCloudSpin {
+  from {
+    transform: rotateX(0deg) rotateY(-18deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(360deg) rotateY(-18deg) rotateZ(0deg);
+  }
+}
+
+@keyframes cloudIconFloat {
+  0%, 100% {
+    margin-top: 0;
+  }
+  50% {
+    margin-top: -8px;
+  }
 }
 
 /* Texto de invitación */
@@ -386,7 +438,8 @@
 }
 
 .link-icon {
-  width: 42px; height: 42px;
+  width: 42px;
+  height: 42px;
   border-radius: 0.75rem;
   display: flex;
   align-items: center;
@@ -457,8 +510,11 @@
 }
 
 .toast-close {
-  width: 32px; height: 32px;
-  display: flex; align-items: center; justify-content: center;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 0.6rem;
@@ -471,7 +527,11 @@
 .toast-close svg { width: 14px; height: 14px; }
 
 .toast-progress {
-  position: absolute; bottom: 0; left: 0; height: 3px; width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
   transform-origin: left;
   animation: toastProgress 5s linear forwards;
 }
@@ -494,7 +554,24 @@
   .contact-form-wrapper { padding: 1.5rem; }
   .form-row { grid-template-columns: 1fr; }
   .contact-globe-card { min-height: auto; padding: 2rem 1.5rem; }
-  .globe-wrapper { max-width: 160px; }
+
+  /* Ajustes para la nube en móviles */
+  .tech-cloud-scene {
+    width: 225px;
+    height: 205px;
+  }
+
+  .tech-cloud {
+    width: 170px;
+    height: 155px;
+  }
+
+  .cloud-tech-icon {
+    width: 34px;
+    height: 34px;
+    font-size: 1.85rem;
+  }
+
   .contact-link { padding: 0.75rem 1rem; }
   .toast-notification { bottom: 1rem; right: 1rem; left: 1rem; max-width: none; }
 }

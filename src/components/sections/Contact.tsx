@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import "../../styles/Contact.css";
+import {
+  SiReact, SiJavascript, SiTypescript, SiHtml5, SiCss, SiNodedotjs,
+  SiPython, SiGit, SiGithub, SiMongodb, SiPostgresql, SiFlutter,
+  SiDart, SiFirebase, SiAngular, SiVite
+} from "react-icons/si";
 
 interface FormData {
   name: string;
@@ -40,6 +45,74 @@ const CloseIcon = () => (
     <path d="M18 6L6 18M6 6l12 12" strokeLinecap="round" />
   </svg>
 );
+
+// --- NUBE 3D DE TECNOLOGÍAS ---
+const techCloudIcons = [
+  { icon: <SiJavascript />, className: "javascript", x: -55, y: -65, z: 80, s: 1.15 },
+  { icon: <SiTypescript />, className: "typescript", x: 20, y: -80, z: 45, s: 1.05 },
+  { icon: <SiHtml5 />, className: "html", x: 78, y: -45, z: 70, s: 1.2 },
+  { icon: <SiCss />, className: "css", x: -85, y: -15, z: 20, s: 0.9 },
+  { icon: <SiReact />, className: "react", x: -35, y: 20, z: 95, s: 0.95 },
+  { icon: <SiNodedotjs />, className: "node", x: 25, y: 35, z: 65, s: 1.15 },
+  { icon: <SiPython />, className: "python", x: 88, y: 18, z: 10, s: 0.85 },
+  { icon: <SiGit />, className: "git", x: -70, y: 70, z: 55, s: 0.95 },
+  { icon: <SiGithub />, className: "github", x: 8, y: 82, z: 20, s: 1.05 },
+  { icon: <SiMongodb />, className: "mongodb", x: -95, y: -70, z: -45, s: 0.85 },
+  { icon: <SiPostgresql />, className: "postgres", x: 95, y: -78, z: -30, s: 1 },
+  { icon: <SiFlutter />, className: "flutter", x: 70, y: 70, z: -40, s: 0.9 },
+  { icon: <SiDart />, className: "dart", x: -10, y: -10, z: -85, s: 0.8 },
+  { icon: <SiFirebase />, className: "firebase", x: -95, y: 35, z: -65, s: 1.1 },
+  { icon: <SiAngular />, className: "angular", x: 40, y: -10, z: -70, s: 0.9 },
+  { icon: <SiVite />, className: "vite", x: -20, y: 58, z: -20, s: 0.85 },
+];
+
+const TechSphere = () => {
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 34;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -34;
+
+    setTilt({ x: y, y: x });
+  };
+
+  return (
+    <div
+      className="tech-cloud-scene"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+    >
+      <div
+        className="tech-cloud"
+        style={
+          {
+            "--tilt-x": `${tilt.x}deg`,
+            "--tilt-y": `${tilt.y}deg`,
+          } as React.CSSProperties
+        }
+      >
+        {techCloudIcons.map((tech, index) => (
+          <span
+            key={index}
+            className={`cloud-tech-icon ${tech.className}`}
+            style={
+              {
+                "--x": `${tech.x}px`,
+                "--y": `${tech.y}px`,
+                "--z": `${tech.z}px`,
+                "--s": tech.s,
+              } as React.CSSProperties
+            }
+          >
+            {tech.icon}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 const Contact = () => {
   const [formData, setFormData] = useState<FormData>({
@@ -322,29 +395,13 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* COLUMNA DERECHA - GLOBO 3D ANIMADO Y CONTACTO */}
+          {/* COLUMNA DERECHA - NUBE 3D Y CONTACTO */}
           <div className="contact-right">
             
-            {/* Contenedor del Globo y Texto de invitación */}
+            {/* Contenedor de la Nube 3D */}
             <div className="contact-globe-card">
               <div className="globe-wrapper">
-                {/* Globo Terráqueo SVG animado con CSS puro */}
-                <div className="globe-3d">
-                  <div className="globe-sphere"></div>
-                  <div className="globe-ring"></div>
-                  <div className="globe-dots">
-                    <span className="dot d1"></span>
-                    <span className="dot d2"></span>
-                    <span className="dot d3"></span>
-                    <span className="dot d4"></span>
-                    <span className="dot d5"></span>
-                    <span className="dot d6"></span>
-                    <span className="dot d7"></span>
-                    <span className="dot d8"></span>
-                    <span className="dot d9"></span>
-                    <span className="dot d10"></span>
-                  </div>
-                </div>
+                <TechSphere />
               </div>
 
               <div className="invitation-text">
