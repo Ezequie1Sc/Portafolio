@@ -172,9 +172,10 @@
   text-shadow: 0 0 24px rgba(59, 130, 246, 0.28);
 }
 
+/* --- BADGE DE VERIFICACIÓN MÁS GRANDE --- */
 .verified-badge {
-  width: 26px;
-  height: 26px;
+  width: 34px;  /* Antes era 26px */
+  height: 34px; /* Antes era 26px */
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -430,7 +431,7 @@
   84% { opacity: 0; transform: translate(0); }
 }
 
-/* --- CARRUSEL DE TECNOLOGÍAS --- */
+/* --- CARRUSEL DE TECNOLOGÍAS INFINITO CORREGIDO --- */
 .hero-tech-footer {
   width: 100%;
   padding: 0.8rem 0;
@@ -439,33 +440,37 @@
   justify-content: center;
   align-items: center;
   z-index: 20;
+  overflow: hidden; /* Asegura que no se salga */
 }
 
 .tech-scroll-container {
-  width: min(760px, 100%);
+  width: 100%;
   overflow: hidden;
-  mask-image: linear-gradient(to right, transparent, black 14%, black 86%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 14%, black 86%, transparent);
+  position: relative;
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .tech-scroll-track {
   display: flex;
   align-items: center;
-  gap: 2.3rem;
+  gap: 2.5rem;
   width: max-content;
-  animation: scrollLogos 18s linear infinite;
+  animation: scrollLogos 25s linear infinite;
+  /* Asegura que el track ocupe todo el ancho necesario */
+  will-change: transform;
 }
 
 .tech-logo-item {
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
   opacity: 0.55;
   filter: grayscale(100%) brightness(1.15);
   transition: all 0.35s ease;
-  flex: 0 0 auto;
+  flex-shrink: 0;
 }
 
 .tech-logo-item:hover {
@@ -475,14 +480,20 @@
 }
 
 .tech-logo-img {
-  height: 28px;
-  width: 28px;
+  height: 32px;
+  width: 32px;
   object-fit: contain;
 }
 
+/* Animación infinita corregida */
 @keyframes scrollLogos {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    /* Se mueve exactamente la mitad del ancho total (un grupo completo) */
+    transform: translateX(-50%);
+  }
 }
 
 @keyframes fadeIn {

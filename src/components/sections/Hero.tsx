@@ -16,8 +16,9 @@ const Hero: React.FC = () => {
   const [greetingIndex, setGreetingIndex] = useState<number>(0);
   const [fadeGreeting, setFadeGreeting] = useState<boolean>(true);
 
-  // Array de tecnologías para el footer (con duplicados para efecto infinito)
+  // Array de tecnologías para el footer (TRIPLICADO para efecto infinito perfecto)
   const techLogos: TechLogo[] = [
+    // Grupo 1
     { name: 'Flutter', icon: '/icons/flutter.svg' },
     { name: 'Dart', icon: '/icons/dart.svg' },
     { name: 'Java', icon: '/icons/java.svg' },
@@ -26,7 +27,16 @@ const Hero: React.FC = () => {
     { name: 'HTML', icon: '/icons/html.svg' },
     { name: 'CSS', icon: '/icons/css.svg' },
     { name: 'TypeScript', icon: '/icons/tp.svg' },
-    // Duplicados para el efecto de scroll infinito
+    // Grupo 2 (Duplicado)
+    { name: 'Flutter', icon: '/icons/flutter.svg' },
+    { name: 'Dart', icon: '/icons/dart.svg' },
+    { name: 'Java', icon: '/icons/java.svg' },
+    { name: 'Python', icon: '/icons/python.svg' },
+    { name: 'C#', icon: '/icons/csharp.svg' },
+    { name: 'HTML', icon: '/icons/html.svg' },
+    { name: 'CSS', icon: '/icons/css.svg' },
+    { name: 'TypeScript', icon: '/icons/tp.svg' },
+    // Grupo 3 (Triplicado)
     { name: 'Flutter', icon: '/icons/flutter.svg' },
     { name: 'Dart', icon: '/icons/dart.svg' },
     { name: 'Java', icon: '/icons/java.svg' },
