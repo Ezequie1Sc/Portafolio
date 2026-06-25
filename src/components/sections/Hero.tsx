@@ -69,9 +69,9 @@ const Hero: React.FC = () => {
           <div className="profile-polygon-wrapper">
             <div className="hero-shape-background"></div>
             <div className="hero-photo-reveal">
-              <img src="/ezequielemovebg.png" alt="Ezequiel Salazar" className="hero-person-img" />
-              <img src="/ezequielemovebg.png" alt="" className="hero-img-glitch glitch-blue" />
-              <img src="/ezequielemovebg.png" alt="" className="hero-img-glitch glitch-purple" />
+              <img src="/ezequielemovebg.webp" alt="Ezequiel Salazar" className="hero-person-img" />
+              <img src="/ezequielemovebg.webp" alt="" className="hero-img-glitch glitch-blue" />
+              <img src="/ezequielemovebg.webp" alt="" className="hero-img-glitch glitch-purple" />
             </div>
           </div>
         </div>
