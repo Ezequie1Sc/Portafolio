@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
   const [greetingIndex, setGreetingIndex] = useState<number>(0);
   const [fadeGreeting, setFadeGreeting] = useState<boolean>(true);
 
-  // Array de tecnologías para el footer
+  // Array de tecnologías para el footer (con duplicados para efecto infinito)
   const techLogos: TechLogo[] = [
     { name: 'Flutter', icon: '/icons/flutter.svg' },
     { name: 'Dart', icon: '/icons/dart.svg' },
@@ -124,8 +124,18 @@ const Hero: React.FC = () => {
             <span className="greeting-world">World!</span>
           </h2>
 
+          {/* TÍTULO CON NOMBRE Y BADGE DE VERIFICACIÓN */}
           <h1 className="hero-title">
-            Im <span className="hero-title-name">Ezequiel Salazar</span>
+            Im{" "}
+            <span className="hero-title-name-wrap">
+              <span className="hero-title-name">Ezequiel Salazar</span>
+              <span className="verified-badge" title="Verificado">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M22.25 12l-2.1 2.4.3 3.2-3.1.7-1.6 2.8L12.9 20 10 21.1l-1.6-2.8-3.1-.7.3-3.2L3.5 12l2.1-2.4-.3-3.2 3.1-.7L10 2.9 12.9 4 15.8 2.9l1.6 2.8 3.1.7-.3 3.2L22.25 12z" />
+                  <path d="M10.8 14.8l-2.4-2.4 1.2-1.2 1.2 1.2 3.8-3.8 1.2 1.2-5 5z" />
+                </svg>
+              </span>
+            </span>
           </h1>
 
           <p className="hero-description">
