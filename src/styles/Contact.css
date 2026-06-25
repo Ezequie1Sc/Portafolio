@@ -268,11 +268,10 @@
   align-items: center;
 }
 
-/* ===== NUBE 3D DE TECNOLOGÍAS ===== */
+/* ===== NUBE 3D DE TECNOLOGÍAS CON BILLBOARD ===== */
 .tech-cloud-scene {
   width: 280px;
   height: 235px;
-  position: relative;
   perspective: 900px;
   display: flex;
   align-items: center;
@@ -298,18 +297,6 @@
   transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
 }
 
-.tech-cloud::before {
-  content: "";
-  position: absolute;
-  inset: 30px;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 40% 35%, rgba(96, 165, 250, 0.18), transparent 45%),
-    radial-gradient(circle at center, rgba(59, 130, 246, 0.08), transparent 65%);
-  filter: blur(4px);
-  transform: translateZ(-80px);
-}
-
 .cloud-tech-icon {
   position: absolute;
   top: 50%;
@@ -320,29 +307,56 @@
   place-items: center;
   font-size: 2.35rem;
   background: transparent;
+
   transform:
     translate3d(var(--x), var(--y), var(--z))
     translate(-50%, -50%)
+    rotateX(calc(var(--tilt-x, 0deg) * -1))
+    rotateY(calc(var(--tilt-y, 0deg) * -1))
     scale(var(--s));
+
+  opacity: 1;
+  backface-visibility: visible;
+  transform-style: preserve-3d;
+
   filter:
     drop-shadow(0 10px 14px rgba(0, 0, 0, 0.5))
-    drop-shadow(0 0 8px rgba(59, 130, 246, 0.15));
-  animation: cloudIconFloat 4s ease-in-out infinite;
+    drop-shadow(0 0 8px rgba(59, 130, 246, 0.18));
+
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease,
+    color 0.25s ease;
 }
 
-.cloud-tech-icon:nth-child(2n) {
-  animation-delay: -1.2s;
-}
-
-.cloud-tech-icon:nth-child(3n) {
-  animation-delay: -2s;
+.tech-cloud-scene:hover .cloud-tech-icon {
+  transform:
+    translate3d(var(--x), var(--y), var(--z))
+    translate(-50%, -50%)
+    rotateX(calc(var(--tilt-x) * -1))
+    rotateY(calc(var(--tilt-y) * -1))
+    scale(var(--s));
 }
 
 .cloud-tech-icon:hover {
+  color: #60a5fa !important;
   filter:
-    drop-shadow(0 0 14px currentColor)
-    drop-shadow(0 12px 18px rgba(0, 0, 0, 0.55));
-  z-index: 20;
+    drop-shadow(0 0 16px rgba(96, 165, 250, 1))
+    drop-shadow(0 0 32px rgba(59, 130, 246, 0.75))
+    drop-shadow(0 16px 22px rgba(0, 0, 0, 0.55));
+  z-index: 50;
+}
+
+.tech-cloud::before {
+  content: "";
+  position: absolute;
+  inset: 30px;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 40% 35%, rgba(96, 165, 250, 0.2), transparent 45%),
+    radial-gradient(circle at center, rgba(59, 130, 246, 0.08), transparent 65%);
+  filter: blur(5px);
+  transform: translateZ(-80px);
 }
 
 .cloud-tech-icon.javascript { color: #f7df1e; }
@@ -364,19 +378,10 @@
 
 @keyframes techCloudSpin {
   from {
-    transform: rotateX(0deg) rotateY(-18deg) rotateZ(0deg);
+    transform: rotateX(0deg) rotateY(-18deg);
   }
   to {
-    transform: rotateX(360deg) rotateY(-18deg) rotateZ(0deg);
-  }
-}
-
-@keyframes cloudIconFloat {
-  0%, 100% {
-    margin-top: 0;
-  }
-  50% {
-    margin-top: -8px;
+    transform: rotateX(0deg) rotateY(342deg);
   }
 }
 

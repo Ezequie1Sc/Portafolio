@@ -69,11 +69,12 @@ const techCloudIcons = [
 const TechSphere = () => {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
 
+  // Aumentamos el factor de 34 a 55 para que la inclinación sea más notoria y fluida
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     const rect = e.currentTarget.getBoundingClientRect();
 
-    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 34;
-    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -34;
+    const x = ((e.clientX - rect.left) / rect.width - 0.5) * 55;
+    const y = ((e.clientY - rect.top) / rect.height - 0.5) * -55;
 
     setTilt({ x: y, y: x });
   };
