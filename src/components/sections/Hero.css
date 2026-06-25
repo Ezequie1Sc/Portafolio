@@ -505,7 +505,7 @@
 }
 
 /* ========================================
-   RESPONSIVE MOBILE
+   RESPONSIVE MOBILE (CARRUSEL VISIBLE)
    ======================================== */
 @media (max-width: 1024px) {
   .profile-polygon-wrapper { width: 320px; height: 390px; }
@@ -524,7 +524,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 1.7rem;
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem; /* Reducido para dar espacio al carrusel */
   }
 
   .hero-visual {
@@ -608,8 +608,27 @@
     height: 18px;
   }
 
+  /* --- CARRUSEL VISIBLE EN MÓVILES (REDUCIDO) --- */
   .hero-tech-footer {
-    display: none;
+    display: flex; /* Antes era display: none */
+    padding: 0.6rem 0;
+    margin-top: 0.5rem;
+    border-top: 1px solid rgba(148, 163, 184, 0.08);
+  }
+
+  .tech-scroll-track {
+    gap: 1.5rem; /* Menos espacio entre logos */
+  }
+
+  .tech-logo-item {
+    width: 32px;
+    height: 32px;
+    opacity: 0.6;
+  }
+
+  .tech-logo-img {
+    height: 24px;
+    width: 24px;
   }
 }
 
@@ -621,5 +640,23 @@
 
   .hero {
     padding-top: 1.2rem;
+  }
+  
+  .hero-tech-footer {
+    padding: 0.4rem 0;
+  }
+  
+  .tech-scroll-track {
+    gap: 1.2rem;
+  }
+  
+  .tech-logo-item {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .tech-logo-img {
+    height: 20px;
+    width: 20px;
   }
 }
