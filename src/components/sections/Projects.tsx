@@ -8,6 +8,8 @@ import ProjectGallery from '../ui/ProjectGallery';
 import '../../styles/Projects.css';
 import '../../styles/ProjectCardMac.css';
 
+const PROJECTS_TITLE = "Proyectos";
+
 const ICON_PATHS: Record<string, React.ReactNode> = {
   mobile: (
     <>
@@ -103,7 +105,7 @@ const renderProjectCard = (
   );
 };
 
-// ===== ANIMACIONES PREMIUM (SIN BLUR) =====
+// ===== ANIMACIONES PREMIUM =====
 const containerVariants = {
   hidden: {},
   visible: {
@@ -131,33 +133,17 @@ const itemVariants = {
   },
 } as const;
 
-// ===== ANIMACIÓN DE LETRAS PARA EL TÍTULO (3D FLIP) =====
 const titleReveal = {
   hidden: {
     opacity: 0,
+    scale: 0.96,
   },
   visible: {
     opacity: 1,
+    scale: 1,
     transition: {
-      staggerChildren: 0.04,
-      delayChildren: 0.15,
-    },
-  },
-} as const;
-
-const letterVariants = {
-  hidden: {
-    opacity: 0,
-    y: 40,
-    rotateX: -90,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    rotateX: 0,
-    transition: {
-      duration: 0.7,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.35,
+      ease: "easeOut",
     },
   },
 } as const;
@@ -281,12 +267,46 @@ const Projects = () => {
       });
   };
 
+  // ===== EFECTO GLITCH DE TEXTO =====
+  const scrambleTitle = (event: React.MouseEvent<HTMLSpanElement>) => {
+    const element = event.currentTarget;
+    const finalText = PROJECTS_TITLE;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%#$@";
+
+    let frame = 0;
+    const totalFrames = 18;
+
+    const interval = window.setInterval(() => {
+      const progress = frame / totalFrames;
+
+      element.textContent = finalText
+        .split("")
+        .map((char, index) => {
+          if (char === " ") return " ";
+
+          if (index < progress * finalText.length) {
+            return finalText[index];
+          }
+
+          return chars[Math.floor(Math.random() * chars.length)];
+        })
+        .join("");
+
+      frame++;
+
+      if (frame > totalFrames) {
+        window.clearInterval(interval);
+        element.textContent = finalText;
+      }
+    }, 28);
+  };
+
   return (
     <>
       <section id="proyectos" className="projects-section">
         <div className="container">
           
-          {/* === TÍTULO CON ANIMACIÓN 3D FLIP POR LETRA === */}
+          {/* === TÍTULO CON EFECTO GLITCH EN HOVER Y LÍNEA SUPERIOR === */}
           <motion.div
             className="projects-header-wrapper"
             initial="hidden"
@@ -295,30 +315,13 @@ const Projects = () => {
             variants={titleReveal}
           >
             <motion.h2 className="projects-main-title">
-              {"Proyectos Destacados".split("").map((char, i) => (
-                <motion.span
-                  key={i}
-                  variants={letterVariants}
-                  className="title-letter"
-                  style={{ 
-                    display: "inline-block",
-                    transformOrigin: "bottom",
-                    perspective: "900px",
-                    transformStyle: "preserve-3d",
-                  }}
-                >
-                  {char === " " ? "\u00A0" : char}
-                </motion.span>
-              ))}
+              <span
+                className="title-scramble"
+                onMouseEnter={scrambleTitle}
+              >
+                {PROJECTS_TITLE}
+              </span>
             </motion.h2>
-
-            <motion.div
-              className="title-underline"
-              initial={{ width: 0 }}
-              whileInView={{ width: "80px" }}
-              viewport={{ once: true, amount: 0.15 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-            />
 
             <motion.p
               className="projects-subtitle"
@@ -373,7 +376,7 @@ const Projects = () => {
             ))}
           </motion.nav>
 
-          {/* === CONTENEDOR DE CATEGORÍAS SIN BLUR === */}
+          {/* === CONTENEDOR DE CATEGORÍAS === */}
           <AnimatePresence mode="wait">
             <motion.div
               key={filter}
