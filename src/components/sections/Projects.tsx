@@ -76,7 +76,7 @@ const CategoryIcon = memo(({ type }: CategoryIconProps) => (
 
 CategoryIcon.displayName = 'CategoryIcon';
 
-// ===== FUNCIÓN DE RENDERIZADO (YA NO TIENE KEY) =====
+// ===== FUNCIÓN DE RENDERIZADO =====
 const renderProjectCard = (
   project: Project,
   isExpanded: boolean,
@@ -103,25 +103,48 @@ const renderProjectCard = (
   );
 };
 
-// ===== ANIMACIONES STAGGER =====
+// ===== ANIMACIONES PREMIUM (SIN BLUR) =====
 const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.08,
+      staggerChildren: 0.07,
+      delayChildren: 0.08,
     },
   },
-};
+} as const;
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 34, filter: 'blur(10px)' },
+  hidden: {
+    opacity: 0,
+    y: 26,
+    scale: 0.98,
+  },
   visible: {
     opacity: 1,
     y: 0,
-    filter: 'blur(0px)',
-    transition: { duration: 0.55, ease: [0.22, 1, 0.36, 1] },
+    scale: 1,
+    transition: {
+      duration: 0.48,
+      ease: "easeOut",
+    },
   },
-};
+} as const;
+
+const headerReveal = {
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.65,
+      ease: "easeOut",
+    },
+  },
+} as const;
 
 interface CategorySectionProps {
   type: string;
@@ -146,16 +169,19 @@ const CategorySection = memo(({
       {CATEGORY_LABELS[type]} ({projectList.length})
     </h3>
     
-    {/* CORRECCIÓN: Pasar initial/animate directamente y usar 'as any' para evitar el error de TS */}
     <motion.div
       className="category-grid"
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: false, amount: 0.15 }}
-      variants={containerVariants as any}
+      viewport={{ once: true, amount: 0.12 }}
+      variants={containerVariants}
     >
       {projectList.map((project) => (
-        <motion.div key={project.id} variants={itemVariants as any}>
+        <motion.div
+          key={project.id}
+          variants={itemVariants}
+          style={{ willChange: "transform, opacity" }}
+        >
           {renderProjectCard(project, expandedCardId === project.id, onExpand, onOpenGallery)}
         </motion.div>
       ))}
@@ -244,12 +270,12 @@ const Projects = () => {
       <section id="proyectos" className="projects-section">
         <div className="container">
           
-          {/* === TÍTULO Y SUBTÍTULO CON ANIMACIÓN === */}
+          {/* === TÍTULO Y SUBTÍTULO CON HEADER REVEAL === */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            variants={headerReveal}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
           >
             <h2 className="projects-main-title">Proyectos Destacados</h2>
             <p className="projects-subtitle">
@@ -261,10 +287,10 @@ const Projects = () => {
           <motion.nav
             className="projects-filter"
             aria-label="Filtrar proyectos por tipo"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
-            transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            variants={headerReveal}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
           >
             {FILTER_TYPES.map((type) => (
               <button
@@ -299,15 +325,15 @@ const Projects = () => {
             ))}
           </motion.nav>
 
-          {/* === CONTENEDOR DE CATEGORÍAS CON ANIMACIÓN PREMIUM === */}
+          {/* === CONTENEDOR DE CATEGORÍAS SIN BLUR === */}
           <AnimatePresence mode="wait">
             <motion.div
               key={filter}
               className="view-container"
-              initial={{ opacity: 0, y: 28, filter: 'blur(10px)' }}
-              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 14 }}
+              transition={{ duration: 0.35, ease: "easeOut" }}
             >
               {filter === 'todos' ? (
                 <div className="projects-categories">
@@ -330,16 +356,28 @@ const Projects = () => {
                     </span>
                     {CATEGORY_LABELS[filter]}
                   </h3>
-                  <div className="category-grid">
-                    {filteredProjects.map((project) =>
-                      renderProjectCard(
-                        project,
-                        expandedCardId === project.id,
-                        handleCardExpand,
-                        handleOpenGallery
-                      )
-                    )}
-                  </div>
+                  <motion.div
+                    className="category-grid"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.12 }}
+                    variants={containerVariants}
+                  >
+                    {filteredProjects.map((project) => (
+                      <motion.div
+                        key={project.id}
+                        variants={itemVariants}
+                        style={{ willChange: "transform, opacity" }}
+                      >
+                        {renderProjectCard(
+                          project,
+                          expandedCardId === project.id,
+                          handleCardExpand,
+                          handleOpenGallery
+                        )}
+                      </motion.div>
+                    ))}
+                  </motion.div>
                 </div>
               )}
             </motion.div>

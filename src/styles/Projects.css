@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&display=swap');
+
 :root {
   --bg-projects: #172031;
   --text-white: #ffffff;
@@ -57,9 +59,10 @@
 }
 
 .projects-main-title {
-  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.6rem, 5vw, 4.4rem);
   font-weight: 800;
-  letter-spacing: -0.06em;
+  letter-spacing: -0.04em;
   color: var(--text-white);
   margin-bottom: var(--spacing-md);
   position: relative;
@@ -208,7 +211,7 @@
   width: 100%;
   min-width: 0;
   position: relative;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
 }
 
 /* ========================================
