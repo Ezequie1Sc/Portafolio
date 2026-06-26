@@ -2,6 +2,9 @@ import { motion } from "framer-motion";
 import { skills } from "../../data";
 import SkillCard from "../ui/SkillCard";
 import "../../styles/Skills.css";
+import { useRef, useEffect, useCallback } from "react";
+
+const SKILLS_TITLE = "Habilidades";
 
 const container = {
   hidden: {},
@@ -9,21 +12,6 @@ const container = {
     transition: {
       staggerChildren: 0.08,
       delayChildren: 0.1,
-    },
-  },
-} as const;
-
-const softReveal = {
-  hidden: {
-    opacity: 0,
-    y: 28,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.55,
-      ease: "easeOut",
     },
   },
 } as const;
@@ -58,11 +46,96 @@ const cardReveal = {
   },
 } as const;
 
+const titleReveal = {
+  hidden: {
+    opacity: 0,
+    scale: 0.96,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.35,
+      ease: "easeOut",
+    },
+  },
+} as const;
+
 const Skills = () => {
+  const titleRef = useRef<HTMLSpanElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // ===== EFECTO GLITCH DE TEXTO =====
+  const scrambleTitle = useCallback((element: HTMLElement) => {
+    if (!element) return;
+    const finalText = SKILLS_TITLE;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%#$@";
+
+    let frame = 0;
+    const totalFrames = 18;
+
+    const interval = window.setInterval(() => {
+      const progress = frame / totalFrames;
+
+      element.textContent = finalText
+        .split("")
+        .map((char, index) => {
+          if (char === " ") return " ";
+
+          if (index < progress * finalText.length) {
+            return finalText[index];
+          }
+
+          return chars[Math.floor(Math.random() * chars.length)];
+        })
+        .join("");
+
+      frame++;
+
+      if (frame > totalFrames) {
+        window.clearInterval(interval);
+        element.textContent = finalText;
+      }
+    }, 28);
+  }, []);
+
+  // ===== GLITCH AUTOMÁTICO AL ENTRAR EN PANTALLA =====
+  useEffect(() => {
+    const element = titleRef.current;
+    const section = sectionRef.current;
+
+    if (!element || !section) return;
+
+    // Configurar IntersectionObserver para detectar cuando la sección entra en pantalla
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Activar glitch cada vez que la sección sea visible
+            scrambleTitle(element);
+          }
+        });
+      },
+      { threshold: 0.3 } // Se activa cuando el 30% de la sección es visible
+    );
+
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [scrambleTitle]);
+
+  // ===== GLITCH AL HOVER =====
+  const handleMouseEnter = (event: React.MouseEvent<HTMLSpanElement>) => {
+    scrambleTitle(event.currentTarget);
+  };
+
   return (
     <motion.section
       id="habilidades"
       className="skills-section"
+      ref={sectionRef}
       initial="hidden"
       whileInView="visible"
       viewport={{
@@ -72,9 +145,25 @@ const Skills = () => {
       }}
     >
       <div className="container">
-        <motion.h2 variants={softReveal} className="skills-main-title">
-          Mis Habilidades Técnicas
-        </motion.h2>
+        
+        {/* === TÍTULO CON ILUMINACIÓN Y GLITCH AUTOMÁTICO === */}
+        <motion.div
+          className="skills-header-wrapper"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={titleReveal}
+        >
+          <motion.h2 className="skills-main-title">
+            <span
+              ref={titleRef}
+              className="title-scramble"
+              onMouseEnter={handleMouseEnter}
+            >
+              {SKILLS_TITLE}
+            </span>
+          </motion.h2>
+        </motion.div>
 
         <div className="skills-layout">
           <motion.div variants={leftReveal} className="about-me-column">

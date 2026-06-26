@@ -1,28 +1,95 @@
 /* ===== SKILLS SECTION ===== */
 .skills-section {
-  padding: 5rem 0;
+  padding: 2rem 0 5rem 0; /* Reducido el padding superior */
   background: #131c31;
-}
-
-.skills-main-title {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 3rem;
   position: relative;
+  overflow: hidden;
 }
 
-.skills-main-title::after {
+/* ========================================
+   LÍNEA DE SEPARACIÓN (BORDE DE SECCIÓN)
+   ======================================== */
+.skills-section::before {
   content: '';
   position: absolute;
-  bottom: -10px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #3b82f6 15%,
+    #3b82f6 85%,
+    transparent 100%
+  );
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+  z-index: 2;
+}
+
+/* ========================================
+   WRAPPER DEL TÍTULO (MÁS ARRIBA)
+   ======================================== */
+.skills-header-wrapper {
+  position: relative;
+  text-align: center;
+  padding-top: 1rem; /* Reducido para acercar el título a la línea */
+  margin-bottom: 3rem;
+  z-index: 1;
+}
+
+/* ===== RESPLANDOR SUAVE DETRÁS DEL TEXTO ===== */
+.skills-header-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-  border-radius: 3px;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 180px;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.15) 0%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== EL TÍTULO ===== */
+.skills-main-title {
+  text-align: center;
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  line-height: 1.1;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: -0.02em;
+}
+
+/* ===== EFECTO GLITCH Y HOVER ===== */
+.title-scramble {
+  display: inline-block;
+  cursor: default;
+  color: #f1f5f9;
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+  transition: all 0.3s ease;
+}
+
+.title-scramble:hover {
+  color: #ffffff;
+  text-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+  transform: scale(1.02);
+}
+
+/* Eliminamos el ::after anterior del título para usar el nuevo diseño */
+.skills-main-title::after {
+  display: none;
 }
 
 /* Layout principal */
@@ -31,6 +98,8 @@
   grid-template-columns: 1fr 2fr;
   gap: 2rem;
   align-items: start;
+  position: relative;
+  z-index: 1;
 }
 
 /* ===== COLUMNA IZQUIERDA - SOBRE MÍ ===== */
@@ -406,8 +475,22 @@
 
 /* Mobile Landscape (640px - 768px) */
 @media (max-width: 768px) {
+  .skills-section {
+    padding: 1.5rem 0 3rem 0;
+  }
+
+  .skills-header-wrapper {
+    padding-top: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .skills-header-wrapper::after {
+    width: 300px;
+    height: 120px;
+  }
+
   .skills-main-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
   
   .skills-layout {
@@ -489,12 +572,12 @@
 /* Mobile Portrait (480px - 640px) */
 @media (max-width: 640px) {
   .skills-section {
-    padding: 3rem 0;
+    padding: 1.5rem 0 2.5rem 0;
   }
   
   .skills-main-title {
-    font-size: 1.8rem;
-    margin-bottom: 2rem;
+    font-size: 2rem;
+    margin-bottom: 0;
   }
   
   .about-me-card {
@@ -596,6 +679,8 @@
     font-size: 0.75rem;
   }
 }
+
+/* ===== OPTIMIZACIONES DE RENDIMIENTO ===== */
 .skills-section,
 .skills-column,
 .skills-grid,
@@ -603,12 +688,57 @@
   transform: translateZ(0);
 }
 
+/* ===== FIX ANDROID / TOUCH ===== */
+@media (hover: none), (pointer: coarse) {
+  .skills-section,
+  .project-category,
+  .view-container,
+  .filtered-view,
+  .category-grid,
+  .filter-btn,
+  .category-icon,
+  .title-scramble,
+  .skills-section::before,
+  .skills-header-wrapper::after {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+    contain: none !important;
+    backface-visibility: visible !important;
+  }
+
+  .filter-btn {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active,
+  .title-scramble:hover {
+    transform: none !important;
+  }
+
+  .skills-main-title {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+}
+
+/* ===== MOVIMIENTO REDUCIDO ===== */
 @media (prefers-reduced-motion: reduce) {
   .skills-section *,
   .skill-card-inner,
   .about-me-card,
   .about-me-item,
-  .about-me-image-wrapper {
+  .about-me-image-wrapper,
+  .title-scramble,
+  .skills-section::before,
+  .skills-header-wrapper::after {
     animation: none !important;
     transition: none !important;
   }
