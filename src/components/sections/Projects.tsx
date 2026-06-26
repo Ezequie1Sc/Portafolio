@@ -131,17 +131,33 @@ const itemVariants = {
   },
 } as const;
 
-const headerReveal = {
+// ===== ANIMACIÓN DE LETRAS PARA EL TÍTULO (3D FLIP) =====
+const titleReveal = {
   hidden: {
     opacity: 0,
-    y: 24,
+  },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.04,
+      delayChildren: 0.15,
+    },
+  },
+} as const;
+
+const letterVariants = {
+  hidden: {
+    opacity: 0,
+    y: 40,
+    rotateX: -90,
   },
   visible: {
     opacity: 1,
     y: 0,
+    rotateX: 0,
     transition: {
-      duration: 0.65,
-      ease: "easeOut",
+      duration: 0.7,
+      ease: [0.22, 1, 0.36, 1],
     },
   },
 } as const;
@@ -270,27 +286,59 @@ const Projects = () => {
       <section id="proyectos" className="projects-section">
         <div className="container">
           
-          {/* === TÍTULO Y SUBTÍTULO CON HEADER REVEAL === */}
+          {/* === TÍTULO CON ANIMACIÓN 3D FLIP POR LETRA === */}
           <motion.div
-            variants={headerReveal}
+            className="projects-header-wrapper"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.15 }}
+            variants={titleReveal}
           >
-            <h2 className="projects-main-title">Proyectos Destacados</h2>
-            <p className="projects-subtitle">
+            <motion.h2 className="projects-main-title">
+              {"Proyectos Destacados".split("").map((char, i) => (
+                <motion.span
+                  key={i}
+                  variants={letterVariants}
+                  className="title-letter"
+                  style={{ 
+                    display: "inline-block",
+                    transformOrigin: "bottom",
+                    perspective: "900px",
+                    transformStyle: "preserve-3d",
+                  }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </motion.h2>
+
+            <motion.div
+              className="title-underline"
+              initial={{ width: 0 }}
+              whileInView={{ width: "80px" }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+            />
+
+            <motion.p
+              className="projects-subtitle"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            >
               Una selección de mis mejores trabajos en diferentes áreas del desarrollo
-            </p>
+            </motion.p>
           </motion.div>
 
           {/* === FILTROS CON ANIMACIÓN === */}
           <motion.nav
             className="projects-filter"
             aria-label="Filtrar proyectos por tipo"
-            variants={headerReveal}
-            initial="hidden"
-            whileInView="visible"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
             {FILTER_TYPES.map((type) => (
               <button

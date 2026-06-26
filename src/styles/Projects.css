@@ -50,48 +50,55 @@
   opacity: 0.8;
 }
 
-/* ===== HEADER ===== */
-.projects-main-title,
-.projects-subtitle {
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
+/* ===== HEADER WRAPPER ===== */
+.projects-header-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: var(--spacing-2xl);
 }
 
+/* ===== TÍTULO PREMIUM CON LETRAS 3D ===== */
 .projects-main-title {
   font-family: 'Playfair Display', serif;
   font-size: clamp(2.6rem, 5vw, 4.4rem);
   font-weight: 800;
   letter-spacing: -0.04em;
   color: var(--text-white);
-  margin-bottom: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
   position: relative;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  perspective: 900px;
 }
 
-.projects-main-title::after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
+.title-letter {
+  display: inline-block;
+  transform-origin: bottom;
+  perspective: 900px;
+  transform-style: preserve-3d;
+}
+
+/* ===== LÍNEA DECORATIVA ===== */
+.title-underline {
   height: 3px;
   background: var(--gradient-primary);
   border-radius: 3px;
-  transition: width var(--dur-base) var(--ease);
+  margin: 0 auto var(--spacing-lg);
 }
 
-.projects-main-title:hover::after {
-  width: 100px;
-}
-
+/* ===== SUBTÍTULO ===== */
 .projects-subtitle {
   color: var(--text-gray);
   font-size: clamp(0.95rem, 2vw, 1.1rem);
-  margin-bottom: var(--spacing-2xl);
   max-width: 540px;
   line-height: 1.6;
   padding: 0 var(--spacing-md);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ===== FILTROS TIPO PILLS MODERNOS ===== */
@@ -276,7 +283,8 @@
   .category-grid,
   .filter-btn,
   .category-icon,
-  .projects-main-title::after {
+  .title-underline,
+  .title-letter {
     animation: none !important;
     transform: none !important;
     transition: none !important;
@@ -313,7 +321,8 @@
   .view-container,
   .filter-btn,
   .category-icon,
-  .projects-main-title::after {
+  .title-underline,
+  .title-letter {
     animation: none !important;
     transition: none !important;
   }
