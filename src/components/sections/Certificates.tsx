@@ -49,13 +49,19 @@ const gridReveal = {
   },
 } as const;
 
+// ✅ CAMBIO 3: CardReveal sin scale pesado
 const cardReveal = {
-  hidden: { opacity: 0, y: 30, scale: 0.98 },
+  hidden: {
+    opacity: 0,
+    y: 24,
+  },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    transition: { duration: 0.5, ease: "easeOut" },
+    transition: {
+      duration: 0.42,
+      ease: "easeOut",
+    },
   },
 } as const;
 
@@ -249,10 +255,11 @@ const Certificates = () => {
             animate="visible"
           >
             {sortedCertificates.map((certificate: Certificate) => (
+              // ✅ CAMBIO 3B: Eliminado layout, agregado willChange
               <motion.div
                 key={certificate.id}
                 variants={cardReveal}
-                layout
+                style={{ willChange: "transform, opacity" }}
               >
                 <CertificateCard certificate={certificate} />
               </motion.div>

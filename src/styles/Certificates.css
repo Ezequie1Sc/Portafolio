@@ -1,11 +1,20 @@
 /* ========================================
    CERTIFICATES SECTION
    ======================================== */
+/* ✅ CAMBIO 1: Fondo forzado con !important y overflow visible */
 .certificates-section {
   padding: 2rem 0 5rem 0;
-  background-color: #101530; /* ✅ AHORA SÍ ES EL COLOR CORRECTO */
+  background: #101530 !important;
+  background-color: #101530 !important;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
+  isolation: isolate;
+}
+
+/* ✅ CAMBIO 2A: Asegurar z-index del container */
+.certificates-section .container {
+  position: relative;
+  z-index: 2;
 }
 
 /* ========================================
@@ -30,7 +39,7 @@
 }
 
 /* ========================================
-   WRAPPER DEL TÍTULO (IGUAL QUE PROYECTOS Y SKILLS)
+   WRAPPER DEL TÍTULO
    ======================================== */
 .certificates-header-wrapper {
   position: relative;
@@ -62,18 +71,19 @@
 /* ========================================
    TÍTULO (CON LA FUENTE Y TAMAÑO CORRECTOS)
    ======================================== */
+/* ✅ CAMBIO 4: Tamaño corregido y forzado */
 .certificates-main-title {
   text-align: center;
-  font-size: clamp(3.5rem, 8vw, 6rem); /* ✅ Tamaño igual a los otros */
+  font-size: clamp(2.8rem, 7vw, 5.2rem) !important;
   font-weight: 800;
   color: #ffffff;
   margin: 0;
   padding: 0;
   position: relative;
   z-index: 1;
-  line-height: 1.1;
-  font-family: 'Playfair Display', serif; /* ✅ Fuente serif premium */
-  letter-spacing: -0.02em;
+  line-height: 1.05;
+  font-family: 'Playfair Display', serif !important;
+  letter-spacing: -0.035em;
 }
 
 /* ===== EFECTO GLITCH Y HOVER ===== */
@@ -91,7 +101,7 @@
   transform: scale(1.02);
 }
 
-/* Eliminar la línea inferior predeterminada para usar nuestro diseño */
+/* Eliminar la línea inferior predeterminada */
 .certificates-main-title::after {
   display: none;
 }
@@ -182,12 +192,21 @@
 /* ========================================
    GRID
    ======================================== */
+/* ✅ CAMBIO 2B: Grid sin restricciones de overflow */
 .certificates-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 2rem;
   position: relative;
   z-index: 1;
+  width: 100%;
+  min-width: 0;
+  overflow: visible;
+}
+
+.certificates-grid > div {
+  min-width: 0;
+  width: 100%;
 }
 
 /* ===== ESTADO VACÍO ===== */
@@ -217,8 +236,12 @@
 }
 
 @media (max-width: 768px) {
+  /* ✅ CAMBIO 1 y 2C: Fondo forzado y grid 100% visible */
   .certificates-section {
     padding: 1.5rem 0 3rem 0;
+    background: #101530 !important;
+    background-color: #101530 !important;
+    overflow: visible !important;
   }
 
   .certificates-header-wrapper {
@@ -231,8 +254,9 @@
     height: 120px;
   }
 
+  /* ✅ CAMBIO 4B: Título forzado en móvil */
   .certificates-main-title {
-    font-size: 2.5rem;
+    font-size: clamp(2.2rem, 12vw, 3rem) !important;
   }
 
   .certificates-subtitle {
@@ -254,6 +278,21 @@
   .category-active-title {
     font-size: 1.3rem;
   }
+
+  /* ✅ CAMBIO 2D: Forzar grid a 1 columna y visible */
+  .certificates-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  .certificates-grid > div {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
 }
 
 @media (max-width: 480px) {
@@ -262,7 +301,7 @@
   }
 
   .certificates-main-title {
-    font-size: 2rem;
+    font-size: clamp(1.8rem, 10vw, 2.2rem) !important;
   }
 
   .certificate-filter-btn {
