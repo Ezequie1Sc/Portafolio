@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback, memo } from 'react';
+import { useState, useMemo, useCallback, memo, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { projects } from '../../data';
 import type { Project } from '../../types';
@@ -208,6 +208,8 @@ const Projects = () => {
   const [filter, setFilter] = useState<FilterType>('todos');
   const [expandedCardId, setExpandedCardId] = useState<number | null>(null);
   const [galleryProject, setGalleryProject] = useState<Project | null>(null);
+  const titleRef = useRef<HTMLSpanElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const categorized = useMemo(
     () => ({
@@ -268,8 +270,8 @@ const Projects = () => {
   };
 
   // ===== EFECTO GLITCH DE TEXTO =====
-  const scrambleTitle = (event: React.MouseEvent<HTMLSpanElement>) => {
-    const element = event.currentTarget;
+  const scrambleTitle = useCallback((element: HTMLElement) => {
+    if (!element) return;
     const finalText = PROJECTS_TITLE;
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%#$@";
 
@@ -299,14 +301,46 @@ const Projects = () => {
         element.textContent = finalText;
       }
     }, 28);
+  }, []);
+
+  // ===== GLITCH AUTOMÁTICO AL ENTRAR EN PANTALLA =====
+  useEffect(() => {
+    const element = titleRef.current;
+    const section = sectionRef.current;
+
+    if (!element || !section) return;
+
+    // Configurar IntersectionObserver para detectar cuando la sección entra en pantalla
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Activar glitch cada vez que la sección sea visible
+            scrambleTitle(element);
+          }
+        });
+      },
+      { threshold: 0.3 } // Se activa cuando el 30% de la sección es visible
+    );
+
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [scrambleTitle]);
+
+  // ===== GLITCH AL HOVER (por si el usuario vuelve a pasar el mouse) =====
+  const handleMouseEnter = (event: React.MouseEvent<HTMLSpanElement>) => {
+    scrambleTitle(event.currentTarget);
   };
 
   return (
     <>
-      <section id="proyectos" className="projects-section">
+      <section id="proyectos" className="projects-section" ref={sectionRef}>
         <div className="container">
           
-          {/* === TÍTULO CON EFECTO GLITCH EN HOVER Y LÍNEA SUPERIOR === */}
+          {/* === TÍTULO CON EFECTO GLITCH AUTOMÁTICO === */}
           <motion.div
             className="projects-header-wrapper"
             initial="hidden"
@@ -316,8 +350,9 @@ const Projects = () => {
           >
             <motion.h2 className="projects-main-title">
               <span
+                ref={titleRef}
                 className="title-scramble"
-                onMouseEnter={scrambleTitle}
+                onMouseEnter={handleMouseEnter}
               >
                 {PROJECTS_TITLE}
               </span>

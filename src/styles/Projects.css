@@ -28,14 +28,14 @@
    BASE SECTION
    ======================================== */
 .projects-section {
-  padding: 6rem 0 4rem 0;
+  padding: 2rem 0 4rem 0; /* Reducido el padding superior */
   background: var(--bg-projects);
   position: relative;
   overflow: hidden;
 }
 
 /* ========================================
-   ÚNICA LÍNEA DE SEPARACIÓN (BORDE DE SECCIÓN)
+   LÍNEA DE SEPARACIÓN (BORDE DE SECCIÓN)
    ======================================== */
 .projects-section::before {
   content: '';
@@ -56,17 +56,17 @@
 }
 
 /* ========================================
-   WRAPPER DEL TÍTULO
+   WRAPPER DEL TÍTULO (MÁS ARRIBA)
    ======================================== */
 .projects-header-wrapper {
   position: relative;
   text-align: center;
-  padding-top: 2.5rem; /* Distancia entre la línea y el título */
+  padding-top: 1rem; /* Reducido para acercar el título a la línea */
   margin-bottom: var(--spacing-2xl);
   z-index: 1;
 }
 
-/* ===== RESPLANDOR SUAVE DETRÁS DEL TEXTO (OPCIONAL) ===== */
+/* ===== RESPLANDOR SUAVE DETRÁS DEL TEXTO ===== */
 .projects-header-wrapper::after {
   content: '';
   position: absolute;
@@ -115,11 +115,11 @@
   transform: scale(1.02);
 }
 
-/* ===== SUBTÍTULO ===== */
+/* ===== SUBTÍTULO (MÁS CERCA DEL TÍTULO) ===== */
 .projects-subtitle {
   color: var(--text-gray);
   font-size: clamp(0.95rem, 2vw, 1.1rem);
-  margin-top: 0.75rem;
+  margin-top: 0.5rem; /* Reducido para acercar el subtítulo */
   max-width: 540px;
   line-height: 1.6;
   padding: 0 var(--spacing-md);
@@ -269,11 +269,11 @@
 
 @media (max-width: 768px) {
   .projects-section {
-    padding: 3rem 0 2rem 0;
+    padding: 1.5rem 0 2rem 0;
   }
 
   .projects-header-wrapper {
-    padding-top: 1.5rem;
+    padding-top: 0.5rem;
   }
 
   .projects-header-wrapper::after {
