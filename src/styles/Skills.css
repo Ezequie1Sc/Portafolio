@@ -596,3 +596,20 @@
     font-size: 0.75rem;
   }
 }
+.skills-section,
+.skills-column,
+.skills-grid,
+.about-me-column {
+  transform: translateZ(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skills-section *,
+  .skill-card-inner,
+  .about-me-card,
+  .about-me-item,
+  .about-me-image-wrapper {
+    animation: none !important;
+    transition: none !important;
+  }
+}

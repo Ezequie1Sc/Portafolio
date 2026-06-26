@@ -1,68 +1,59 @@
 import { motion } from "framer-motion";
-import { skills } from '../../data';
-import SkillCard from '../ui/SkillCard';
-import '../../styles/Skills.css';
+import { skills } from "../../data";
+import SkillCard from "../ui/SkillCard";
+import "../../styles/Skills.css";
 
-// ===== ANIMACIONES CON FRAMER MOTION (CORREGIDAS PARA TYPESCRIPT) =====
 const container = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.12,
-      delayChildren: 0.15,
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
     },
   },
 } as const;
 
-const fadeUp = {
+const softReveal = {
   hidden: {
     opacity: 0,
-    y: 50,
-    filter: "blur(12px)",
+    y: 28,
   },
   visible: {
     opacity: 1,
     y: 0,
-    filter: "blur(0px)",
     transition: {
-      duration: 0.8,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.55,
+      ease: "easeOut",
     },
   },
 } as const;
 
-const slideLeft = {
+const leftReveal = {
   hidden: {
     opacity: 0,
-    x: -80,
-    filter: "blur(14px)",
+    x: -35,
   },
   visible: {
     opacity: 1,
     x: 0,
-    filter: "blur(0px)",
     transition: {
-      duration: 0.9,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.6,
+      ease: "easeOut",
     },
   },
 } as const;
 
-const cardAnimation = {
+const cardReveal = {
   hidden: {
     opacity: 0,
-    y: 60,
-    scale: 0.95,
-    filter: "blur(10px)",
+    y: 32,
   },
   visible: {
     opacity: 1,
     y: 0,
-    scale: 1,
-    filter: "blur(0px)",
     transition: {
-      duration: 0.65,
-      ease: [0.22, 1, 0.36, 1],
+      duration: 0.45,
+      ease: "easeOut",
     },
   },
 } as const;
@@ -72,46 +63,38 @@ const Skills = () => {
     <motion.section
       id="habilidades"
       className="skills-section"
-      variants={container}
       initial="hidden"
       whileInView="visible"
       viewport={{
-        once: false,
-        amount: 0.25,
+        once: true,
+        amount: 0.12,
+        margin: "0px 0px -80px 0px",
       }}
     >
       <div className="container">
-        {/* Título con fadeUp */}
-        <motion.h2
-          variants={fadeUp}
-          className="skills-main-title"
-        >
+        <motion.h2 variants={softReveal} className="skills-main-title">
           Mis Habilidades Técnicas
         </motion.h2>
 
         <div className="skills-layout">
-          {/* Columna izquierda - About Me (Slide from left) */}
-          <motion.div
-            variants={slideLeft}
-            className="about-me-column"
-          >
+          <motion.div variants={leftReveal} className="about-me-column">
             <div className="about-me-card">
               <div className="about-me-header">
                 <span className="about-me-border-top"></span>
                 <h3 className="about-me-title">SOBRE MÍ</h3>
                 <span className="about-me-border-bottom"></span>
               </div>
-              
+
               <div className="about-me-image-container">
                 <div className="about-me-image-wrapper">
-                  <img 
-                    src="foto.webp" 
-                    alt="Profile" 
+                  <img
+                    src="foto.webp"
+                    alt="Profile"
                     className="about-me-image"
                   />
                 </div>
               </div>
-              
+
               <div className="about-me-grid">
                 <div className="about-me-item">
                   <div className="about-me-item-header">
@@ -150,16 +133,13 @@ const Skills = () => {
             </div>
           </motion.div>
 
-          {/* Columna derecha - Skills (FadeUp en cascada) */}
-          <motion.div
-            variants={fadeUp}
-            className="skills-column"
-          >
+          <motion.div variants={container} className="skills-column">
             <div className="skills-grid">
               {skills.map((skill) => (
                 <motion.div
                   key={skill.id}
-                  variants={cardAnimation}
+                  variants={cardReveal}
+                  style={{ willChange: "transform, opacity" }}
                 >
                   <SkillCard skill={skill} />
                 </motion.div>
