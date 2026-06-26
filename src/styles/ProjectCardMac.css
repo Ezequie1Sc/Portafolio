@@ -1,7 +1,7 @@
 :root {
   --mac-bg-dark: #1e293b;
   --mac-bg-darker: #0f172a;
-  --mac-browser-bar: #0f172a; /* ✅ RESTAURADO A AZUL OSCURO/NEGRO */
+  --mac-browser-bar: #0f172a;
   --mac-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
   --mac-radius: 12px;
   --mac-dot-red: #ff5f57;
@@ -13,14 +13,13 @@
   --text-muted: #64748b;
   --border-light: rgba(255, 255, 255, 0.08);
   --border-hover: rgba(59, 130, 246, 0.3);
-  /* Eliminamos la variable border-dark porque ya no la usamos para barra blanca */
 }
 
 .project-card-mac {
   width: 100%;
   max-width: 100%;
   min-width: 0;
-  height: auto;
+  height: auto; /* ✅ La altura se adapta al contenido */
   align-self: start;
   position: relative;
   display: flex;
@@ -40,7 +39,7 @@
 }
 
 /* ============================================================
-   BARRA MAC (RESTAURADA A AZUL OSCURO/NEGRO)
+   BARRA MAC
    ============================================================ */
 .mac-browser-bar {
   flex-shrink: 0;
@@ -49,7 +48,7 @@
   gap: 10px;
   min-width: 0;
   padding: 10px 14px;
-  background: var(--mac-browser-bar); /* ✅ Fondo oscuro original */
+  background: var(--mac-browser-bar);
   border-bottom: 1px solid var(--border-light);
 }
 
@@ -85,29 +84,32 @@
 }
 
 /* ============================================================
-   IMAGEN
+   IMAGEN (OPCIÓN 3: SIN ALTURA FIJA, 100% ANCHO)
    ============================================================ */
 .mac-image-wrapper {
   position: relative;
   display: block;
   width: 100%;
   max-width: 100%;
-  height: 220px;
-  overflow: hidden;
-  background: var(--mac-bg-darker);
+  
+  /* ✅ ELIMINAMOS LA ALTURA FIJA DE 220px */
+  height: auto; 
+  
+  background: transparent;
   cursor: pointer;
   flex-shrink: 0;
   border: none;
   padding: 0;
+  overflow: hidden;
 }
 
 .mac-image-wrapper img {
   display: block;
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
+  width: 100%; /* ✅ Ocupa todo el ancho disponible */
+  height: auto; /* ✅ La altura se ajusta automáticamente para no deformar la imagen */
+  object-fit: cover; /* Fallback */
+  object-position: center;
+  
   transition: transform 0.45s ease, filter 0.45s ease;
 }
 
@@ -166,7 +168,7 @@
 }
 
 /* ============================================================
-   CONTENIDO
+   CONTENIDO (Título pegado abajo a la izquierda)
    ============================================================ */
 .mac-content {
   position: absolute;
@@ -182,7 +184,6 @@
   pointer-events: none;
 }
 
-/* Cuando se expande: fondo azul oscuro sólido */
 .mac-content.expanded {
   position: relative;
   background: var(--mac-bg-dark);
@@ -191,9 +192,6 @@
   pointer-events: auto;
 }
 
-/* ============================================================
-   TÍTULO - SIN FONDO AZUL (Solo texto blanco con sombra)
-   ============================================================ */
 .mac-header {
   display: flex;
   align-items: center;
@@ -207,13 +205,10 @@
   font-weight: 700;
   letter-spacing: 0.02em;
   line-height: 1.2;
-  
-  /* ✅ SIN FONDO AZUL, solo sombra para legibilidad */
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
   pointer-events: none;
 }
 
-/* Cuando está expandido, el título ya no necesita sombra porque hay fondo */
 .mac-content.expanded .mac-title-text {
   text-shadow: none;
 }
@@ -547,7 +542,10 @@
   .mac-dots { gap: 4px; }
   .mac-dot { width: 7px; height: 7px; }
   .mac-url-bar { padding: 2px 8px; font-size: 0.55rem; }
-  .mac-image-wrapper { height: 180px; }
+  
+  /* En móvil, la altura se adapta sola gracias a height:auto */
+  .mac-image-wrapper { height: auto; }
+  
   .mac-image-link-btn { right: 10px; bottom: 10px; width: 38px; height: 38px; }
   .mac-image-link-btn svg { width: 18px; height: 18px; }
   .mac-content { padding: 0 12px 12px 12px; gap: 6px; }
@@ -563,7 +561,7 @@
 
 @media (max-width: 480px) {
   .project-card-mac { contain: layout paint; }
-  .mac-image-wrapper { height: 160px; }
+  .mac-image-wrapper { height: auto; }
   .mac-image-link-btn { right: 8px; bottom: 8px; width: 34px; height: 34px; }
   .mac-image-link-btn svg { width: 16px; height: 16px; }
   .mac-content { padding: 0 10px 10px 10px; }
@@ -574,13 +572,10 @@
 }
 
 @media (max-width: 380px) {
-  .mac-image-wrapper { height: 140px; }
+  .mac-image-wrapper { height: auto; }
   .mac-title-text { font-size: 0.65rem; }
 }
 
-/* ============================================================
-   MOVIMIENTO REDUCIDO
-   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   .project-card-mac, .project-card-mac:hover, .mac-image-wrapper img,
   .mac-expandable-wrapper, .mac-accordion-body, .mac-btn-secondary,
@@ -594,9 +589,6 @@
   }
 }
 
-/* ============================================================
-   FIX GLITCH ANDROID
-   ============================================================ */
 @media (hover: none), (pointer: coarse) {
   .project-card, .project-card-mac, .project-image img,
   .mac-image-wrapper img, .project-video {
@@ -623,9 +615,6 @@
   .mac-accordion-body { transition: none !important; }
 }
 
-/* ============================================================
-   MÓVIL: BOTÓN SIEMPRE VISIBLE
-   ============================================================ */
 @media (hover: none), (pointer: coarse) {
   .mac-expand-btn {
     opacity: 1;
