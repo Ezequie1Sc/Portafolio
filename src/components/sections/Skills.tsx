@@ -106,17 +106,15 @@ const Skills = () => {
 
     if (!element || !section) return;
 
-    // Configurar IntersectionObserver para detectar cuando la sección entra en pantalla
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Activar glitch cada vez que la sección sea visible
             scrambleTitle(element);
           }
         });
       },
-      { threshold: 0.3 } // Se activa cuando el 30% de la sección es visible
+      { threshold: 0.3 }
     );
 
     observer.observe(section);
@@ -168,12 +166,8 @@ const Skills = () => {
         <div className="skills-layout">
           <motion.div variants={leftReveal} className="about-me-column">
             <div className="about-me-card">
-              <div className="about-me-header">
-                <span className="about-me-border-top"></span>
-                <h3 className="about-me-title">SOBRE MÍ</h3>
-                <span className="about-me-border-bottom"></span>
-              </div>
-
+              
+              {/* Imagen de perfil (más grande) */}
               <div className="about-me-image-container">
                 <div className="about-me-image-wrapper">
                   <img

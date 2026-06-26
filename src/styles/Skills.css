@@ -1,6 +1,6 @@
 /* ===== SKILLS SECTION ===== */
 .skills-section {
-  padding: 2rem 0 5rem 0; /* Reducido el padding superior */
+  padding: 2rem 0 5rem 0;
   background: #131c31;
   position: relative;
   overflow: hidden;
@@ -33,7 +33,7 @@
 .skills-header-wrapper {
   position: relative;
   text-align: center;
-  padding-top: 1rem; /* Reducido para acercar el título a la línea */
+  padding-top: 1rem;
   margin-bottom: 3rem;
   z-index: 1;
 }
@@ -87,7 +87,6 @@
   transform: scale(1.02);
 }
 
-/* Eliminamos el ::after anterior del título para usar el nuevo diseño */
 .skills-main-title::after {
   display: none;
 }
@@ -104,14 +103,15 @@
 
 /* ===== COLUMNA IZQUIERDA - SOBRE MÍ ===== */
 .about-me-column {
-  position: sticky;
-  top: 100px;
+  /* ELIMINADO EL STICKY: ahora fluye con el scroll naturalmente */
+  position: relative;
+  top: 0;
 }
 
 .about-me-card {
   background: #1e293b;
   border-radius: 1.5rem;
-  padding: 1.8rem 1.5rem;
+  padding: 2rem 1.5rem;
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
@@ -123,50 +123,18 @@
   box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.4);
 }
 
-.about-me-header {
-  text-align: center;
-  margin-bottom: 2rem;
-  position: relative;
-}
-
-.about-me-border-top {
-  display: block;
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-  margin: 0 auto 0.75rem;
-  border-radius: 2px;
-}
-
-.about-me-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: white;
-  letter-spacing: 1px;
-  margin-bottom: 0.5rem;
-}
-
-.about-me-border-bottom {
-  display: block;
-  width: 40px;
-  height: 2px;
-  background: linear-gradient(90deg, #8b5cf6, #3b82f6);
-  margin: 0.5rem auto 0;
-  border-radius: 2px;
-}
-
-/* Imagen de perfil */
+/* ===== IMAGEN DE PERFIL (MÁS GRANDE) ===== */
 .about-me-image-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   padding: 0 1rem;
 }
 
 .about-me-image-wrapper {
-  width: 120px;
-  height: 120px;
+  width: 160px;  /* Aumentado de 120px a 160px */
+  height: 160px; /* Aumentado de 120px a 160px */
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid #3b82f6;
@@ -429,7 +397,6 @@
   margin-top: 0.5rem;
 }
 
-/* Scrollbar */
 .skill-back-text::-webkit-scrollbar {
   width: 4px;
 }
@@ -446,7 +413,6 @@
 
 /* ===== RESPONSIVE ===== */
 
-/* Tablet (768px - 1024px) */
 @media (max-width: 1024px) {
   .skills-layout {
     grid-template-columns: 1fr 1.5fr;
@@ -473,7 +439,9 @@
   }
 }
 
-/* Mobile Landscape (640px - 768px) */
+/* ========================================
+   MÓVIL: Ajuste de foto y layout
+   ======================================== */
 @media (max-width: 768px) {
   .skills-section {
     padding: 1.5rem 0 3rem 0;
@@ -498,22 +466,20 @@
     gap: 2rem;
   }
   
+  /* La tarjeta fluye normalmente en móvil también */
   .about-me-column {
-    position: static;
-    top: auto;
+    position: relative !important;
+    top: auto !important;
   }
   
   .about-me-card {
     padding: 1.5rem;
   }
   
-  .about-me-title {
-    font-size: 1.6rem;
-  }
-  
+  /* Foto más grande en móvil también */
   .about-me-image-wrapper {
-    width: 100px;
-    height: 100px;
+    width: 140px;
+    height: 140px;
   }
   
   .about-me-item-title {
@@ -569,7 +535,6 @@
   }
 }
 
-/* Mobile Portrait (480px - 640px) */
 @media (max-width: 640px) {
   .skills-section {
     padding: 1.5rem 0 2.5rem 0;
@@ -584,13 +549,9 @@
     padding: 1.2rem;
   }
   
-  .about-me-title {
-    font-size: 1.4rem;
-  }
-  
   .about-me-image-wrapper {
-    width: 80px;
-    height: 80px;
+    width: 120px;
+    height: 120px;
   }
   
   .about-me-item-icon {
@@ -611,7 +572,6 @@
   }
 }
 
-/* Mobile Small (menos de 480px) */
 @media (max-width: 480px) {
   .skills-grid {
     grid-template-columns: 1fr;
@@ -671,8 +631,9 @@
     padding: 1rem;
   }
   
-  .about-me-title {
-    font-size: 1.3rem;
+  .about-me-image-wrapper {
+    width: 100px;
+    height: 100px;
   }
   
   .about-me-item-text {
