@@ -1,12 +1,68 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import * as data from '../../data';
 import type { Certificate } from '../../types';
 import CertificateCard from '../ui/CertificateCard';
-import CertificateFilter from '../ui/CertificateFilter';
 import '../../styles/Certificates.css';
+
+const CERTIFICATES_TITLE = "Certificados";
+
+// ===== ANIMACIONES =====
+const sectionReveal = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+      when: "beforeChildren",
+      staggerChildren: 0.1,
+    },
+  },
+} as const;
+
+const titleReveal = {
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.35, ease: "easeOut" },
+  },
+} as const;
+
+const filterReveal = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut", delay: 0.2 },
+  },
+} as const;
+
+const gridReveal = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08,
+      delayChildren: 0.3,
+    },
+  },
+} as const;
+
+const cardReveal = {
+  hidden: { opacity: 0, y: 30, scale: 0.98 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+} as const;
 
 const Certificates = () => {
   const [activeFilter, setActiveFilter] = useState('todos');
+  const titleRef = useRef<HTMLSpanElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   const counts = {
     todos: data.certificates.length,
@@ -43,47 +99,180 @@ const Certificates = () => {
     return 0;
   });
 
+  // ===== EFECTO GLITCH DE TEXTO =====
+  const scrambleTitle = useCallback((element: HTMLElement) => {
+    if (!element) return;
+    const finalText = CERTIFICATES_TITLE;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%#$@";
+
+    let frame = 0;
+    const totalFrames = 18;
+
+    const interval = window.setInterval(() => {
+      const progress = frame / totalFrames;
+
+      element.textContent = finalText
+        .split("")
+        .map((char, index) => {
+          if (char === " ") return " ";
+
+          if (index < progress * finalText.length) {
+            return finalText[index];
+          }
+
+          return chars[Math.floor(Math.random() * chars.length)];
+        })
+        .join("");
+
+      frame++;
+
+      if (frame > totalFrames) {
+        window.clearInterval(interval);
+        element.textContent = finalText;
+      }
+    }, 28);
+  }, []);
+
+  // ===== GLITCH AUTOMÁTICO AL ENTRAR =====
+  useEffect(() => {
+    const element = titleRef.current;
+    const section = sectionRef.current;
+
+    if (!element || !section) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            scrambleTitle(element);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [scrambleTitle]);
+
+  // ===== GLITCH AL HOVER =====
+  const handleMouseEnter = (event: React.MouseEvent<HTMLSpanElement>) => {
+    scrambleTitle(event.currentTarget);
+  };
+
   return (
-    <section id="certificados" className="certificates-section">
+    <motion.section
+      id="certificados"
+      className="certificates-section"
+      ref={sectionRef}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+      variants={sectionReveal}
+    >
       <div className="container">
-        <h2 className="certificates-main-title">
-          <span className="certificates-title-icon"></span> Certificaciones
-        </h2>
         
-        <p className="certificates-subtitle">
-          Actualización profesional y aprendizaje continuo
-        </p>
+        {/* === TÍTULO CON GLITCH === */}
+        <motion.div
+          className="certificates-header-wrapper"
+          variants={titleReveal}
+        >
+          <motion.h2 className="certificates-main-title">
+            <span
+              ref={titleRef}
+              className="title-scramble"
+              onMouseEnter={handleMouseEnter}
+            >
+              {CERTIFICATES_TITLE}
+            </span>
+          </motion.h2>
 
-        <CertificateFilter 
-          activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
-          counts={counts}
-        />
+          <motion.p
+            className="certificates-subtitle"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+          >
+            Actualización profesional y aprendizaje continuo
+          </motion.p>
+        </motion.div>
 
+        {/* === FILTROS === */}
+        <motion.div
+          className="certificate-filters"
+          variants={filterReveal}
+        >
+          {Object.keys(counts).map((filterKey) => (
+            <button
+              key={filterKey}
+              className={`certificate-filter-btn ${activeFilter === filterKey ? 'active' : ''}`}
+              onClick={() => setActiveFilter(filterKey)}
+            >
+              {filterKey === 'todos' ? 'Todos' : 
+                filterKey === 'programacion' ? 'Programación' :
+                filterKey === 'datos' ? 'Datos' :
+                filterKey === 'ia' ? 'IA' :
+                filterKey === 'ciberseguridad' ? 'Ciberseguridad' :
+                filterKey === 'idiomas' ? 'Idiomas' : 'Profesional'}
+              <span className="filter-count">{counts[filterKey as keyof typeof counts]}</span>
+            </button>
+          ))}
+        </motion.div>
+
+        {/* === TÍTULO DE CATEGORÍA ACTIVA === */}
         {activeFilter !== 'todos' && (
-          <h3 className="category-active-title">
+          <motion.h3
+            className="category-active-title"
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+          >
             {activeFilter === 'programacion' && ' Programación'}
             {activeFilter === 'datos' && ' Bases de Datos'}
             {activeFilter === 'ia' && ' Inteligencia Artificial'}
             {activeFilter === 'ciberseguridad' && ' Ciberseguridad'}
             {activeFilter === 'idiomas' && ' Idiomas'}
             {activeFilter === 'profesional' && ' Habilidades Profesionales'}
-          </h3>
+          </motion.h3>
         )}
 
-        <div className="certificates-grid">
-          {sortedCertificates.map((certificate: Certificate) => (
-            <CertificateCard key={certificate.id} certificate={certificate} />
-          ))}
-        </div>
+        {/* === GRID DE CERTIFICADOS === */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeFilter}
+            className="certificates-grid"
+            variants={gridReveal}
+            initial="hidden"
+            animate="visible"
+          >
+            {sortedCertificates.map((certificate: Certificate) => (
+              <motion.div
+                key={certificate.id}
+                variants={cardReveal}
+                layout
+              >
+                <CertificateCard certificate={certificate} />
+              </motion.div>
+            ))}
+          </motion.div>
+        </AnimatePresence>
 
+        {/* === ESTADO VACÍO === */}
         {sortedCertificates.length === 0 && (
-          <div className="certificates-empty">
+          <motion.div
+            className="certificates-empty"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+          >
             No hay certificados en esta categoría
-          </div>
+          </motion.div>
         )}
       </div>
-    </section>
+    </motion.section>
   );
 };
 

@@ -1,73 +1,126 @@
-/* ===== CERTIFICATES SECTION ===== */
+/* ========================================
+   CERTIFICATES SECTION
+   ======================================== */
 .certificates-section {
-  padding: 5rem 0;
-  background-color: #0b1220;
+  padding: 2rem 0 5rem 0;
+  background-color: #101530; /* ✅ AHORA SÍ ES EL COLOR CORRECTO */
   position: relative;
+  overflow: hidden;
 }
 
-/* Línea superior (sin cambios, es segura) */
+/* ========================================
+   LÍNEA DE SEPARACIÓN SUPERIOR
+   ======================================== */
 .certificates-section::before {
   content: '';
   position: absolute;
-  inset: 0 0 auto 0;
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, #3b82f6, #8b5cf6, #ec4899, transparent);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #3b82f6 15%,
+    #3b82f6 85%,
+    transparent 100%
+  );
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+  z-index: 2;
 }
 
-/* ===== TITULOS ===== */
-.certificates-main-title {
-  text-align: center;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 1rem;
+/* ========================================
+   WRAPPER DEL TÍTULO (IGUAL QUE PROYECTOS Y SKILLS)
+   ======================================== */
+.certificates-header-wrapper {
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
+  text-align: center;
+  padding-top: 1rem;
+  margin-bottom: 3rem;
+  z-index: 1;
 }
 
-.certificates-main-title::after {
+/* ===== RESPLANDOR SUAVE DETRÁS DEL TEXTO ===== */
+.certificates-header-wrapper::after {
   content: '';
   position: absolute;
-  bottom: -10px;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
-  border-radius: 3px;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 180px;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.15) 0%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
 }
 
-.certificates-title-icon {
-  font-size: 2rem;
+/* ========================================
+   TÍTULO (CON LA FUENTE Y TAMAÑO CORRECTOS)
+   ======================================== */
+.certificates-main-title {
+  text-align: center;
+  font-size: clamp(3.5rem, 8vw, 6rem); /* ✅ Tamaño igual a los otros */
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  line-height: 1.1;
+  font-family: 'Playfair Display', serif; /* ✅ Fuente serif premium */
+  letter-spacing: -0.02em;
 }
 
+/* ===== EFECTO GLITCH Y HOVER ===== */
+.title-scramble {
+  display: inline-block;
+  cursor: default;
+  color: #f1f5f9;
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+  transition: all 0.3s ease;
+}
+
+.title-scramble:hover {
+  color: #ffffff;
+  text-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+  transform: scale(1.02);
+}
+
+/* Eliminar la línea inferior predeterminada para usar nuestro diseño */
+.certificates-main-title::after {
+  display: none;
+}
+
+/* ===== SUBTÍTULO ===== */
 .certificates-subtitle {
   text-align: center;
   color: #a0aec0;
-  font-size: 1.1rem;
-  margin-bottom: 3rem;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  margin-top: 0.75rem;
   max-width: 600px;
   margin-inline: auto;
   line-height: 1.6;
+  padding: 0 var(--spacing-md);
+  position: relative;
+  z-index: 1;
 }
 
-/* ===== GRID ===== */
-.certificates-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-}
-
-/* ===== FILTROS ===== */
+/* ========================================
+   FILTROS
+   ======================================== */
 .certificate-filters {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.75rem;
-  margin: 2rem 0 2.5rem;
+  margin: 0 0 2.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .certificate-filter-btn {
@@ -75,42 +128,29 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 1.2rem;
-
-  /* ❌ Eliminado backdrop-filter */
   background: rgba(255, 255, 255, 0.05);
-
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 2rem;
   color: #a0aec0;
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-
-  /* transitions más ligeras */
-  transition: background 0.2s, border-color 0.2s, color 0.2s, transform 0.2s;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Hover solo en dispositivos con hover */
-@media (hover: hover) {
-  .certificate-filter-btn:hover {
-    border-color: #3b82f6;
-    color: white;
-    transform: translateY(-2px);
-    background: rgba(59, 130, 246, 0.1);
-  }
+.certificate-filter-btn:hover {
+  border-color: #3b82f6;
+  color: white;
+  transform: translateY(-2px);
+  background: rgba(59, 130, 246, 0.1);
 }
 
 .certificate-filter-btn.active {
   background: #3b82f6;
   color: white;
   border-color: #3b82f6;
-
-  /* sombra más ligera para mobile */
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
-}
-
-.filter-icon {
-  font-size: 1.1rem;
+  box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+  transform: translateY(-2px);
 }
 
 .filter-count {
@@ -125,7 +165,7 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* ===== TITULO ACTIVO ===== */
+/* ===== TÍTULO DE CATEGORÍA ACTIVA ===== */
 .category-active-title {
   font-size: 1.5rem;
   font-weight: 600;
@@ -139,7 +179,18 @@
   width: fit-content;
 }
 
-/* ===== VACÍO ===== */
+/* ========================================
+   GRID
+   ======================================== */
+.certificates-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== ESTADO VACÍO ===== */
 .certificates-empty {
   text-align: center;
   color: #a0aec0;
@@ -150,7 +201,9 @@
   border: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
-/* ===== RESPONSIVE ===== */
+/* ========================================
+   RESPONSIVE
+   ======================================== */
 @media (min-width: 640px) {
   .certificates-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -164,28 +217,38 @@
 }
 
 @media (max-width: 768px) {
+  .certificates-section {
+    padding: 1.5rem 0 3rem 0;
+  }
+
+  .certificates-header-wrapper {
+    padding-top: 0.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .certificates-header-wrapper::after {
+    width: 300px;
+    height: 120px;
+  }
+
   .certificates-main-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
 
   .certificates-subtitle {
     font-size: 1rem;
     padding: 0 1rem;
-    margin-bottom: 2rem;
+    margin-top: 0.5rem;
   }
 
   .certificate-filters {
     gap: 0.5rem;
-    margin: 1.5rem 0 2rem;
+    margin: 0 0 2rem;
   }
 
   .certificate-filter-btn {
     padding: 0.4rem 1rem;
     font-size: 0.8rem;
-  }
-
-  .filter-icon {
-    font-size: 1rem;
   }
 
   .category-active-title {
@@ -195,11 +258,11 @@
 
 @media (max-width: 480px) {
   .certificates-section {
-    padding: 3rem 0;
+    padding: 1.5rem 0 2.5rem 0;
   }
 
   .certificates-main-title {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   .certificate-filter-btn {
@@ -209,5 +272,54 @@
 
   .category-active-title {
     font-size: 1.2rem;
+  }
+}
+
+/* ========================================
+   FIX ANDROID / TOUCH
+   ======================================== */
+@media (hover: none), (pointer: coarse) {
+  .certificates-section,
+  .certificates-grid,
+  .certificate-filter-btn,
+  .title-scramble,
+  .certificates-section::before,
+  .certificates-header-wrapper::after {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+    contain: none !important;
+    backface-visibility: visible !important;
+  }
+
+  .certificate-filter-btn:hover,
+  .certificate-filter-btn.active,
+  .title-scramble:hover {
+    transform: none !important;
+  }
+
+  .certificates-main-title,
+  .certificates-subtitle {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+}
+
+/* ========================================
+   MOVIMIENTO REDUCIDO
+   ======================================== */
+@media (prefers-reduced-motion: reduce) {
+  .certificates-section *,
+  .certificate-filter-btn,
+  .title-scramble,
+  .certificates-section::before,
+  .certificates-header-wrapper::after {
+    animation: none !important;
+    transition: none !important;
   }
 }
