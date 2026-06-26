@@ -1,13 +1,13 @@
 /* ===== SKILLS SECTION ===== */
 .skills-section {
   padding: 2rem 0 5rem 0;
-  background: #131c31;
+  background: #0f172a;
   position: relative;
   overflow: hidden;
 }
 
 /* ========================================
-   LÍNEA DE SEPARACIÓN (BORDE DE SECCIÓN)
+   LÍNEA DE SEPARACIÓN SUPERIOR
    ======================================== */
 .skills-section::before {
   content: '';
@@ -28,7 +28,7 @@
 }
 
 /* ========================================
-   WRAPPER DEL TÍTULO (MÁS ARRIBA)
+   WRAPPER DEL TÍTULO
    ======================================== */
 .skills-header-wrapper {
   position: relative;
@@ -91,21 +91,25 @@
   display: none;
 }
 
-/* Layout principal */
+/* ========================================
+   LAYOUT PRINCIPAL (ELEVADOR)
+   ======================================== */
 .skills-layout {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 2fr; /* 1 columna izquierda, 2 a la derecha */
   gap: 2rem;
-  align-items: start;
+  align-items: flex-start; /* ✅ CLAVE: Esto evita que se estiren */
   position: relative;
   z-index: 1;
 }
 
-/* ===== COLUMNA IZQUIERDA - SOBRE MÍ ===== */
+/* ========================================
+   COLUMNA IZQUIERDA - SOBRE MÍ (ELEVADOR)
+   ======================================== */
 .about-me-column {
-  /* ELIMINADO EL STICKY: ahora fluye con el scroll naturalmente */
   position: relative;
   top: 0;
+  /* ✅ SIN height: 100% para que no se estire la tarjeta */
 }
 
 .about-me-card {
@@ -115,6 +119,7 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease;
+  /* ✅ SIN height: 100% para que mantenga su tamaño natural */
 }
 
 .about-me-card:hover {
@@ -123,7 +128,7 @@
   box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.4);
 }
 
-/* ===== IMAGEN DE PERFIL (MÁS GRANDE) ===== */
+/* ===== IMAGEN DE PERFIL ===== */
 .about-me-image-container {
   display: flex;
   justify-content: center;
@@ -133,8 +138,8 @@
 }
 
 .about-me-image-wrapper {
-  width: 160px;  /* Aumentado de 120px a 160px */
-  height: 160px; /* Aumentado de 120px a 160px */
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid #3b82f6;
@@ -153,12 +158,11 @@
   display: block;
 }
 
-/* Grid de información */
+/* ===== GRID DE INFORMACIÓN ===== */
 .about-me-grid {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  margin-bottom: 1.5rem;
 }
 
 .about-me-item {
@@ -199,18 +203,9 @@
   margin-left: 1.7rem;
 }
 
-.about-me-footer {
-  margin-top: 1rem;
-}
-
-.about-me-footer-line {
-  display: block;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3), transparent);
-}
-
-/* ===== COLUMNA DERECHA - SKILLS ===== */
+/* ========================================
+   COLUMNA DERECHA - SKILLS
+   ======================================== */
 .skills-column {
   min-width: 0;
 }
@@ -411,8 +406,9 @@
   border-radius: 10px;
 }
 
-/* ===== RESPONSIVE ===== */
-
+/* ========================================
+   RESPONSIVE
+   ======================================== */
 @media (max-width: 1024px) {
   .skills-layout {
     grid-template-columns: 1fr 1.5fr;
@@ -440,7 +436,7 @@
 }
 
 /* ========================================
-   MÓVIL: Ajuste de foto y layout
+   RESPONSIVE MÓVIL 
    ======================================== */
 @media (max-width: 768px) {
   .skills-section {
@@ -462,11 +458,10 @@
   }
   
   .skills-layout {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Una sola columna en móvil */
     gap: 2rem;
   }
   
-  /* La tarjeta fluye normalmente en móvil también */
   .about-me-column {
     position: relative !important;
     top: auto !important;
@@ -476,7 +471,6 @@
     padding: 1.5rem;
   }
   
-  /* Foto más grande en móvil también */
   .about-me-image-wrapper {
     width: 140px;
     height: 140px;
@@ -542,7 +536,6 @@
   
   .skills-main-title {
     font-size: 2rem;
-    margin-bottom: 0;
   }
   
   .about-me-card {
@@ -652,12 +645,10 @@
 /* ===== FIX ANDROID / TOUCH ===== */
 @media (hover: none), (pointer: coarse) {
   .skills-section,
-  .project-category,
-  .view-container,
-  .filtered-view,
-  .category-grid,
-  .filter-btn,
-  .category-icon,
+  .skill-card-inner,
+  .about-me-card,
+  .about-me-item,
+  .about-me-image-wrapper,
   .title-scramble,
   .skills-section::before,
   .skills-header-wrapper::after {
@@ -667,11 +658,6 @@
     will-change: auto !important;
     contain: none !important;
     backface-visibility: visible !important;
-  }
-
-  .filter-btn {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
   }
 
   .filter-btn:hover,

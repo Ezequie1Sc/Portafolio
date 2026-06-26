@@ -6,6 +6,7 @@ import { useRef, useEffect, useCallback } from "react";
 
 const SKILLS_TITLE = "Habilidades";
 
+// Animaciones para las tarjetas de la derecha (como en la captura modular)
 const container = {
   hidden: {},
   visible: {
@@ -99,7 +100,7 @@ const Skills = () => {
     }, 28);
   }, []);
 
-  // ===== GLITCH AUTOMÁTICO AL ENTRAR EN PANTALLA =====
+  // ===== GLITCH AUTOMÁTICO AL ENTRAR =====
   useEffect(() => {
     const element = titleRef.current;
     const section = sectionRef.current;
@@ -164,10 +165,11 @@ const Skills = () => {
         </motion.div>
 
         <div className="skills-layout">
+          {/* === COLUMNA IZQUIERDA - SOBRE MÍ (ELEVADOR) === */}
           <motion.div variants={leftReveal} className="about-me-column">
             <div className="about-me-card">
               
-              {/* Imagen de perfil (más grande) */}
+              {/* Imagen de perfil */}
               <div className="about-me-image-container">
                 <div className="about-me-image-wrapper">
                   <img
@@ -209,13 +211,10 @@ const Skills = () => {
                   </p>
                 </div>
               </div>
-
-              <div className="about-me-footer">
-                <span className="about-me-footer-line"></span>
-              </div>
             </div>
           </motion.div>
 
+          {/* === COLUMNA DERECHA - SKILLS === */}
           <motion.div variants={container} className="skills-column">
             <div className="skills-grid">
               {skills.map((skill) => (
