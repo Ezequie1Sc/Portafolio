@@ -1,11 +1,14 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import emailjs from "@emailjs/browser";
+import { motion } from "framer-motion";
 import "../../styles/Contact.css";
 import {
   SiReact, SiJavascript, SiTypescript, SiHtml5, SiCss, SiNodedotjs,
   SiPython, SiGit, SiGithub, SiMongodb, SiPostgresql, SiFlutter,
   SiDart, SiFirebase, SiAngular, SiVite
 } from "react-icons/si";
+
+const CONTACT_TITLE = "Contacto";
 
 interface FormData {
   name: string;
@@ -26,6 +29,22 @@ interface NotificationState {
   type: "success" | "error" | "";
   message: string;
 }
+
+// ===== ANIMACIONES DEL HEADER (IGUAL QUE PROJECTS) =====
+const titleReveal = {
+  hidden: {
+    opacity: 0,
+    scale: 0.96,
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.35,
+      ease: "easeOut",
+    },
+  },
+} as const;
 
 const SuccessIcon = () => (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -131,6 +150,10 @@ const Contact = () => {
     type: "",
     message: "",
   });
+
+  // Refs para el glitch
+  const titleRef = useRef<HTMLSpanElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     validateForm();
@@ -241,27 +264,125 @@ const Contact = () => {
     return errors[field] ? "has-error" : formData[field] ? "has-success" : "";
   };
 
+  // ===== EFECTO GLITCH DE TEXTO =====
+  const scrambleTitle = useCallback((element: HTMLElement) => {
+    if (!element) return;
+    const finalText = CONTACT_TITLE;
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789%#$@";
+
+    let frame = 0;
+    const totalFrames = 18;
+
+    const interval = window.setInterval(() => {
+      const progress = frame / totalFrames;
+
+      element.textContent = finalText
+        .split("")
+        .map((char, index) => {
+          if (char === " ") return " ";
+
+          if (index < progress * finalText.length) {
+            return finalText[index];
+          }
+
+          return chars[Math.floor(Math.random() * chars.length)];
+        })
+        .join("");
+
+      frame++;
+
+      if (frame > totalFrames) {
+        window.clearInterval(interval);
+        element.textContent = finalText;
+      }
+    }, 28);
+  }, []);
+
+  // ===== GLITCH AUTOMÁTICO AL ENTRAR =====
+  useEffect(() => {
+    const element = titleRef.current;
+    const section = sectionRef.current;
+
+    if (!element || !section) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            scrambleTitle(element);
+          }
+        });
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [scrambleTitle]);
+
+  // ===== GLITCH AL HOVER =====
+  const handleMouseEnter = (event: React.MouseEvent<HTMLSpanElement>) => {
+    scrambleTitle(event.currentTarget);
+  };
+
   return (
-    <section id="contacto" className="contact-section">
+    <motion.section
+      id="contacto"
+      className="contact-section"
+      ref={sectionRef}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.15 }}
+    >
       <div className="contact-grid-bg" />
       <div className="contact-light-left" />
       <div className="contact-light-right" />
 
       <div className="contact-container">
+        
+        {/* === TÍTULO CON GLITCH Y LÍNEA SUPERIOR === */}
+        <motion.div
+          className="contact-header-wrapper"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={titleReveal}
+        >
+          <motion.h2 className="contact-main-title">
+            <span
+              ref={titleRef}
+              className="title-scramble"
+              onMouseEnter={handleMouseEnter}
+            >
+              {CONTACT_TITLE}
+            </span>
+          </motion.h2>
+
+          <motion.p
+            className="contact-subtitle-header"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.6, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          >
+            ¿Tienes un proyecto en mente? Hablemos.
+          </motion.p>
+        </motion.div>
+
         <div className="contact-layout">
           
           {/* COLUMNA IZQUIERDA - FORMULARIO */}
           <div className="contact-left">
             <div className="contact-form-wrapper">
               
-              {/* Título y Subtítulo con animación de entrada */}
+              {/* Título y Subtítulo del formulario */}
               <div className="contact-header">
                 <h2 className="contact-title">
                   Cuéntame sobre <span className="title-highlight">tu proyecto</span>
                 </h2>
-                <p className="contact-subtitle">
-                  Completa el formulario y te responderé a la brevedad
-                </p>
               </div>
 
               <form onSubmit={handleSubmit} className="contact-form" noValidate>
@@ -411,7 +532,6 @@ const Contact = () => {
             {/* Enlaces de contacto rápidos */}
             <div className="contact-links-grid">
               
-              {/* EMAIL - Icono y color oficial */}
               <a href="mailto:ezequielsc017@gmail.com" className="contact-link">
                 <div className="link-icon icon-email">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -425,7 +545,6 @@ const Contact = () => {
                 </div>
               </a>
 
-              {/* LINKEDIN - Icono y color oficial (#0a66c2) */}
               <a href="https://www.linkedin.com/in/ezequiel-salazar-194975340/" target="_blank" rel="noopener noreferrer" className="contact-link">
                 <div className="link-icon icon-linkedin">
                   <svg viewBox="0 0 24 24" fill="currentColor">
@@ -438,7 +557,6 @@ const Contact = () => {
                 </div>
               </a>
 
-              {/* GITHUB - Icono y color oficial (#171515) */}
               <a href="https://github.com/Ezequie1Sc" target="_blank" rel="noopener noreferrer" className="contact-link">
                 <div className="link-icon icon-github">
                   <svg viewBox="0 0 16 16" fill="currentColor">
@@ -469,7 +587,7 @@ const Contact = () => {
           <div className="toast-progress" />
         </div>
       )}
-    </section>
+    </motion.section>
   );
 };
 

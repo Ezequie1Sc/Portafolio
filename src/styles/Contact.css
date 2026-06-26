@@ -10,13 +10,36 @@
   --red: #ef4444;
 }
 
-/* ===== BASE SECTION ===== */
+/* ========================================
+   BASE SECTION
+   ======================================== */
 .contact-section {
   position: relative;
-  padding: clamp(4rem, 8vw, 7rem) 1.5rem;
+  padding: 2rem 1.5rem clamp(4rem, 8vw, 7rem);
   background: var(--bg-dark);
   overflow: hidden;
   isolation: isolate;
+}
+
+/* ========================================
+   LÍNEA DE SEPARACIÓN SUPERIOR
+   ======================================== */
+.contact-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #3b82f6 15%,
+    #3b82f6 85%,
+    transparent 100%
+  );
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.3);
+  z-index: 2;
 }
 
 .contact-grid-bg,
@@ -44,7 +67,87 @@
   background: radial-gradient(ellipse at 100% 60%, rgba(139, 92, 246, 0.06) 0%, transparent 60%);
 }
 
-/* ===== CONTENEDOR PRINCIPAL ===== */
+/* ========================================
+   HEADER PREMIUM (TÍTULO, LÍNEA Y GLOW)
+   ======================================== */
+.contact-header-wrapper {
+  position: relative;
+  text-align: center;
+  padding-top: 1rem;
+  margin-bottom: 3rem;
+  z-index: 1;
+}
+
+/* ===== RESPLANDOR SUAVE DETRÁS DEL TEXTO ===== */
+.contact-header-wrapper::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  height: 180px;
+  background: radial-gradient(
+    circle,
+    rgba(59, 130, 246, 0.15) 0%,
+    transparent 70%
+  );
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ===== EL TÍTULO ===== */
+.contact-main-title {
+  text-align: center;
+  font-size: clamp(3.5rem, 8vw, 6rem);
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  line-height: 1.1;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: -0.02em;
+}
+
+/* ===== EFECTO GLITCH Y HOVER ===== */
+.title-scramble {
+  display: inline-block;
+  cursor: default;
+  color: #f1f5f9;
+  text-shadow: 0 0 30px rgba(59, 130, 246, 0.15);
+  transition: all 0.3s ease;
+}
+
+.title-scramble:hover {
+  color: #ffffff;
+  text-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+  transform: scale(1.02);
+}
+
+.contact-main-title::after {
+  display: none;
+}
+
+/* ===== SUBTÍTULO DEL HEADER ===== */
+.contact-subtitle-header {
+  text-align: center;
+  color: #a0aec0;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  margin-top: 0.75rem;
+  max-width: 540px;
+  margin-inline: auto;
+  line-height: 1.6;
+  padding: 0 var(--spacing-md);
+  position: relative;
+  z-index: 1;
+}
+
+/* ========================================
+   CONTENEDOR PRINCIPAL
+   ======================================== */
 .contact-container {
   position: relative;
   z-index: 10;
@@ -91,13 +194,6 @@
 .title-highlight {
   font-style: italic;
   color: var(--blue);
-}
-
-.contact-subtitle {
-  color: var(--text-secondary);
-  font-size: 1rem;
-  opacity: 0;
-  animation: fadeSlideUp 0.8s ease 0.2s forwards;
 }
 
 @keyframes fadeSlideUp {
@@ -273,9 +369,7 @@
   cursor: grab;
 }
 
-.tech-cloud-scene:active {
-  cursor: grabbing;
-}
+.tech-cloud-scene:active { cursor: grabbing; }
 
 .tech-cloud {
   position: relative;
@@ -371,15 +465,10 @@
 .cloud-tech-icon.vite { color: #646cff; }
 
 @keyframes techCloudSpin {
-  from {
-    transform: rotateX(0deg) rotateY(-18deg);
-  }
-  to {
-    transform: rotateX(0deg) rotateY(342deg);
-  }
+  from { transform: rotateX(0deg) rotateY(-18deg); }
+  to { transform: rotateX(0deg) rotateY(342deg); }
 }
 
-/* Texto de invitación */
 .invitation-text {
   position: relative;
   z-index: 2;
@@ -540,34 +629,71 @@
 }
 @keyframes toastProgress { from { transform: scaleX(1); } to { transform: scaleX(0); } }
 
-/* ===== RESPONSIVE ===== */
+/* ========================================
+   RESPONSIVE
+   ======================================== */
 @media (max-width: 900px) {
   .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
 }
 
+@media (max-width: 768px) {
+  .contact-section { padding: 1.5rem 1rem 3rem 1rem; }
+  .contact-header-wrapper { padding-top: 0.5rem; margin-bottom: 2rem; }
+  .contact-header-wrapper::after { width: 300px; height: 120px; }
+  .contact-main-title { font-size: 2.5rem; }
+  .contact-subtitle-header { font-size: 1rem; margin-top: 0.5rem; }
+}
+
 @media (max-width: 600px) {
-  .contact-section { padding: 3rem 1rem; }
   .contact-form-wrapper { padding: 1.5rem; }
   .form-row { grid-template-columns: 1fr; }
   .contact-globe-card { min-height: auto; padding: 2rem 1.5rem; }
 
   /* Ajustes para la nube en móviles */
-  .tech-cloud-scene {
-    width: 225px;
-    height: 205px;
-  }
-
-  .tech-cloud {
-    width: 170px;
-    height: 155px;
-  }
-
-  .cloud-tech-icon {
-    width: 34px;
-    height: 34px;
-    font-size: 1.85rem;
-  }
+  .tech-cloud-scene { width: 225px; height: 205px; }
+  .tech-cloud { width: 170px; height: 155px; }
+  .cloud-tech-icon { width: 34px; height: 34px; font-size: 1.85rem; }
 
   .contact-link { padding: 0.75rem 1rem; }
   .toast-notification { bottom: 1rem; right: 1rem; left: 1rem; max-width: none; }
+}
+
+/* ===== FIX ANDROID / TOUCH ===== */
+@media (hover: none), (pointer: coarse) {
+  .contact-section,
+  .title-scramble,
+  .contact-section::before,
+  .contact-header-wrapper::after {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+    contain: none !important;
+    backface-visibility: visible !important;
+  }
+
+  .title-scramble:hover {
+    transform: none !important;
+  }
+
+  .contact-main-title,
+  .contact-subtitle-header {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+  }
+}
+
+/* ===== MOVIMIENTO REDUCIDO ===== */
+@media (prefers-reduced-motion: reduce) {
+  .contact-section *,
+  .title-scramble,
+  .contact-section::before,
+  .contact-header-wrapper::after {
+    animation: none !important;
+    transition: none !important;
+  }
 }
