@@ -1,7 +1,6 @@
 /* ========================================
    CERTIFICATES SECTION
    ======================================== */
-/* ✅ CAMBIO 1: Fondo forzado con !important y overflow visible */
 .certificates-section {
   padding: 2rem 0 5rem 0;
   background: #101530 !important;
@@ -11,7 +10,6 @@
   isolation: isolate;
 }
 
-/* ✅ CAMBIO 2A: Asegurar z-index del container */
 .certificates-section .container {
   position: relative;
   z-index: 2;
@@ -49,7 +47,6 @@
   z-index: 1;
 }
 
-/* ===== RESPLANDOR SUAVE DETRÁS DEL TEXTO ===== */
 .certificates-header-wrapper::after {
   content: '';
   position: absolute;
@@ -68,10 +65,6 @@
   z-index: 0;
 }
 
-/* ========================================
-   TÍTULO (CON LA FUENTE Y TAMAÑO CORRECTOS)
-   ======================================== */
-/* ✅ CAMBIO 4: Tamaño corregido y forzado */
 .certificates-main-title {
   text-align: center;
   font-size: clamp(2.8rem, 7vw, 5.2rem) !important;
@@ -86,7 +79,6 @@
   letter-spacing: -0.035em;
 }
 
-/* ===== EFECTO GLITCH Y HOVER ===== */
 .title-scramble {
   display: inline-block;
   cursor: default;
@@ -101,12 +93,10 @@
   transform: scale(1.02);
 }
 
-/* Eliminar la línea inferior predeterminada */
 .certificates-main-title::after {
   display: none;
 }
 
-/* ===== SUBTÍTULO ===== */
 .certificates-subtitle {
   text-align: center;
   color: #a0aec0;
@@ -175,7 +165,6 @@
   background: rgba(255, 255, 255, 0.2);
 }
 
-/* ===== TÍTULO DE CATEGORÍA ACTIVA ===== */
 .category-active-title {
   font-size: 1.5rem;
   font-weight: 600;
@@ -189,10 +178,6 @@
   width: fit-content;
 }
 
-/* ========================================
-   GRID
-   ======================================== */
-/* ✅ CAMBIO 2B: Grid sin restricciones de overflow */
 .certificates-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -209,7 +194,6 @@
   width: 100%;
 }
 
-/* ===== ESTADO VACÍO ===== */
 .certificates-empty {
   text-align: center;
   color: #a0aec0;
@@ -236,7 +220,6 @@
 }
 
 @media (max-width: 768px) {
-  /* ✅ CAMBIO 1 y 2C: Fondo forzado y grid 100% visible */
   .certificates-section {
     padding: 1.5rem 0 3rem 0;
     background: #101530 !important;
@@ -254,7 +237,6 @@
     height: 120px;
   }
 
-  /* ✅ CAMBIO 4B: Título forzado en móvil */
   .certificates-main-title {
     font-size: clamp(2.2rem, 12vw, 3rem) !important;
   }
@@ -279,7 +261,6 @@
     font-size: 1.3rem;
   }
 
-  /* ✅ CAMBIO 2D: Forzar grid a 1 columna y visible */
   .certificates-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
@@ -360,5 +341,42 @@
   .certificates-header-wrapper::after {
     animation: none !important;
     transition: none !important;
+  }
+}
+
+/* ========================================
+   ✅ FIX: CERTIFICADOS INVISIBLE EN MOBILE
+   ======================================== */
+@media (max-width: 768px) {
+  .certificates-section {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    min-height: auto !important;
+    background: #101530 !important;
+    overflow: visible !important;
+  }
+
+  .certificates-section .container {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  .certificates-header-wrapper,
+  .certificate-filters,
+  .certificates-grid,
+  .certificates-grid > div {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+  }
+
+  .certificates-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
   }
 }

@@ -9,7 +9,7 @@ const CERTIFICATES_TITLE = "Certificados";
 
 // ===== ANIMACIONES =====
 const sectionReveal = {
-  hidden: { opacity: 0 },
+  hidden: { opacity: 1 },
   visible: {
     opacity: 1,
     transition: {
@@ -49,7 +49,6 @@ const gridReveal = {
   },
 } as const;
 
-// ✅ CAMBIO 3: CardReveal sin scale pesado
 const cardReveal = {
   hidden: {
     opacity: 0,
@@ -174,9 +173,9 @@ const Certificates = () => {
       id="certificados"
       className="certificates-section"
       ref={sectionRef}
-      initial="hidden"
+      initial={false}
       whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={{ once: true, amount: 0.05 }}
       variants={sectionReveal}
     >
       <div className="container">
@@ -255,7 +254,6 @@ const Certificates = () => {
             animate="visible"
           >
             {sortedCertificates.map((certificate: Certificate) => (
-              // ✅ CAMBIO 3B: Eliminado layout, agregado willChange
               <motion.div
                 key={certificate.id}
                 variants={cardReveal}
