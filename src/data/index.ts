@@ -501,7 +501,45 @@ export const projects: Project[] = [
     impact: 'Aumentó consultas al programa en 150%.'
   },
 
+{
+  id: 20,
+  title: 'Portafolio Demo',
+  description: 'Portafolio web desarrollado con HTML, CSS y JavaScript para presentar proyectos, habilidades técnicas y experiencia mediante una interfaz moderna y responsiva.',
+  image: '/web.png',
+  icon: '/icons/html.svg',
 
+  type: 'web',
+
+  technologies: [
+    { name: 'HTML5', icon: '/icons/html.svg', bgColor: 'bg-orange-600' },
+    { name: 'CSS3', icon: '/icons/css.svg', bgColor: 'bg-blue-600' },
+    { name: 'JavaScript', icon: '/icons/javascript.svg', bgColor: 'bg-yellow-500' },
+  ],
+
+  images: [
+    '/proyectos/portafolio-demo/1.png',
+    '/proyectos/portafolio-demo/2.png',
+    '/proyectos/portafolio-demo/3.png'
+  ],
+
+  color: 'orange',
+
+  github: 'https://github.com/Ezequie1Sc/Portafolio-demo',
+  demoUrl: 'https://portafolio-demo-liard.vercel.app/',
+
+  problem: 'Muchos desarrolladores necesitan una forma profesional y atractiva de presentar sus proyectos, habilidades y experiencia en un solo lugar.',
+
+  solution: 'Se desarrolló un portafolio moderno, responsivo y modular utilizando HTML, CSS y JavaScript, incorporando navegación intuitiva, animaciones e interfaz adaptable a cualquier dispositivo.',
+
+  howItWorks: [
+    'Presenta proyectos mediante tarjetas organizadas e interactivas.',
+    'Incluye una sección de habilidades técnicas con iconografía personalizada.',
+    'Permite alternar entre tema claro y oscuro.',
+    'Cuenta con formulario de contacto y navegación completamente responsiva.'
+  ],
+
+  impact: 'Facilita la presentación profesional del perfil del desarrollador, mejora la experiencia del usuario y sirve como demostración práctica de habilidades en desarrollo web frontend.'
+},
 
 {
   id: 16,
