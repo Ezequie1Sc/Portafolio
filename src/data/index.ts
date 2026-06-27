@@ -608,7 +608,7 @@ export const projects: Project[] = [
     id: 8,
     title: 'Portafolio Web',
     description: 'Portafolio profesional con React y TypeScript.',
-     image: '/image.png',
+     image: './portafolioweb.png',
     icon: '/icons/react.svg',
     
     type: 'web',
