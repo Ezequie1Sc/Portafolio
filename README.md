@@ -17,7 +17,7 @@
 
   <br />
   
-  <img src="./public/image.png" width="800" alt="Portafolio Preview" />
+  <img src="./public/portafolioweb.png" width="800" alt="Portafolio Preview" />
   
   <br />
   
