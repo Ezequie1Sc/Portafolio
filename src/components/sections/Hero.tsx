@@ -120,9 +120,7 @@ const Hero: React.FC = () => {
           </h1>
 
           <p className="hero-description">
-            Desarrollador Fullstack con pensamiento creativo. Me encanta crear
-            diseños elegantes y el mejor software desde cero. Siempre quiero hacer
-            que los productos sean los mejores y más eficientes.
+          Desarrollador de software con pensamiento creativo. Me apasiona crear soluciones tecnológicas desde cero, combinando diseño, funcionalidad y buenas prácticas para desarrollar productos modernos, eficientes y fáciles de usar.
           </p>
 
           {/* BOTONES */}
