@@ -445,7 +445,7 @@ export const projects: Project[] = [
   id: 16,
   title: 'Sitio Web para Técnico de Climatización',
   description: 'Página web profesional para promocionar servicios de climatización, instalaciones y mantenimiento con contacto directo vía WhatsApp.',
-  image: '/proyectos/web/Tecnico.webp',
+  image: '\proyectos\tecnicoa.png',
   icon: '/icons/html.svg',
   type: 'web',
   technologies: [
@@ -460,7 +460,7 @@ export const projects: Project[] = [
   ],
   color: 'blue',
   github: 'https://github.com/Ezequie1Sc/IceCold.git',
-  demoUrl: 'https://tenico-miguel.vercel.app/',
+  demoUrl: 'https://tecnico-miguel.vercel.app/',
   problem: 'Muchos técnicos independientes carecen de una presencia digital profesional para mostrar sus servicios y facilitar el contacto con clientes potenciales.',
   solution: 'Desarrollo de una landing page moderna y responsive que presenta los servicios ofrecidos y permite la comunicación inmediata mediante WhatsApp.',
   howItWorks: [
