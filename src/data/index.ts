@@ -445,7 +445,7 @@ export const projects: Project[] = [
   id: 16,
   title: 'Sitio Web para Técnico de Climatización',
   description: 'Página web profesional para promocionar servicios de climatización, instalaciones y mantenimiento con contacto directo vía WhatsApp.',
-  image: '\proyectos\tecnicoa.png',
+  image: '/proyectos/tecnicoa.png',
   icon: '/icons/html.svg',
   type: 'web',
   technologies: [
