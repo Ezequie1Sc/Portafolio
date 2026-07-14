@@ -6,7 +6,7 @@
     </svg>
     Portafolio Web
   </h1>
-  <p>Portafolio profesional con React y TypeScript</p>
+  <p>Portafolio profesional con React y TypeScript ajaka</p>
   
   <div>
     <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
