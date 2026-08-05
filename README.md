@@ -4,7 +4,7 @@
       <path d="M20 7h-4V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
       <path d="M8 7V5h8v2"/>
     </svg>
-    Portafolio Web
+    Portafolio Web demo
   </h1>
   <p>Portafolio profesional con React y TypeScript ajaka</p>
   
